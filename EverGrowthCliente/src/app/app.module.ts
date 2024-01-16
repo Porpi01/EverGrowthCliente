@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminUserPlistRoutedComponent } from './components/Usuario/admin-user-plist-routed/admin-user-plist-routed.component';
 import { MenuComponent } from './components/Shared/Menu/Menu.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminUserPlistUnroutedComponent } from './components/Usuario/admin-user-plist-unrouted/admin-user-plist-unrouted.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { UsuarioService } from './service/Usuario.service';
 import { HttpClientModule } from '@angular/common/http';
+import { PaginatorModule } from 'primeng/paginator';
+import { DividerModule } from 'primeng/divider';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 
@@ -32,10 +36,18 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     TableModule,
     ButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    PaginatorModule,
+    DividerModule,
+    BrowserAnimationsModule,
+    ConfirmDialogModule,
+   
   ],
   providers: [
-    UsuarioService
+    UsuarioService,    
+    ConfirmationService,
+    MessageService,
+   
 
   ],
   bootstrap: [AppComponent]

@@ -5,9 +5,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { PaginatorState } from 'primeng/paginator';
 import { IUsuario } from './../../../model/model.interfaces';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmEventType, ConfirmationService } from 'primeng/api';
 
 
 @Component({
+  providers: [ConfirmationService],
   selector: 'app-admin-user-plist-unrouted',
   templateUrl: './admin-user-plist-unrouted.component.html',
   styleUrls: ['./admin-user-plist-unrouted.component.css']
@@ -21,9 +24,12 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
   oPaginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
   usuarios: IUsuario[] = [];
+  userToRemove: IUsuario | null = null;
 
   constructor(
     private UsuarioService: UsuarioService,
+    private ConfirmDialogModule: ConfirmDialogModule,
+    private ConfirmationService: ConfirmationService,
   ) { }
 
   ngOnInit() {
@@ -70,4 +76,27 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
     this.orderDirection = this.orderDirection === 'asc' ? 'desc' : 'asc';
     this.getPage();
   }
+
+  doRemove(user: IUsuario) {
+    this.userToRemove = user;
+    this.ConfirmationService.confirm({
+      accept: () => {
+        // this.oMatSnackBar.open("The user has been removed.", '', { duration: 1200 });
+        this.UsuarioService.removeOne(this.userToRemove?.id).subscribe({
+          next: () => {
+            this.getPage();
+          },
+          error: (error: HttpErrorResponse) => {
+
+            this.status = error;
+            // this.oMatSnackBar.open("The user hasn't been removed.", "", { duration: 1200 });
+          }
+        });
+      },
+      reject: (type: ConfirmEventType) => {
+        //this.oMatSnackBar.open("The user hasn't been removed.", "", { duration: 1200 });
+      }
+    });
+  }
+
 }

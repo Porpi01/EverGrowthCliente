@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminUserPlistUnroutedComponent } from './components/Usuario/admin-user-plist-unrouted/admin-user-plist-unrouted.component';
+import { AdminUserPlistRoutedComponent } from './components/Usuario/admin-user-plist-routed/admin-user-plist-routed.component';
 
 const routes: Routes = [
 
-  {path: 'admin/usuario/plist', component: AdminUserPlistUnroutedComponent},
+  {path: 'admin/usuario/plist', component: AdminUserPlistRoutedComponent},
   
 
 

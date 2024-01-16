@@ -1,4 +1,5 @@
-import { HttpErrorResponse } from "@angular/common/http";
+
+
 
 export interface Sort {
     empty: boolean;
@@ -61,7 +62,10 @@ export interface IUsuario extends IEntity {
     username: string,
     password: string,
     direccion: string,
-    rol: boolean
+    rol: boolean,
+    pedidos: number,
+    carritos: number,
+    valoracion: number
 
 }
 

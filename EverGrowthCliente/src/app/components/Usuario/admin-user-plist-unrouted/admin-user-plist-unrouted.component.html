@@ -6,36 +6,94 @@
   </div>
 </div>
 
+<p-divider></p-divider>
+<div class="flex justify-content-center mb-3">
+  <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+    [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+  <h3 class="text-center"> Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
 
-<p-table [value]="usuarios" [tableStyle]="{'min-width': '40rem'}">
+</div>
 
+<div class="mb-5">
+  <p-table [value]="usuarios">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Apellido1</th>
+        <th>Apellido2</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Dirección</th>
+        <th>Username</th>
+        <th>Rol</th>
+        <th>Pedidos</th>
+        <th>Valoraciones</th>
+        <th>Carritos</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user class="align-middle">
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.nombre }}</td>
+        <td>{{ user.apellido1 }}</td>
+        <td>{{ user.apellido2 }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.telefono }}</td>
+        <td>{{ user.direccion }}</td>
+        <td>{{ user.username }}</td>
+        <td class="text-center">
+          <span *ngIf="user.rol==true">Admin</span>
+          <span *ngIf="user.rol==false">User</span>
+        </td>
+        <td class="text-center">
+          <a [routerLink]="['/admin','thread','plist','byuser',user.id]" *ngIf="user.pedidos>0">{{user.pedidos}}</a>
+          <span *ngIf="user.pedidos==0">0</span>
+        </td>
+        <td class="text-center">
+          <a [routerLink]="['/admin','reply','plist','byuser',user.id]"
+            *ngIf="user.valoracion>0">{{user.valoracion}}</a>
+          <span *ngIf="user.valoracion==0">0</span>
+        </td>
+        <td class="text-center">
+          <a [routerLink]="['/admin','reply','plist','byuser',user.id]" *ngIf="user.carritos>0">{{user.carritos}}</a>
+          <span *ngIf="user.carritos==0">0</span>
+        </td>
+        <td class="text-center">
+          <div  class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+            <p-button [rounded]="true" [outlined]="true" [routerLink]="['/admin','user','view',user.id]"><i
+                class="fa-solid fa-eye" ></i></p-button>
+
+            <p-button [rounded]="true" severity="success" [outlined]="true"[routerLink]="['/admin','user','edit',user.id]"><i
+                class="fa-solid fa-pen-to-square"></i></p-button>
+            <p-button [rounded]="true" severity="warning" [outlined]="true"><i class="fa-solid fa-circle-up"></i></p-button>
+     
+            <p-button [rounded]="true" severity="danger" [outlined]="true" *ngIf="user.pedidos==0 && user.valoracion==0 && user.carritos==0" 
+              (click)="doRemove(user)"><i class="fa-solid fa-trash"></i></p-button>
+          </div>
+        </td>
+
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>
+
+
+<p-confirmDialog #cd [style]="{ width: '30vw' }">
   <ng-template pTemplate="header">
-    <tr>
-      <th>Id</th>
-      <th>Nombre</th>
-      <th>Apellido1</th>
-      <th>Apellido2</th>
-      <th>Email</th>
-      <th>Telefono</th>
-      <th>Direccion</th>
-      <th>Username</th>
-      <th>Rol</th>
-    </tr>
+    <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> User removal</h5>
   </ng-template>
-  <ng-template pTemplate="body" let-user class="align-middle">
-    <tr>
-      <td>{{ user.id }}</td>
-      <td>{{ user.nombre }}</td>
-      <td>{{ user.apellido1 }}</td>
-      <td>{{ user.apellido2 }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.telefono }}</td>
-      <td>{{ user.direccion }}</td>
-      <td>{{ user.username }}</td>
-      <td class="text-center">
-        <span *ngIf="user.rol==true">Admin</span>
-        <span *ngIf="user.rol==false">User</span>
-      </td>
-    </tr>
+  <ng-template pTemplate="message">
+    <div class="container d-flex align-items-center justify-content-center">
+   
+    </div>
   </ng-template>
-</p-table>
+  <ng-template pTemplate="footer">
+    <p>¿Seguro que quieres eliminar este usuario?</p>
+    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+    <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Sí" (click)="cd.accept()"></button>
+  </ng-template>
+</p-confirmDialog>
