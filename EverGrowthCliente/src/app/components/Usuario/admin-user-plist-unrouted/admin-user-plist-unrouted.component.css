@@ -1,0 +1,28 @@
+/* Estilo para la tabla */
+p-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto; /* Centrar la tabla y agregar espacio alrededor */
+  }
+  
+  /* Estilo para las celdas del encabezado */
+  p-table th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 7px;
+    text-align: center; /* Centrar el texto */
+  }
+  
+  /* Estilo para las celdas del cuerpo */
+  p-table td {
+    border: 1px solid #ddd;
+    padding: 7px;
+    text-align: center; /* Centrar el texto */
+  }
+  
+
+  
+  /* Estilo para el texto centrado en la celda */
+  .text-center {
+    text-align: center;
+  }

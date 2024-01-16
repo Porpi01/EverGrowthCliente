@@ -5,13 +5,10 @@
     </div>
   </div>
 </div>
-<p-table [value]="usuarios" [tableStyle]="{'min-width': '60rem'}">
-  <ng-template pTemplate="caption">
-    <div class="flex align-items-center justify-content-between">
-      USUARIOS
 
-    </div>
-  </ng-template>
+
+<p-table [value]="usuarios" [tableStyle]="{'min-width': '40rem'}">
+
   <ng-template pTemplate="header">
     <tr>
       <th>Id</th>
@@ -22,11 +19,10 @@
       <th>Telefono</th>
       <th>Direccion</th>
       <th>Username</th>
-      <th>Password</th>
       <th>Rol</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-user>
+  <ng-template pTemplate="body" let-user class="align-middle">
     <tr>
       <td>{{ user.id }}</td>
       <td>{{ user.nombre }}</td>
@@ -36,7 +32,10 @@
       <td>{{ user.telefono }}</td>
       <td>{{ user.direccion }}</td>
       <td>{{ user.username }}</td>
-      <td>{{ user.rol }}</td>
+      <td class="text-center">
+        <span *ngIf="user.rol==true">Admin</span>
+        <span *ngIf="user.rol==false">User</span>
+      </td>
     </tr>
   </ng-template>
 </p-table>
