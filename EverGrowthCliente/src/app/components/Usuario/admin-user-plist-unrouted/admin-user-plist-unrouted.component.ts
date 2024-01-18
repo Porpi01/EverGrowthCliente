@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from './../../../service/Usuario.service';
 import { IUsuarioPage } from 'src/app/model/model.interfaces';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Subject, debounceTime, of, switchMap } from 'rxjs';
 import { PaginatorState } from 'primeng/paginator';
 import { IUsuario } from './../../../model/model.interfaces';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -42,7 +42,7 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
       },
     });
   }
-
+ 
   getPage(): void {
     this.UsuarioService
       .getPage(

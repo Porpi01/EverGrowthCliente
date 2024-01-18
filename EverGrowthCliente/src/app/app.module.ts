@@ -14,7 +14,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { PaginatorModule } from 'primeng/paginator';
 import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService} from 'primeng/api';
+import { ToolbarModule } from 'primeng/toolbar';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { InputTextModule } from 'primeng/inputtext';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -41,12 +45,18 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     DividerModule,
     BrowserAnimationsModule,
     ConfirmDialogModule,
-   
+    ToolbarModule,
+    SplitButtonModule,
+    InputTextModule,
+    MatSnackBarModule
+  
   ],
   providers: [
     UsuarioService,    
     ConfirmationService,
-    MessageService,
+
+  
+    
    
 
   ],

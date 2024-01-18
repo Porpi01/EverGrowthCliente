@@ -1,4 +1,23 @@
 <div style="text-align: center; margin-top: 50px;">
-    <h1><strong>USUARIOS</strong></h1>
+    <h1>USUARIOS</h1>
   </div>
-  <app-admin-user-plist-unrouted ></app-admin-user-plist-unrouted>
+  <div class="container">
+  <p-toolbar>
+    <div class="p-toolbar-group-start  justify-content-center"  *ngIf="!bLoading">
+      <p-button [rounded]="true" severity="warning mx-1" [outlined]="true"  (click)="doGenerateRandom(10)">+10</p-button>
+      <p-button [rounded]="true" severity="warning  mx-1" [outlined]="true"  (click)="doGenerateRandom(50)">+50</p-button>
+      <p-button [rounded]="true" severity="warning  mx-1" [outlined]="true"  (click)="doGenerateRandom(100)">+100</p-button>
+    </div>
+    <div class="p-toolbar-group-center">
+        <span class="p-input-icon-left">
+          <i class="fa-solid fa-magnifying-glass"></i>
+            <input pInputText   class="p-inputtext-sm"  placeholder="Search" />
+        </span>
+    </div>
+    <div class="p-toolbar-group-end">
+        <p-splitButton label="Options"  [model]="items"></p-splitButton>
+    </div>
+</p-toolbar>
+</div>
+  <app-admin-user-plist-unrouted  [forceReload]="forceReload" *ngIf="!bLoading" ></app-admin-user-plist-unrouted>
+
