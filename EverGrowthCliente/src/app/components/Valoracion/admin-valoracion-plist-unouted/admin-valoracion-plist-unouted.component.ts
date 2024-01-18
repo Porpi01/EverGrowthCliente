@@ -1,39 +1,39 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { UsuarioService } from './../../../service/Usuario.service';
-import { IUsuarioPage } from 'src/app/model/model.interfaces';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Subject } from 'rxjs';
-import { PaginatorState } from 'primeng/paginator';
-import { IUsuario } from './../../../model/model.interfaces';
+import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmEventType, ConfirmationService } from 'primeng/api';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { PaginatorState } from 'primeng/paginator';
+import { IValoracionPage, IValoracion } from 'src/app/model/model.interfaces';
 
+import { Subject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ValoracionService } from './../../../service/Valoracion.service';
 
 @Component({
-  providers: [ConfirmationService],
-  selector: 'app-admin-user-plist-unrouted',
-  templateUrl: './admin-user-plist-unrouted.component.html',
-  styleUrls: ['./admin-user-plist-unrouted.component.css']
+  selector: 'app-admin-valoracion-plist-unouted',
+  templateUrl: './admin-valoracion-plist-unouted.component.html',
+  styleUrls: ['./admin-valoracion-plist-unouted.component.css'],
+  providers: [ConfirmationService]
 })
-export class AdminUserPlistUnroutedComponent implements OnInit {
+export class AdminValoracionPlistUnoutedComponent implements OnInit {
+
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
   
 
-  oPage: IUsuarioPage | undefined;
+  oPage: IValoracionPage | undefined;
   orderField: string = 'id';
   orderDirection: string = 'asc';
   oPaginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
-  usuarios: IUsuario[] = [];
-  userToRemove: IUsuario | null = null;
+  valoraciones: IValoracion[] = [];
+  valoracionToremove: IValoracion | null = null;
  
   value: string = '';
-
   constructor(
-    private UsuarioService: UsuarioService,
+    private ValoracionService: ValoracionService,
     private ConfirmationService: ConfirmationService,
     private MatSnackBar: MatSnackBar
   ) { 
+    
   }
 
   ngOnInit() {
@@ -50,12 +50,12 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
 
   onInputChange(query: string): void {
     if (query.length > 2) {
-      this.UsuarioService
+      this.ValoracionService
         .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
         .subscribe({
-          next: (data: IUsuarioPage) => {
+          next: (data: IValoracionPage) => {
             this.oPage = data;
-            this.usuarios = data.content;
+            this.valoraciones = data.content;
             this.oPaginatorState.pageCount = data.totalPages;
             console.log(this.oPaginatorState);
           },
@@ -69,7 +69,7 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
   }
 
   getPage(): void {
-    this.UsuarioService
+    this.ValoracionService
       .getPage(
         this.oPaginatorState.rows,
         this.oPaginatorState.page,
@@ -77,12 +77,12 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
         this.orderDirection
       )
       .subscribe({
-        next: (data: IUsuarioPage) => {
+        next: (data: IValoracionPage) => {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
-          this.usuarios = data.content;
+          this.valoraciones = data.content;
           console.log(this.oPaginatorState);
-          console.log(this.usuarios);
+          console.log(this.valoraciones);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -102,12 +102,12 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  doRemove(user: IUsuario) {
-    this.userToRemove = user;
+  doRemove(user: IValoracion) {
+    this.valoracionToremove = user;
     this.ConfirmationService.confirm({
       accept: () => {
         this.MatSnackBar.open("The user has been removed.", '', { duration: 1200 });
-        this.UsuarioService.removeOne(this.userToRemove?.id).subscribe({
+        this.ValoracionService.removeOne(this.valoracionToremove?.id).subscribe({
           next: () => {
             this.getPage();
           },
@@ -124,5 +124,4 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
     });
   }
 
-  
 }

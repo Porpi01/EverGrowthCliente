@@ -2,13 +2,6 @@
   font-size: 12px;
 }
 
-/* Estilo para la tabla */
-p-table {
-   
-    border-collapse: collapse;
-  
-  
-  }
  
   
   /* Estilo para las celdas del encabezado */
@@ -31,8 +24,3 @@ p-table {
     text-align: center;
   }
 
-  .btn-group p-button {
-    font-size: 0.5em; /* Puedes ajustar el tamaño según tus necesidades */
-    padding: 0.1em; /* Puedes ajustar el relleno según tus necesidades */
-  }
-  

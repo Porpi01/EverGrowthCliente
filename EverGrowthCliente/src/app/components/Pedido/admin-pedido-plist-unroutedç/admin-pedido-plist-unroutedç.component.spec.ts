@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ProductoComponent } from './Producto.component';
+import { AdminPedidoPlistUnroutedçComponent } from './admin-pedido-plist-unroutedç.component';
 
-describe('ProductoComponent', () => {
-  let component: ProductoComponent;
-  let fixture: ComponentFixture<ProductoComponent>;
+describe('AdminPedidoPlistUnroutedçComponent', () => {
+  let component: AdminPedidoPlistUnroutedçComponent;
+  let fixture: ComponentFixture<AdminPedidoPlistUnroutedçComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductoComponent ]
+      declarations: [ AdminPedidoPlistUnroutedçComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductoComponent);
+    fixture = TestBed.createComponent(AdminPedidoPlistUnroutedçComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

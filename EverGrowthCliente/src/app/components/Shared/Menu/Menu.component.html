@@ -13,26 +13,31 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" [class.active]="strUrl=='/admin/valoracion'||strUrl=='/'" aria-current="page"
-            routerLink="/admin/valoracion"><i class="fas fa-star"></i> Valoracion</a>
+            routerLink="/admin/valoracion/plist"><i class="fas fa-star"></i> Valoracion</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [class.active]="strUrl=='/admin/usuario'||strUrl=='/'" aria-current="page"
             routerLink="/admin/usuario/plist"><i class="fas fa-user"></i> Usuario</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-box"></i> Producto</a>
+          <a class="nav-link"  [class.active]="strUrl=='/admin/producto'||strUrl=='/'" aria-current="page"
+          routerLink="/admin/producto/plist"><i class="fas fa-box"></i> Producto</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i> Pedido</a>
+          <a class="nav-link"  [class.active]="strUrl=='/admin/pedido'||strUrl=='/'" aria-current="page"
+          routerLink="/admin/pedido/plist"><i class="fas fa-shopping-cart"></i> Pedido</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-receipt"></i> DetallePedido</a>
+          <a class="nav-link" [class.active]="strUrl=='/admin/detallePedido'||strUrl=='/'" aria-current="page"
+          routerLink="/admin/detallePedido/plist"><i class="fas fa-receipt"></i> DetallePedido</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-tags"></i> Categoria</a>
+          <a class="nav-link"  [class.active]="strUrl=='/admin/categoria'||strUrl=='/'" aria-current="page"
+          routerLink="/admin/categoria/plist"><i class="fas fa-tags"></i> Categoria</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-shopping-basket"></i> Carrito</a>
+          <a class="nav-link"  [class.active]="strUrl=='/admin/carrito'||strUrl=='/'" aria-current="page"
+          routerLink="/admin/carrito/plist"><i class="fas fa-shopping-basket"></i> Carrito</a>
         </li>
       </ul>
     </div>

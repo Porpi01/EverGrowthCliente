@@ -1,23 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MenuItem } from 'primeng/api';
-import { UsuarioService } from './../../../service/Usuario.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-@Component({
+import { ConfirmationService, MenuItem } from 'primeng/api';
+import { Subject } from 'rxjs';
+import { ValoracionService } from './../../../service/Valoracion.service';
 
-  selector: 'app-admin-user-plist-routed',
-  templateUrl: './admin-user-plist-routed.component.html',
-  styleUrls: ['./admin-user-plist-routed.component.css'],
+
+@Component({
+  selector: 'app-admin-valoracion-plist-routed',
+  templateUrl: './admin-valoracion-plist-routed.component.html',
+  styleUrls: ['./admin-valoracion-plist-routed.component.css'],
   providers: [ConfirmationService]
 })
-export class AdminUserPlistRoutedComponent implements OnInit {
+export class AdminValoracionPlistRoutedComponent implements OnInit {
 
+
+ 
   forceReload: Subject<boolean> = new Subject<boolean>();
   items: MenuItem[] | undefined;
   bLoading: boolean = false;
   constructor(
-    private UsuarioService: UsuarioService,
+    private ValoracionService: ValoracionService,
     private oMatSnackBar: MatSnackBar,
     private ConfirmationService: ConfirmationService,
 
@@ -40,14 +43,14 @@ export class AdminUserPlistRoutedComponent implements OnInit {
 
   doGenerateRandom(amount: number) {
     this.bLoading = true;
-    this.UsuarioService.generateRandom(amount).subscribe({
+    this.ValoracionService.generateRandom(amount).subscribe({
       next: (oResponse: number) => {
 
-        this.oMatSnackBar.open('Now there are ' + oResponse + ' users', '', { duration: 2000 });
+        this.oMatSnackBar.open('Now there are ' + oResponse + ' valoraciones', '', { duration: 2000 });
         this.bLoading = false;
       },
       error: (oError: HttpErrorResponse) => {
-        this.oMatSnackBar.open('Error generating users: ' + oError.message, '', { duration: 2000 });
+        this.oMatSnackBar.open('Error generating valoraciones: ' + oError.message, '', { duration: 2000 });
         this.bLoading = false;
       },
     });
@@ -59,22 +62,22 @@ export class AdminUserPlistRoutedComponent implements OnInit {
     this.ConfirmationService.confirm({
    
       target: $event.target as EventTarget,
-      message: 'Are you sure you want to remove all users?',
+      message: 'Are you sure you want to remove all valoraciones?',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Yes',
       rejectLabel: 'No',
       accept: () => {
-        this.UsuarioService.empty().subscribe({
+        this.ValoracionService.empty().subscribe({
         
           next: (oResponse: number) => {
-            this.oMatSnackBar.open(`Now there are ${oResponse} users.`, '', { duration: 2000 });
+            this.oMatSnackBar.open(`Now there are ${oResponse} valoraciones.`, '', { duration: 2000 });
             this.bLoading = false;
             this.forceReload.next(true);
             console.log($event);
             console.log('ConfirmationService called')
           },
           error: (oError: HttpErrorResponse) => {
-            this.oMatSnackBar.open(`Error emptying users: ${oError.message}`, '', { duration: 2000 });
+            this.oMatSnackBar.open(`Error emptying valoraciones: ${oError.message}`, '', { duration: 2000 });
             this.bLoading = false;
           },
         });
@@ -84,7 +87,5 @@ export class AdminUserPlistRoutedComponent implements OnInit {
       }
     });
   }
-
-  
 
 }

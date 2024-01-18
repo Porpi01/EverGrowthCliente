@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { DetallePedidoComponent } from './DetallePedido.component';
+import { AdminDetallePedidoPlistRoutedComponent } from './admin-detallePedido-plist-routed.component';
 
-describe('DetallePedidoComponent', () => {
-  let component: DetallePedidoComponent;
-  let fixture: ComponentFixture<DetallePedidoComponent>;
+describe('AdminDetallePedidoPlistRoutedComponent', () => {
+  let component: AdminDetallePedidoPlistRoutedComponent;
+  let fixture: ComponentFixture<AdminDetallePedidoPlistRoutedComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetallePedidoComponent ]
+      declarations: [ AdminDetallePedidoPlistRoutedComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DetallePedidoComponent);
+    fixture = TestBed.createComponent(AdminDetallePedidoPlistRoutedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

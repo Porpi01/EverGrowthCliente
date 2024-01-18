@@ -19,9 +19,13 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { InputTextModule } from 'primeng/inputtext';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
-
-
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AdminValoracionPlistUnoutedComponent } from './components/Valoracion/admin-valoracion-plist-unouted/admin-valoracion-plist-unouted.component';
+import { AdminValoracionPlistRoutedComponent } from './components/Valoracion/admin-valoracion-plist-routed/admin-valoracion-plist-routed.component';
+import { ValoracionService } from './service/Valoracion.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AdminUserPlistRoutedComponent,
     AdminUserPlistUnroutedComponent,
 
-
+    //Componentes entidad Valoracion
+    AdminValoracionPlistUnoutedComponent,
+    AdminValoracionPlistRoutedComponent
 
   ],
   imports: [
@@ -48,17 +54,17 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ToolbarModule,
     SplitButtonModule,
     InputTextModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ConfirmPopupModule,
+    AutoCompleteModule,
+    FormsModule,
+    ReactiveFormsModule
   
   ],
   providers: [
     UsuarioService,    
     ConfirmationService,
-
-  
-    
-   
-
+    ValoracionService
   ],
   bootstrap: [AppComponent]
 })

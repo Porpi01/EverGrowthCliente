@@ -7,36 +7,39 @@
 </div>
 
 <p-divider></p-divider>
-<div class="flex justify-content-center mb-3">
+<div class="d-flex align-items-center justify-content-center">
+  <span class="p-input-icon-left">
+    <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+    <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"  style="width: 100%; height: 30px;" />
+  </span>
   <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
-    [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
-  <h3 class="text-center"> Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
-
+    [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
+  <h3 class="mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
 </div>
+<div class="container mb-5 mt-3" >          
 
-<div class="container mb-5">
   <p-table [value]="usuarios">
 
     <ng-template pTemplate="header">
       <tr>
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>Apellido1</th>
-        <th>Apellido2</th>
-        <th>Email</th>
+   
+        <th (click)="doOrder('id')">Nombre</th>
+        <th (click)="doOrder('Apellido1')">Apellido1</th>
+        <th (click)="doOrder('Apellido2')">Apellido2</th>
+        <th (click)="doOrder('Email')">Email</th>
         <th>Teléfono</th>
-        <th>Dirección</th>
-        <th>Username</th>
-        <th>Rol</th>
+        <th (click)="doOrder('Dirección')">Dirección</th>
+        <th (click)="doOrder('Username')">Username</th>
+        <th (click)="doOrder('Rol')">Rol</th>
         <th>Pedidos</th>
-        <th>Valoraciones</th>
-        <th>Carritos</th>
-        <th>Acciones</th>
+        <th >Valoraciones</th>
+        <th >Carritos</th>
+        <th >Acciones</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-user class="align-middle">
-      <tr>
-        <td>{{ user.id }}</td>
+    <ng-template pTemplate="body" let-user of oPage?.content class="align-middle">
+      <tr >
+       
         <td>{{ user.nombre }}</td>
         <td>{{ user.apellido1 }}</td>
         <td>{{ user.apellido2 }}</td>
@@ -61,7 +64,9 @@
           <a [routerLink]="['/admin','reply','plist','byuser',user.id]" *ngIf="user.carritos>0">{{user.carritos}}</a>
           <span *ngIf="user.carritos==0">0</span>
         </td>
+        
         <td class="text-center">
+
           <div  class="btn-group btn-group-sm" role="group" aria-label="Basic example">
             <p-button [rounded]="true" [outlined]="true" [routerLink]="['/admin','user','view',user.id]"><i
                 class="fa-solid fa-eye" ></i></p-button>
@@ -75,6 +80,23 @@
           </div>
         </td>
 
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+   
+        <th (click)="doOrder('id')">Nombre</th>
+        <th (click)="doOrder('Apellido1')">Apellido1</th>
+        <th (click)="doOrder('Apellido2')">Apellido2</th>
+        <th (click)="doOrder('Email')">Email</th>
+        <th>Teléfono</th>
+        <th (click)="doOrder('Dirección')">Dirección</th>
+        <th (click)="doOrder('Username')">Username</th>
+        <th (click)="doOrder('Rol')">Rol</th>
+        <th>Pedidos</th>
+        <th >Valoraciones</th>
+        <th >Carritos</th>
+        <th >Acciones</th>
       </tr>
     </ng-template>
   </p-table>
