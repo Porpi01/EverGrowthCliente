@@ -97,29 +97,29 @@ export interface IPedido extends IEntity {
 export interface IPedidoPage extends IPage<IPedido> {
 }
 
-export interface DetallePedido extends IEntity {
+export interface IDetallePedido extends IEntity {
 
     cantidad: number,
     precio_unitario: number,
     productos: number,
     pedidos: number
 }
-export interface IDetallePedidoPage extends IPage<DetallePedido> {
+export interface IDetallePedidoPage extends IPage<IDetallePedido> {
 }
-export interface Categoria extends IEntity {
+export interface ICategoria extends IEntity {
     nombre: string
 }
 
-export interface ICategoriaPage extends IPage<Categoria> {
+export interface ICategoriaPage extends IPage<ICategoria> {
 }
 
-export interface Carrito extends IEntity {
+export interface ICarrito extends IEntity {
     cantidad: number,
     productos: number,
     usuario: number
 }
 
-export interface ICarritoPage extends IPage<Carrito> {
+export interface ICarritoPage extends IPage<ICarrito> {
 }
 
 

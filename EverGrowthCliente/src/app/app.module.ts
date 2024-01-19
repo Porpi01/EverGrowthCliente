@@ -23,9 +23,18 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AdminValoracionPlistUnoutedComponent } from './components/Valoracion/admin-valoracion-plist-unouted/admin-valoracion-plist-unouted.component';
-import { AdminValoracionPlistRoutedComponent } from './components/Valoracion/admin-valoracion-plist-routed/admin-valoracion-plist-routed.component';
 import { ValoracionService } from './service/Valoracion.service';
+import { AdminProductoPlistUnroutedComponent } from './components/Producto/admin-producto-plist-unrouted/admin-producto-plist-unrouted.component';
+import { AdminProductoPlistRoutedComponent } from './components/Producto/admin-producto-plist-routed/admin-producto-plist-routed.component';
+import { ProductoService } from './service/Producto.service';
+import { PedidoService } from './service/Pedido.service';
+import { DetallePedidoService } from './service/DetallePedido.service';
+import { CategoriaService } from './service/Categoria.service';
+import { CarritoService } from './service/Carrito.service';
+import { AdminPedidoPlistUnroutedComponent } from './components/Pedido/admin-pedido-plist-unrouted/admin-pedido-plist-unrouted.component';
+import { AdminValoracionPlistUnroutedComponent } from './components/Valoracion/admin-valoracion-plist-unrouted/admin-valoracion-plist-unrouted.component';
+import { AdminValoracionPlistRoutedComponent } from './components/Valoracion/admin-valoracion-plist-routed/admin-valoracion-plist-routed.component';
+import { AdminPedidoPlistRoutedComponent } from './components/Pedido/admin-pedido-plist-routed/admin-pedido-plist-routed.component';
 
 @NgModule({
   declarations: [
@@ -37,8 +46,16 @@ import { ValoracionService } from './service/Valoracion.service';
     AdminUserPlistUnroutedComponent,
 
     //Componentes entidad Valoracion
-    AdminValoracionPlistUnoutedComponent,
-    AdminValoracionPlistRoutedComponent
+    AdminValoracionPlistUnroutedComponent,
+    AdminValoracionPlistRoutedComponent,
+
+    //Componentes entidad Producto
+    AdminProductoPlistUnroutedComponent,
+    AdminProductoPlistRoutedComponent,
+
+    //Componentes entidad Pedido
+    AdminPedidoPlistUnroutedComponent,
+    AdminPedidoPlistRoutedComponent
 
   ],
   imports: [
@@ -64,7 +81,12 @@ import { ValoracionService } from './service/Valoracion.service';
   providers: [
     UsuarioService,    
     ConfirmationService,
-    ValoracionService
+    ValoracionService,
+    ProductoService,
+    PedidoService,
+    DetallePedidoService,
+    CategoriaService,
+    CarritoService
   ],
   bootstrap: [AppComponent]
 })

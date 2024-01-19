@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { Subject } from 'rxjs';
-import { ValoracionService } from './../../../service/Valoracion.service';
+import { ValoracionService } from '../../../service/Valoracion.service';
 
 
 @Component({
@@ -15,7 +15,6 @@ import { ValoracionService } from './../../../service/Valoracion.service';
 export class AdminValoracionPlistRoutedComponent implements OnInit {
 
 
- 
   forceReload: Subject<boolean> = new Subject<boolean>();
   items: MenuItem[] | undefined;
   bLoading: boolean = false;
@@ -87,5 +86,4 @@ export class AdminValoracionPlistRoutedComponent implements OnInit {
       }
     });
   }
-
 }

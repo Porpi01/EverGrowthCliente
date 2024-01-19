@@ -1,21 +1,20 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ConfirmEventType, ConfirmationService } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
-import { IValoracionPage, IValoracion } from 'src/app/model/model.interfaces';
-
 import { Subject } from 'rxjs';
+import { IValoracionPage, IValoracion } from 'src/app/model/model.interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ValoracionService } from './../../../service/Valoracion.service';
-
+import { ValoracionService } from '../../../service/Valoracion.service';
 @Component({
-  selector: 'app-admin-valoracion-plist-unouted',
-  templateUrl: './admin-valoracion-plist-unouted.component.html',
-  styleUrls: ['./admin-valoracion-plist-unouted.component.css'],
+  selector: 'app-admin-valoracion-plist-unrouted',
+  templateUrl: './admin-valoracion-plist-unrouted.component.html',
+  styleUrls: ['./admin-valoracion-plist-unrouted.component.css'],
   providers: [ConfirmationService]
 })
-export class AdminValoracionPlistUnoutedComponent implements OnInit {
+export class AdminValoracionPlistUnroutedComponent implements OnInit {
 
+ 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
   
 
@@ -102,8 +101,8 @@ export class AdminValoracionPlistUnoutedComponent implements OnInit {
     this.getPage();
   }
 
-  doRemove(user: IValoracion) {
-    this.valoracionToremove = user;
+  doRemove(valoracion: IValoracion) {
+    this.valoracionToremove = valoracion;
     this.ConfirmationService.confirm({
       accept: () => {
         this.MatSnackBar.open("The user has been removed.", '', { duration: 1200 });
@@ -123,5 +122,6 @@ export class AdminValoracionPlistUnoutedComponent implements OnInit {
       }
     });
   }
+
 
 }

@@ -1,3 +1,21 @@
-<p>
-  admin-producto-plist-routed works!
-</p>
+<div style="text-align: center; margin-top: 50px;">
+  <h1>PRODUCTOS</h1>
+  </div>
+  <div class="container">
+  <p-toolbar>
+    <div class="p-toolbar-group-start  justify-content-center"  *ngIf="!bLoading">
+      <p-button [rounded]="true" severity="warning mx-1" [outlined]="true"  (click)="doGenerateRandom(10)">+10</p-button>
+      <p-button [rounded]="true" severity="warning  mx-1" [outlined]="true"  (click)="doGenerateRandom(50)">+50</p-button>
+      <p-button [rounded]="true" severity="warning  mx-1" [outlined]="true"  (click)="doGenerateRandom(100)">+100</p-button>
+    </div>
+    <div class="p-toolbar-group-center">
+     
+    </div>
+    <div class="p-toolbar-group-end">
+        <p-splitButton label="Options"  [model]="items"></p-splitButton>
+    </div>
+</p-toolbar>
+</div>
+  <app-admin-producto-plist-unrouted  [forceReload]="forceReload" *ngIf="!bLoading" ></app-admin-producto-plist-unrouted>
+
+<p-confirmPopup></p-confirmPopup>

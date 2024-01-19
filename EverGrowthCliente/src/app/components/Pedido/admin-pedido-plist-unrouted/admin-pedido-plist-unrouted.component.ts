@@ -3,32 +3,33 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmEventType, ConfirmationService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
-
-import { ProductoService } from './../../../service/Producto.service';
+import { IPedidoPage, IPedido } from 'src/app/model/model.interfaces';
+import { PedidoService } from '../../../service/Pedido.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IProducto, IProductoPage } from 'src/app/model/model.interfaces';
+
+
 @Component({
-  selector: 'app-admin-producto-plist-unrouted',
-  templateUrl: './admin-producto-plist-unrouted.component.html',
-  styleUrls: ['./admin-producto-plist-unrouted.component.css'],
+  selector: 'app-admin-pedido-plist-unroutedç',
+  templateUrl: './admin-pedido-plist-unrouted.component.html',
+  styleUrls: ['./admin-pedido-plist-unrouted.component.css'],
   providers: [ConfirmationService]
 })
-export class AdminProductoPlistUnroutedComponent implements OnInit {
+export class AdminPedidoPlistUnroutedComponent implements OnInit {
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
   
 
-  oPage: IProductoPage | undefined;
+  oPage: IPedidoPage | undefined;
   orderField: string = 'id';
   orderDirection: string = 'asc';
   oPaginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
-  productos: IProducto[] = [];
-  productoToRemove: IProducto | null = null;
+  pedidos: IPedido[] = [];
+  pedidoToRemove: IPedido | null = null;
  
   value: string = '';
 
   constructor(
-    private ProductoService: ProductoService,
+    private PedidoService: PedidoService,
     private ConfirmationService: ConfirmationService,
     private MatSnackBar: MatSnackBar
   ) { 
@@ -48,12 +49,12 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
 
   onInputChange(query: string): void {
     if (query.length > 2) {
-      this.ProductoService
+      this.PedidoService
         .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
         .subscribe({
-          next: (data: IProductoPage) => {
+          next: (data: IPedidoPage) => {
             this.oPage = data;
-            this.productos = data.content;
+            this.pedidos = data.content;
             this.oPaginatorState.pageCount = data.totalPages;
             console.log(this.oPaginatorState);
           },
@@ -67,7 +68,7 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
   }
 
   getPage(): void {
-    this.ProductoService
+    this.PedidoService
       .getPage(
         this.oPaginatorState.rows,
         this.oPaginatorState.page,
@@ -75,12 +76,12 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
         this.orderDirection
       )
       .subscribe({
-        next: (data: IProductoPage) => {
+        next: (data: IPedidoPage) => {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
-          this.productos = data.content;
+          this.pedidos = data.content;
           console.log(this.oPaginatorState);
-          console.log(this.productos);
+          console.log(this.pedidos);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -100,12 +101,12 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  doRemove(producto: IProducto) {
-    this.productoToRemove = producto;
+  doRemove(producto: IPedido) {
+    this.pedidoToRemove = producto;
     this.ConfirmationService.confirm({
       accept: () => {
         this.MatSnackBar.open("The producto has been removed.", '', { duration: 1200 });
-        this.ProductoService.removeOne(this.productoToRemove?.id).subscribe({
+        this.PedidoService.removeOne(this.pedidoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
           },
@@ -121,6 +122,4 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
       }
     });
   }
-
-
 }

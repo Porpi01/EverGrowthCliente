@@ -18,42 +18,40 @@
 </div>
 <div class="container mb-5 mt-3" >          
 
-  <p-table [value]="productos">
+  <p-table [value]="pedidos">
 
     <ng-template pTemplate="header">
       <tr>
-        <th (click)="doOrder('nombre')">Nombre</th>
-        <th (click)="doOrder('precio')">Precio</th>
-        <th (click)="doOrder('stock')">Stock</th>
-        <th (click)="doOrder('imagen')">Imagen</th>
-        <th >Categoria</th>
-        <th >Acciones</th>
+        <th (click)="doOrder('id')">Id</th>
+        <th (click)="doOrder('fecha_pedido')">Fecha_pedido</th>
+        <th (click)="doOrder('estado_pedido')">Estado_pedido</th>
+        <th >Usuarios</th>
+        <th >Facturas</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-producto of oPage?.content class="align-middle">
+    <ng-template pTemplate="body" let-pedido of oPage?.content class="align-middle">
       <tr >
-       
-        <td>{{ producto.nombre }}</td>
-        <td>{{ producto.precio }}</td>
-        <td>{{ producto.stock }}</td>
-        <td></td>
+        <td>{{ pedido.id }}</td>
+        <td>{{ pedido.fecha_pedido }}</td>
+        <td>{{ pedido.estado_pedido }}</td>
+    
         <td class="text-center">
-          <a [routerLink]="['/admin','categoria','plist','bycategoria',producto.categoria.id]">({{producto.categoria.id}})( {{producto.categoria.nombre}}) </a>
+          <a [routerLink]="['/admin','usuario','plist','byusuario',pedido.user.id]">({{pedido.user.id}})({{pedido.user.nombre}})({{pedido.user.apellido1}}) </a>
         </td>
         
         
         <td class="text-center">
 
           <div  class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <p-button [rounded]="true" [outlined]="true" [routerLink]="['/admin','user','view',producto.id]"><i
+            <p-button [rounded]="true" [outlined]="true" [routerLink]="['/admin','user','view',pedido.id]"><i
                 class="fa-solid fa-eye" ></i></p-button>
 
-            <p-button [rounded]="true" severity="success" [outlined]="true"[routerLink]="['/admin','user','edit',producto.id]"><i
+            <p-button [rounded]="true" severity="success" [outlined]="true"[routerLink]="['/admin','user','edit',pedido.id]"><i
                 class="fa-solid fa-pen-to-square"></i></p-button>
             <p-button [rounded]="true" severity="warning" [outlined]="true"><i class="fa-solid fa-circle-up"></i></p-button>
      
-            <p-button [rounded]="true" severity="danger" [outlined]="true" *ngIf="producto.categoria===0" 
-              (click)="doRemove(producto)"><i class="fa-solid fa-trash"></i></p-button>
+            <p-button [rounded]="true" severity="danger" [outlined]="true" *ngIf="pedido.categoria===0" 
+              (click)="doRemove(pedido)"><i class="fa-solid fa-trash"></i></p-button>
           </div>
         </td>
 
@@ -61,12 +59,10 @@
     </ng-template>
     <ng-template pTemplate="footer">
       <tr>
-        <th (click)="doOrder('nombre')">Nombre</th>
-        <th (click)="doOrder('precio')">Precio</th>
-        <th (click)="doOrder('stock')">Stock</th>
-        <th (click)="doOrder('imagen')">Imagen</th>
-        <th >Categoria</th>
-        <th >Acciones</th>
+        <th (click)="doOrder('fechaPedido')">Fecha Pedido</th>
+        <th (click)="doOrder('Estado Pedido')">Estado</th>
+        <th >Usuarios</th>
+        <th >Facturas</th>
       </tr>
     </ng-template>
   </p-table>
