@@ -35,6 +35,12 @@ import { AdminPedidoPlistUnroutedComponent } from './components/Pedido/admin-ped
 import { AdminValoracionPlistUnroutedComponent } from './components/Valoracion/admin-valoracion-plist-unrouted/admin-valoracion-plist-unrouted.component';
 import { AdminValoracionPlistRoutedComponent } from './components/Valoracion/admin-valoracion-plist-routed/admin-valoracion-plist-routed.component';
 import { AdminPedidoPlistRoutedComponent } from './components/Pedido/admin-pedido-plist-routed/admin-pedido-plist-routed.component';
+import { AdminDetallePedidoPlistUnroutedComponent } from './components/DetallePedido/admin-detallePedido-plist-unrouted/admin-detallePedido-plist-unrouted.component';
+import { AdminDetallePedidoPlistRoutedComponent } from './components/DetallePedido/admin-detallePedido-plist-routed/admin-detallePedido-plist-routed.component';
+import { AdminCategoriaPlistUnroutedComponent } from './components/Categoria/admin-categoria-plist-unrouted/admin-categoria-plist-unrouted.component';
+import { AdminCategoriaPlistRoutedComponent } from './components/Categoria/admin-categoria-plist-routed/admin-categoria-plist-routed.component';
+import { AdminCarritoPlistUnroutedComponent } from './components/Carrito/admin-carrito-plist-unrouted/admin-carrito-plist-unrouted.component';
+import { AdminCarritoPlistRoutedComponent } from './components/Carrito/admin-carrito-plist-routed/admin-carrito-plist-routed.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +61,19 @@ import { AdminPedidoPlistRoutedComponent } from './components/Pedido/admin-pedid
 
     //Componentes entidad Pedido
     AdminPedidoPlistUnroutedComponent,
-    AdminPedidoPlistRoutedComponent
+    AdminPedidoPlistRoutedComponent,
+
+    //Componentes entidad DetallePedido
+    AdminDetallePedidoPlistUnroutedComponent,
+    AdminDetallePedidoPlistRoutedComponent,
+
+    //Componentes entidad Categoria
+    AdminCategoriaPlistUnroutedComponent,
+    AdminCategoriaPlistRoutedComponent,
+
+    //Componentes entidad Carrito
+    AdminCarritoPlistUnroutedComponent,
+    AdminCarritoPlistRoutedComponent
 
   ],
   imports: [
