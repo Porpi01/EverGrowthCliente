@@ -24,7 +24,7 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
   status: HttpErrorResponse | null = null;
   productos: IProducto[] = [];
   productoToRemove: IProducto | null = null;
- 
+  imagenBase64: string | null = null;
   value: string = '';
 
   constructor(
@@ -34,7 +34,7 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
   ) { 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getPage();
     this.forceReload.subscribe({
       next: (v) => {
@@ -43,7 +43,9 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
         }
       },
     });
+    
   }
+
 
 
   onInputChange(query: string): void {

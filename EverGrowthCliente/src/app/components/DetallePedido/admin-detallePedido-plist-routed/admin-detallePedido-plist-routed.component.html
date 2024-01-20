@@ -1,9 +1,16 @@
 <div style="text-align: center; margin-top: 50px;">
-  <h1>PEDIDOS</h1>
+  <h1>DETALLE PEDIDOS</h1>
   </div>
   <div class="container">
-  <p-toolbar>
-    <div class="p-toolbar-group-start  justify-content-center"  *ngIf="!bLoading">
+    <div *ngIf="bLoading" class="progress card text-center m-5">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" 
+           aria-valuenow="loadingProgress + '%'" aria-valuemin="0" aria-valuemax="100"
+           [style.width]="loadingProgress + '%'">
+        {{ loadingProgress }}%
+      </div>
+    </div>
+  <p-toolbar  *ngIf="!bLoading">
+    <div class="p-toolbar-group-start  justify-content-center" >
       <p-button [rounded]="true" severity="warning mx-1" [outlined]="true"  (click)="doGenerateRandom(10)">+10</p-button>
       <p-button [rounded]="true" severity="warning  mx-1" [outlined]="true"  (click)="doGenerateRandom(50)">+50</p-button>
       <p-button [rounded]="true" severity="warning  mx-1" [outlined]="true"  (click)="doGenerateRandom(100)">+100</p-button>

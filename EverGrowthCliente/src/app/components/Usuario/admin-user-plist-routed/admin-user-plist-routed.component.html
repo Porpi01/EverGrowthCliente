@@ -1,21 +1,30 @@
 <div style="text-align: center; margin-top: 50px;">
   <h1>USUARIOS</h1>
-  </div>
-  <div class="container">
-  <p-toolbar>
-    <div class="p-toolbar-group-start  justify-content-center"  *ngIf="!bLoading">
-      <p-button [rounded]="true" severity="warning mx-1" [outlined]="true"  (click)="doGenerateRandom(10)">+10</p-button>
-      <p-button [rounded]="true" severity="warning  mx-1" [outlined]="true"  (click)="doGenerateRandom(50)">+50</p-button>
-      <p-button [rounded]="true" severity="warning  mx-1" [outlined]="true"  (click)="doGenerateRandom(100)">+100</p-button>
-    </div>
-    <div class="p-toolbar-group-center">
-     
-    </div>
-    <div class="p-toolbar-group-end">
-        <p-splitButton label="Options"  [model]="items"></p-splitButton>
-    </div>
-</p-toolbar>
 </div>
-  <app-admin-user-plist-unrouted  [forceReload]="forceReload" *ngIf="!bLoading" ></app-admin-user-plist-unrouted>
+
+<div class="container">
+  <div *ngIf="bLoading" class="progress card text-center m-5">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" 
+         aria-valuenow="loadingProgress + '%'" aria-valuemin="0" aria-valuemax="100"
+         [style.width]="loadingProgress + '%'">
+      {{ loadingProgress }}%
+    </div>
+  </div>
+
+
+  <p-toolbar *ngIf="!bLoading">
+    <div class="p-toolbar-group-start justify-content-center">
+      <p-button [rounded]="true" severity="warning mx-1" [outlined]="true" (click)="doGenerateRandom(10)">+10</p-button>
+      <p-button [rounded]="true" severity="warning mx-1" [outlined]="true" (click)="doGenerateRandom(50)">+50</p-button>
+      <p-button [rounded]="true" severity="warning mx-1" [outlined]="true" (click)="doGenerateRandom(100)">+100</p-button>
+    </div>
+ 
+    <div class="p-toolbar-group-end">
+      <p-splitButton label="Options" [model]="items"></p-splitButton>
+    </div>
+  </p-toolbar>
+</div>
+
+<app-admin-user-plist-unrouted [forceReload]="forceReload" *ngIf="!bLoading"></app-admin-user-plist-unrouted>
 
 <p-confirmPopup></p-confirmPopup>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_URL } from 'src/environment/environment';
@@ -51,4 +51,6 @@ export class ProductoService {
   empty(): Observable<number> {
     return this.http.delete<number>(this.sUrl + "/empty");
   }
+
+ 
 }

@@ -17,6 +17,7 @@ export class AdminCategoriaPlistRoutedComponent implements OnInit {
   forceReload: Subject<boolean> = new Subject<boolean>();
   items: MenuItem[] | undefined;
   bLoading: boolean = false;
+  loadingProgress: number = 0;
   constructor(
     private CategoriaService: CategoriaService,
     private oMatSnackBar: MatSnackBar,
@@ -41,17 +42,27 @@ export class AdminCategoriaPlistRoutedComponent implements OnInit {
 
   doGenerateRandom(amount: number) {
     this.bLoading = true;
-    this.CategoriaService.generateRandom(amount).subscribe({
-      next: (oResponse: number) => {
-
-        this.oMatSnackBar.open('Now there are ' + oResponse + ' producto', '', { duration: 2000 });
-        this.bLoading = false;
-      },
-      error: (oError: HttpErrorResponse) => {
-        this.oMatSnackBar.open('Error generating producto: ' + oError.message, '', { duration: 2000 });
-        this.bLoading = false;
-      },
-    });
+    const totalSteps = 10; 
+    const stepSize = 100 / totalSteps;
+    this.loadingProgress = 0;
+  
+    const intervalId = setInterval(() => {
+      if (this.loadingProgress < 100) {
+        this.loadingProgress += stepSize; 
+      } else {
+        clearInterval(intervalId);
+        this.CategoriaService.generateRandom(amount).subscribe({
+          next: (oResponse: number) => {
+            this.oMatSnackBar.open('Now there are ' + oResponse + ' users', '', { duration: 2000 });
+            this.bLoading = false;
+          },
+          error: (oError: HttpErrorResponse) => {
+            this.oMatSnackBar.open('Error generating users: ' + oError.message, '', { duration: 2000 });
+            this.bLoading = false;
+          }
+        });
+      }
+    }, 1000 / totalSteps); 
   }
 
   doEmpty($event: Event) {

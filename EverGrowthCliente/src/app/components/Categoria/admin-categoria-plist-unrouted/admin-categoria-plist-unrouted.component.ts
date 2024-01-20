@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmEventType, ConfirmationService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
-import { IDetallePedidoPage, IDetallePedido, ICategoriaPage, ICategoria } from 'src/app/model/model.interfaces';
+import { ICategoriaPage, ICategoria } from 'src/app/model/model.interfaces';
 import { CategoriaService } from './../../../service/Categoria.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 

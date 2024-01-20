@@ -14,13 +14,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { PaginatorModule } from 'primeng/paginator';
 import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService} from 'primeng/api';
+import { ConfirmationService, MessageService} from 'primeng/api';
 import { ToolbarModule } from 'primeng/toolbar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { InputTextModule } from 'primeng/inputtext';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValoracionService } from './service/Valoracion.service';
@@ -91,9 +90,9 @@ import { AdminCarritoPlistRoutedComponent } from './components/Carrito/admin-car
     InputTextModule,
     MatSnackBarModule,
     ConfirmPopupModule,
-    AutoCompleteModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   
   ],
   providers: [
@@ -104,7 +103,9 @@ import { AdminCarritoPlistRoutedComponent } from './components/Carrito/admin-car
     PedidoService,
     DetallePedidoService,
     CategoriaService,
-    CarritoService
+    CarritoService,
+    MessageService
+    
   ],
   bootstrap: [AppComponent]
 })

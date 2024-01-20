@@ -3,8 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
-
-
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ICarrito, ICarritoPage } from 'src/app/model/model.interfaces';
 import { CarritoService } from './../../../service/Carrito.service';

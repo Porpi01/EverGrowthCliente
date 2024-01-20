@@ -1,0 +1,27 @@
+*{
+    font-size: 12px;
+  }
+  
+   
+    
+    /* Estilo para las celdas del encabezado */
+    p-table th {
+      background-color: #f2f2f2;
+      border: 1px solid #ddd;
+      padding: 3px;
+      text-align: center; /* Centrar el texto */
+    }
+    
+    /* Estilo para las celdas del cuerpo */
+    p-table td {
+      border: 1px solid #ddd;
+      padding: 3px;
+      text-align: center; /* Centrar el texto */
+    }
+    
+    /* Estilo para el texto centrado en la celda */
+    .text-center {
+      text-align: center;
+    }
+  
+  
