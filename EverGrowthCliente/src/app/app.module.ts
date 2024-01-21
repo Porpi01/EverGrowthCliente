@@ -14,13 +14,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { PaginatorModule } from 'primeng/paginator';
 import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService, MessageService} from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToolbarModule } from 'primeng/toolbar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { InputTextModule } from 'primeng/inputtext';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ValoracionService } from './service/Valoracion.service';
 import { AdminProductoPlistUnroutedComponent } from './components/Producto/admin-producto-plist-unrouted/admin-producto-plist-unrouted.component';
@@ -40,15 +40,36 @@ import { AdminCategoriaPlistUnroutedComponent } from './components/Categoria/adm
 import { AdminCategoriaPlistRoutedComponent } from './components/Categoria/admin-categoria-plist-routed/admin-categoria-plist-routed.component';
 import { AdminCarritoPlistUnroutedComponent } from './components/Carrito/admin-carrito-plist-unrouted/admin-carrito-plist-unrouted.component';
 import { AdminCarritoPlistRoutedComponent } from './components/Carrito/admin-carrito-plist-routed/admin-carrito-plist-routed.component';
+import { AdminUserFormUnroutedComponent } from './components/Usuario/admin-user-form-unrouted/admin-user-form-unrouted.component';
+import { AdminUserNewRoutedComponent } from './components/Usuario/admin-user-new-routed/admin-user-new-routed.component';
+import { MessagesModule } from 'primeng/messages';
+import { FooterComponent } from './components/Shared/Footer/Footer.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatRadioModule} from '@angular/material/radio';
+import { AdminUserViewRoutedComponent } from './components/Usuario/admin-user-view-routed/admin-user-view-routed.component';
+import { CardModule } from 'primeng/card';
+import { AdminUserDetailUnroutedComponent } from './components/Usuario/admin-user-detail-unrouted/admin-user-detail-unrouted.component';
+import { AdminUserEditRoutedComponent } from './components/Usuario/admin-user-edit-routed/admin-user-edit-routed.component';
+import { DataViewModule } from 'primeng/dataview';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
+    FooterComponent,
 
     //Componentes entidad Usuario
     AdminUserPlistRoutedComponent,
     AdminUserPlistUnroutedComponent,
+    AdminUserFormUnroutedComponent,
+    AdminUserNewRoutedComponent,
+    AdminUserViewRoutedComponent,
+    AdminUserDetailUnroutedComponent,
+    AdminUserEditRoutedComponent,
+    
 
     //Componentes entidad Valoracion
     AdminValoracionPlistUnroutedComponent,
@@ -92,20 +113,30 @@ import { AdminCarritoPlistRoutedComponent } from './components/Carrito/admin-car
     ConfirmPopupModule,
     FormsModule,
     ReactiveFormsModule,
-    
-  
+    MessagesModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatRadioModule,
+    CardModule,
+    DataViewModule
+
+
+
+
   ],
   providers: [
-    UsuarioService,    
-    ConfirmationService,
+    UsuarioService,
     ValoracionService,
     ProductoService,
     PedidoService,
     DetallePedidoService,
     CategoriaService,
     CarritoService,
-    MessageService
-    
+    ConfirmationService,
+    MessageService,
+    FormBuilder
+
   ],
   bootstrap: [AppComponent]
 })

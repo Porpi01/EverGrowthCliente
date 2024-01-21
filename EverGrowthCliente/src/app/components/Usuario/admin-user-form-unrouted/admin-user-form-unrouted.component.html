@@ -1,3 +1,109 @@
-<p>
-  admin-user-form-unrouted works!
-</p>
+<div *ngIf="status!=null">
+  <div class="d-flex justify-content-center my-3">
+    <div class="alert alert-danger" role="alert">
+      {{status!.error.message}} - {{status!.message}}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="status==null">
+  <div class="container col-12">
+    <div class="d-flex justify-content-center my-3">
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <mat-form-field *ngIf="operation=='EDIT'">
+            <mat-label>ID:</mat-label>
+            <input matInput formControlName="id" placeholder="ID" required readonly>
+            <mat-hint align="end">(Cannot change this number)</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field >
+            <mat-label>Nombre:</mat-label>
+            <input matInput formControlName="nombre" placeholder="nombre" required>
+            <mat-hint align="end">(3 to 255 characters long)</mat-hint>
+            <mat-error *ngIf="hasError('nombre', 'required')">nombre is required</mat-error>
+            <mat-error *ngIf="hasError('nombre', 'minlength')">nombre must be at least 3 characters long</mat-error>
+            <mat-error *ngIf="hasError('nombre', 'maxlength')">nombre exceeds the limit</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field >
+            <mat-label>Apellido1:</mat-label>
+            <input matInput formControlName="apellido1" placeholder="apellido1" required>
+            <mat-hint align="end">(3 to 255 characters long)</mat-hint>
+            <mat-error *ngIf="hasError('apellido1', 'required')">Apellido1 is required</mat-error>
+            <mat-error *ngIf="hasError('apellido1', 'minlength')">Apellido1 must be at least 3 characters long</mat-error>
+            <mat-error *ngIf="hasError('apellido1', 'maxlength')">Apellido1 exceeds the limit</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field >
+            <mat-label>Apellido2:</mat-label>
+            <input matInput formControlName="apellido2" placeholder="apellido2" >
+            <mat-hint align="end">(3 to 255 characters long)</mat-hint>
+            <mat-error *ngIf="hasError('apellido2', 'minlength')">Apellido2 must be at least 3 characters long</mat-error>
+            <mat-error *ngIf="hasError('apellido2', 'maxlength')">Apellido2 exceeds the limit</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field >
+            <mat-label>Email:</mat-label>
+            <input matInput formControlName="email" placeholder="pat@example.com" required>
+            <mat-hint align="end">(3 to 255 characters long)</mat-hint>
+            <mat-error *ngIf="hasError('email', 'required')">Email is required</mat-error>
+            <mat-error *ngIf="hasError('email', 'email')">Email is not valid</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field >
+            <mat-label>Teléfono:</mat-label>
+            <input matInput formControlName="telefono" placeholder="telefono" required>
+            <mat-hint align="end">(9 caracteres)</mat-hint>
+            <mat-error *ngIf="hasError('telefono', 'required')">Teléfono is required</mat-error>
+            <mat-error *ngIf="hasError('telefono', 'minlength')">Teléfono must be at least 3 characters long</mat-error>
+            <mat-error *ngIf="hasError('telefono', 'maxlength')">Teléfono exceeds the limit</mat-error>
+            <mat-error *ngIf="hasError('telefono', 'pattern')">Characters-not-accepeted</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field >
+            <mat-label>Dirección:</mat-label>
+            <input matInput formControlName="direccion" placeholder="direccion" required>
+            <mat-hint align="end">(3 to 255 characters long)</mat-hint>
+            <mat-error *ngIf="hasError('direccion', 'required')">Dirección is required</mat-error>
+            <mat-error *ngIf="hasError('direccion', 'minlength')">Dirección must be at least 3 characters long</mat-error>
+            <mat-error *ngIf="hasError('direccion', 'maxlength')">Dirección exceeds the limit</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field >
+            <mat-label>Username:</mat-label>
+            <input matInput formControlName="username" placeholder="username" required>
+            <mat-hint align="end">(3 to 255 characters long)</mat-hint>
+            <mat-error *ngIf="hasError('username', 'required')">Username is required</mat-error>
+            <mat-error *ngIf="hasError('username', 'minlength')">Username must be at least 3 characters long</mat-error>
+            <mat-error *ngIf="hasError('username', 'maxlength')">Username exceeds the limit</mat-error>
+            <mat-error *ngIf="hasError('username', 'pattern')">Characters-not-accepeted</mat-error>
+          </mat-form-field>
+        </div>
+
+
+
+
+        <mat-radio-group aria-label="Type of user" formControlName="rol" required>
+          <mat-radio-button [value]="true">Admin</mat-radio-button>
+          <mat-radio-button [value]="false">User</mat-radio-button>
+          <mat-error *ngIf="hasError('rol', 'required')">User type is required</mat-error>
+        </mat-radio-group>
+
+        <div class="text-center mt-5">
+       
+          <p-button type="submit">Guardar</p-button>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

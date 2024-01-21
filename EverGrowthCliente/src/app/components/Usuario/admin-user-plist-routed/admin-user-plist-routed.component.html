@@ -14,9 +14,9 @@
 
   <p-toolbar *ngIf="!bLoading">
     <div class="p-toolbar-group-start justify-content-center">
-      <p-button [rounded]="true" severity="warning mx-1" [outlined]="true" (click)="doGenerateRandom(10)">+10</p-button>
-      <p-button [rounded]="true" severity="warning mx-1" [outlined]="true" (click)="doGenerateRandom(50)">+50</p-button>
-      <p-button [rounded]="true" severity="warning mx-1" [outlined]="true" (click)="doGenerateRandom(100)">+100</p-button>
+      <p-button [rounded]="true" severity="warning mx-1" (click)="doGenerateRandom(10)">+10</p-button>
+      <p-button [rounded]="true" severity="warning mx-1"  (click)="doGenerateRandom(50)">+50</p-button>
+      <p-button [rounded]="true" severity="warning mx-1"  (click)="doGenerateRandom(100)">+100</p-button>
     </div>
  
     <div class="p-toolbar-group-end">
@@ -28,3 +28,4 @@
 <app-admin-user-plist-unrouted [forceReload]="forceReload" *ngIf="!bLoading"></app-admin-user-plist-unrouted>
 
 <p-confirmPopup></p-confirmPopup>
+<p-messages></p-messages>

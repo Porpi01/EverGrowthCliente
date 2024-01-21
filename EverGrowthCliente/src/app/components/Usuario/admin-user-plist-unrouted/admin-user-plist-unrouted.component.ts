@@ -5,15 +5,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { PaginatorState } from 'primeng/paginator';
 import { IUsuario } from './../../../model/model.interfaces';
-import { ConfirmEventType, ConfirmationService } from 'primeng/api';
+import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
-  providers: [ConfirmationService],
+  providers: [ConfirmationService,MessageService],
   selector: 'app-admin-user-plist-unrouted',
   templateUrl: './admin-user-plist-unrouted.component.html',
-  styleUrls: ['./admin-user-plist-unrouted.component.css']
+  styleUrls: ['./admin-user-plist-unrouted.component.css'],
+ 
 })
 export class AdminUserPlistUnroutedComponent implements OnInit {
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
@@ -32,7 +33,8 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
   constructor(
     private UsuarioService: UsuarioService,
     private ConfirmationService: ConfirmationService,
-    private MatSnackBar: MatSnackBar
+    private MatSnackBar: MatSnackBar,
+    
   ) { 
   }
 

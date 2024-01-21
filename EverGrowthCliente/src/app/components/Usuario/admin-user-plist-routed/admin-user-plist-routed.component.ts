@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MenuItem } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { UsuarioService } from './../../../service/Usuario.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 @Component({
 
   selector: 'app-admin-user-plist-routed',
@@ -19,8 +19,9 @@ export class AdminUserPlistRoutedComponent implements OnInit {
   loadingProgress: number = 0;
   constructor(
     private UsuarioService: UsuarioService,
-    private oMatSnackBar: MatSnackBar,
     private ConfirmationService: ConfirmationService,
+    private router: Router,
+    private MessageService: MessageService
 
   ) { }
 
@@ -34,69 +35,87 @@ export class AdminUserPlistRoutedComponent implements OnInit {
       },
       {
         label: 'Crear',
-        icon: "fa-solid fa-circle-plus"
+        icon: "fa-solid fa-circle-plus",
+        command: () => this.router.navigate(['admin/usuario/new'])
       }
     ];
   }
 
-  doGenerateRandom(amount: number) {
-    this.bLoading = true;
-    const totalSteps = 10; // Increase the number of steps
-    const stepSize = 100 / totalSteps;
-    this.loadingProgress = 0;
   
-    const intervalId = setInterval(() => {
-      if (this.loadingProgress < 100) {
-        this.loadingProgress += stepSize; // Adjust the step size based on your loading process
-      } else {
-        clearInterval(intervalId);
-        // Now that loading is complete, show the next content
-        this.UsuarioService.generateRandom(amount).subscribe({
-          next: (oResponse: number) => {
-            this.oMatSnackBar.open('Now there are ' + oResponse + ' users', '', { duration: 2000 });
-            this.bLoading = false;
-          },
-          error: (oError: HttpErrorResponse) => {
-            this.oMatSnackBar.open('Error generating users: ' + oError.message, '', { duration: 2000 });
-            this.bLoading = false;
-          }
-        });
-      }
-    }, 1000 / totalSteps); // Increase the interval duration based on your total steps
-  }
+doGenerateRandom(amount: number) {
+  this.bLoading = true;
+  const totalSteps = 10;
+  const stepSize = 100 / totalSteps;
+  this.loadingProgress = 0;
+
+  const intervalId = setInterval(() => {
+    if (this.loadingProgress < 100) {
+      this.loadingProgress += stepSize;
+    } else {
+      clearInterval(intervalId);
+      this.UsuarioService.generateRandom(amount).subscribe({
+        next: (oResponse: number) => {
+          this.MessageService.add({ severity: 'success',  detail: 'Now there are ' + oResponse + ' users', life: 2000 });
+          this.bLoading = false;
+        },
+        error: (oError: HttpErrorResponse) => {
+          this.MessageService.add({ severity: 'error', detail: 'Error generating users: ' + oError.message, life: 2000 });
+          this.bLoading = false;
+        }
+      });
+    }
+  }, 1000 / totalSteps);
+}
 
   doEmpty($event: Event) {
     console.log('doEmpty called');
- 
+
     this.ConfirmationService.confirm({
-   
       target: $event.target as EventTarget,
       message: 'Are you sure you want to remove all users?',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Yes',
       rejectLabel: 'No',
       accept: () => {
+        console.log('Accept block reached');
         this.UsuarioService.empty().subscribe({
-        
           next: (oResponse: number) => {
-            this.oMatSnackBar.open(`Now there are ${oResponse} users.`, '', { duration: 2000 });
+            console.log('Success response:', oResponse);
+            this.MessageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: `Now there are ${oResponse} users.`,
+              life: 2000
+            });
+
             this.bLoading = false;
             this.forceReload.next(true);
-            console.log($event);
-            console.log('ConfirmationService called')
           },
           error: (oError: HttpErrorResponse) => {
-            this.oMatSnackBar.open(`Error emptying users: ${oError.message}`, '', { duration: 2000 });
+            console.error('Error response:', oError);
+            this.MessageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `Error emptying users: ${oError.message}`,
+              life: 2000
+            });
+
             this.bLoading = false;
           },
         });
       },
       reject: () => {
-        this.oMatSnackBar.open('Operation cancelled!', '', { duration: 2000 });
-      }
+        console.log('Reject block reached');
+        this.MessageService.add({
+          severity: 'info',
+          summary: 'Info',
+          detail: 'Operation cancelled!',
+          life: 2000
+        });
+
+      },
     });
   }
 
-  
 
 }
