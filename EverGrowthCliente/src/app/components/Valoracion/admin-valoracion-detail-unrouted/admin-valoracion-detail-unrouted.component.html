@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <p-card class="custom-card">
+        <ng-template pTemplate="header">
+          <i class="fa-solid fa-circle-info"></i>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div>
+            <div><strong>Título:</strong> {{ valoraciones.titulo }}</div>
+            <div><strong>Fecha:</strong> {{ valoraciones.fecha }}</div>
+            <div><strong>Mensaje:</strong> {{ valoraciones.mensaje }}</div>
+            <div *ngIf="valoraciones.user">
+              <strong>Usuarios:</strong>
+              <ng-container *ngIf="valoraciones.user.id">
+                <a [routerLink]="['/admin','usuario','view',valoraciones.user.id]">
+                  {{ valoraciones.user.nombre }} {{ valoraciones.user.apellido1}}
+                </a>
+              </ng-container>
+            </div>
+         
+            <div *ngIf="valoraciones.producto">
+              <strong>Productos:</strong>
+              <ng-container *ngIf="valoraciones.producto.id">
+                <a [routerLink]="['/admin','producto','plist','byproducto',valoraciones.producto.id]">
+                  {{ valoraciones.producto.id }} {{ valoraciones.producto.nombre}}
+                </a>
+              </ng-container>
+            </div>
+           
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>

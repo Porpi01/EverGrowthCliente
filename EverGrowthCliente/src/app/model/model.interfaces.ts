@@ -46,8 +46,8 @@ export interface IValoracion extends IEntity {
     titulo: string,
     fecha: Date,
     mensaje: string,
-    usuario: number,
-    producto: number,
+    user: IUsuario,
+    producto: IProducto,
 }
 
 export interface IValoracionPage extends IPage<IValoracion> {

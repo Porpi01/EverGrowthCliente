@@ -41,31 +41,31 @@ export class AdminUserPlistRoutedComponent implements OnInit {
     ];
   }
 
-  
-doGenerateRandom(amount: number) {
-  this.bLoading = true;
-  const totalSteps = 10;
-  const stepSize = 100 / totalSteps;
-  this.loadingProgress = 0;
 
-  const intervalId = setInterval(() => {
-    if (this.loadingProgress < 100) {
-      this.loadingProgress += stepSize;
-    } else {
-      clearInterval(intervalId);
-      this.UsuarioService.generateRandom(amount).subscribe({
-        next: (oResponse: number) => {
-          this.MessageService.add({ severity: 'success',  detail: 'Now there are ' + oResponse + ' users', life: 2000 });
-          this.bLoading = false;
-        },
-        error: (oError: HttpErrorResponse) => {
-          this.MessageService.add({ severity: 'error', detail: 'Error generating users: ' + oError.message, life: 2000 });
-          this.bLoading = false;
-        }
-      });
-    }
-  }, 1000 / totalSteps);
-}
+  doGenerateRandom(amount: number) {
+    this.bLoading = true;
+    const totalSteps = 10;
+    const stepSize = 100 / totalSteps;
+    this.loadingProgress = 0;
+
+    const intervalId = setInterval(() => {
+      if (this.loadingProgress < 100) {
+        this.loadingProgress += stepSize;
+      } else {
+        clearInterval(intervalId);
+        this.UsuarioService.generateRandom(amount).subscribe({
+          next: (oResponse: number) => {
+            this.MessageService.add({ severity: 'success', detail: 'Now there are ' + oResponse + ' users', life: 2000 });
+            this.bLoading = false;
+          },
+          error: (oError: HttpErrorResponse) => {
+            this.MessageService.add({ severity: 'error', detail: 'Error generating users: ' + oError.message, life: 2000 });
+            this.bLoading = false;
+          }
+        });
+      }
+    }, 1000 / totalSteps);
+  }
 
   doEmpty($event: Event) {
     console.log('doEmpty called');

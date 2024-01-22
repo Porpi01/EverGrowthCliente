@@ -11,7 +11,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 })
 export class AdminUserDetailUnroutedComponent implements OnInit {
   @Input() id: number = 1;
-  usuarios: IUsuario[] = [];
+  usuarios: IUsuario = {} as IUsuario;
   status: HttpErrorResponse | null = null;
   
 
@@ -28,13 +28,14 @@ export class AdminUserDetailUnroutedComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.id);
+    
     this.getOne();
   }
 
   getOne(): void {
     this.usuarioService.getOne(this.id).subscribe({
       next: (data: IUsuario) => {
-        this.usuarios = [data];
+        this.usuarios = data;
         console.log(this.usuarios)    
         console.log(data.nombre)  
       },

@@ -1,20 +1,20 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ConfirmationService, ConfirmEventType } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
-import { IValoracionPage, IValoracion } from 'src/app/model/model.interfaces';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ValoracionService } from '../../../service/Valoracion.service';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ValoracionService } from './../../../service/Valoracion.service';
+import { IValoracion, IValoracionPage } from 'src/app/model/model.interfaces';
+import { AdminValoracionDetailUnroutedComponent } from '../admin-valoracion-detail-unrouted/admin-valoracion-detail-unrouted.component';
 @Component({
   selector: 'app-admin-valoracion-plist-unrouted',
   templateUrl: './admin-valoracion-plist-unrouted.component.html',
   styleUrls: ['./admin-valoracion-plist-unrouted.component.css'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService,MessageService]
 })
 export class AdminValoracionPlistUnroutedComponent implements OnInit {
 
- 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
   
 
@@ -24,15 +24,19 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
   oPaginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
   valoraciones: IValoracion[] = [];
-  valoracionToremove: IValoracion | null = null;
+  valoracionToRemove: IValoracion | null = null;
+  ref: DynamicDialogRef | undefined;
  
   value: string = '';
+
   constructor(
     private ValoracionService: ValoracionService,
     private ConfirmationService: ConfirmationService,
-    private MatSnackBar: MatSnackBar
-  ) { 
+    private DialogService: DialogService,
+    private MessageService: MessageService
+
     
+  ) { 
   }
 
   ngOnInit() {
@@ -101,27 +105,41 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  doRemove(valoracion: IValoracion) {
-    this.valoracionToremove = valoracion;
-    this.ConfirmationService.confirm({
-      accept: () => {
-        this.MatSnackBar.open("The user has been removed.", '', { duration: 1200 });
-        this.ValoracionService.removeOne(this.valoracionToremove?.id).subscribe({
-          next: () => {
-            this.getPage();
-          },
-          error: (error: HttpErrorResponse) => {
-
-            this.status = error;
-            this.MatSnackBar.open("The user hasn't been removed.", "", { duration: 1200 });
-          }
-        });
+  doView(valoracion: IValoracion) {
+    this.ref = this.DialogService.open(AdminValoracionDetailUnroutedComponent, {
+      data: {
+        id: valoracion.id
       },
-      reject: (type: ConfirmEventType) => {
-        this.MatSnackBar.open("The user hasn't been removed.", "", { duration: 1200 });
-      }
+      header: 'View valoracion',
+      width: '50%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: false
     });
   }
 
 
+  doRemove(valoracion: IValoracion) {
+    this.valoracionToRemove = valoracion;
+  
+    this.ConfirmationService.confirm({
+      accept: () => {
+        this.ValoracionService.removeOne(this.valoracionToRemove?.id).subscribe({
+          next: () => {
+            this.getPage();
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The valoracion has been removed.' });
+          },
+          error: (error: HttpErrorResponse) => {
+            this.status = error;
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The valoracion hasn\'t been removed.' });
+          }
+        });
+      },
+      reject: (type: ConfirmEventType) => {
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The valoracion hasn\'t been removed.' });
+      }
+    });
+  }
+
+  
 }

@@ -73,7 +73,7 @@
 
             <p-button [rounded]="true" severity="success" [outlined]="true"[routerLink]="['/admin','usuario','edit',user.id]"><i
                 class="fa-solid fa-pen-to-square"></i></p-button>
-            <p-button [rounded]="true" severity="warning" [outlined]="true"><i class="fa-solid fa-circle-up"></i></p-button>
+            <p-button [rounded]="true" severity="warning" [outlined]="true" (click)="doView(user)"><i class="fa-solid fa-circle-up"></i></p-button>
      
             <p-button [rounded]="true" severity="danger" [outlined]="true" *ngIf="user.pedidos==0 && user.valoracion==0 && user.carritos==0" 
               (click)="doRemove(user)"><i class="fa-solid fa-trash"></i></p-button>
@@ -104,19 +104,19 @@
 </div>
 
 
-<p-confirmDialog #cd [style]="{ width: '50vw' }">
+<p-confirmDialog #cd [style]="{ 'width': '50vw', 'max-width': '500px',  }" [baseZIndex]="10000">
   <ng-template pTemplate="header">
-    <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> Eliminar usuario</h5>
+    <h5 class="confirm-dialog-header"><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> Eliminar usuario</h5>
   </ng-template>
   <ng-template pTemplate="message">
     <div class="container d-flex align-items-center justify-content-center">
       <app-admin-user-detail-unrouted [id]="userToRemove!.id"></app-admin-user-detail-unrouted>
-
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
     <p>¿Seguro que quieres eliminar este usuario?</p>
-    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+    <button class="btn btn-secondary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
     <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Sí" (click)="cd.accept()"></button>
   </ng-template>
 </p-confirmDialog>
+<p-messages></p-messages>

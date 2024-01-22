@@ -53,6 +53,9 @@ import { CardModule } from 'primeng/card';
 import { AdminUserDetailUnroutedComponent } from './components/Usuario/admin-user-detail-unrouted/admin-user-detail-unrouted.component';
 import { AdminUserEditRoutedComponent } from './components/Usuario/admin-user-edit-routed/admin-user-edit-routed.component';
 import { DataViewModule } from 'primeng/dataview';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AdminValoracionDetailUnroutedComponent } from './components/Valoracion/admin-valoracion-detail-unrouted/admin-valoracion-detail-unrouted.component';
+import { AdminValoracionViewRoutedComponent } from './components/Valoracion/admin-valoracion-view-routed/admin-valoracion-view-routed.component';
 
 
 @NgModule({
@@ -74,6 +77,8 @@ import { DataViewModule } from 'primeng/dataview';
     //Componentes entidad Valoracion
     AdminValoracionPlistUnroutedComponent,
     AdminValoracionPlistRoutedComponent,
+    AdminValoracionDetailUnroutedComponent,
+    AdminValoracionViewRoutedComponent,
 
     //Componentes entidad Producto
     AdminProductoPlistUnroutedComponent,
@@ -119,7 +124,8 @@ import { DataViewModule } from 'primeng/dataview';
     MatFormFieldModule,
     MatRadioModule,
     CardModule,
-    DataViewModule
+    DataViewModule,
+   
 
 
 
@@ -135,7 +141,8 @@ import { DataViewModule } from 'primeng/dataview';
     CarritoService,
     ConfirmationService,
     MessageService,
-    FormBuilder
+    FormBuilder,
+    DialogService
 
   ],
   bootstrap: [AppComponent]

@@ -6,7 +6,8 @@ import { Subject } from 'rxjs';
 import { PaginatorState } from 'primeng/paginator';
 import { IUsuario } from './../../../model/model.interfaces';
 import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdminUserDetailUnroutedComponent } from '../admin-user-detail-unrouted/admin-user-detail-unrouted.component';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 
 @Component({
@@ -27,13 +28,16 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
   status: HttpErrorResponse | null = null;
   usuarios: IUsuario[] = [];
   userToRemove: IUsuario | null = null;
+  ref: DynamicDialogRef | undefined;
  
   value: string = '';
 
   constructor(
     private UsuarioService: UsuarioService,
     private ConfirmationService: ConfirmationService,
-    private MatSnackBar: MatSnackBar,
+    private DialogService: DialogService,
+    private MessageService: MessageService
+
     
   ) { 
   }
@@ -104,24 +108,38 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
+  doView(user: IUsuario) {
+    this.ref = this.DialogService.open(AdminUserDetailUnroutedComponent, {
+      data: {
+        id: user.id
+      },
+      header: 'View user',
+      width: '50%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: false
+    });
+  }
+
+
   doRemove(user: IUsuario) {
     this.userToRemove = user;
+  
     this.ConfirmationService.confirm({
       accept: () => {
-        this.MatSnackBar.open("The user has been removed.", '', { duration: 1200 });
         this.UsuarioService.removeOne(this.userToRemove?.id).subscribe({
           next: () => {
             this.getPage();
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The user has been removed.' });
           },
           error: (error: HttpErrorResponse) => {
-
             this.status = error;
-            this.MatSnackBar.open("The user hasn't been removed.", "", { duration: 1200 });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The user hasn\'t been removed.' });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MatSnackBar.open("The user hasn't been removed.", "", { duration: 1200 });
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The user hasn\'t been removed.' });
       }
     });
   }

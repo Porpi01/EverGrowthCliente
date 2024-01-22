@@ -10,6 +10,7 @@ import { AdminCarritoPlistRoutedComponent } from './components/Carrito/admin-car
 import { AdminUserNewRoutedComponent } from './components/Usuario/admin-user-new-routed/admin-user-new-routed.component';
 import { AdminUserViewRoutedComponent } from './components/Usuario/admin-user-view-routed/admin-user-view-routed.component';
 import { AdminUserEditRoutedComponent } from './components/Usuario/admin-user-edit-routed/admin-user-edit-routed.component';
+import { AdminValoracionViewRoutedComponent } from './components/Valoracion/admin-valoracion-view-routed/admin-valoracion-view-routed.component';
 
 const routes: Routes = [
 //Usuario
@@ -25,6 +26,11 @@ const routes: Routes = [
 //Valoracion
   { path: 'admin/valoracion/plist', component: AdminValoracionPlistRoutedComponent },
   { path: 'admin/valoracion/plist/byvaloracion/:id', component: AdminValoracionPlistRoutedComponent },
+  { path: 'admin/valoracion/view/:id', component: AdminValoracionViewRoutedComponent },
+
+
+
+
 //Producto
   { path: 'admin/producto/plist', component: AdminProductoPlistRoutedComponent },
   { path: 'admin/producto/plist/byproducto/:id', component: AdminProductoPlistRoutedComponent },
