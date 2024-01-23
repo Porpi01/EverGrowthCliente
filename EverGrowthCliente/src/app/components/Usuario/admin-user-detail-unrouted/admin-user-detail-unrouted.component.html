@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-5">
+    <div class="col-md-6">
       <p-card class="custom-card">
         <ng-template pTemplate="header">
           <i class="fa-solid fa-circle-info"></i>
@@ -14,8 +14,10 @@
             <div><strong>Teléfono:</strong> {{ usuarios.telefono }}</div>
             <div><strong>Dirección:</strong> {{ usuarios.direccion }}</div>
             <div><strong>Username:</strong> {{ usuarios.username }}</div>
-            <div><strong>Rol:</strong> {{ usuarios.rol ? 'User' : 'Admin' }}</div>
-
+            <div><strong>Rol:</strong>   
+              <span *ngIf="usuarios.rol==false">User</span>
+              <span *ngIf="usuarios.rol==true">Admin</span>
+            </div>
             <div *ngIf="usuarios.valoracion !== undefined">
               <strong>Valoraciones:</strong>
               <ng-container *ngIf="usuarios.valoracion > 0; else noValoraciones">

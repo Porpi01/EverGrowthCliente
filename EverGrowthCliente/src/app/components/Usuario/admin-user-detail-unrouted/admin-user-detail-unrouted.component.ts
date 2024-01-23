@@ -23,6 +23,7 @@ export class AdminUserDetailUnroutedComponent implements OnInit {
     if (config && config.data) {
       this.id = config.data.id;
       console.log(this.config.data);
+      
     }
   }
 
