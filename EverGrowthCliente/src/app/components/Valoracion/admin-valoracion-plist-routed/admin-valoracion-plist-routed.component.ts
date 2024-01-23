@@ -10,7 +10,7 @@ import { ValoracionService } from './../../../service/Valoracion.service';
   selector: 'app-admin-valoracion-plist-routed',
   templateUrl: './admin-valoracion-plist-routed.component.html',
   styleUrls: ['./admin-valoracion-plist-routed.component.css'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService, MessageService]
 })
 export class AdminValoracionPlistRoutedComponent implements OnInit {
 

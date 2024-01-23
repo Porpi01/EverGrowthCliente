@@ -1,3 +1,29 @@
-<p>
-  admin-categoria-detail-unrouted works!
-</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <p-card class="custom-card">
+        <ng-template pTemplate="header">
+          <i class="fa-solid fa-circle-info"></i>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div>
+            <div><strong>Nombre:</strong> {{ categorias.nombre }}</div>
+           
+            <div *ngIf="categorias.productos !== undefined">
+              <strong>Productos:</strong>
+              <ng-container *ngIf="categorias.productos > 0; else noProductos">
+                <a [routerLink]="['/admin','categoria','plist','byproducto',categorias.id]">
+                  {{ categorias.productos }}
+                </a>
+              </ng-container>
+              <ng-template #noProductos>
+                <span>0</span>
+              </ng-template>
+            </div>
+           
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>

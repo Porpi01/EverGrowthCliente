@@ -1,17 +1,18 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ConfirmEventType, ConfirmationService } from 'primeng/api';
+import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
 import { ICategoriaPage, ICategoria } from 'src/app/model/model.interfaces';
 import { CategoriaService } from './../../../service/Categoria.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AdminCategoriaDetailUnroutedComponent } from '../admin-categoria-detail-unrouted/admin-categoria-detail-unrouted.component';
 
 @Component({
   selector: 'app-admin-categoria-plist-unrouted',
   templateUrl: './admin-categoria-plist-unrouted.component.html',
   styleUrls: ['./admin-categoria-plist-unrouted.component.css'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService,MessageService]
 })
 export class AdminCategoriaPlistUnroutedComponent implements OnInit {
 
@@ -25,13 +26,15 @@ export class AdminCategoriaPlistUnroutedComponent implements OnInit {
   status: HttpErrorResponse | null = null;
   categoria: ICategoria[] = [];
   categoriaToRemove: ICategoria | null = null;
+  ref: DynamicDialogRef | undefined;
  
   value: string = '';
 
   constructor(
     private CategoriaService: CategoriaService,
     private ConfirmationService: ConfirmationService,
-    private MatSnackBar: MatSnackBar
+    private DialogService: DialogService,
+    private MessageService: MessageService
   ) { 
   }
 
@@ -101,24 +104,38 @@ export class AdminCategoriaPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  doRemove(producto: ICategoria) {
-    this.categoriaToRemove = producto;
+  doView(categoria: ICategoria) {
+    this.ref = this.DialogService.open(AdminCategoriaDetailUnroutedComponent, {
+      data: {
+        id: categoria.id
+      },
+      header: 'View categoría',
+      width: '50%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: false
+    });
+  }
+
+
+  doRemove(categoria: ICategoria) {
+    this.categoriaToRemove  = categoria;
+  
     this.ConfirmationService.confirm({
       accept: () => {
-        this.MatSnackBar.open("The producto has been removed.", '', { duration: 1200 });
         this.CategoriaService.removeOne(this.categoriaToRemove?.id).subscribe({
           next: () => {
             this.getPage();
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The categoría has been removed.' });
           },
           error: (error: HttpErrorResponse) => {
-
             this.status = error;
-            this.MatSnackBar.open("The producto hasn't been removed.", "", { duration: 1200 });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The categoría hasn\'t been removed.' });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MatSnackBar.open("The producto hasn't been removed.", "", { duration: 1200 });
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The categoría hasn\'t been removed.' });
       }
     });
   }

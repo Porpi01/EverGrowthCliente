@@ -1,3 +1,36 @@
-<p>
-  admin-detallePedido-detail-unrouted works!
-</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <p-card class="custom-card">
+        <ng-template pTemplate="header">
+          <i class="fa-solid fa-circle-info"></i>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div>
+            <div><strong>Cantidad:</strong> {{ detallePedidos.cantidad }}</div>
+            <div><strong>Precio Unitario:</strong> {{ detallePedidos.precio_unitario }}</div>
+           
+            <div *ngIf="detallePedidos.pedidos">
+              <strong>Pedido:</strong>
+              <ng-container *ngIf="detallePedidos.pedidos.id">
+                <a [routerLink]="['/admin','usuario','view',detallePedidos.pedidos.id]">
+                  {{ detallePedidos.pedidos.id }} 
+                </a>
+              </ng-container>
+            </div>
+         
+            <div *ngIf="detallePedidos.productos">
+              <strong>Producto:</strong>
+              <ng-container *ngIf="detallePedidos.productos.id">
+                <a [routerLink]="['/admin','producto','plist','byproducto',detallePedidos.productos.id]">
+                  {{ detallePedidos.productos.id }} {{ detallePedidos.productos.nombre}}
+                </a>
+              </ng-container>
+            </div>
+           
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>

@@ -1,17 +1,20 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ConfirmationService, ConfirmEventType } from 'primeng/api';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ICarrito, ICarritoPage } from 'src/app/model/model.interfaces';
 import { CarritoService } from './../../../service/Carrito.service';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AdminCarritoDetailUnroutedComponent } from '../admin-carrito-detail-unrouted/admin-carrito-detail-unrouted.component';
+
 
 @Component({
   selector: 'app-admin-carrito-plist-unrouted',
   templateUrl: './admin-carrito-plist-unrouted.component.html',
   styleUrls: ['./admin-carrito-plist-unrouted.component.css'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService,MessageService]
 })
 export class AdminCarritoPlistUnroutedComponent implements OnInit {
 
@@ -25,13 +28,15 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
   status: HttpErrorResponse | null = null;
   carrito: ICarrito[] = [];
   carritoToRemove: ICarrito | null = null;
+  ref: DynamicDialogRef | undefined;
  
   value: string = '';
 
   constructor(
     private CarritoService: CarritoService,
     private ConfirmationService: ConfirmationService,
-    private MatSnackBar: MatSnackBar
+    private DialogService: DialogService,
+    private MessageService: MessageService
   ) { 
   }
 
@@ -101,24 +106,39 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  doRemove(producto: ICarrito) {
-    this.carritoToRemove = producto;
+ 
+  doView(carrito: ICarrito) {
+    this.ref = this.DialogService.open(AdminCarritoDetailUnroutedComponent, {
+      data: {
+        id: carrito.id
+      },
+      header: 'View carrito',
+      width: '50%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: false
+    });
+  }
+
+
+  doRemove(carrito: ICarrito) {
+    this.carritoToRemove  = carrito;
+  
     this.ConfirmationService.confirm({
       accept: () => {
-        this.MatSnackBar.open("The producto has been removed.", '', { duration: 1200 });
         this.CarritoService.removeOne(this.carritoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The carrito has been removed.' });
           },
           error: (error: HttpErrorResponse) => {
-
             this.status = error;
-            this.MatSnackBar.open("The producto hasn't been removed.", "", { duration: 1200 });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The carrito hasn\'t been removed.' });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MatSnackBar.open("The producto hasn't been removed.", "", { duration: 1200 });
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The carrito hasn\'t been removed.' });
       }
     });
   }

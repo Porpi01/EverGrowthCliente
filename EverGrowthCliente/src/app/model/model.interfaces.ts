@@ -104,13 +104,14 @@ export interface IDetallePedido extends IEntity {
 
     cantidad: number,
     precio_unitario: number,
-    productos: number,
-    pedidos: number
+    productos: IProducto,
+    pedidos: IPedido
 }
 export interface IDetallePedidoPage extends IPage<IDetallePedido> {
 }
 export interface ICategoria extends IEntity {
     nombre: string
+    productos: number
 }
 
 export interface ICategoriaPage extends IPage<ICategoria> {
@@ -118,8 +119,8 @@ export interface ICategoriaPage extends IPage<ICategoria> {
 
 export interface ICarrito extends IEntity {
     cantidad: number,
-    productos: number,
-    usuario: number
+    producto: IProducto,
+    user: IUsuario
 }
 
 export interface ICarritoPage extends IPage<ICarrito> {
