@@ -11,6 +11,7 @@ import { AdminUserNewRoutedComponent } from './components/Usuario/admin-user-new
 import { AdminUserViewRoutedComponent } from './components/Usuario/admin-user-view-routed/admin-user-view-routed.component';
 import { AdminUserEditRoutedComponent } from './components/Usuario/admin-user-edit-routed/admin-user-edit-routed.component';
 import { AdminValoracionViewRoutedComponent } from './components/Valoracion/admin-valoracion-view-routed/admin-valoracion-view-routed.component';
+import { AdminProductoViewRoutedComponent } from './components/Producto/admin-producto-view-routed/admin-producto-view-routed.component';
 
 const routes: Routes = [
 //Usuario
@@ -34,6 +35,11 @@ const routes: Routes = [
 //Producto
   { path: 'admin/producto/plist', component: AdminProductoPlistRoutedComponent },
   { path: 'admin/producto/plist/byproducto/:id', component: AdminProductoPlistRoutedComponent },
+  {path: 'admin/producto/plist/byvaloracion/:id', component: AdminProductoPlistRoutedComponent },
+  { path: 'admin/producto/view/:id', component: AdminProductoViewRoutedComponent },
+
+
+
 //Pedido
 { path: 'admin/pedido/plist', component: AdminPedidoPlistRoutedComponent },
 { path: 'admin/pedido/plist/bypedido/:id', component: AdminPedidoPlistRoutedComponent },

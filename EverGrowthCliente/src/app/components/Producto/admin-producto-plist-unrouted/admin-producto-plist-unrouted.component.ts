@@ -1,19 +1,21 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ConfirmEventType, ConfirmationService } from 'primeng/api';
+import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
 
 import { ProductoService } from './../../../service/Producto.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { IProducto, IProductoPage } from 'src/app/model/model.interfaces';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AdminProductoDetailUnroutedComponent } from '../admin-producto-detail-unrouted/admin-producto-detail-unrouted.component';
 @Component({
   selector: 'app-admin-producto-plist-unrouted',
   templateUrl: './admin-producto-plist-unrouted.component.html',
   styleUrls: ['./admin-producto-plist-unrouted.component.css'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService,MessageService]
 })
 export class AdminProductoPlistUnroutedComponent implements OnInit {
+
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
   
 
@@ -25,12 +27,16 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
   productos: IProducto[] = [];
   productoToRemove: IProducto | null = null;
   imagenBase64: string | null = null;
+  ref: DynamicDialogRef | undefined;
+
   value: string = '';
 
   constructor(
     private ProductoService: ProductoService,
     private ConfirmationService: ConfirmationService,
-    private MatSnackBar: MatSnackBar
+    private DialogService: DialogService,
+    private MessageService: MessageService
+
   ) { 
   }
 
@@ -102,24 +108,38 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
+  doView(producto: IProducto) {
+    this.ref = this.DialogService.open(AdminProductoDetailUnroutedComponent, {
+      data: {
+        id: producto.id
+      },
+      header: 'View Producto',
+      width: '50%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: false
+    });
+  }
+
+
   doRemove(producto: IProducto) {
     this.productoToRemove = producto;
+  
     this.ConfirmationService.confirm({
       accept: () => {
-        this.MatSnackBar.open("The producto has been removed.", '', { duration: 1200 });
         this.ProductoService.removeOne(this.productoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The producto has been removed.' });
           },
           error: (error: HttpErrorResponse) => {
-
             this.status = error;
-            this.MatSnackBar.open("The producto hasn't been removed.", "", { duration: 1200 });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The producto hasn\'t been removed.' });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MatSnackBar.open("The producto hasn't been removed.", "", { duration: 1200 });
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The producto hasn\'t been removed.' });
       }
     });
   }

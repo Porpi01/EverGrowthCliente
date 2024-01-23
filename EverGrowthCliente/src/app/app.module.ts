@@ -56,6 +56,8 @@ import { DataViewModule } from 'primeng/dataview';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AdminValoracionDetailUnroutedComponent } from './components/Valoracion/admin-valoracion-detail-unrouted/admin-valoracion-detail-unrouted.component';
 import { AdminValoracionViewRoutedComponent } from './components/Valoracion/admin-valoracion-view-routed/admin-valoracion-view-routed.component';
+import { AdminProductoViewRoutedComponent } from './components/Producto/admin-producto-view-routed/admin-producto-view-routed.component';
+import { AdminProductoDetailUnroutedComponent } from './components/Producto/admin-producto-detail-unrouted/admin-producto-detail-unrouted.component';
 
 
 @NgModule({
@@ -83,6 +85,8 @@ import { AdminValoracionViewRoutedComponent } from './components/Valoracion/admi
     //Componentes entidad Producto
     AdminProductoPlistUnroutedComponent,
     AdminProductoPlistRoutedComponent,
+    AdminProductoViewRoutedComponent,
+    AdminProductoDetailUnroutedComponent,
 
     //Componentes entidad Pedido
     AdminPedidoPlistUnroutedComponent,

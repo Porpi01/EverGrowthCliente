@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-admin-user-plist-routed',
   templateUrl: './admin-user-plist-routed.component.html',
   styleUrls: ['./admin-user-plist-routed.component.css'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService, MessageService]
 })
 export class AdminUserPlistRoutedComponent implements OnInit {
 

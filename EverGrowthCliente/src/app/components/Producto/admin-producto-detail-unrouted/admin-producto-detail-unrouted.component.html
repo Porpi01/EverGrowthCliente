@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <p-card class="custom-card">
+        <ng-template pTemplate="header">
+          <i class="fa-solid fa-circle-info"></i>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div>
+            <div><strong>Nombre:</strong> {{ productos.nombre }}</div>
+            <div><strong>Precio:</strong> {{ productos.precio }}</div>
+            <div><strong>Stock:</strong> {{ productos.stock }}</div>
+            <div><strong>Imagen:</strong> </div>
+            <div *ngIf="productos.categoria">
+              <strong>Productos:</strong>
+              <ng-container *ngIf="productos.categoria.id">
+                <a [routerLink]="['/admin','categoria','plist','bycategoria',productos.categoria.id]">
+                  {{ productos.categoria.id }} {{ productos.categoria.nombre}}
+                </a>
+              </ng-container>
+            </div>
+
+            <div *ngIf="productos.valoracion !== undefined">
+              <strong>Valoraciones:</strong>
+              <ng-container *ngIf="productos.valoracion > 0; else noValoracion">
+                <a [routerLink]="['/admin','valoracion','plist','byvaloracion',productos.id]">
+                  {{ productos.valoracion }}
+                </a>
+              </ng-container>
+              <ng-template #noValoracion>
+                <span>0</span>
+              </ng-template>
+            </div>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>
