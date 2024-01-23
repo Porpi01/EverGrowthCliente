@@ -1,18 +1,19 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ConfirmEventType, ConfirmationService } from 'primeng/api';
+import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
 import { IPedidoPage, IPedido } from 'src/app/model/model.interfaces';
 import { PedidoService } from '../../../service/Pedido.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdminPedidoDetailUnroutedComponent } from '../admin-pedido-detail-unrouted/admin-pedido-detail-unrouted.component';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 
 @Component({
   selector: 'app-admin-pedido-plist-unroutedç',
   templateUrl: './admin-pedido-plist-unrouted.component.html',
   styleUrls: ['./admin-pedido-plist-unrouted.component.css'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService,MessageService]
 })
 export class AdminPedidoPlistUnroutedComponent implements OnInit {
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
@@ -25,13 +26,16 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
   status: HttpErrorResponse | null = null;
   pedidos: IPedido[] = [];
   pedidoToRemove: IPedido | null = null;
+  ref: DynamicDialogRef | undefined;
  
   value: string = '';
 
   constructor(
     private PedidoService: PedidoService,
     private ConfirmationService: ConfirmationService,
-    private MatSnackBar: MatSnackBar
+   private MessageService: MessageService,
+   private DialogService: DialogService,
+
   ) { 
   }
 
@@ -101,24 +105,38 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  doRemove(producto: IPedido) {
-    this.pedidoToRemove = producto;
+  doView(pedido: IPedido) {
+    this.ref = this.DialogService.open(AdminPedidoDetailUnroutedComponent, {
+      data: {
+        id: pedido.id
+      },
+      header: 'View pedido',
+      width: '50%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: false
+    });
+  }
+
+
+  doRemove(pedido: IPedido) {
+    this.pedidoToRemove = pedido;
+  
     this.ConfirmationService.confirm({
       accept: () => {
-        this.MatSnackBar.open("The producto has been removed.", '', { duration: 1200 });
         this.PedidoService.removeOne(this.pedidoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The pedido has been removed.' });
           },
           error: (error: HttpErrorResponse) => {
-
             this.status = error;
-            this.MatSnackBar.open("The producto hasn't been removed.", "", { duration: 1200 });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The pedido hasn\'t been removed.' });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MatSnackBar.open("The producto hasn't been removed.", "", { duration: 1200 });
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The pedido hasn\'t been removed.' });
       }
     });
   }

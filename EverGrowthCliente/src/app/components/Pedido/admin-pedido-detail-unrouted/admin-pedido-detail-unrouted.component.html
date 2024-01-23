@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <p-card class="custom-card">
+        <ng-template pTemplate="header">
+          <i class="fa-solid fa-circle-info"></i>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div>
+            <div><strong>Fecha Pedido:</strong> {{ pedidos.fecha_pedido }}</div>
+            <div><strong>Fecha entrega:</strong> {{ pedidos.fecha_entrega }}</div>
+            <div><strong>Estado Pedido:</strong> {{ pedidos.estado_pedido }}</div>
+            <div><strong>Factura:</strong> {{ pedidos.factura }}</div>
+            <div *ngIf="pedidos.user !== undefined">
+              <strong>Detalles Pedidos:</strong>
+              <ng-container *ngIf="pedidos.detallePedidos > 0; else noDetallePedidos">
+                <a [routerLink]="['/admin','detallePedido','plist','bydetallePedido',pedidos.id]">
+                  {{ pedidos.detallePedidos }}
+                </a>
+              </ng-container>
+              <ng-template #noDetallePedidos>
+                <span>0</span>
+              </ng-template>
+            </div>
+
+            <div *ngIf="pedidos.user">
+              <strong>Usuarios:</strong>
+              <ng-container *ngIf="pedidos.user.id">
+                <a [routerLink]="['/admin','pedidos','plist','byusuario',pedidos.user.id]">
+                  {{ pedidos.user.id }} {{ pedidos.user.nombre}} {{ pedidos.user.apellido1}}
+                </a>
+              </ng-container>
+            </div>
+            
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>

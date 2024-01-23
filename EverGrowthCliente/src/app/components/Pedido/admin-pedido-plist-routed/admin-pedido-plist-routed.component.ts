@@ -1,15 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ConfirmationService, MenuItem } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { PedidoService } from './../../../service/Pedido.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-pedido-plist-routed',
   templateUrl: './admin-pedido-plist-routed.component.html',
   styleUrls: ['./admin-pedido-plist-routed.component.css'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService, MessageService]
 })
 export class AdminPedidoPlistRoutedComponent implements OnInit {
 
@@ -19,7 +19,8 @@ export class AdminPedidoPlistRoutedComponent implements OnInit {
   loadingProgress: number = 0;
   constructor(
     private PedidoService: PedidoService,
-    private oMatSnackBar: MatSnackBar,
+    private router: Router,
+    private MessageService: MessageService,
     private ConfirmationService: ConfirmationService,
 
   ) { }
@@ -34,7 +35,8 @@ export class AdminPedidoPlistRoutedComponent implements OnInit {
       },
       {
         label: 'Crear',
-        icon: "fa-solid fa-circle-plus"
+        icon: "fa-solid fa-circle-plus",
+        command: () => this.router.navigate(['admin/pedido/new'])
       }
     ];
   }
@@ -42,60 +44,76 @@ export class AdminPedidoPlistRoutedComponent implements OnInit {
 
   doGenerateRandom(amount: number) {
     this.bLoading = true;
-    const totalSteps = 10; // Increase the number of steps
+    const totalSteps = 10;
     const stepSize = 100 / totalSteps;
     this.loadingProgress = 0;
-  
+
     const intervalId = setInterval(() => {
       if (this.loadingProgress < 100) {
-        this.loadingProgress += stepSize; // Adjust the step size based on your loading process
+        this.loadingProgress += stepSize;
       } else {
         clearInterval(intervalId);
-        // Now that loading is complete, show the next content
         this.PedidoService.generateRandom(amount).subscribe({
           next: (oResponse: number) => {
-            this.oMatSnackBar.open('Now there are ' + oResponse + ' users', '', { duration: 2000 });
+            this.MessageService.add({ severity: 'success', detail: 'Now there are ' + oResponse + ' pedidos', life: 2000 });
             this.bLoading = false;
           },
           error: (oError: HttpErrorResponse) => {
-            this.oMatSnackBar.open('Error generating users: ' + oError.message, '', { duration: 2000 });
+            this.MessageService.add({ severity: 'error', detail: 'Error generating pedidos: ' + oError.message, life: 2000 });
             this.bLoading = false;
           }
         });
       }
-    }, 1000 / totalSteps); // Increase the interval duration based on your total steps
+    }, 1000 / totalSteps);
   }
-
 
   doEmpty($event: Event) {
     console.log('doEmpty called');
- 
+
     this.ConfirmationService.confirm({
-   
       target: $event.target as EventTarget,
-      message: 'Are you sure you want to remove all producto?',
+      message: 'Are you sure you want to remove all pedidos?',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Yes',
       rejectLabel: 'No',
       accept: () => {
+        console.log('Accept block reached');
         this.PedidoService.empty().subscribe({
-        
           next: (oResponse: number) => {
-            this.oMatSnackBar.open(`Now there are ${oResponse} producto.`, '', { duration: 2000 });
+            console.log('Success response:', oResponse);
+            this.MessageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: `Now there are ${oResponse} pedidos.`,
+              life: 2000
+            });
+
             this.bLoading = false;
             this.forceReload.next(true);
-            console.log($event);
-            console.log('ConfirmationService called')
           },
           error: (oError: HttpErrorResponse) => {
-            this.oMatSnackBar.open(`Error emptying producto: ${oError.message}`, '', { duration: 2000 });
+            console.error('Error response:', oError);
+            this.MessageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: `Error emptying pedidos: ${oError.message}`,
+              life: 2000
+            });
+
             this.bLoading = false;
           },
         });
       },
       reject: () => {
-        this.oMatSnackBar.open('Operation cancelled!', '', { duration: 2000 });
-      }
+        console.log('Reject block reached');
+        this.MessageService.add({
+          severity: 'info',
+          summary: 'Info',
+          detail: 'Operation cancelled!',
+          life: 2000
+        });
+
+      },
     });
   }
 

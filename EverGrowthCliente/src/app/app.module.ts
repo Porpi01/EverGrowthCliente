@@ -58,6 +58,14 @@ import { AdminValoracionDetailUnroutedComponent } from './components/Valoracion/
 import { AdminValoracionViewRoutedComponent } from './components/Valoracion/admin-valoracion-view-routed/admin-valoracion-view-routed.component';
 import { AdminProductoViewRoutedComponent } from './components/Producto/admin-producto-view-routed/admin-producto-view-routed.component';
 import { AdminProductoDetailUnroutedComponent } from './components/Producto/admin-producto-detail-unrouted/admin-producto-detail-unrouted.component';
+import { AdminPedidoViewRoutedComponent } from './components/Pedido/admin-pedido-view-routed/admin-pedido-view-routed.component';
+import { AdminPedidoDetailUnroutedComponent } from './components/Pedido/admin-pedido-detail-unrouted/admin-pedido-detail-unrouted.component';
+import { AdminDetallePedidoViewRoutedComponent } from './components/DetallePedido/admin-detallePedido-view-routed/admin-detallePedido-view-routed.component';
+import { AdminDetallePedidoDetailUnroutedComponent } from './components/DetallePedido/admin-detallePedido-detail-unrouted/admin-detallePedido-detail-unrouted.component';
+import { AdminCategoriaViewRoutedComponent } from './components/Categoria/admin-categoria-view-routed/admin-categoria-view-routed.component';
+import { AdminCategoriaDetailUnroutedComponent } from './components/Categoria/admin-categoria-detail-unrouted/admin-categoria-detail-unrouted.component';
+import { AdminCarritoViewRoutedComponent } from './components/Carrito/admin-carrito-view-routed/admin-carrito-view-routed.component';
+import { AdminCarritoDetailUnroutedComponent } from './components/Carrito/admin-carrito-detail-unrouted/admin-carrito-detail-unrouted.component';
 
 
 @NgModule({
@@ -91,18 +99,26 @@ import { AdminProductoDetailUnroutedComponent } from './components/Producto/admi
     //Componentes entidad Pedido
     AdminPedidoPlistUnroutedComponent,
     AdminPedidoPlistRoutedComponent,
+    AdminPedidoViewRoutedComponent,
+    AdminPedidoDetailUnroutedComponent,
 
     //Componentes entidad DetallePedido
     AdminDetallePedidoPlistUnroutedComponent,
     AdminDetallePedidoPlistRoutedComponent,
+    AdminDetallePedidoViewRoutedComponent,
+    AdminDetallePedidoDetailUnroutedComponent,
 
     //Componentes entidad Categoria
     AdminCategoriaPlistUnroutedComponent,
     AdminCategoriaPlistRoutedComponent,
+    AdminCategoriaViewRoutedComponent,
+    AdminCategoriaDetailUnroutedComponent,
 
     //Componentes entidad Carrito
     AdminCarritoPlistUnroutedComponent,
-    AdminCarritoPlistRoutedComponent
+    AdminCarritoPlistRoutedComponent,
+    AdminCarritoViewRoutedComponent,
+    AdminCarritoDetailUnroutedComponent
 
   ],
   imports: [

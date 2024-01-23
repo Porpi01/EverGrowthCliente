@@ -91,8 +91,10 @@ export interface IPedido extends IEntity {
 
     fecha_pedido: Date,
     fecha_entrega: Date,
-    estado_pedido: Boolean
-    usuario: number
+    estado_pedido: Boolean,
+    factura:IPedido,
+    user: IUsuario,
+    detallePedidos: number
 }
 
 export interface IPedidoPage extends IPage<IPedido> {

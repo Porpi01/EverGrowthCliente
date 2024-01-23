@@ -12,6 +12,10 @@ import { AdminUserViewRoutedComponent } from './components/Usuario/admin-user-vi
 import { AdminUserEditRoutedComponent } from './components/Usuario/admin-user-edit-routed/admin-user-edit-routed.component';
 import { AdminValoracionViewRoutedComponent } from './components/Valoracion/admin-valoracion-view-routed/admin-valoracion-view-routed.component';
 import { AdminProductoViewRoutedComponent } from './components/Producto/admin-producto-view-routed/admin-producto-view-routed.component';
+import { AdminPedidoViewRoutedComponent } from './components/Pedido/admin-pedido-view-routed/admin-pedido-view-routed.component';
+import { AdminDetallePedidoViewRoutedComponent } from './components/DetallePedido/admin-detallePedido-view-routed/admin-detallePedido-view-routed.component';
+import { AdminCategoriaViewRoutedComponent } from './components/Categoria/admin-categoria-view-routed/admin-categoria-view-routed.component';
+import { AdminCarritoViewRoutedComponent } from './components/Carrito/admin-carrito-view-routed/admin-carrito-view-routed.component';
 
 const routes: Routes = [
 //Usuario
@@ -43,15 +47,30 @@ const routes: Routes = [
 //Pedido
 { path: 'admin/pedido/plist', component: AdminPedidoPlistRoutedComponent },
 { path: 'admin/pedido/plist/bypedido/:id', component: AdminPedidoPlistRoutedComponent },
+{ path: 'admin/pedido/view/:id', component: AdminPedidoViewRoutedComponent },
+
+
+
+
 //DetallePedido
 { path: 'admin/detallePedido/plist', component: AdminDetallePedidoPlistRoutedComponent },
 { path: 'admin/detallePedido/plist/bydetallePedido/:id', component: AdminDetallePedidoPlistRoutedComponent },
+{ path: 'admin/detallePedido/view/:id', component: AdminDetallePedidoViewRoutedComponent },
+
+
+
+
 //Categoria
 { path: 'admin/categoria/plist', component: AdminCategoriaPlistRoutedComponent },
 { path: 'admin/categoria/plist/bycategoria/:id', component: AdminCategoriaPlistRoutedComponent },
+{ path: 'admin/categoria/view/:id', component: AdminCategoriaViewRoutedComponent },
+
+
+
 //Carrito
 { path: 'admin/carrito/plist', component: AdminCarritoPlistRoutedComponent },
 { path: 'admin/carrito/plist/bycarrito/:id', component: AdminCarritoPlistRoutedComponent },
+{ path: 'admin/carrito/view/:id', component: AdminCarritoViewRoutedComponent },
 
 
 
