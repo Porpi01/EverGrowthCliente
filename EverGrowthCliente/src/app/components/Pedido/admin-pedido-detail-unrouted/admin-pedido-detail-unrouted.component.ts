@@ -11,7 +11,7 @@ import { IPedido, IUsuario } from 'src/app/model/model.interfaces';
 })
 export class AdminPedidoDetailUnroutedComponent implements OnInit {
     @Input() id: number = 1;
-    pedidos: IPedido = {} as IPedido;
+    pedidos: IPedido = {user:{} } as IPedido;
     status: HttpErrorResponse | null = null;
     
   
@@ -36,7 +36,8 @@ export class AdminPedidoDetailUnroutedComponent implements OnInit {
       this.PedidoService.getOne(this.id).subscribe({
         next: (data: IPedido) => {
           this.pedidos = data;
-          console.log(this.pedidos)    
+          console.log(this.pedidos.fecha_entrega) 
+          console.log(this.pedidos.fecha_pedido)   
        
         },
         error: (error: HttpErrorResponse) => {

@@ -77,8 +77,12 @@ import { AdminProductoSelectionUnroutedComponent } from './components/Producto/a
 import { AdminValoracionNewRoutedComponent } from './components/Valoracion/admin-valoracion-new-routed/admin-valoracion-new-routed.component';
 import { AdminValoracionFormUnroutedComponent } from './components/Valoracion/admin-valoracion-form-unrouted/admin-valoracion-form-unrouted.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { AdminValoracionEditRoutedComponent } from './components/Valoracion/admin-valoracion-edit-routed/admin-valoracion-edit-routed.component';
+import { AdminPedidoEditRoutedComponent } from './components/Pedido/admin-pedido-edit-routed/admin-pedido-edit-routed.component';
+import { AdminPedidoSelectionUnroutedComponent } from './components/Pedido/admin-pedido-selection-unrouted/admin-pedido-selection-unrouted.component';
+import { AdminPedidoFormUnroutedComponent } from './components/Pedido/admin-pedido-form-unrouted/admin-pedido-form-unrouted.component';
+import { AdminPedidoNewRoutedComponent } from './components/Pedido/admin-pedido-new-routed/admin-pedido-new-routed.component';
 
 
 @NgModule({
@@ -122,6 +126,10 @@ import { AdminValoracionEditRoutedComponent } from './components/Valoracion/admi
     AdminPedidoPlistRoutedComponent,
     AdminPedidoViewRoutedComponent,
     AdminPedidoDetailUnroutedComponent,
+    AdminPedidoEditRoutedComponent,
+    AdminPedidoSelectionUnroutedComponent,
+    AdminPedidoFormUnroutedComponent,
+    AdminPedidoNewRoutedComponent,
 
     //Componentes entidad DetallePedido
     AdminDetallePedidoPlistUnroutedComponent,
@@ -189,7 +197,8 @@ import { AdminValoracionEditRoutedComponent } from './components/Valoracion/admi
     MessageService,
     FormBuilder,
     DialogService,
-    MediaService
+    MediaService,
+    { provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS } // Proporciona el formato de fecha nativo
 
   ],
   bootstrap: [AppComponent]
