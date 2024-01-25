@@ -66,6 +66,19 @@ import { AdminCategoriaViewRoutedComponent } from './components/Categoria/admin-
 import { AdminCategoriaDetailUnroutedComponent } from './components/Categoria/admin-categoria-detail-unrouted/admin-categoria-detail-unrouted.component';
 import { AdminCarritoViewRoutedComponent } from './components/Carrito/admin-carrito-view-routed/admin-carrito-view-routed.component';
 import { AdminCarritoDetailUnroutedComponent } from './components/Carrito/admin-carrito-detail-unrouted/admin-carrito-detail-unrouted.component';
+import { AdminUserSelectionUnroutedComponent } from './components/Usuario/admin-user-selection-unrouted/admin-user-selection-unrouted.component';
+import { OrderListModule } from 'primeng/orderlist';
+import { PickListModule } from 'primeng/picklist';
+import { MediaService } from './service/Media.service';
+import { AdminProductoNewRoutedComponent } from './components/Producto/admin-producto-new-routed/admin-producto-new-routed.component';
+import { AdminProductoFormUnroutedComponent } from './components/Producto/admin-producto-form-unrouted/admin-producto-form-unrouted.component';
+import { AdminCategoriaSelectionUnroutedComponent } from './components/Categoria/admin-categoria-selection-unrouted/admin-categoria-selection-unrouted.component';
+import { AdminProductoSelectionUnroutedComponent } from './components/Producto/admin-producto-selection-unrouted/admin-producto-selection-unrouted.component';
+import { AdminValoracionNewRoutedComponent } from './components/Valoracion/admin-valoracion-new-routed/admin-valoracion-new-routed.component';
+import { AdminValoracionFormUnroutedComponent } from './components/Valoracion/admin-valoracion-form-unrouted/admin-valoracion-form-unrouted.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { AdminValoracionEditRoutedComponent } from './components/Valoracion/admin-valoracion-edit-routed/admin-valoracion-edit-routed.component';
 
 
 @NgModule({
@@ -73,6 +86,7 @@ import { AdminCarritoDetailUnroutedComponent } from './components/Carrito/admin-
     AppComponent,
     MenuComponent,
     FooterComponent,
+
 
     //Componentes entidad Usuario
     AdminUserPlistRoutedComponent,
@@ -82,6 +96,7 @@ import { AdminCarritoDetailUnroutedComponent } from './components/Carrito/admin-
     AdminUserViewRoutedComponent,
     AdminUserDetailUnroutedComponent,
     AdminUserEditRoutedComponent,
+    AdminUserSelectionUnroutedComponent,
     
 
     //Componentes entidad Valoracion
@@ -89,12 +104,18 @@ import { AdminCarritoDetailUnroutedComponent } from './components/Carrito/admin-
     AdminValoracionPlistRoutedComponent,
     AdminValoracionDetailUnroutedComponent,
     AdminValoracionViewRoutedComponent,
+    AdminValoracionNewRoutedComponent,
+    AdminValoracionFormUnroutedComponent,
+    AdminValoracionEditRoutedComponent,
 
     //Componentes entidad Producto
     AdminProductoPlistUnroutedComponent,
     AdminProductoPlistRoutedComponent,
     AdminProductoViewRoutedComponent,
     AdminProductoDetailUnroutedComponent,
+    AdminProductoNewRoutedComponent,
+    AdminProductoFormUnroutedComponent,
+    AdminProductoSelectionUnroutedComponent,
 
     //Componentes entidad Pedido
     AdminPedidoPlistUnroutedComponent,
@@ -113,6 +134,7 @@ import { AdminCarritoDetailUnroutedComponent } from './components/Carrito/admin-
     AdminCategoriaPlistRoutedComponent,
     AdminCategoriaViewRoutedComponent,
     AdminCategoriaDetailUnroutedComponent,
+    AdminCategoriaSelectionUnroutedComponent,
 
     //Componentes entidad Carrito
     AdminCarritoPlistUnroutedComponent,
@@ -145,6 +167,10 @@ import { AdminCarritoDetailUnroutedComponent } from './components/Carrito/admin-
     MatRadioModule,
     CardModule,
     DataViewModule,
+    OrderListModule,
+    PickListModule,
+    MatDatepickerModule,
+    MatNativeDateModule
    
 
 
@@ -162,7 +188,8 @@ import { AdminCarritoDetailUnroutedComponent } from './components/Carrito/admin-
     ConfirmationService,
     MessageService,
     FormBuilder,
-    DialogService
+    DialogService,
+    MediaService
 
   ],
   bootstrap: [AppComponent]

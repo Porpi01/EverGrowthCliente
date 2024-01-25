@@ -16,6 +16,9 @@ import { AdminPedidoViewRoutedComponent } from './components/Pedido/admin-pedido
 import { AdminDetallePedidoViewRoutedComponent } from './components/DetallePedido/admin-detallePedido-view-routed/admin-detallePedido-view-routed.component';
 import { AdminCategoriaViewRoutedComponent } from './components/Categoria/admin-categoria-view-routed/admin-categoria-view-routed.component';
 import { AdminCarritoViewRoutedComponent } from './components/Carrito/admin-carrito-view-routed/admin-carrito-view-routed.component';
+import { AdminProductoNewRoutedComponent } from './components/Producto/admin-producto-new-routed/admin-producto-new-routed.component';
+import { AdminValoracionNewRoutedComponent } from './components/Valoracion/admin-valoracion-new-routed/admin-valoracion-new-routed.component';
+import { AdminValoracionEditRoutedComponent } from './components/Valoracion/admin-valoracion-edit-routed/admin-valoracion-edit-routed.component';
 
 const routes: Routes = [
 //Usuario
@@ -32,23 +35,26 @@ const routes: Routes = [
   { path: 'admin/valoracion/plist', component: AdminValoracionPlistRoutedComponent },
   { path: 'admin/valoracion/plist/byvaloracion/:id', component: AdminValoracionPlistRoutedComponent },
   { path: 'admin/valoracion/view/:id', component: AdminValoracionViewRoutedComponent },
+  { path: 'admin/valoracion/new', component: AdminValoracionNewRoutedComponent },
+  { path: 'admin/valoracion/edit/:id', component: AdminValoracionEditRoutedComponent },
 
 
-
+  
 
 //Producto
   { path: 'admin/producto/plist', component: AdminProductoPlistRoutedComponent },
   { path: 'admin/producto/plist/byproducto/:id', component: AdminProductoPlistRoutedComponent },
   {path: 'admin/producto/plist/byvaloracion/:id', component: AdminProductoPlistRoutedComponent },
   { path: 'admin/producto/view/:id', component: AdminProductoViewRoutedComponent },
+  { path: 'admin/producto/new', component: AdminProductoNewRoutedComponent },
 
-
+  
 
 //Pedido
 { path: 'admin/pedido/plist', component: AdminPedidoPlistRoutedComponent },
 { path: 'admin/pedido/plist/bypedido/:id', component: AdminPedidoPlistRoutedComponent },
 { path: 'admin/pedido/view/:id', component: AdminPedidoViewRoutedComponent },
-
+{ path: 'admin/pedido/new', component: AdminValoracionNewRoutedComponent},
 
 
 

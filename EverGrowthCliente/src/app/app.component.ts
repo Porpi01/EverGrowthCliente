@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PrimeNGConfig } from "primeng/api";
+import { MediaService } from './service/Media.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,10 +8,15 @@ import { PrimeNGConfig } from "primeng/api";
 })
 export class AppComponent {
   title = 'EverGrowthCliente';
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(
+    private primengConfig: PrimeNGConfig,
+  ) { }
 
-    ngOnInit() {
-        this.primengConfig.ripple = true;
-    }
+  ngOnInit() {
+    this.primengConfig.ripple = true;
+  }
+
+ 
+  
 }
 

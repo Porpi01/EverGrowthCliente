@@ -1,39 +1,40 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { FormGroup, FormControl } from '@angular/forms';
+import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
-import { IUsuarioPage, IUsuario } from 'src/app/model/model.interfaces';
-import { UsuarioService } from './../../../service/Usuario.service';
-
+import { IProducto, IProductoPage } from 'src/app/model/model.interfaces';
+import { ProductoService } from './../../../service/Producto.service';
 
 @Component({
-  selector: 'app-admin-user-selection-unrouted',
-  templateUrl: './admin-user-selection-unrouted.component.html',
-  styleUrls: ['./admin-user-selection-unrouted.component.css']
+  selector: 'app-admin-producto-selection-unrouted',
+  templateUrl: './admin-producto-selection-unrouted.component.html',
+  styleUrls: ['./admin-producto-selection-unrouted.component.css']
 })
-export class AdminUserSelectionUnroutedComponent implements OnInit {
-  
-  oPage: IUsuarioPage | undefined;
+export class AdminProductoSelectionUnroutedComponent implements OnInit {
+
+  oPage: IProductoPage | undefined;
   orderField: string = 'id';
   orderDirection: string = 'asc';
   oPaginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
-  usuarios: IUsuario[] = [];
-  userToRemove: IUsuario | null = null;
+  productos: IProducto[] = [];
+  produtoToRemove: IProducto | null = null;
   ref: DynamicDialogRef | undefined;
-  filteredUsers: IUsuario[] | undefined;
-  selectedUsers: IUsuario | undefined;
+  filteredUsers: IProducto[] | undefined;
+  selectedUsers: IProducto | undefined;
   formGroup: FormGroup;
   value: string = '';
+  url?: string;
+
 
   constructor(
-    private usuarioService: UsuarioService,
+    private ProductoService: ProductoService,
     private dialogService: DialogService,
     public oDynamicDialogRef: DynamicDialogRef
   ) {
     this.formGroup = new FormGroup({
-      selectedUser: new FormControl<any | null>(null)
+      selectedCategoria: new FormControl<any | null>(null)
     });
   }
 
@@ -43,12 +44,12 @@ export class AdminUserSelectionUnroutedComponent implements OnInit {
 
   onInputChange(query: string): void {
     if (query.length > 2) {
-      this.usuarioService
+      this.ProductoService
         .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
         .subscribe({
-          next: (data: IUsuarioPage) => {
+          next: (data: IProductoPage) => {
             this.oPage = data;
-            this.usuarios = data.content;
+            this.productos = data.content;
             this.oPaginatorState.pageCount = data.totalPages;
             console.log(this.oPaginatorState);
           },
@@ -62,7 +63,7 @@ export class AdminUserSelectionUnroutedComponent implements OnInit {
   }
 
   getPage(): void {
-    this.usuarioService
+    this.ProductoService
       .getPage(
         this.oPaginatorState.rows,
         this.oPaginatorState.page,
@@ -70,12 +71,12 @@ export class AdminUserSelectionUnroutedComponent implements OnInit {
         this.orderDirection
       )
       .subscribe({
-        next: (data: IUsuarioPage) => {
+        next: (data: IProductoPage) => {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
-          this.usuarios = data.content;
+          this.productos = data.content;
           console.log(this.oPaginatorState);
-          console.log(this.usuarios);
+          console.log(this.productos);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -95,7 +96,8 @@ export class AdminUserSelectionUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  onSelectUser(oUser: IUsuario) {
-    this.oDynamicDialogRef.close(oUser);
+  onSelectProducto(categoria: IProducto) {
+    this.oDynamicDialogRef.close(categoria);
   }
+
 }

@@ -1,12 +1,14 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-5">
+      <i class="fa-solid fa-circle-info"></i>
+    </div>
+
+    <div class="col-md-7">
       <p-card class="custom-card">
-        <ng-template pTemplate="header">
-          <i class="fa-solid fa-circle-info"></i>
-        </ng-template>
         <ng-template pTemplate="content">
           <div>
+            <h1>USUARIO</h1>
             <div><strong>Nombre:</strong> {{ usuarios.nombre }}</div>
             <div><strong>Apellido1:</strong> {{ usuarios.apellido1 }}</div>
             <div><strong>Apellido2:</strong> {{ usuarios.apellido2 }}</div>

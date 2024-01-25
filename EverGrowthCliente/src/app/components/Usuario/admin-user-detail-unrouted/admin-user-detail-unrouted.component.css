@@ -25,10 +25,14 @@
   .fa-circle-info {
     font-size: 10em;
     position: relative;
-    top: -60px; 
+    top: 150px; 
     color: #e4b363;
     display: flex;
     justify-content: center;
   }
   
+ h1{
+text-align: center;
+font-weight: bold;
+ }
  

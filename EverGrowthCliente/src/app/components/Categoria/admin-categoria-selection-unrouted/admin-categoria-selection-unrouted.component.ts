@@ -1,39 +1,39 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { ICategoria, ICategoriaPage } from 'src/app/model/model.interfaces';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormGroup, FormControl } from '@angular/forms';
 import { PaginatorState } from 'primeng/paginator';
-import { IUsuarioPage, IUsuario } from 'src/app/model/model.interfaces';
-import { UsuarioService } from './../../../service/Usuario.service';
+import { CategoriaService } from './../../../service/Categoria.service';
 
 
 @Component({
-  selector: 'app-admin-user-selection-unrouted',
-  templateUrl: './admin-user-selection-unrouted.component.html',
-  styleUrls: ['./admin-user-selection-unrouted.component.css']
+  selector: 'app-admin-categoria-selection-unrouted',
+  templateUrl: './admin-categoria-selection-unrouted.component.html',
+  styleUrls: ['./admin-categoria-selection-unrouted.component.css']
 })
-export class AdminUserSelectionUnroutedComponent implements OnInit {
-  
-  oPage: IUsuarioPage | undefined;
+export class AdminCategoriaSelectionUnroutedComponent implements OnInit {
+
+  oPage: ICategoriaPage | undefined;
   orderField: string = 'id';
   orderDirection: string = 'asc';
   oPaginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
-  usuarios: IUsuario[] = [];
-  userToRemove: IUsuario | null = null;
+  categorias: ICategoria[] = [];
+  userToRemove: ICategoria | null = null;
   ref: DynamicDialogRef | undefined;
-  filteredUsers: IUsuario[] | undefined;
-  selectedUsers: IUsuario | undefined;
+  filteredUsers: ICategoria[] | undefined;
+  selectedUsers: ICategoria | undefined;
   formGroup: FormGroup;
   value: string = '';
 
   constructor(
-    private usuarioService: UsuarioService,
+    private CategoriaService: CategoriaService,
     private dialogService: DialogService,
     public oDynamicDialogRef: DynamicDialogRef
   ) {
     this.formGroup = new FormGroup({
-      selectedUser: new FormControl<any | null>(null)
+      selectedCategoria: new FormControl<any | null>(null)
     });
   }
 
@@ -43,12 +43,12 @@ export class AdminUserSelectionUnroutedComponent implements OnInit {
 
   onInputChange(query: string): void {
     if (query.length > 2) {
-      this.usuarioService
+      this.CategoriaService
         .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
         .subscribe({
-          next: (data: IUsuarioPage) => {
+          next: (data: ICategoriaPage) => {
             this.oPage = data;
-            this.usuarios = data.content;
+            this.categorias = data.content;
             this.oPaginatorState.pageCount = data.totalPages;
             console.log(this.oPaginatorState);
           },
@@ -62,7 +62,7 @@ export class AdminUserSelectionUnroutedComponent implements OnInit {
   }
 
   getPage(): void {
-    this.usuarioService
+    this.CategoriaService
       .getPage(
         this.oPaginatorState.rows,
         this.oPaginatorState.page,
@@ -70,12 +70,12 @@ export class AdminUserSelectionUnroutedComponent implements OnInit {
         this.orderDirection
       )
       .subscribe({
-        next: (data: IUsuarioPage) => {
+        next: (data: ICategoriaPage) => {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
-          this.usuarios = data.content;
+          this.categorias = data.content;
           console.log(this.oPaginatorState);
-          console.log(this.usuarios);
+          console.log(this.categorias);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -95,7 +95,8 @@ export class AdminUserSelectionUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  onSelectUser(oUser: IUsuario) {
-    this.oDynamicDialogRef.close(oUser);
+  onSelectCategoria(categoria: ICategoria) {
+    this.oDynamicDialogRef.close(categoria);
   }
+
 }

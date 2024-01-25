@@ -1,12 +1,13 @@
-<div *ngIf="status!=null">
+<div *ngIf="status != null">
   <div class="d-flex justify-content-center my-3">
     <div class="alert alert-danger" role="alert">
-      {{status!.error.message}} - {{status!.message}}
+      {{ status!.error.message }} - {{ status!.message }}
     </div>
   </div>
 </div>
 
 <p-divider></p-divider>
+
 <div class="d-flex align-items-center justify-content-center">
   <span class="p-input-icon-left">
     <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
@@ -15,12 +16,11 @@
   </span>
   <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
     [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
-  <h3 class="mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
+  <h3 class="mb-0">Mostrando {{ oPage?.numberOfElements }} de {{ oPage?.totalElements }}</h3>
 </div>
+
 <div class="container mb-5 mt-3">
-
   <p-table [value]="productos">
-
     <ng-template pTemplate="header">
       <tr>
         <th (click)="doOrder('nombre')">Nombre</th>
@@ -34,38 +34,51 @@
     </ng-template>
     <ng-template pTemplate="body" let-producto of oPage?.content class="align-middle">
       <tr>
-
         <td>{{ producto.nombre }}</td>
         <td>{{ producto.precio }}</td>
         <td>{{ producto.stock }}</td>
-        <td></td>
+        <ng-container *ngIf="url; else noImage">
+          <td>
+            <img [src]="url" alt="Imagen del producto" class="img-fluid" style="max-width: 100px; max-height: 100px;"/>
+          </td>
+        </ng-container>
+        
+        <ng-template #noImage>
+          <td></td>
+        </ng-template>
+
         <td class="text-center">
-          <a [routerLink]="['/admin','producto','plist','byvaloracion',producto.id]" *ngIf="producto.valoracion>0">{{producto.valoracion}}</a>
-          <span *ngIf="producto.valoracion==0">0</span>
+          <a [routerLink]="['/admin','producto','plist','byvaloracion',producto.id]" *ngIf="producto.valoracion>0">
+            {{ producto.valoracion }}
+          </a>
+          <span *ngIf="producto.valoracion===0">0</span>
         </td>
         <td class="text-center">
-          <a [routerLink]="['/admin','categoria','plist','bycategoria',producto.categoria.id]">({{producto.categoria.id}})(
-            {{producto.categoria.nombre}}) </a>
+          <a [routerLink]="['/admin','categoria','plist','bycategoria',producto.categoria.id]">
+            ({{ producto.categoria.id }})({{ producto.categoria.nombre }})
+          </a>
         </td>
-
-
         <td class="text-center">
-
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <p-button [rounded]="true" [outlined]="true" [routerLink]="['/admin','producto','view',producto.id]"><i
-                class="fa-solid fa-eye"></i></p-button>
-
+            <p-button [rounded]="true" [outlined]="true" [routerLink]="['/admin','producto','view',producto.id]">
+              <i class="fa-solid fa-eye"></i>
+            </p-button>
             <p-button [rounded]="true" severity="success" [outlined]="true"
-              [routerLink]="['/admin','producto','edit',producto.id]"><i
-                class="fa-solid fa-pen-to-square"></i></p-button>
-            <p-button [rounded]="true" severity="warning" [outlined]="true"><i
-                class="fa-solid fa-circle-up"></i></p-button>
-
+              [routerLink]="['/admin','producto','edit',producto.id]">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </p-button>
+            <p-button [rounded]="true" severity="warning" [outlined]="true">
+              <i class="fa-solid fa-circle-up"></i>
+            </p-button>
             <p-button [rounded]="true" severity="danger" [outlined]="true" *ngIf="producto.categoria===0"
-              (click)="doRemove(producto)"><i class="fa-solid fa-trash"></i></p-button>
+              (click)="doRemove(producto)">
+              <i class="fa-solid fa-trash"></i>
+            </p-button>
+            <input type="file" accept="image/*" (change)="upload($event)" style="display: none" #fileInput>
+            <p-button [rounded]="true" [outlined]="true" 
+              (click)="fileInput.click()"><i class="fa-solid fa-image"></i></p-button>
           </div>
         </td>
-
       </tr>
     </ng-template>
     <ng-template pTemplate="footer">
@@ -80,8 +93,8 @@
       </tr>
     </ng-template>
   </p-table>
-
 </div>
+
 
 
 <p-confirmDialog #cd [style]="{ width: '30vw' }">

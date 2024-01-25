@@ -8,16 +8,17 @@ import { ProductoService } from './../../../service/Producto.service';
 import { IProducto, IProductoPage } from 'src/app/model/model.interfaces';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AdminProductoDetailUnroutedComponent } from '../admin-producto-detail-unrouted/admin-producto-detail-unrouted.component';
+import { MediaService } from './../../../service/Media.service';
 @Component({
   selector: 'app-admin-producto-plist-unrouted',
   templateUrl: './admin-producto-plist-unrouted.component.html',
   styleUrls: ['./admin-producto-plist-unrouted.component.css'],
-  providers: [ConfirmationService,MessageService]
+  providers: [ConfirmationService, MessageService]
 })
 export class AdminProductoPlistUnroutedComponent implements OnInit {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
-  
+
 
   oPage: IProductoPage | undefined;
   orderField: string = 'id';
@@ -30,14 +31,17 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
 
   value: string = '';
+  url?: string;
+
 
   constructor(
     private ProductoService: ProductoService,
     private ConfirmationService: ConfirmationService,
     private DialogService: DialogService,
-    private MessageService: MessageService
+    private MessageService: MessageService,
+    private MediaService: MediaService,
 
-  ) { 
+  ) {
   }
 
   ngOnInit(): void {
@@ -49,7 +53,7 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
         }
       },
     });
-    
+
   }
 
 
@@ -124,7 +128,7 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
 
   doRemove(producto: IProducto) {
     this.productoToRemove = producto;
-  
+
     this.ConfirmationService.confirm({
       accept: () => {
         this.ProductoService.removeOne(this.productoToRemove?.id).subscribe({
@@ -144,5 +148,19 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
     });
   }
 
+  upload(event: any) {
+    const file = event.target.files[0];
+    console.log(file, 'file');
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      this.MediaService.uploadFile(formData).subscribe(response => {
+        console.log(response, 'response');
+        this.url = response.url;
+      }
+
+      );
+    }
+  }
 
 }
