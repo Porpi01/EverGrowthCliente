@@ -83,6 +83,15 @@ import { AdminPedidoEditRoutedComponent } from './components/Pedido/admin-pedido
 import { AdminPedidoSelectionUnroutedComponent } from './components/Pedido/admin-pedido-selection-unrouted/admin-pedido-selection-unrouted.component';
 import { AdminPedidoFormUnroutedComponent } from './components/Pedido/admin-pedido-form-unrouted/admin-pedido-form-unrouted.component';
 import { AdminPedidoNewRoutedComponent } from './components/Pedido/admin-pedido-new-routed/admin-pedido-new-routed.component';
+import { AdminDetallePedidoEditRoutedComponent } from './components/DetallePedido/admin-detallePedido-edit-routed/admin-detallePedido-edit-routed.component';
+import { AdminDetallePedidoNewRoutedComponent } from './components/DetallePedido/admin-detallePedido-new-routed/admin-detallePedido-new-routed.component';
+import { AdminDetallePedidoFormUnroutedComponent } from './components/DetallePedido/admin-detallePedido-form-unrouted/admin-detallePedido-form-unrouted.component';
+import { AdminCategoriaNewRoutedComponent } from './components/Categoria/admin-categoria-new-routed/admin-categoria-new-routed.component';
+import { AdminCategoriaFormUnroutedComponent } from './components/Categoria/admin-categoria-form-unrouted/admin-categoria-form-unrouted.component';
+import { AdminCategoriaEditRoutedComponent } from './components/Categoria/admin-categoria-edit-routed/admin-categoria-edit-routed.component';
+import { AdminCarritoNewRoutedComponent } from './components/Carrito/admin-carrito-new-routed/admin-carrito-new-routed.component';
+import { AdminCarritoFormUnroutedComponent } from './components/Carrito/admin-carrito-form-unrouted/admin-carrito-form-unrouted.component';
+import { AdminCarritoEditRoutedComponent } from './components/Carrito/admin-carrito-edit-routed/admin-carrito-edit-routed.component';
 
 
 @NgModule({
@@ -136,6 +145,10 @@ import { AdminPedidoNewRoutedComponent } from './components/Pedido/admin-pedido-
     AdminDetallePedidoPlistRoutedComponent,
     AdminDetallePedidoViewRoutedComponent,
     AdminDetallePedidoDetailUnroutedComponent,
+    AdminDetallePedidoEditRoutedComponent,
+    AdminDetallePedidoNewRoutedComponent,
+    AdminDetallePedidoFormUnroutedComponent,
+    
 
     //Componentes entidad Categoria
     AdminCategoriaPlistUnroutedComponent,
@@ -143,12 +156,18 @@ import { AdminPedidoNewRoutedComponent } from './components/Pedido/admin-pedido-
     AdminCategoriaViewRoutedComponent,
     AdminCategoriaDetailUnroutedComponent,
     AdminCategoriaSelectionUnroutedComponent,
+    AdminCategoriaNewRoutedComponent,
+    AdminCategoriaFormUnroutedComponent,
+    AdminCategoriaEditRoutedComponent,
 
     //Componentes entidad Carrito
     AdminCarritoPlistUnroutedComponent,
     AdminCarritoPlistRoutedComponent,
     AdminCarritoViewRoutedComponent,
-    AdminCarritoDetailUnroutedComponent
+    AdminCarritoDetailUnroutedComponent,
+    AdminCarritoNewRoutedComponent ,
+    AdminCarritoFormUnroutedComponent,
+    AdminCarritoEditRoutedComponent
 
   ],
   imports: [
