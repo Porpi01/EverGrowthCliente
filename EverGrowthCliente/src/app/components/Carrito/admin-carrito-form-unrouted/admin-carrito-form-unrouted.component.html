@@ -1,3 +1,63 @@
-<p>
-  admin-carrito-form-unrouted works!
-</p>
+<div *ngIf="status != null">
+  <div class="d-flex justify-content-center my-3">
+    <div class="alert alert-danger" role="alert">
+      {{ status!.error.message }} - {{ status!.message }}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="status == null">
+  <div class="container col-12">
+    <div class="d-flex justify-content-center my-3">
+      <form [formGroup]="carritoForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <mat-form-field *ngIf="operation == 'EDIT'">
+            <mat-label>ID:</mat-label>
+            <input matInput formControlName="id" placeholder="ID" required readonly>
+            <mat-hint align="end">(Cannot change this number)</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+        <mat-form-field>
+          <mat-label>Cantidad</mat-label>
+          <input matInput formControlName="cantidad" type="number">
+          <mat-error *ngIf="hasError('cantidad', 'required')">La cantidad es requerida</mat-error>
+        </mat-form-field>
+        </div>
+    
+        <div formGroupName="producto">
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>Producto:</mat-label>
+              <input matInput formControlName="id" placeholder="ID Producto" required readonly>
+            </mat-form-field>
+          </div>
+          <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowProductosSelection()">
+            <i class="pi pi-search"></i> Buscar un producto
+          </button>
+        </div>
+
+        <div formGroupName="user">
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label>Usuario:</mat-label>
+              <input matInput formControlName="id" placeholder="ID user" required readonly>
+            </mat-form-field>
+          </div>
+          <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowUsersSelection()">
+            <i class="pi pi-search"></i> Buscar un pedido
+          </button>
+        </div>
+
+        <!-- Botón de Guardar -->
+       
+        <div class="text-center mt-5">
+
+          <p-button type="submit">Guardar</p-button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

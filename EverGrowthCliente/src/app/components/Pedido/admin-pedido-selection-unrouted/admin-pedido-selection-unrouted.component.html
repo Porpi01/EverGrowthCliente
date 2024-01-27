@@ -1,3 +1,52 @@
-<p>
-  admin-pedido-selection-unrouted works!
-</p>
+<div *ngIf="status!=null">
+  <div class="d-flex justify-content-center my-3">
+    <div class="alert alert-danger" role="alert">
+      {{status!.error.message}} - {{status!.message}}
+    </div>
+  </div>
+</div>
+
+<p-divider></p-divider>
+<div class="d-flex align-items-center justify-content-center">
+  <span class="p-input-icon-left">
+    <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+    <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
+      style="width: 100%; height: 30px;" />
+  </span>
+  <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+    [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
+  <h3 class="mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
+</div>
+<div class="container mb-5 mt-3">
+
+  <p-table [value]="pedidos">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th (click)="doOrder('id')">Id</th>
+        <th (click)="doOrder('fecha_pedido')">Fecha pedido</th>
+        <th (click)="doOrder('fecha_entrega')">Fecha entrega</th>
+        <th (click)="doOrder('estado_pedido')">Estado pedido</th>
+        <th>Usuarios</th>
+        <th>Facturas</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pedido of oPage?.content class="align-middle">
+      <tr>
+        <td>{{ pedido.id }}</td>
+        <td>{{ pedido.fecha_pedido }}</td>
+        <td>{{ pedido.fecha_entrega}}</td>
+        <td>{{ pedido.estado_pedido }}</td>
+
+
+        <td class="text-center">
+          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+            <button class="btn btn-primary" (click)="onSelectPedido(pedido)"><i
+                class="pi pi-plus-circle"></i></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>

@@ -10,10 +10,11 @@
     
     /* Estilo para las celdas del encabezado */
     p-table th {
-      background-color: #f2f2f2;
+      background-color: #e8e9eb;
       border: 1px solid #ddd;
       padding: 3px;
       text-align: center; /* Centrar el texto */
+      
     }
     
     /* Estilo para las celdas del cuerpo */
@@ -28,4 +29,13 @@
       text-align: center;
     }
   
-  
+    .icon-link i {
+      font-size: 20px; 
+      cursor: pointer; 
+      margin-right: 3px;
+      color:#ef6461;
+    }
+    
+    .icon-link i:hover {
+      color:#d4605e; /* Cambia el color del icono al pasar el ratón sobre él */
+    }

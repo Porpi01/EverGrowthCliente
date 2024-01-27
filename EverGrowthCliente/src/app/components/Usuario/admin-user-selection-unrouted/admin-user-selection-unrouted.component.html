@@ -25,13 +25,8 @@
         <th (click)="doOrder('Apellido1')">Apellido1</th>
         <th (click)="doOrder('Apellido2')">Apellido2</th>
         <th (click)="doOrder('Email')">Email</th>
-        <th>Teléfono</th>
-        <th (click)="doOrder('Dirección')">Dirección</th>
         <th (click)="doOrder('Username')">Username</th>
         <th (click)="doOrder('Rol')">Rol</th>
-        <th>Pedidos</th>
-        <th >Valoraciones</th>
-        <th >Carritos</th>
         <th >Acciones</th>
       </tr>
     </ng-template>
@@ -42,8 +37,6 @@
         <td>{{ user.apellido1 }}</td>
         <td>{{ user.apellido2 }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.telefono }}</td>
-        <td>{{ user.direccion }}</td>
         <td>{{ user.username }}</td>
         <td class="text-center">
           <span *ngIf="user.rol==true">Admin</span>
@@ -51,8 +44,7 @@
         </td>
         <td class="text-center">
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <button class="btn btn-primary" (click)="onSelectUser(user)"><i
-                class="pi pi-plus-circle"></i></button>
+            <button class="btn btn-primary" (click)="onSelectUser(user)"><i class="fa-solid fa-circle-plus"></i></button>
           </div>
         </td>
   

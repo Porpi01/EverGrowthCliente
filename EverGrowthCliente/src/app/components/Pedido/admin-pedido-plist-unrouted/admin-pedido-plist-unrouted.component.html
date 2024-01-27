@@ -34,8 +34,8 @@
     <ng-template pTemplate="body" let-pedido of oPage?.content class="align-middle">
       <tr >
         <td>{{ pedido.id }}</td>
-        <td>{{ pedido.fecha_pedido }}</td>
-        <td>{{ pedido.fecha_entrega}}</td>
+        <td>{{ pedido.fecha_pedido | date: 'dd/MM/yyyy'}}</td>
+        <td>{{ pedido.fecha_entrega | date: 'dd/MM/yyyy'}}</td>
         <td>{{ pedido.estado_pedido }}</td>
         
     

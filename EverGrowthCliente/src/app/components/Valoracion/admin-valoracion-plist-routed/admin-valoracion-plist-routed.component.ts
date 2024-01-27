@@ -58,6 +58,7 @@ export class AdminValoracionPlistRoutedComponent implements OnInit {
           next: (oResponse: number) => {
             this.MessageService.add({ severity: 'success', detail: 'Now there are ' + oResponse + ' valoraciones', life: 2000 });
             this.bLoading = false;
+     
           },
           error: (oError: HttpErrorResponse) => {
             this.MessageService.add({ severity: 'error', detail: 'Error generating valoraciones: ' + oError.message, life: 2000 });

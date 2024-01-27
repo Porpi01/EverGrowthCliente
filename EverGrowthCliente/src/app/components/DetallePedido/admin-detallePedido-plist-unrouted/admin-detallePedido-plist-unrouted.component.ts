@@ -140,5 +140,9 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
       }
     });
   }
+
+  calculateTotalPrice(quantity: number, unitPrice: number): number {
+    return quantity * unitPrice;
+  }
 }
 

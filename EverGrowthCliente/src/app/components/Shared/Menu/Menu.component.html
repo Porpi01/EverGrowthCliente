@@ -1,45 +1,52 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">EverGrowth</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas"
+      aria-controls="navbarOffcanvas">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" [class.active]="strUrl=='/home'||strUrl=='/'" aria-current="page" routerLink="/home"><i
-              class="fas fa-home"></i> Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [class.active]="strUrl=='/admin/valoracion'||strUrl=='/'" aria-current="page"
-            routerLink="/admin/valoracion/plist"><i class="fas fa-star"></i> Valoracion</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [class.active]="strUrl=='/admin/usuario'||strUrl=='/'" aria-current="page"
-            routerLink="/admin/usuario/plist"><i class="fas fa-user"></i> Usuario</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  [class.active]="strUrl=='/admin/producto'||strUrl=='/'" aria-current="page"
-          routerLink="/admin/producto/plist"><i class="fas fa-box"></i> Producto</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  [class.active]="strUrl=='/admin/pedido'||strUrl=='/'" aria-current="page"
-          routerLink="/admin/pedido/plist"><i class="fas fa-shopping-cart"></i> Pedido</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [class.active]="strUrl=='/admin/detallePedido'||strUrl=='/'" aria-current="page"
-          routerLink="/admin/detallePedido/plist"><i class="fas fa-receipt"></i> DetallePedido</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  [class.active]="strUrl=='/admin/categoria'||strUrl=='/'" aria-current="page"
-          routerLink="/admin/categoria/plist"><i class="fas fa-tags"></i> Categoria</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  [class.active]="strUrl=='/admin/carrito'||strUrl=='/'" aria-current="page"
-          routerLink="/admin/carrito/plist"><i class="fas fa-shopping-basket"></i> Carrito</a>
-        </li>
-      </ul>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="navbarOffcanvas" aria-labelledby="navbarOffcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="navbarOffcanvasLabel">Menú</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="strUrl=='/home'||strUrl=='/'" aria-current="page" routerLink="/home"><i
+                class="fas fa-home"></i> Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="strUrl=='/admin/valoracion'||strUrl=='/'" aria-current="page"
+              routerLink="/admin/valoracion/plist"><i class="fas fa-star"></i> Valoracion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="strUrl=='/admin/usuario'||strUrl=='/'" aria-current="page"
+              routerLink="/admin/usuario/plist"><i class="fas fa-user"></i> Usuario</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="strUrl=='/admin/producto'||strUrl=='/'" aria-current="page"
+              routerLink="/admin/producto/plist"><i class="fas fa-box"></i> Producto</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="strUrl=='/admin/pedido'||strUrl=='/'" aria-current="page"
+              routerLink="/admin/pedido/plist"><i class="fas fa-shopping-cart"></i> Pedido</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="strUrl=='/admin/detallePedido'||strUrl=='/'" aria-current="page"
+              routerLink="/admin/detallePedido/plist"><i class="fas fa-receipt"></i> DetallePedido</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="strUrl=='/admin/categoria'||strUrl=='/'" aria-current="page"
+              routerLink="/admin/categoria/plist"><i class="fas fa-tags"></i> Categoria</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="strUrl=='/admin/carrito'||strUrl=='/'" aria-current="page"
+              routerLink="/admin/carrito/plist"><i class="fas fa-shopping-basket"></i> Carrito</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>

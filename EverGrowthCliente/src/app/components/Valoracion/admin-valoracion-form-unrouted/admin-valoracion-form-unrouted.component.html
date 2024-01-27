@@ -29,6 +29,7 @@
             <mat-error *ngIf="hasError('titulo', 'required')">El titulo es obligatorio</mat-error>
             <mat-error *ngIf="hasError('titulo', 'minlength')">El titulo debe tener al menos 3 caracteres</mat-error>
             <mat-error *ngIf="hasError('titulo', 'maxlength')">El titulo excede el límite de caracteres</mat-error>
+            <mat-error *ngIf="hasError('titulo', 'startWithCapitalLetter')">El título debe comenzar con mayúscula</mat-error>
           </mat-form-field>
         </div>
 
@@ -49,42 +50,56 @@
             <mat-label>Mensaje:</mat-label>
             <textarea matInput formControlName="mensaje" placeholder="Mensaje" required></textarea>
             <mat-error *ngIf="hasError('mensaje', 'required')">El mensaje es obligatorio</mat-error>
+            <mat-error *ngIf="hasError('mensaje', 'minlength')">El mensaje debe tener al menos 3 caracteres</mat-error>
+            <mat-error *ngIf="hasError('mensaje', 'maxlength')">El mensaje excede el límite de caracteres</mat-error>
+            <mat-error *ngIf="hasError('mensaje', 'startWithCapitalLetter')">El mensaje debe comenzar con mayúscula</mat-error>
+
           </mat-form-field>
         </div>
 
         <!-- User field -->
-        <div formGroupName="user">
-          <div class="form-group">
-            <mat-form-field>
-              <mat-label>User ID:</mat-label>
-              <input matInput formControlName="id" placeholder="User ID" required readonly>
-            </mat-form-field>
+        <div formGroupName="user" class="row ">
+          <div class="col-8">
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Usuario ID:</mat-label>
+                <input matInput formControlName="id" placeholder="User ID" required readonly>
+              </mat-form-field>
+            </div>
           </div>
-          <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowUsersSelection()">
-            <i class="pi pi-search"></i> Buscar un Usuario
-          </button>
+          <div class="col-4">
+            <button class="btn btn-primary" type="button" (click)="onShowUsersSelection()">
+              <i class="fa-solid fa-person-circle-plus"></i> 
+            </button>
+          </div>
         </div>
-       
+
+
         <!-- Producto field -->
-        <div formGroupName="producto">
+        <div formGroupName="producto" class="row">
+          <div class="col-8">
           <div class="form-group">
             <mat-form-field>
               <mat-label>Producto ID:</mat-label>
               <input matInput formControlName="id" placeholder="Producto ID" required readonly>
             </mat-form-field>
           </div>
-          <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowProductosSelection()">
-            <i class="pi pi-search"></i> Buscar un Producto
+          </div>
+          <div class="col-4">
+          <button  class="btn btn-primary" type="button" (click)="onShowProductosSelection()">
+            <i class="fa-solid fa-cart-plus"></i> 
           </button>
+        </div>
         </div>
        
         <!-- Botón de Guardar -->
         <div class="text-center mt-5">
        
-          <p-button type="submit">Guardar</p-button>
+          <button class="btn btn-primary" type="submit">Guardar</button>
 
         </div>
       </form>
     </div>
   </div>
 </div>
+

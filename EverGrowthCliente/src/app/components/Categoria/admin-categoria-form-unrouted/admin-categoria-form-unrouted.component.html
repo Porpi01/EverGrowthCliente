@@ -1,3 +1,42 @@
-<p>
-  admin-categoria-form-unrouted works!
-</p>
+
+<div *ngIf="status!=null">
+  <div class="d-flex justify-content-center my-3">
+    <div class="alert alert-danger" role="alert">
+      {{status!.error.message}} - {{status!.message}}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="status==null">
+  <div class="container col-12">
+    <div class="d-flex justify-content-center my-3">
+      <form [formGroup]="categoriaForm" (ngSubmit)="onSubmit()">
+       
+        <!-- ID field - Only shown in EDIT mode -->
+        <div class="form-group">
+          <mat-form-field *ngIf="operation == 'EDIT'">
+            <mat-label>ID:</mat-label>
+            <input matInput formControlName="id" placeholder="ID" required readonly>
+            <mat-hint align="end">(Cannot change this number)</mat-hint>
+          </mat-form-field>
+        </div>
+
+          <mat-form-field>
+            <mat-label>Nombre:</mat-label>
+            <input matInput formControlName="nombre" placeholder="nombre" required>
+            <mat-hint align="end">(3 to 255 characters long)</mat-hint>
+            <mat-error *ngIf="hasError('nombre', 'required')">Nombre es requerido</mat-error>
+            <mat-error *ngIf="hasError('nombre', 'minlength')">Nombre debe tener al menos 3 caracteres</mat-error>
+            <mat-error *ngIf="hasError('nombre', 'maxlength')">Nombre excede el límite de caracteres</mat-error>
+          </mat-form-field>
+      
+
+        <div class="text-center mt-5">
+
+          <p-button type="submit">Guardar</p-button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

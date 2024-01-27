@@ -25,6 +25,7 @@
         <th (click)="doOrder('id')">Id</th>
         <th (click)="doOrder('cantidad')">Cantidad</th>
         <th (click)="doOrder('precio_unitario')">Precio Unitario</th>
+        <th>Precio total</th>
         <th >Productos</th>
         <th >Pedidos</th>
         <th >Acciones</th>
@@ -35,6 +36,7 @@
         <td>{{ detallePedido.id }}</td>
         <td>{{ detallePedido.cantidad }}</td>
         <td>{{ detallePedido.precio_unitario }}</td>
+        <td>{{ calculateTotalPrice(detallePedido.cantidad, detallePedido.precio_unitario) }}</td>
     
         <td class="text-center">
           <a [routerLink]="['/admin','producto','plist','byproducto',detallePedido.productos.id]">({{detallePedido.productos.id}}) ({{detallePedido.productos.nombre}})</a>
@@ -66,6 +68,7 @@
         <th (click)="doOrder('id')">Id</th>
         <th (click)="doOrder('cantidad')">Cantidad</th>
         <th (click)="doOrder('precio_unitario')">Precio Unitario</th>
+        <th>Precio total</th>
         <th >Productos</th>
         <th >Pedidos</th>
         <th >Acciones</th>

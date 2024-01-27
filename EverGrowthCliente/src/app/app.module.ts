@@ -77,7 +77,7 @@ import { AdminProductoSelectionUnroutedComponent } from './components/Producto/a
 import { AdminValoracionNewRoutedComponent } from './components/Valoracion/admin-valoracion-new-routed/admin-valoracion-new-routed.component';
 import { AdminValoracionFormUnroutedComponent } from './components/Valoracion/admin-valoracion-form-unrouted/admin-valoracion-form-unrouted.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { AdminValoracionEditRoutedComponent } from './components/Valoracion/admin-valoracion-edit-routed/admin-valoracion-edit-routed.component';
 import { AdminPedidoEditRoutedComponent } from './components/Pedido/admin-pedido-edit-routed/admin-pedido-edit-routed.component';
 import { AdminPedidoSelectionUnroutedComponent } from './components/Pedido/admin-pedido-selection-unrouted/admin-pedido-selection-unrouted.component';
@@ -92,6 +92,9 @@ import { AdminCategoriaEditRoutedComponent } from './components/Categoria/admin-
 import { AdminCarritoNewRoutedComponent } from './components/Carrito/admin-carrito-new-routed/admin-carrito-new-routed.component';
 import { AdminCarritoFormUnroutedComponent } from './components/Carrito/admin-carrito-form-unrouted/admin-carrito-form-unrouted.component';
 import { AdminCarritoEditRoutedComponent } from './components/Carrito/admin-carrito-edit-routed/admin-carrito-edit-routed.component';
+import { TrimPipe } from './pipes/trimString.pipe';
+import { TrimDatePipe } from './pipes/trimDate.pipe';
+import { AdminProductoEditRoutedComponent } from './components/Producto/admin-producto-edit-routed/admin-producto-edit-routed.component';
 
 
 @NgModule({
@@ -99,6 +102,8 @@ import { AdminCarritoEditRoutedComponent } from './components/Carrito/admin-carr
     AppComponent,
     MenuComponent,
     FooterComponent,
+    TrimDatePipe,
+    TrimPipe,
 
 
     //Componentes entidad Usuario
@@ -129,6 +134,7 @@ import { AdminCarritoEditRoutedComponent } from './components/Carrito/admin-carr
     AdminProductoNewRoutedComponent,
     AdminProductoFormUnroutedComponent,
     AdminProductoSelectionUnroutedComponent,
+    AdminProductoEditRoutedComponent,
 
     //Componentes entidad Pedido
     AdminPedidoPlistUnroutedComponent,
@@ -217,7 +223,9 @@ import { AdminCarritoEditRoutedComponent } from './components/Carrito/admin-carr
     FormBuilder,
     DialogService,
     MediaService,
-    { provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS } // Proporciona el formato de fecha nativo
+
+   {provide:MAT_NATIVE_DATE_FORMATS, useValue: 'es-ES'},
+   {provide:MAT_DATE_LOCALE, useValue: 'es-ES'},
 
   ],
   bootstrap: [AppComponent]

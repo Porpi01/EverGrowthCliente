@@ -7,7 +7,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { formOperation, IPedido, IUsuario } from 'src/app/model/model.interfaces';
-import { CALENDAR_ES } from 'src/environment/environment';
 import { AdminUserSelectionUnroutedComponent } from '../../Usuario/admin-user-selection-unrouted/admin-user-selection-unrouted.component';
 import { PedidoService } from './../../../service/Pedido.service';
 
@@ -15,9 +14,7 @@ import { PedidoService } from './../../../service/Pedido.service';
   selector: 'app-admin-pedido-form-unrouted',
   templateUrl: './admin-pedido-form-unrouted.component.html',
   styleUrls: ['./admin-pedido-form-unrouted.component.css'],
-  providers: [
-   
-  ],
+  providers: [],
 })
 export class AdminPedidoFormUnroutedComponent implements OnInit {
 
@@ -25,7 +22,6 @@ export class AdminPedidoFormUnroutedComponent implements OnInit {
   @Input() id: number = 1;
   @Input() operation: formOperation = 'NEW'; 
 
-  es = CALENDAR_ES;
 
 
   pedidoForm!: FormGroup;

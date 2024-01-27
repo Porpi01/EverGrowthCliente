@@ -108,14 +108,17 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
   doView(valoracion: IValoracion) {
     this.ref = this.DialogService.open(AdminValoracionDetailUnroutedComponent, {
       data: {
-        id: valoracion.id
+        id: valoracion.id,
+        openedFromView: true, 
+    
       },
-      header: 'View valoracion',
+      header: 'Vista de valoracion',
       width: '50%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: false
     });
+ 
   }
 
 

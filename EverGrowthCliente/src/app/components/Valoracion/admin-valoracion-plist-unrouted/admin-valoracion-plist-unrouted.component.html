@@ -8,60 +8,68 @@
 </div>
 
 <p-divider></p-divider>
-<div class="d-flex align-items-center justify-content-center">
-  <span class="p-input-icon-left">
-    <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
-    <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"  style="width: 100%; height: 30px;" />
-  </span>
-  <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
-    [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
-  <h3 class="mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
-</div>
-<div class="container mb-5 mt-3" >          
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-7 col-md-12 col-sm-12">
+      <div class="d-flex align-items-center">
+        <span class="p-input-icon-left">
+          <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+          <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)" style="width: 100%; height: 30px;" />
+        </span>
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!" [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>      
+      </div>
+    </div>
+    <div class="col-lg-2 col-md-12 col-sm-12">
+      <h3 class="text-center mb-0">Mostrando {{ oPage?.numberOfElements }} de {{ oPage?.totalElements }}</h3>
+    </div>
+  </div>
 
-  <p-table [value]="valoraciones">
+<div class="row justify-content-center">
+  <div class="col-lg-12 col-md-12 col-sm-12">
 
+  <p-table  [value]="valoraciones">
     <ng-template pTemplate="header">
       <tr>
    
         <th (click)="doOrder('titulo')">Título</th>
         <th (click)="doOrder('fecha')">Fecha</th>
         <th (click)="doOrder('mensaje')">Mensaje</th>
-        <th >Usuarios</th>
-        <th >Productos</th>
+        <th >Usuario</th>
+        <th >Producto</th>
         <th >Acciones</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-valoraciones of oPage?.content class="align-middle">
       <tr >
        
-        <td>{{ valoraciones.titulo }}</td>
-        <td>{{ valoraciones.fecha }}</td>
-        <td>{{ valoraciones.mensaje}}</td>
+        <td>{{valoraciones.titulo | trim:25}}</td>
+        <td>{{valoraciones.fecha | date: 'dd/MM/yyyy'}}</td>
+        <td>{{ valoraciones.mensaje | trim:25 }}</td>
       
         <td class="text-center">
-          <a [routerLink]="['/admin','usuario','plist','byusuario',valoraciones.user.id]">({{valoraciones.user.id}}) {{valoraciones.user.nombre}}
+          <a [routerLink]="['/admin','valoracion','plist','byusuario',valoraciones.user.id]">({{valoraciones.user.id}}) {{valoraciones.user.nombre}}
             {{valoraciones.user.apellido1}}</a>
         </td>
         <td class="text-center">
-          <a [routerLink]="['/admin','producto','plist','byproducto',valoraciones.producto.id]">({{valoraciones.producto.id}}) {{valoraciones.producto.nombre}}
+          <a [routerLink]="['/admin','valoracion','plist','byproducto',valoraciones.producto.id]">({{valoraciones.producto.id}}) {{valoraciones.producto.nombre}}
         </a>
         </td>
-       
-        
         <td class="text-center">
-
-          <div  class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <p-button [rounded]="true" [outlined]="true" [routerLink]="['/admin','valoracion','view',valoraciones.id]"><i
-                class="fa-solid fa-eye" ></i></p-button>
-
-            <p-button [rounded]="true" severity="success" [outlined]="true"[routerLink]="['/admin','valoracion','edit',valoraciones.id]"><i
-                class="fa-solid fa-pen-to-square"></i></p-button>
-            <p-button [rounded]="true" severity="warning" [outlined]="true" (click)="doView(valoraciones)"><i class="fa-solid fa-circle-up"></i></p-button>
-     
-            <p-button [rounded]="true" severity="danger" [outlined]="true" *ngIf="valoraciones.pedidos==0 && valoraciones.valoracion==0 && valoraciones.carritos==0" 
-              (click)="doRemove(valoraciones)"><i class="fa-solid fa-trash"></i></p-button>
-          </div>
+          <a [routerLink]="['/admin','valoracion','view',valoraciones.id]"  class="icon-link">
+            <i class="fa-solid fa-eye"></i>
+          </a>
+        
+          <a [routerLink]="['/admin','valoracion','edit',valoraciones.id]"  class="icon-link">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </a>
+        
+          <a (click)="doView(valoraciones)"  class="icon-link">
+            <i class="fa-solid fa-circle-up"></i>
+          </a>
+        
+          <a *ngIf="valoraciones.user==0 && valoraciones.producto==0" (click)="doRemove(valoraciones)"  class="icon-link">
+            <i class="fa-solid fa-trash"></i>
+          </a>
         </td>
 
       </tr>
@@ -72,14 +80,15 @@
         <th (click)="doOrder('titulo')">Título</th>
         <th (click)="doOrder('fecha')">Fecha</th>
         <th (click)="doOrder('mensaje')">Mensaje</th>
-        <th >Usuarios</th>
-        <th >Productos</th>
+        <th >Usuario</th>
+        <th >Producto</th>
         <th >Acciones</th>
       </tr>
     </ng-template>
   </p-table>
+  </div>
+  </div>
 
-</div>
 
 
 <p-confirmDialog #cd [style]="{ width: '30vw' }">

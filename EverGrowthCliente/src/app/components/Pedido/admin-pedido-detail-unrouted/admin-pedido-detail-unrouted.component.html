@@ -7,8 +7,8 @@
         </ng-template>
         <ng-template pTemplate="content">
           <div>
-            <div><strong>Fecha Pedido:</strong> {{ pedidos.fecha_pedido }}</div>
-            <div><strong>Fecha entrega:</strong> {{ pedidos.fecha_entrega }}</div>
+            <div><strong>Fecha Pedido:</strong> {{ pedidos.fecha_pedido | date: 'dd/MM/yyyy' }}</div>
+            <div><strong>Fecha entrega:</strong> {{ pedidos.fecha_entrega | date: 'dd/MM/yyyy'}}</div>
             <div><strong>Estado Pedido:</strong> {{ pedidos.estado_pedido }}</div>
             <div><strong>Factura:</strong> {{ pedidos.factura }}</div>
             <div *ngIf="pedidos.user !== undefined">

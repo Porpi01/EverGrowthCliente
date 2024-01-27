@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-5">
+    <div class="col-lg-5 col-md-5 d-none d-md-block">
       <i class="fa-solid fa-circle-info"></i>
     </div>
 
-    <div class="col-md-7">
+    <div class="col-lg-7 col-md-7 col-sm-12">
       <p-card class="custom-card">
         <ng-template pTemplate="content">
           <div>
@@ -23,7 +23,7 @@
             <div *ngIf="usuarios.valoracion !== undefined">
               <strong>Valoraciones:</strong>
               <ng-container *ngIf="usuarios.valoracion > 0; else noValoraciones">
-                <a [routerLink]="['/admin','usuario','plist','byvaloracion',usuarios.id]">
+                <a [routerLink]="['/admin','valoracion','plist','byusuario',usuarios.id]">
                   {{ usuarios.valoracion }}
                 </a>
               </ng-container>

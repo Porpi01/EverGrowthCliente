@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit, Input } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { DynamicDialogRef, DialogService } from "primeng/dynamicdialog";
@@ -8,9 +8,19 @@ import { formOperation, IValoracion, ICategoria, IUsuario, IProducto } from "src
 import { ValoracionService } from "src/app/service/Valoracion.service";
 import { AdminUserSelectionUnroutedComponent } from "../../Usuario/admin-user-selection-unrouted/admin-user-selection-unrouted.component";
 import { AdminProductoSelectionUnroutedComponent } from "../../Producto/admin-producto-selection-unrouted/admin-producto-selection-unrouted.component";
-import { CALENDAR_ES } from 'src/environment/environment';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS } from "@angular/material/core";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
+import { MessageService } from "primeng/api";
+
+export function startWithCapitalLetter(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value: string = control.value;
+    if (value && value.charAt(0) !== value.charAt(0).toUpperCase()) {
+      return { 'startWithCapitalLetter': { value: control.value } };
+    }
+    return null;
+  };
+}
 
 
 @Component({
@@ -20,6 +30,7 @@ import { MatDatepickerInputEvent } from "@angular/material/datepicker";
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS },
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    MessageService
   ],
 })
 export class AdminValoracionFormUnroutedComponent implements OnInit {
@@ -27,7 +38,6 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
   @Input() id: number = 1;
   @Input() operation: formOperation = 'NEW'; 
 
-  es = CALENDAR_ES;
 
   valoracionForm!: FormGroup;
   valoracion: IValoracion = { fecha: new Date(), user: {}, producto: {} } as IValoracion;
@@ -36,12 +46,13 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
   oDynamicDialogRef: DynamicDialogRef | undefined;
 
 
+
   constructor(
     private formBuilder: FormBuilder,
     private valoracionService: ValoracionService,
     private router: Router,
-    private snackBar: MatSnackBar,
     private dialogService: DialogService,
+    private MessageService: MessageService
   ) {
     this.initializeForm(this.valoracion);
   }
@@ -49,9 +60,9 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
   initializeForm(valoracion: IValoracion) {
     this.valoracionForm = this.formBuilder.group({
       id: [valoracion.id],
-      titulo: [valoracion.titulo, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      titulo: [valoracion.titulo, [Validators.required, Validators.minLength(3), Validators.maxLength(255), startWithCapitalLetter()]],
       fecha: [valoracion.fecha, [Validators.required]],
-      mensaje: [valoracion.mensaje, [Validators.required]],
+      mensaje: [valoracion.mensaje, [Validators.required , Validators.minLength(3), Validators.maxLength(2048), startWithCapitalLetter()]],
       user: this.formBuilder.group({
         id: [valoracion.user?.id, Validators.required]
       }),
@@ -67,10 +78,12 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
         next: (data: IValoracion) => {
           this.valoracion = data;
           this.initializeForm(this.valoracion);
+
+          console.log(this.valoracion.fecha);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
-          this.snackBar.open('Error reading user from server', '', { duration: 2000 });
+          this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The valoracion create hasn\'t been successful' });
         }
       });
     } else {
@@ -82,6 +95,7 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
     return this.valoracionForm.controls[controlName].hasError(errorName);
   }
 
+ 
   onSubmit() {
     if (this.valoracionForm.valid) {
       if (this.operation == 'NEW') {
@@ -91,15 +105,17 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
           next: (data: IValoracion) => {
             this.valoracion = {"user": {}, "producto": {}} as IValoracion;
             this.initializeForm(this.valoracion);
-            this.snackBar.open('The user create has been successful', '', { duration: 2000 });
-            console.log(this.valoracion.id);
 
+            this.MessageService.add({ severity: 'success',  detail: 'The valoracion create has been successful', life: 2000});
+            console.log(this.valoracion.id);
+            console.log('Mensaje agregado con éxito al MessageService');          
             this.router.navigate(['/admin', 'valoracion', 'view', data]);
+         
 
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.snackBar.open('The user create hasn\'t been successful', '', { duration: 2000 });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The valoracion create hasn\'t been successful' });
           }
         });
       } else {
@@ -107,12 +123,16 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
           next: (data: IValoracion) => {
             this.valoracion = data;
             this.initializeForm(this.valoracion);
-            this.snackBar.open('The user has been updated successfully', '', { duration: 2000 });
+
+
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'La valoracion se ha actualizado correctamente' });
             this.router.navigate(['/admin', 'valoracion', 'view', this.valoracion.id]);
+            console.log(this.MessageService);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.snackBar.open('Failed to update the user', '', { duration: 2000 });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The valoracion no se ha actualizado'});
+            
           }
         });
       }
@@ -158,3 +178,4 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
   }
 
 }
+

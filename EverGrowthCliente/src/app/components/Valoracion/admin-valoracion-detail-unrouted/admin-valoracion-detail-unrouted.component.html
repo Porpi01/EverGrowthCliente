@@ -1,36 +1,37 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-lg-5 col-md-5 d-none d-md-block">
+      <i class="fa-solid fa-circle-info"></i>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-12">
       <p-card class="custom-card">
-        <ng-template pTemplate="header">
-          <i class="fa-solid fa-circle-info"></i>
-        </ng-template>
         <ng-template pTemplate="content">
           <div>
+            <h1>VALORACIÓN</h1>
             <div><strong>Título:</strong> {{ valoraciones.titulo }}</div>
-            <div><strong>Fecha:</strong> {{ valoraciones.fecha }}</div>
+            <div><strong>Fecha:</strong> {{ valoraciones.fecha | date: 'dd/MM/yyyy'}}</div>
             <div><strong>Mensaje:</strong> {{ valoraciones.mensaje }}</div>
             <div *ngIf="valoraciones.user">
-              <strong>Usuarios:</strong>
+              <strong>Usuario:</strong>
               <ng-container *ngIf="valoraciones.user.id">
                 <a [routerLink]="['/admin','usuario','view',valoraciones.user.id]">
                   {{ valoraciones.user.nombre }} {{ valoraciones.user.apellido1}}
                 </a>
               </ng-container>
             </div>
-         
             <div *ngIf="valoraciones.producto">
-              <strong>Productos:</strong>
+              <strong>Producto:</strong>
               <ng-container *ngIf="valoraciones.producto.id">
-                <a [routerLink]="['/admin','producto','plist','byproducto',valoraciones.producto.id]">
+                <a [routerLink]="['/admin','producto','view',valoraciones.producto.id]">
                   {{ valoraciones.producto.id }} {{ valoraciones.producto.nombre}}
                 </a>
               </ng-container>
             </div>
-           
+            <button *ngIf="mostrarBotones" class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
           </div>
         </ng-template>
       </p-card>
     </div>
   </div>
 </div>
+<p-messages></p-messages>

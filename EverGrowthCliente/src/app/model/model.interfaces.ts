@@ -104,6 +104,7 @@ export interface IDetallePedido extends IEntity {
 
     cantidad: number,
     precio_unitario: number,
+    precio_total: number,
     productos: IProducto,
     pedidos: IPedido
 }
