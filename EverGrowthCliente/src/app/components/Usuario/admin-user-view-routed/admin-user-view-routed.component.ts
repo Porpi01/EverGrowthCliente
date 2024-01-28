@@ -1,8 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IUsuario } from 'src/app/model/model.interfaces';
-import { UsuarioService } from 'src/app/service/Usuario.service';
+
 
 @Component({
   selector: 'app-admin-user-view-routed',

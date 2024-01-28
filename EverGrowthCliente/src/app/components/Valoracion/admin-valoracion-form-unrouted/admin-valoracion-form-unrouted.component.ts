@@ -83,7 +83,8 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
-          this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The valoracion create hasn\'t been successful' });
+
+          this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'La creación de la valoración no ha sido exitosa' });
         }
       });
     } else {
@@ -106,7 +107,7 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
             this.valoracion = {"user": {}, "producto": {}} as IValoracion;
             this.initializeForm(this.valoracion);
 
-            this.MessageService.add({ severity: 'success',  detail: 'The valoracion create has been successful', life: 2000});
+            this.MessageService.add({ severity: 'success',  detail: 'La creación de la valoración ha sido exitosa', life: 2000});
             console.log(this.valoracion.id);
             console.log('Mensaje agregado con éxito al MessageService');          
             this.router.navigate(['/admin', 'valoracion', 'view', data]);
@@ -115,7 +116,7 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The valoracion create hasn\'t been successful' });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail:'La creación de la valoración no ha sido exitosa' });
           }
         });
       } else {
@@ -127,7 +128,7 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
 
             this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'La valoracion se ha actualizado correctamente' });
             this.router.navigate(['/admin', 'valoracion', 'view', this.valoracion.id]);
-            console.log(this.MessageService);
+          
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;

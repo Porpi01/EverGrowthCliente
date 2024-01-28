@@ -2,21 +2,62 @@
   font-size: 12px;
 }
 
- 
+ p-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
   
   /* Estilo para las celdas del encabezado */
   p-table th {
-    background-color: #f2f2f2;
+    background-color: #e8e9eb;
     border: 1px solid #ddd;
     padding: 3px;
     text-align: center; /* Centrar el texto */
+    
   }
   
   /* Estilo para las celdas del cuerpo */
   p-table td {
     border: 1px solid #ddd;
     padding: 3px;
-    text-align: left; /* Centrar el texto */
+    text-align: center; /* Centrar el texto */
   }
   
+  /* Estilo para el texto centrado en la celda */
+  .text-center {
+    text-align: center;
+  }
+
+  .icon-link i {
+    font-size: 20px; 
+    cursor: pointer; 
+    margin-right: 3px;
+    color:#ef6461;
+  }
+  
+  .icon-link i:hover {
+    color:#d4605e; /* Cambia el color del icono al pasar el ratón sobre él */
+  }
+
+  
+.confirm-dialog-header {
+padding: 1rem;
+font-size: 20px;
+font-weight: bold;
+text-align: center;
+}
+
+.confirm-dialog-footer .btn-secondary {
+background-color: #ef6461; 
+color: #fff; 
+padding: 1rem 1rem; 
+}
+
+
+.confirm-dialog-footer .btn-danger {
+background-color: #ef6461;
+color: #fff; 
+padding: 1rem 1rem; 
+}
 

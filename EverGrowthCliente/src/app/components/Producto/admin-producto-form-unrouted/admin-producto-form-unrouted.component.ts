@@ -67,7 +67,7 @@ export class AdminProductoFormUnroutedComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
-          this.MatSnackBar.open('Error reading user from server', '', { duration: 2000 });
+          this.MatSnackBar.open('Error al leer productos', '', { duration: 2000 });
         }
       })
     } else {
@@ -89,12 +89,12 @@ export class AdminProductoFormUnroutedComponent implements OnInit {
             this.producto = data;
             console.log(this.producto);
             this.initializeForm(this.producto);
-            this.MatSnackBar.open('The user create has been successful', '', { duration: 2000 });
+            this.MatSnackBar.open('El producto se ha creado correctamente', '', { duration: 2000 });
             this.oRouter.navigate(['/admin', 'producto', 'view', this.producto]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MatSnackBar.open('The user create hasn\'t been successful', '', { duration: 2000 });
+            this.MatSnackBar.open('El producto no se ha creado correctamente', '', { duration: 2000 });
           }
         })
 
@@ -103,12 +103,12 @@ export class AdminProductoFormUnroutedComponent implements OnInit {
           next: (data: IProducto) => {
             this.producto = data;
             this.initializeForm(this.producto);
-            this.MatSnackBar.open('The user has been updated successfully', '', { duration: 2000 });
+            this.MatSnackBar.open('El producto se ha actualizado correctamente', '', { duration: 2000 });
             this.oRouter.navigate(['/admin', 'producto', 'view', this.producto.id]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MatSnackBar.open('Failed to update the user', '', { duration: 2000 });
+            this.MatSnackBar.open('El producto no se ha actualizado correctamente', '', { duration: 2000 });
           }
         });
         
@@ -116,9 +116,9 @@ export class AdminProductoFormUnroutedComponent implements OnInit {
     }
   }
 
-  onShowUsersSelection() {
+  onShowCategoriaSelection() {
     this.oDynamicDialogRef = this.oDialogService.open(AdminCategoriaSelectionUnroutedComponent, {
-      header: 'Select a Categoria',
+      header: 'Selecciona una Categoria',
       width: '80%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,

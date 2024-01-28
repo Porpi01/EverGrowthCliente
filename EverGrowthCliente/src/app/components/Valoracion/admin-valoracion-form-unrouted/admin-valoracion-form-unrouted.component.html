@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<div *ngIf="status === null">
+<div *ngIf="status == null">
   <div class="container col-12">
     <div class="d-flex justify-content-center my-3">
       <form [formGroup]="valoracionForm" (ngSubmit)="onSubmit()">
@@ -14,29 +14,29 @@
         <!-- ID field - Only shown in EDIT mode -->
         <div class="form-group">
           <mat-form-field *ngIf="operation === 'EDIT'">
-            <mat-label>ID:</mat-label>
-            <input matInput formControlName="id" placeholder="ID" required readonly>
-            <mat-hint align="end">(Cannot change this number)</mat-hint>
+            <mat-label>Id:</mat-label>
+            <input matInput formControlName="id" placeholder="Id" required readonly>
+            <mat-hint align="end">No se puede modificar</mat-hint>
           </mat-form-field>
         </div>
         
         <!-- Titulo field -->
         <div class="form-group">
           <mat-form-field>
-            <mat-label>Titulo:</mat-label>
-            <input matInput formControlName="titulo" placeholder="Titulo" required>
+            <mat-label>Título:</mat-label>
+            <input matInput formControlName="titulo" placeholder="Título" required>
             <mat-hint align="end">(3 a 255 caracteres de longitud)</mat-hint>
-            <mat-error *ngIf="hasError('titulo', 'required')">El titulo es obligatorio</mat-error>
-            <mat-error *ngIf="hasError('titulo', 'minlength')">El titulo debe tener al menos 3 caracteres</mat-error>
-            <mat-error *ngIf="hasError('titulo', 'maxlength')">El titulo excede el límite de caracteres</mat-error>
-            <mat-error *ngIf="hasError('titulo', 'startWithCapitalLetter')">El título debe comenzar con mayúscula</mat-error>
+            <mat-error *ngIf="hasError('titulo', 'required')">Campo obligatorio</mat-error>
+            <mat-error *ngIf="hasError('titulo', 'minlength')">Mínimo 3 caracteres</mat-error>
+            <mat-error *ngIf="hasError('titulo', 'maxlength')">Límite excedidos</mat-error>
+            <mat-error *ngIf="hasError('titulo', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
           </mat-form-field>
         </div>
 
         <!-- Fecha field -->
         <div class="form-group">
           <mat-form-field>
-            <mat-label>Fecha de Creación:</mat-label>
+            <mat-label>Fecha de creación:</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="fecha" (dateInput)="addEvent('input', $event)">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -62,8 +62,9 @@
           <div class="col-8">
             <div class="form-group">
               <mat-form-field>
-                <mat-label>Usuario ID:</mat-label>
-                <input matInput formControlName="id" placeholder="User ID" required readonly>
+                <mat-label>Id Usuario:</mat-label>
+                <input matInput formControlName="id" placeholder="Id Usuario" required readonly>
+
               </mat-form-field>
             </div>
           </div>
@@ -80,8 +81,9 @@
           <div class="col-8">
           <div class="form-group">
             <mat-form-field>
-              <mat-label>Producto ID:</mat-label>
-              <input matInput formControlName="id" placeholder="Producto ID" required readonly>
+              <mat-label>Id Producto:</mat-label>
+              <input matInput formControlName="id" placeholder="Id Producto" required readonly>
+
             </mat-form-field>
           </div>
           </div>
@@ -92,14 +94,12 @@
         </div>
         </div>
        
-        <!-- Botón de Guardar -->
         <div class="text-center mt-5">
-       
           <button class="btn btn-primary" type="submit">Guardar</button>
-
         </div>
       </form>
     </div>
   </div>
 </div>
 
+<p-messages></p-messages>

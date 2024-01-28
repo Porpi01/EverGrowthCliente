@@ -10,7 +10,8 @@
 <p-divider></p-divider>
 <div class="container">
   <div class="row justify-content-center align-items-center">
-    <div class="col-lg-7 col-md-12 col-sm-12">
+
+    <div class="col-lg-9 col-md-12 col-sm-12">
       <div class="d-flex align-items-center">
         <span class="p-input-icon-left">
           <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
@@ -19,7 +20,8 @@
         <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!" [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>      
       </div>
     </div>
-    <div class="col-lg-2 col-md-12 col-sm-12">
+
+    <div class="col-lg-2 col-md-12 d-none d-md-block">
       <h3 class="text-center mb-0">Mostrando {{ oPage?.numberOfElements }} de {{ oPage?.totalElements }}</h3>
     </div>
   </div>
@@ -88,12 +90,12 @@
   </p-table>
   </div>
   </div>
-
+</div>
 
 
 <p-confirmDialog #cd [style]="{ width: '30vw' }">
   <ng-template pTemplate="header">
-    <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> valoraciones removal</h5>
+    <h5><i class="fa-solid fa-triangle-exclamation"></i> Eliminar valoración</h5>
   </ng-template>
   <ng-template pTemplate="message">
     <div class="container d-flex align-items-center justify-content-center">
@@ -102,7 +104,7 @@
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
-    <p>¿Seguro que quieres eliminar esta valoración</p>
+    <p>¿Seguro que quieres eliminar esta valoración?</p>
     <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
     <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Sí" (click)="cd.accept()"></button>
   </ng-template>

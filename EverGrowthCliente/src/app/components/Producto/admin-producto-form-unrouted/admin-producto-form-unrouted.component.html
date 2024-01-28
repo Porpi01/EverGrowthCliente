@@ -71,14 +71,14 @@
               <input matInput formControlName="id" placeholder="ID categoría" required readonly>
             </mat-form-field>
           </div>
-          <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowUsersSelection()">
+          <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowCategoriaSelection()">
             <i class="pi pi-search"></i> Buscar una categoría
           </button>
         </div>
        
         <!-- Botón de Guardar -->
         <div class="text-center mt-5">
-          <button mat-raised-button color="primary" type="submit" [disabled]="!productForm.valid">Guardar</button>
+          <button class="btn btn-primary" type="submit">Guardar</button>
         </div>
       </form>
     </div>

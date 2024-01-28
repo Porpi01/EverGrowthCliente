@@ -93,8 +93,8 @@ import { AdminCarritoNewRoutedComponent } from './components/Carrito/admin-carri
 import { AdminCarritoFormUnroutedComponent } from './components/Carrito/admin-carrito-form-unrouted/admin-carrito-form-unrouted.component';
 import { AdminCarritoEditRoutedComponent } from './components/Carrito/admin-carrito-edit-routed/admin-carrito-edit-routed.component';
 import { TrimPipe } from './pipes/trimString.pipe';
-import { TrimDatePipe } from './pipes/trimDate.pipe';
 import { AdminProductoEditRoutedComponent } from './components/Producto/admin-producto-edit-routed/admin-producto-edit-routed.component';
+import { PrecioPipe } from './pipes/Precio.pipe';
 
 
 @NgModule({
@@ -102,7 +102,7 @@ import { AdminProductoEditRoutedComponent } from './components/Producto/admin-pr
     AppComponent,
     MenuComponent,
     FooterComponent,
-    TrimDatePipe,
+    PrecioPipe,
     TrimPipe,
 
 
@@ -226,6 +226,7 @@ import { AdminProductoEditRoutedComponent } from './components/Producto/admin-pr
 
    {provide:MAT_NATIVE_DATE_FORMATS, useValue: 'es-ES'},
    {provide:MAT_DATE_LOCALE, useValue: 'es-ES'},
+   
 
   ],
   bootstrap: [AppComponent]

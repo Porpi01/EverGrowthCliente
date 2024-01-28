@@ -55,11 +55,12 @@ export class AdminUserPlistRoutedComponent implements OnInit {
         clearInterval(intervalId);
         this.UsuarioService.generateRandom(amount).subscribe({
           next: (oResponse: number) => {
-            this.MessageService.add({ severity: 'success', detail: 'Now there are ' + oResponse + ' users', life: 2000 });
+            this.MessageService.add({ severity: 'success', detail: 'Hay' + oResponse + 'usuarios', life: 2000 });
             this.bLoading = false;
+            console.log('Success response:', oResponse);
           },
           error: (oError: HttpErrorResponse) => {
-            this.MessageService.add({ severity: 'error', detail: 'Error generating users: ' + oError.message, life: 2000 });
+            this.MessageService.add({ severity: 'error', detail: 'Error al generar usuarios: ' + oError.message, life: 2000 });
             this.bLoading = false;
           }
         });
@@ -72,9 +73,9 @@ export class AdminUserPlistRoutedComponent implements OnInit {
 
     this.ConfirmationService.confirm({
       target: $event.target as EventTarget,
-      message: 'Are you sure you want to remove all users?',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Yes',
+      message: '¿Seguro que quiere eliminar los usuarios?',
+      icon: 'fa-solid fa-triangle-exclamation',
+      acceptLabel: 'Sí',
       rejectLabel: 'No',
       accept: () => {
         console.log('Accept block reached');
@@ -83,8 +84,7 @@ export class AdminUserPlistRoutedComponent implements OnInit {
             console.log('Success response:', oResponse);
             this.MessageService.add({
               severity: 'success',
-              summary: 'Success',
-              detail: `Now there are ${oResponse} users.`,
+              detail: `Hay ${oResponse} usuarios.`,
               life: 2000
             });
 
@@ -95,8 +95,7 @@ export class AdminUserPlistRoutedComponent implements OnInit {
             console.error('Error response:', oError);
             this.MessageService.add({
               severity: 'error',
-              summary: 'Error',
-              detail: `Error emptying users: ${oError.message}`,
+              detail: `Error al borrar los usuarios: ${oError.message}`,
               life: 2000
             });
 
@@ -108,8 +107,7 @@ export class AdminUserPlistRoutedComponent implements OnInit {
         console.log('Reject block reached');
         this.MessageService.add({
           severity: 'info',
-          summary: 'Info',
-          detail: 'Operation cancelled!',
+          detail: 'Operación cancelada',
           life: 2000
         });
 

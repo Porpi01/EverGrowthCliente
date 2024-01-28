@@ -1,12 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ValoracionService } from './../../../service/Valoracion.service';
 import { IValoracion, IValoracionPage } from 'src/app/model/model.interfaces';
 import { AdminValoracionDetailUnroutedComponent } from '../admin-valoracion-detail-unrouted/admin-valoracion-detail-unrouted.component';
+
 @Component({
   selector: 'app-admin-valoracion-plist-unrouted',
   templateUrl: './admin-valoracion-plist-unrouted.component.html',
@@ -112,8 +113,8 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
         openedFromView: true, 
     
       },
-      header: 'Vista de valoracion',
-      width: '50%',
+      header: 'Vista de la valoración',
+      width: '60%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: false
@@ -130,16 +131,16 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
         this.ValoracionService.removeOne(this.valoracionToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The valoracion has been removed.' });
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'La valoración ha sido eliminada' });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The valoracion hasn\'t been removed.' });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'La valoración no se ha podido eliminar' });
           }
         });
       },
-      reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The valoracion hasn\'t been removed.' });
+      reject: () => {
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'La valoración no ha sido eliminada' });
       }
     });
   }

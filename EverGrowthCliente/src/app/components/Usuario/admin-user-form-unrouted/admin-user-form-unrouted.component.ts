@@ -1,18 +1,31 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { IUsuario, formOperation } from 'src/app/model/model.interfaces';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MessageService } from 'primeng/api';
 import { UsuarioService } from './../../../service/Usuario.service';
 
+export function startWithCapitalLetter(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value: string = control.value;
+    if (value && value.charAt(0) !== value.charAt(0).toUpperCase()) {
+      return { 'startWithCapitalLetter': { value: control.value } };
+    }
+    return null;
+  };
+}
+
+
 @Component({
   selector: 'app-admin-user-form-unrouted',
   templateUrl: './admin-user-form-unrouted.component.html',
   styleUrls: ['./admin-user-form-unrouted.component.css'],
-  providers: [MessageService]
+  providers: [MessageService, ]
 })
+
+
 export class AdminUserFormUnroutedComponent implements OnInit {
 
   @Input() id: number = 1;
@@ -32,9 +45,9 @@ export class AdminUserFormUnroutedComponent implements OnInit {
   initializeForm(usuario: IUsuario) {
     this.userForm = this.FormBuilder.group({
       id: [usuario.id],
-      nombre: [usuario.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-      apellido1: [usuario.apellido1, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-      apellido2: [usuario.apellido2,[ Validators.minLength(3), Validators.maxLength(255)]],
+      nombre: [usuario.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255),startWithCapitalLetter()]],
+      apellido1: [usuario.apellido1, [Validators.required, Validators.minLength(3), Validators.maxLength(255), startWithCapitalLetter()]],
+      apellido2: [usuario.apellido2,[ Validators.minLength(3), Validators.maxLength(255), startWithCapitalLetter()]],
       email: [usuario.email, [Validators.required, Validators.email]],
       telefono: [usuario.telefono, [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('^[0-9]+$')]],
       direccion: [usuario.direccion, [Validators.required, Validators.minLength(5), Validators.maxLength(255)]],
@@ -52,7 +65,7 @@ export class AdminUserFormUnroutedComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
-          this.MatSnackBar.open('Error reading user from server', '', { duration: 2000 });
+          this.MatSnackBar.open('Error leyendo usuarios', '', { duration: 2000 });
         }
       })
     } else {
@@ -74,12 +87,12 @@ export class AdminUserFormUnroutedComponent implements OnInit {
             this.usuario = data;
             console.log(this.usuario);
             this.initializeForm(this.usuario);
-            this.MatSnackBar.open('The user create has been successful', '', { duration: 2000 });
+            this.MatSnackBar.open('El usuario se ha creado correctamente', '', { duration: 2000 });
             this.oRouter.navigate(['/admin', 'usuario', 'view', this.usuario]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MatSnackBar.open('The user create hasn\'t been successful', '', { duration: 2000 });
+            this.MatSnackBar.open('El usuario no se ha creado correctamente', '', { duration: 2000 });
           }
         })
 
@@ -88,12 +101,12 @@ export class AdminUserFormUnroutedComponent implements OnInit {
           next: (data: IUsuario) => {
             this.usuario = data;
             this.initializeForm(this.usuario);
-            this.MatSnackBar.open('The user has been updated successfully', '', { duration: 2000 });
+            this.MatSnackBar.open('El usuario se ha actualizado a correctamente','', { duration: 2000 });
             this.oRouter.navigate(['/admin', 'usuario', 'view', this.usuario.id]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MatSnackBar.open('Failed to update the user', '', { duration: 2000 });
+            this.MatSnackBar.open('Falló la actualización', '', { duration: 2000 });
           }
         });
         

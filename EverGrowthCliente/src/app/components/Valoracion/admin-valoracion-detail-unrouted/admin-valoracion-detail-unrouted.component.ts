@@ -27,6 +27,7 @@ export class AdminValoracionDetailUnroutedComponent implements OnInit {
   constructor(
     private ValoracionService: ValoracionService,
     private router: Router,
+    
    
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig

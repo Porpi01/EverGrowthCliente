@@ -54,11 +54,11 @@ export class AdminProductoPlistRoutedComponent implements OnInit {
         clearInterval(intervalId);
         this.ProductoService.generateRandom(amount).subscribe({
           next: (oResponse: number) => {
-            this.MessageService.add({ severity: 'success', detail: 'Now there are ' + oResponse + ' productos', life: 2000 });
+            this.MessageService.add({ severity: 'success', detail: 'Hay ' + oResponse + ' productos', life: 2000 });
             this.bLoading = false;
           },
           error: (oError: HttpErrorResponse) => {
-            this.MessageService.add({ severity: 'error', detail: 'Error generating productos: ' + oError.message, life: 2000 });
+            this.MessageService.add({ severity: 'error', detail: 'Error generando productos: ' + oError.message, life: 2000 });
             this.bLoading = false;
           }
         });
@@ -71,9 +71,9 @@ export class AdminProductoPlistRoutedComponent implements OnInit {
 
     this.ConfirmationService.confirm({
       target: $event.target as EventTarget,
-      message: 'Are you sure you want to remove all productos?',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Yes',
+      message: '¿Seguro que quieres eliminar los productos?',
+      icon: 'fa-solid fa-triangle-exclamation',
+      acceptLabel: 'Sí',
       rejectLabel: 'No',
       accept: () => {
         console.log('Accept block reached');
@@ -83,7 +83,7 @@ export class AdminProductoPlistRoutedComponent implements OnInit {
             this.MessageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: `Now there are ${oResponse} productos.`,
+              detail: `Hay ${oResponse} productos.`,
               life: 2000
             });
 
@@ -95,7 +95,7 @@ export class AdminProductoPlistRoutedComponent implements OnInit {
             this.MessageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: `Error emptying productos: ${oError.message}`,
+              detail: `Error borrando productos: ${oError.message}`,
               life: 2000
             });
 
@@ -107,8 +107,7 @@ export class AdminProductoPlistRoutedComponent implements OnInit {
         console.log('Reject block reached');
         this.MessageService.add({
           severity: 'info',
-          summary: 'Info',
-          detail: 'Operation cancelled!',
+          detail: 'Operación cancelada',
           life: 2000
         });
 

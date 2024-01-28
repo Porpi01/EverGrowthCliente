@@ -3,6 +3,7 @@ import { Component, Input, OnInit, Optional } from '@angular/core';
 import { IUsuario } from 'src/app/model/model.interfaces';
 import { UsuarioService } from 'src/app/service/Usuario.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-user-detail-unrouted',
@@ -13,10 +14,11 @@ export class AdminUserDetailUnroutedComponent implements OnInit {
   @Input() id: number = 1;
   usuarios: IUsuario = {} as IUsuario;
   status: HttpErrorResponse | null = null;
-  
+  mostrarBotones: boolean;
 
   constructor(
     private usuarioService: UsuarioService,
+    private router: Router,
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig
   ) {
@@ -25,6 +27,7 @@ export class AdminUserDetailUnroutedComponent implements OnInit {
       console.log(this.config.data);
       
     }
+    this.mostrarBotones = true; 
   }
 
   ngOnInit() {
@@ -44,5 +47,9 @@ export class AdminUserDetailUnroutedComponent implements OnInit {
         this.status = error;
       }
     });
+  }
+
+  volverAtras() {
+    this.router.navigate(['/admin/usuario/plist']);
   }
 }

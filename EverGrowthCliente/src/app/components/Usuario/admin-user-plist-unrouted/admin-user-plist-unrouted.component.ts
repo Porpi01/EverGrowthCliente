@@ -18,6 +18,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
  
 })
 export class AdminUserPlistUnroutedComponent implements OnInit {
+
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
   
 
@@ -113,8 +114,8 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
       data: {
         id: user.id
       },
-      header: 'View user',
-      width: '50%',
+      header: 'Vista del usuario',
+      width: '60%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: false
@@ -130,16 +131,16 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
         this.UsuarioService.removeOne(this.userToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The user has been removed.' });
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'El usuario ha sido eliminado' });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The user hasn\'t been removed.' });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'El usuario no ha sido eliminado' });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The user hasn\'t been removed.' });
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'El usuario no ha sido eliminado' });
       }
     });
   }

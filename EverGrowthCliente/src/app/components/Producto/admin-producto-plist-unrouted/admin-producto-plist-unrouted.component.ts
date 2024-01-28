@@ -117,8 +117,8 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
       data: {
         id: producto.id
       },
-      header: 'View Producto',
-      width: '50%',
+      header: 'Vista de Producto',
+      width: '60%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: false
@@ -134,16 +134,16 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
         this.ProductoService.removeOne(this.productoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The producto has been removed.' });
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'El producto ha sido eliminado' });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The producto hasn\'t been removed.' });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'El producto no ha sido eliminado' });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The producto hasn\'t been removed.' });
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'El producto no ha sido eliminado' });
       }
     });
   }

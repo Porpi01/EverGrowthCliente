@@ -29,7 +29,6 @@ export class AdminUserSelectionUnroutedComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private dialogService: DialogService,
     public oDynamicDialogRef: DynamicDialogRef
   ) {
     this.formGroup = new FormGroup({

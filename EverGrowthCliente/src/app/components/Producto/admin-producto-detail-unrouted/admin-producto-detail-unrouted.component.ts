@@ -3,6 +3,7 @@ import { Component, Input, OnInit, Optional } from '@angular/core';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { IProducto, IUsuario } from 'src/app/model/model.interfaces';
 import { ProductoService } from './../../../service/Producto.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-producto-detail-unrouted',
@@ -18,6 +19,7 @@ export class AdminProductoDetailUnroutedComponent implements OnInit {
 
   constructor(
     private ProductoService: ProductoService,
+    private router: Router,
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig
   ) {
@@ -44,6 +46,10 @@ export class AdminProductoDetailUnroutedComponent implements OnInit {
         this.status = error;
       }
     });
+  }
+
+  volverAtras() {
+    this.router.navigate(['/admin/producto/plist']);
   }
 
 }
