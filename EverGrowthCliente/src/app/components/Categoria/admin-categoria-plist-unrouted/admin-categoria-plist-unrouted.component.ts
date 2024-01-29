@@ -109,8 +109,8 @@ export class AdminCategoriaPlistUnroutedComponent implements OnInit {
       data: {
         id: categoria.id
       },
-      header: 'View categoría',
-      width: '50%',
+      header: 'Vista de la categoría',
+      width: '60%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: false
@@ -126,16 +126,16 @@ export class AdminCategoriaPlistUnroutedComponent implements OnInit {
         this.CategoriaService.removeOne(this.categoriaToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The categoría has been removed.' });
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'La categoría ha sido eliminada' });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The categoría hasn\'t been removed.' });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'La categoría no ha sido eliminada' });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The categoría hasn\'t been removed.' });
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'La categoría no ha sido eliminada' });
       }
     });
   }

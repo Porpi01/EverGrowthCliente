@@ -7,95 +7,109 @@
 </div>
 
 <p-divider></p-divider>
-<div class="d-flex align-items-center justify-content-center">
-  <span class="p-input-icon-left">
-    <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
-    <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
-      style="width: 100%; height: 30px;" />
-  </span>
-  <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
-    [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
-  <h3 class="mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
-</div>
-<div class="container mb-5 mt-3">
-
-  <p-table [value]="detallePedidos">
-
-    <ng-template pTemplate="header">
-      <tr>
-        <th (click)="doOrder('id')">Id</th>
-        <th (click)="doOrder('cantidad')">Cantidad</th>
-        <th (click)="doOrder('precio_unitario')">Precio Unitario</th>
-        <th>Precio total</th>
-        <th>Productos</th>
-        <th>Pedidos</th>
-        <th>Acciones</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-detallePedido of oPage?.content class="align-middle">
-      <tr>
-        <td>{{ detallePedido.id }}</td>
-        <td>{{ detallePedido.cantidad }}</td>
-        <td>{{ detallePedido.precio_unitario }}</td>
-        <td>{{ calculateTotalPrice(detallePedido.cantidad, detallePedido.precio_unitario) }}</td>
-
-        <td class="text-center">
-          <a [routerLink]="['/admin','producto','plist','byproducto',detallePedido.productos.id]">({{detallePedido.productos.id}})
-            ({{detallePedido.productos.nombre}})</a>
-        </td>
-
-        <td class="text-center">
-          <a
-            [routerLink]="['/admin','pedido','plist','bypedido',detallePedido.pedidos.id]">({{detallePedido.pedidos.id}})</a>
-        </td>
-
-        <td class="text-center">
-
-          <a [routerLink]="['/admin','detallePedido','view',detallePedido.id]" class="icon-link"><i
-              class="fa-solid fa-eye"></i></a>
-
-          <a [routerLink]="['/admin','detallePedido','edit',detallePedido.id]" class="icon-link"><i
-              class="fa-solid fa-pen-to-square"></i>
-          </a>
-
-          <a (click)="doView(detallePedido)" class="icon-link"><i class="fa-solid fa-circle-up"></i>
-          </a>
-          <a *ngIf="detallePedido.categoria===0" (click)="doRemove(detallePedido)"><i class="fa-solid fa-trash"></i>
-          </a>
-
-        </td>
-
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="footer">
-      <tr>
-        <th (click)="doOrder('id')">Id</th>
-        <th (click)="doOrder('cantidad')">Cantidad</th>
-        <th (click)="doOrder('precio_unitario')">Precio Unitario</th>
-        <th>Precio total</th>
-        <th>Productos</th>
-        <th>Pedidos</th>
-        <th>Acciones</th>
-      </tr>
-    </ng-template>
-  </p-table>
-
-</div>
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-9 col-md-12 col-sm-12">
+      <div class="d-flex align-items-center">
+        <span class="p-input-icon-left">
+          <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+          <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
+            style="width: 100%; height: 30px;" />
+        </span>
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!"
+          [rows]="oPaginatorState.rows!" [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]"
+          class="mx-2"></p-paginator>
+      </div>
+    </div>
+    <div class="col-lg-2 col-md-12 d-none d-md-block">
+      <h3 class="text-center mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
+    </div>
+  </div>
 
 
-<p-confirmDialog #cd [style]="{ width: '30vw' }">
-  <ng-template pTemplate="header">
-    <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> User removal</h5>
-  </ng-template>
-  <ng-template pTemplate="message">
-    <div class="container d-flex align-items-center justify-content-center">
+  <div class="row justify-content-center">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+
+      <p-table [value]="detallePedidos">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th (click)="doOrder('id')">Id</th>
+            <th (click)="doOrder('cantidad')">Cantidad</th>
+            <th (click)="doOrder('precio_unitario')">Precio Unitario</th>
+            <th>Precio total</th>
+            <th>Productos</th>
+            <th>Pedidos</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-detallePedido of oPage?.content class="align-middle">
+          <tr>
+            <td>{{ detallePedido.id }}</td>
+            <td>{{ detallePedido.cantidad }}</td>
+            <td>{{ detallePedido.precio_unitario }}</td>
+            <td>{{ calculateTotalPrice(detallePedido.cantidad, detallePedido.precio_unitario) }}</td>
+
+            <td class="text-center">
+              <a [routerLink]="['/admin','producto','plist','byproducto',detallePedido.productos.id]">({{detallePedido.productos.id}})
+                ({{detallePedido.productos.nombre}})</a>
+            </td>
+
+            <td class="text-center">
+              <a
+                [routerLink]="['/admin','pedido','plist','bypedido',detallePedido.pedidos.id]">({{detallePedido.pedidos.id}})</a>
+            </td>
+
+            <td class="text-center">
+
+              <a [routerLink]="['/admin','detallePedido','view',detallePedido.id]" class="icon-link"><i
+                  class="fa-solid fa-eye"></i></a>
+
+              <a [routerLink]="['/admin','detallePedido','edit',detallePedido.id]" class="icon-link"><i
+                  class="fa-solid fa-pen-to-square"></i>
+              </a>
+
+              <a (click)="doView(detallePedido)" class="icon-link"><i class="fa-solid fa-circle-up"></i>
+              </a>
+              <a *ngIf="detallePedido.categoria===0" (click)="doRemove(detallePedido)"><i class="fa-solid fa-trash"></i>
+              </a>
+
+            </td>
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <tr>
+            <th (click)="doOrder('id')">Id</th>
+            <th (click)="doOrder('cantidad')">Cantidad</th>
+            <th (click)="doOrder('precio_unitario')">Precio Unitario</th>
+            <th>Precio total</th>
+            <th>Productos</th>
+            <th>Pedidos</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+      </p-table>
 
     </div>
-  </ng-template>
-  <ng-template pTemplate="footer">
-    <p>¿Seguro que quieres eliminar este usuario?</p>
-    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
-    <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Sí" (click)="cd.accept()"></button>
-  </ng-template>
-</p-confirmDialog>
-<p-messages></p-messages>
+  </div>
+  
+
+    <p-confirmDialog #cd>
+      <ng-template pTemplate="header">
+        <h5 class="confirm-dialog-header">Eliminar detalle pedido</h5>
+      </ng-template>
+      <ng-template pTemplate="message">
+        <div class="container d-flex align-items-center justify-content-center">
+          <app-admin-detallePedido-detail-unrouted [id]="pedidoToRemove!.id"></app-admin-detallePedido-detail-unrouted>
+
+        </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <p>¿Seguro que quieres eliminar este detalle pedido?</p>
+        <button class="btn btn-primary mx-1" pButton label="No" (click)="cd.reject()"></button>
+        <button class="btn btn-danger mx-1" pButton label="Sí" (click)="cd.accept()"></button>
+      </ng-template>
+    </p-confirmDialog>
+    <p-messages></p-messages>
+    

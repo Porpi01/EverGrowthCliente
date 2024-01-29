@@ -3,6 +3,7 @@ import { ICarrito } from 'src/app/model/model.interfaces';
 import { CarritoService } from './../../../service/Carrito.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-carrito-detail-unrouted',
@@ -19,6 +20,7 @@ export class AdminCarritoDetailUnroutedComponent implements OnInit {
 
   constructor(
     private CarritoService: CarritoService,
+    private router: Router,
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig
   ) {
@@ -45,5 +47,10 @@ export class AdminCarritoDetailUnroutedComponent implements OnInit {
         this.status = error;
       }
     });
+  }
+
+  
+  volverAtras() {
+    this.router.navigate(['/admin/carrito/plist']);
   }
 }

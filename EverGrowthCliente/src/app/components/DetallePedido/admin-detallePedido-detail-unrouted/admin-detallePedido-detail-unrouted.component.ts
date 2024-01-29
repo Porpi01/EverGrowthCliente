@@ -3,6 +3,7 @@ import { IDetallePedido } from 'src/app/model/model.interfaces';
 import { DetallePedidoService } from './../../../service/DetallePedido.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-detallePedido-detail-unrouted',
@@ -18,6 +19,8 @@ export class AdminDetallePedidoDetailUnroutedComponent implements OnInit {
 
   constructor(
     private DetallePedidoService: DetallePedidoService,
+    private router: Router,
+
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig
   ) {
@@ -46,4 +49,7 @@ export class AdminDetallePedidoDetailUnroutedComponent implements OnInit {
     });
   }
 
+  volverAtras() {
+    this.router.navigate(['/admin/detallePedido/plist']);
+  }
 }

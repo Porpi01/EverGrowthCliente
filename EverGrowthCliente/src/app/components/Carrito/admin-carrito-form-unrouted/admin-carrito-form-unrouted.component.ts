@@ -18,13 +18,13 @@ export class AdminCarritoFormUnroutedComponent implements OnInit {
 
 
   @Input() id: number = 1;
-  @Input() operation: formOperation = 'NEW'; 
+  @Input() operation: formOperation = 'NEW';
 
 
 
 
   carritoForm!: FormGroup;
-  carrito: ICarrito = { user: {}, producto:{}} as ICarrito;
+  carrito: ICarrito = { user: {}, producto: {} } as ICarrito;
   status: HttpErrorResponse | null = null;
 
   oDynamicDialogRef: DynamicDialogRef | undefined;
@@ -50,10 +50,10 @@ export class AdminCarritoFormUnroutedComponent implements OnInit {
       producto: this.formBuilder.group({
         id: [carrito.producto?.id, Validators.required]
       })
-  
+
     });
   }
-  
+
   ngOnInit() {
     if (this.operation == 'EDIT') {
       this.CarritoService.getOne(this.id).subscribe({
@@ -63,7 +63,7 @@ export class AdminCarritoFormUnroutedComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
-          this.snackBar.open('Error reading carrito from server', '', { duration: 2000 });
+          this.snackBar.open('Error al leer el carrito', '', { duration: 2000 });
         }
       });
     } else {
@@ -80,11 +80,11 @@ export class AdminCarritoFormUnroutedComponent implements OnInit {
       if (this.operation == 'NEW') {
         console.log(this.carritoForm.value);
         this.CarritoService.newOne(this.carritoForm.value).subscribe({
-       
+
           next: (data: ICarrito) => {
             this.carrito = data;
             this.initializeForm(this.carrito);
-            this.snackBar.open('The carrito create has been successful', '', { duration: 2000 });
+            this.snackBar.open('Carrito creado', '', { duration: 2000 });
             console.log(this.carrito.id);
 
             this.router.navigate(['/admin', 'carrito', 'view', data]);
@@ -92,7 +92,7 @@ export class AdminCarritoFormUnroutedComponent implements OnInit {
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.snackBar.open('The carrito create hasn\'t been successful', '', { duration: 2000 });
+            this.snackBar.open('Carrito no creado', '', { duration: 2000 });
           }
         });
       } else {
@@ -100,12 +100,12 @@ export class AdminCarritoFormUnroutedComponent implements OnInit {
           next: (data: ICarrito) => {
             this.carrito = data;
             this.initializeForm(this.carrito);
-            this.snackBar.open('The carrito has been updated successfully', '', { duration: 2000 });
+            this.snackBar.open('Carrito actualizado', '', { duration: 2000 });
             this.router.navigate(['/admin', 'carrito', 'view', this.carrito.id]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.snackBar.open('Failed to update the categoria', '', { duration: 2000 });
+            this.snackBar.open('Carrito no actualizado', '', { duration: 2000 });
           }
         });
       }
@@ -114,7 +114,7 @@ export class AdminCarritoFormUnroutedComponent implements OnInit {
 
   onShowUsersSelection() {
     this.oDynamicDialogRef = this.dialogService.open(AdminUserSelectionUnroutedComponent, {
-      header: 'Select a Usuario',
+      header: 'Selecciona un Usuario',
       width: '80%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
@@ -131,7 +131,7 @@ export class AdminCarritoFormUnroutedComponent implements OnInit {
 
   onShowProductosSelection() {
     this.oDynamicDialogRef = this.dialogService.open(AdminProductoSelectionUnroutedComponent, {
-      header: 'Select a Producto',
+      header: 'Selecciona un Producto',
       width: '80%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,

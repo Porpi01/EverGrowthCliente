@@ -1,28 +1,38 @@
 <div style="text-align: center; margin-top: 50px;">
-  <h1>CARRITO</h1>
+  <h1>CARRITOS</h1>
   </div>
   <div class="container">
-    <div *ngIf="bLoading" class="progress card text-center m-5">
-      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" 
-           aria-valuenow="loadingProgress + '%'" aria-valuemin="0" aria-valuemax="100"
-           [style.width]="loadingProgress + '%'">
+    <div *ngIf="bLoading" class="progress card m-5">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+        aria-valuenow="loadingProgress + '%'" aria-valuemin="0" aria-valuemax="100" [style.width]="loadingProgress + '%'">
         {{ loadingProgress }}%
       </div>
     </div>
-  <p-toolbar *ngIf="!bLoading">
-    <div class="p-toolbar-group-start  justify-content-center"  >
-      <p-button [rounded]="true" severity="primary mx-1"  (click)="doGenerateRandom(10)">+10</p-button>
-      <p-button [rounded]="true" severity="primary  mx-1"   (click)="doGenerateRandom(50)">+50</p-button>
-      <p-button [rounded]="true" severity="primary  mx-1"  (click)="doGenerateRandom(100)">+100</p-button>
+  
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+          <p-toolbar *ngIf="!bLoading">
+  
+            <div class="p-toolbar-group-start ">
+              <p-button class="custom-button" [rounded]="true" severity="primary mx-1"
+                (click)="doGenerateRandom(10)">+10</p-button>
+              <p-button class="custom-button" [rounded]="true" severity="primary mx-1"
+                (click)="doGenerateRandom(50)">+50</p-button>
+              <p-button class="custom-button" [rounded]="true" severity="primary mx-1"
+                (click)="doGenerateRandom(100)">+100</p-button>
+            </div>
+  
+  
+            <div class="p-toolbar-group-end ">
+              <p-splitButton id="2" label="Options" [model]="items"></p-splitButton>
+            </div>
+  
+          </p-toolbar>
+        </div>
+      </div>
     </div>
-    <div class="p-toolbar-group-center">
-     
-    </div>
-    <div class="p-toolbar-group-end">
-        <p-splitButton label="Options"  [model]="items"></p-splitButton>
-    </div>
-</p-toolbar>
-</div>
+  </div>
   <app-admin-carrito-plist-unrouted  [forceReload]="forceReload" *ngIf="!bLoading" ></app-admin-carrito-plist-unrouted>
 
 <p-confirmPopup></p-confirmPopup>

@@ -7,83 +7,98 @@
 </div>
 
 <p-divider></p-divider>
-<div class="d-flex align-items-center justify-content-center">
-  <span class="p-input-icon-left">
-    <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
-    <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"  style="width: 100%; height: 30px;" />
-  </span>
-  <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
-    [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
-  <h3 class="mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
-</div>
-<div class="container mb-5 mt-3" >          
-
-  <p-table [value]="carrito">
-
-    <ng-template pTemplate="header">
-      <tr>
-        <th (click)="doOrder('id')">Id</th>
-        <th (click)="doOrder('cantidad')">Cantidad</th>
-        <th >Usuarios</th>
-        <th >Productos</th>
-        <th >Acciones</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-carritos of oPage?.content class="align-middle">
-      <tr >
-        <td>{{ carritos.id }}</td>
-        <td>{{ carritos.cantidad}}</td>
-      
-        <td class="text-center">
-          <a [routerLink]="['/admin','usuario','plist','byusuario',carritos.user.id]">({{carritos.user.id}}) ({{carritos.user.nombre}})({{carritos.user.apellido1}})  </a>
-          </td>
-        <td class="text-center">
-          <a [routerLink]="['/admin','producto','plist','byproducto',carritos.producto.id]">({{carritos.producto.id}})({{carritos.producto.nombre}}) </a>
-        </td>
-        
-        <td class="text-center">
-
-          <div  class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <p-button [rounded]="true" [outlined]="true" [routerLink]="['/admin','carrito','view',carritos.id]"><i
-                class="fa-solid fa-eye" ></i></p-button>
-
-            <p-button [rounded]="true" severity="success" [outlined]="true"[routerLink]="['/admin','carrito','edit',carritos.id]"><i
-                class="fa-solid fa-pen-to-square"></i></p-button>
-            <p-button [rounded]="true" severity="warning" [outlined]="true" (click)="doView(carritos)"><i class="fa-solid fa-circle-up"></i></p-button>
-     
-            <p-button [rounded]="true" severity="danger" [outlined]="true" *ngIf="carritos.categoria===0" 
-              (click)="doRemove(carritos)"><i class="fa-solid fa-trash"></i></p-button>
-          </div>
-        </td>
-
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="footer">
-      <tr>
-        <th (click)="doOrder('id')">Id</th>
-        <th (click)="doOrder('cantidad')">Cantidad</th>
-        <th >Usuarios</th>
-        <th >Productos</th>
-        <th >Acciones</th>
-      </tr>
-    </ng-template>
-  </p-table>
-
-</div>
-
-
-<p-confirmDialog #cd [style]="{ width: '30vw' }">
-  <ng-template pTemplate="header">
-    <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> User removal</h5>
-  </ng-template>
-  <ng-template pTemplate="message">
-    <div class="container d-flex align-items-center justify-content-center">
-   
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-9 col-md-12 col-sm-12">
+      <div class="d-flex align-items-center">
+        <span class="p-input-icon-left">
+          <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+          <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
+            style="width: 100%; height: 30px;" />
+        </span>
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!"
+          [rows]="oPaginatorState.rows!" [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]"
+          class="mx-2"></p-paginator>
+      </div>
     </div>
-  </ng-template>
-  <ng-template pTemplate="footer">
-    <p>¿Seguro que quieres eliminar este usuario?</p>
-    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
-    <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Sí" (click)="cd.accept()"></button>
-  </ng-template>
-</p-confirmDialog>
+    <div class="col-lg-2 col-md-12 d-none d-md-block">
+      <h3 class="text-center mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
+    </div>
+  </div>
+
+
+  <div class="row justify-content-center">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+
+      <p-table [value]="carrito">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th (click)="doOrder('id')">Id</th>
+            <th (click)="doOrder('cantidad')">Cantidad</th>
+            <th>Usuarios</th>
+            <th>Productos</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-carritos of oPage?.content class="align-middle">
+          <tr>
+            <td>{{ carritos.id }}</td>
+            <td>{{ carritos.cantidad}}</td>
+
+            <td class="text-center">
+              <a [routerLink]="['/admin','usuario','plist','byusuario',carritos.user.id]">({{carritos.user.id}})
+                ({{carritos.user.nombre}})({{carritos.user.apellido1}}) </a>
+            </td>
+            <td class="text-center">
+              <a [routerLink]="['/admin','producto','plist','byproducto',carritos.producto.id]">({{carritos.producto.id}})({{carritos.producto.nombre}})
+              </a>
+            </td>
+
+
+            <td class="text-center">
+              <a [routerLink]="['/admin','carrito','view',carritos.id]"  class="icon-link"><i class="fa-solid fa-eye"></i>
+              </a>
+
+              <a [routerLink]="['/admin','carrito','edit',carritos.id]"  class="icon-link"><i class="fa-solid fa-pen-to-square"></i></a>
+
+              <a (click)="doView(carritos)" class="icon-link"><i class="fa-solid fa-circle-up"></i>
+              </a>
+              <a *ngIf="carritos.categoria===0" (click)="doRemove(carritos)"  class="icon-link"><i class="fa-solid fa-trash"></i>
+              </a>
+
+            </td>
+
+
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <tr>
+            <th (click)="doOrder('id')">Id</th>
+            <th (click)="doOrder('cantidad')">Cantidad</th>
+            <th>Usuarios</th>
+            <th>Productos</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+      </p-table>
+
+    </div>
+
+
+    <p-confirmDialog #cd>
+      <ng-template pTemplate="header">
+        <h5 class="confirm-dialog-header">Eliminar carrrito</h5>
+      </ng-template>
+      <ng-template pTemplate="message">
+        <div class="container d-flex align-items-center justify-content-center">
+          <app-admin-carrito-detail-unrouted [id]="carritoToRemove!.id"></app-admin-carrito-detail-unrouted>
+
+        </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <p>¿Seguro que quieres eliminar este carrito?</p>
+        <button class="btn btn-primary mx-1" pButton  label="No" (click)="cd.reject()"></button>
+        <button class="btn btn-danger mx-1" pButton  label="Sí" (click)="cd.accept()"></button>
+      </ng-template>
+    </p-confirmDialog>

@@ -3,6 +3,7 @@ import { ICategoria, IDetallePedido } from 'src/app/model/model.interfaces';
 import { CategoriaService } from './../../../service/Categoria.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-categoria-detail-unrouted',
@@ -19,6 +20,7 @@ export class AdminCategoriaDetailUnroutedComponent implements OnInit {
 
   constructor(
     private CategoriaService: CategoriaService,
+    private router: Router,
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig
   ) {
@@ -46,5 +48,7 @@ export class AdminCategoriaDetailUnroutedComponent implements OnInit {
       }
     });
   }
-
+  volverAtras() {
+    this.router.navigate(['/admin/categoria/plist']);
+  }
 }

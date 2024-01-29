@@ -34,13 +34,13 @@
         <ng-template pTemplate="header">
           <tr>
 
-            <th (click)="doOrder('id')">Nombre</th>
+            <th (click)="doOrder('Nombre')">Nombre</th>
             <th (click)="doOrder('Apellido1')">Apellido1</th>
-            <th (click)="doOrder('Apellido2')">Apellido2</th>
+            <th class="d-none d-sm-table-cell" (click)="doOrder('Apellido2')">Apellido2</th>
             <th (click)="doOrder('Email')">Email</th>
-            <th>Teléfono</th>
-            <th (click)="doOrder('Dirección')">Dirección</th>
-            <th (click)="doOrder('Username')">Username</th>
+            <th class="d-none d-sm-table-cell">Teléfono</th>
+            <th class="d-none d-sm-table-cell" (click)="doOrder('Dirección')">Dirección</th>
+            <th  (click)="doOrder('Username')">Username</th>
             <th (click)="doOrder('Rol')">Rol</th>
             <th>Pedidos</th>
             <th>Valoraciones</th>
@@ -53,10 +53,10 @@
 
             <td>{{ user.nombre }}</td>
             <td>{{ user.apellido1 }}</td>
-            <td>{{ user.apellido2 }}</td>
+            <td class="d-none d-sm-table-cell">{{ user.apellido2 }}</td>
             <td>{{ user.email }}</td>
-            <td>{{ user.telefono }}</td>
-            <td>{{ user.direccion }}</td>
+            <td class="d-none d-sm-table-cell">{{ user.telefono }}</td>
+            <td class="d-none d-sm-table-cell">{{ user.direccion }}</td>
             <td>{{ user.username }}</td>
             <td class="text-center">
               <span *ngIf="user.rol==true">Admin</span>
@@ -100,12 +100,12 @@
         <ng-template pTemplate="footer">
           <tr>
 
-            <th (click)="doOrder('id')">Nombre</th>
+            <th (click)="doOrder('Nombre')">Nombre</th>
             <th (click)="doOrder('Apellido1')">Apellido1</th>
-            <th (click)="doOrder('Apellido2')">Apellido2</th>
+            <th class="d-none d-sm-table-cell" (click)="doOrder('Apellido2')">Apellido2</th>
             <th (click)="doOrder('Email')">Email</th>
-            <th>Teléfono</th>
-            <th (click)="doOrder('Dirección')">Dirección</th>
+            <th class="d-none d-sm-table-cell">Teléfono</th>
+            <th  class="d-none d-sm-table-cell"(click)="doOrder('Dirección')">Dirección</th>
             <th (click)="doOrder('Username')">Username</th>
             <th (click)="doOrder('Rol')">Rol</th>
             <th>Pedidos</th>

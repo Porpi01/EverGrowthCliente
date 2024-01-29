@@ -1,34 +1,48 @@
 
 
 .container{
-    border-radius: 10px;
-    padding: 5px;
-     font-size: 1.2em;
-  }
-
-.custom-card{
-    background-color: #e8e9eb;
+  border-radius: 10px;
+  padding: 5px;
+   font-size: 1.2em;
 }
 
-  /* Estilos para las etiquetas <div> dentro de la tarjeta */
-  .custom-card div {
-    margin-bottom: 10px;
-    padding: 5px;
+.custom-card{
+  background-color: #e8e9eb;
+}
 
-  }
-  
-  /* Estilos específicos para las etiquetas <strong> dentro de la tarjeta */
-  .custom-card strong {
-    color: #313638; 
+/* Estilos para las etiquetas <div> dentro de la tarjeta */
+.custom-card div {
+  margin-bottom: 10px;
+  padding: 5px;
 
-  }
-  .fa-circle-info {
-    font-size: 10em;
-    position: relative;
-    top: -60px; 
-    color: #e4b363;
-    display: flex;
-    justify-content: center;
-  }
-  
- 
+}
+
+/* Estilos específicos para las etiquetas <strong> dentro de la tarjeta */
+.custom-card strong {
+  color: #313638; 
+
+}
+.fa-circle-info {
+  font-size: 10em;
+  position: relative;
+  top: 75px; 
+  color: #e4b363;
+  display: flex;
+  justify-content: center;
+}
+
+h1{
+text-align: center;
+font-weight: bold;
+}
+
+.btn {
+  background-color: #ef6461 !important;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 20px; 
+}
+

@@ -1,11 +1,13 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-5">
+    <div class="col-lg-5 col-md-5 d-none d-md-block">
+      <i class="fa-solid fa-circle-info"></i>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-12">
       <p-card class="custom-card">
-        <ng-template pTemplate="header">
-          <i class="fa-solid fa-circle-info"></i>
-        </ng-template>
         <ng-template pTemplate="content">
+          <div>
+            <h1>CARRITO</h1>
           <div><strong>Cantidad:</strong> {{ carritos.cantidad }}</div>
       
             <div *ngIf="carritos.producto">
@@ -24,7 +26,8 @@
                 </a>
               </ng-container>
             </div>
-        
+            <button class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
+          </div>
         </ng-template>
       </p-card>
     </div>

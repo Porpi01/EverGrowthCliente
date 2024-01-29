@@ -56,11 +56,11 @@ export class AdminCarritoPlistRoutedComponent implements OnInit {
         clearInterval(intervalId);
         this.CarritoService.generateRandom(amount).subscribe({
           next: (oResponse: number) => {
-            this.MessageService.add({ severity: 'success', detail: 'Now there are ' + oResponse + ' carrito', life: 2000 });
+            this.MessageService.add({ severity: 'success', detail: 'Hay ' + oResponse + ' carrito', life: 2000 });
             this.bLoading = false;
           },
           error: (oError: HttpErrorResponse) => {
-            this.MessageService.add({ severity: 'error', detail: 'Error generating carrito: ' + oError.message, life: 2000 });
+            this.MessageService.add({ severity: 'error', detail: 'Error al generar carritos ' + oError.message, life: 2000 });
             this.bLoading = false;
           }
         });
@@ -73,19 +73,19 @@ export class AdminCarritoPlistRoutedComponent implements OnInit {
 
     this.ConfirmationService.confirm({
       target: $event.target as EventTarget,
-      message: 'Are you sure you want to remove all carrito?',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Yes',
+      message: '¿Seguro que quieres eliminar los detalle pedidos?',
+      icon: 'fa-solid fa-triangle-exclamation',
+      acceptLabel: 'Sí',
       rejectLabel: 'No',
       accept: () => {
         console.log('Accept block reached');
         this.CarritoService.empty().subscribe({
           next: (oResponse: number) => {
-            console.log('Success response:', oResponse);
+            console.log('Hay', oResponse);
             this.MessageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: `Now there are ${oResponse} carrito.`,
+              detail: `Hay ${oResponse} carritos.`,
               life: 2000
             });
 
@@ -97,7 +97,7 @@ export class AdminCarritoPlistRoutedComponent implements OnInit {
             this.MessageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: `Error emptying carrito: ${oError.message}`,
+              detail: `Error al borrar carritos: ${oError.message}`,
               life: 2000
             });
 
@@ -110,7 +110,7 @@ export class AdminCarritoPlistRoutedComponent implements OnInit {
         this.MessageService.add({
           severity: 'info',
           summary: 'Info',
-          detail: 'Operation cancelled!',
+          detail: 'Operación cancelada',
           life: 2000
         });
 

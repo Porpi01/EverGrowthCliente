@@ -112,8 +112,8 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
       data: {
         id: carrito.id
       },
-      header: 'View carrito',
-      width: '50%',
+      header: 'Vista de carrito',
+      width: '60%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: false
@@ -129,16 +129,16 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
         this.CarritoService.removeOne(this.carritoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The carrito has been removed.' });
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'El carrito ha sido eliminado' });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The carrito hasn\'t been removed.' });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'El carrito no ha sido eliminado' });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The carrito hasn\'t been removed.' });
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'El carrito no ha sido eliminado' });
       }
     });
   }

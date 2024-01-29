@@ -1,12 +1,14 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-lg-5 col-md-5 d-none d-md-block">
+      <i class="fa-solid fa-circle-info"></i>
+    </div>
+
+    <div class="col-lg-7 col-md-7 col-sm-12">
       <p-card class="custom-card">
-        <ng-template pTemplate="header">
-          <i class="fa-solid fa-circle-info"></i>
-        </ng-template>
         <ng-template pTemplate="content">
           <div>
+            <h1>CATEGORIA</h1>
             <div><strong>Nombre:</strong> {{ categorias.nombre }}</div>
            
             <div *ngIf="categorias.productos !== undefined">
@@ -20,7 +22,7 @@
                 <span>0</span>
               </ng-template>
             </div>
-           
+            <button class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
           </div>
         </ng-template>
       </p-card>

@@ -15,39 +15,47 @@
           <mat-form-field *ngIf="operation == 'EDIT'">
             <mat-label>ID:</mat-label>
             <input matInput formControlName="id" placeholder="ID" required readonly>
-            <mat-hint align="end">(Cannot change this number)</mat-hint>
+            <mat-hint align="end">No se puede modificar</mat-hint>
           </mat-form-field>
         </div>
         <div class="form-group">
         <mat-form-field>
           <mat-label>Cantidad</mat-label>
           <input matInput formControlName="cantidad" type="number">
-          <mat-error *ngIf="hasError('cantidad', 'required')">La cantidad es requerida</mat-error>
+          <mat-error *ngIf="hasError('cantidad', 'required')">Campo obligatorio</mat-error>
         </mat-form-field>
         </div>
     
-        <div formGroupName="producto">
+        <div formGroupName="producto" class="row">
+          <div class="col-8">
           <div class="form-group">
             <mat-form-field>
               <mat-label>Producto:</mat-label>
               <input matInput formControlName="id" placeholder="ID Producto" required readonly>
             </mat-form-field>
           </div>
+          </div>
+          <div class="col-4">
           <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowProductosSelection()">
-            <i class="pi pi-search"></i> Buscar un producto
+            <i class="fa-solid fa-boxes-stacked"></i>
           </button>
         </div>
+        </div>
 
-        <div formGroupName="user">
+        <div formGroupName="user" class="row">
+          <div class="col-8">
           <div class="form-group">
             <mat-form-field>
               <mat-label>Usuario:</mat-label>
               <input matInput formControlName="id" placeholder="ID user" required readonly>
             </mat-form-field>
           </div>
+          </div>
+          <div class="col-4">
           <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowUsersSelection()">
-            <i class="pi pi-search"></i> Buscar un pedido
+            <i class="fa-solid fa-person-circle-plus"></i> 
           </button>
+        </div>
         </div>
 
         <!-- Botón de Guardar -->

@@ -58,11 +58,11 @@ export class AdminCategoriaPlistRoutedComponent implements OnInit {
         clearInterval(intervalId);
         this.CategoriaService.generateRandom(amount).subscribe({
           next: (oResponse: number) => {
-            this.MessageService.add({ severity: 'success', detail: 'Now there are ' + oResponse + ' categoría', life: 2000 });
+            this.MessageService.add({ severity: 'success', detail: 'Hay ' + oResponse + ' categoría', life: 2000 });
             this.bLoading = false;
           },
           error: (oError: HttpErrorResponse) => {
-            this.MessageService.add({ severity: 'error', detail: 'Error generating categoría: ' + oError.message, life: 2000 });
+            this.MessageService.add({ severity: 'error', detail: 'Error al generar categorias: ' + oError.message, life: 2000 });
             this.bLoading = false;
           }
         });
@@ -75,9 +75,9 @@ export class AdminCategoriaPlistRoutedComponent implements OnInit {
 
     this.ConfirmationService.confirm({
       target: $event.target as EventTarget,
-      message: 'Are you sure you want to remove all categoría?',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Yes',
+      message: '¿Seguro que quieres eliminar las categorías?',
+      icon: 'fa-solid fa-triangle-exclamation',
+      acceptLabel: 'Sí',
       rejectLabel: 'No',
       accept: () => {
         console.log('Accept block reached');
@@ -87,7 +87,7 @@ export class AdminCategoriaPlistRoutedComponent implements OnInit {
             this.MessageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: `Now there are ${oResponse} categoría.`,
+              detail: `Hay ${oResponse} categoría.`,
               life: 2000
             });
 
@@ -99,7 +99,7 @@ export class AdminCategoriaPlistRoutedComponent implements OnInit {
             this.MessageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: `Error emptying categoría: ${oError.message}`,
+              detail: `Error al borrar las categoría: ${oError.message}`,
               life: 2000
             });
 
@@ -112,7 +112,7 @@ export class AdminCategoriaPlistRoutedComponent implements OnInit {
         this.MessageService.add({
           severity: 'info',
           summary: 'Info',
-          detail: 'Operation cancelled!',
+          detail: 'Operación cancelada',
           life: 2000
         });
 

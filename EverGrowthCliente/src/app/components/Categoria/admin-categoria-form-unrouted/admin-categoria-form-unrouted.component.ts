@@ -15,9 +15,7 @@ import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 export class AdminCategoriaFormUnroutedComponent implements OnInit {
 
   @Input() id: number = 1;
-  @Input() operation: formOperation = 'NEW'; 
-
-
+  @Input() operation: formOperation = 'NEW';
 
 
   categoriaForm!: FormGroup;
@@ -41,10 +39,10 @@ export class AdminCategoriaFormUnroutedComponent implements OnInit {
     this.categoriaForm = this.formBuilder.group({
       id: [categoria.id],
       nombre: [categoria.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
-  
+
     });
   }
-  
+
   ngOnInit() {
     if (this.operation == 'EDIT') {
       this.CategoriaService.getOne(this.id).subscribe({
@@ -54,7 +52,7 @@ export class AdminCategoriaFormUnroutedComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
-          this.snackBar.open('Error reading categoria from server', '', { duration: 2000 });
+          this.snackBar.open('Error al leer la categoría del servidor', '', { duration: 2000 });
         }
       });
     } else {
@@ -71,11 +69,11 @@ export class AdminCategoriaFormUnroutedComponent implements OnInit {
       if (this.operation == 'NEW') {
         console.log(this.categoriaForm.value);
         this.CategoriaService.newOne(this.categoriaForm.value).subscribe({
-       
+
           next: (data: ICategoria) => {
             this.categoria = data;
             this.initializeForm(this.categoria);
-            this.snackBar.open('The categoria create has been successful', '', { duration: 2000 });
+            this.snackBar.open('La categoría se ha creado', '', { duration: 2000 });
             console.log(this.categoria.id);
 
             this.router.navigate(['/admin', 'categoria', 'view', data]);
@@ -83,7 +81,7 @@ export class AdminCategoriaFormUnroutedComponent implements OnInit {
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.snackBar.open('The categoria create hasn\'t been successful', '', { duration: 2000 });
+            this.snackBar.open('La categoría no se ha creado', '', { duration: 2000 });
           }
         });
       } else {
@@ -91,23 +89,23 @@ export class AdminCategoriaFormUnroutedComponent implements OnInit {
           next: (data: ICategoria) => {
             this.categoria = data;
             this.initializeForm(this.categoria);
-            this.snackBar.open('The categoria has been updated successfully', '', { duration: 2000 });
+            this.snackBar.open('La categoría se ha actualizado', '', { duration: 2000 });
             this.router.navigate(['/admin', 'categoria', 'view', this.categoria.id]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.snackBar.open('Failed to update the categoria', '', { duration: 2000 });
+            this.snackBar.open('Falló la actualización', '', { duration: 2000 });
           }
         });
       }
     }
   }
 
-  }
-
- 
+}
 
 
-  
+
+
+
 
 
