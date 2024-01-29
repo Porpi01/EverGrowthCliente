@@ -15,56 +15,66 @@
           <mat-form-field *ngIf="operation == 'EDIT'">
             <mat-label>ID:</mat-label>
             <input matInput formControlName="id" placeholder="ID" required readonly>
-            <mat-hint align="end">(Cannot change this number)</mat-hint>
+            <mat-hint align="end">No se puede modificar</mat-hint>
           </mat-form-field>
         </div>
         <div class="form-group">
-        <mat-form-field>
-          <mat-label>Cantidad</mat-label>
-          <input matInput formControlName="cantidad" type="number">
-          <mat-error *ngIf="hasError('cantidad', 'required')">La cantidad es requerida</mat-error>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-label>Cantidad</mat-label>
+            <input matInput formControlName="cantidad" type="number">
+            <mat-error *ngIf="hasError('cantidad', 'required')">Campo requerido</mat-error>
+          </mat-form-field>
         </div>
         <div class="form-group">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Precio Unitario</mat-label>
             <input matInput formControlName="precio_unitario" type="number" step="0.01">
-            <mat-error *ngIf="hasError('precio_unitario', 'required')">El precio unitario es requerido</mat-error>
+            <mat-error *ngIf="hasError('precio_unitario', 'required')">Campo requerido</mat-error>
           </mat-form-field>
         </div>
-    
 
-        <div formGroupName="productos">
-          <div class="form-group">
-            <mat-form-field [style.width.px]="350">
-              <mat-label>Producto:</mat-label>
-              <input matInput formControlName="id" placeholder="ID Producto" required readonly>
-            </mat-form-field>
+
+        <div formGroupName="productos" class="row">
+          <div class="col-8">
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Producto:</mat-label>
+                <input matInput formControlName="id" placeholder="ID Producto" required readonly>
+              </mat-form-field>
+            </div>
           </div>
-          <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowProductoSelection()">
-            <i class="pi pi-search"></i> Buscar un producto
-          </button>
-        </div>
-
-        <div formGroupName="pedidos">
-          <div class="form-group">
-            <mat-form-field [style.width.px]="350">
-              <mat-label>Pedido:</mat-label>
-              <input matInput formControlName="id" placeholder="ID pedido" required readonly>
-            </mat-form-field>
+            <div class="col-4">
+              <button style="margin-bottom: 10px" class="btn btn-primary" type="button"
+                (click)="onShowProductoSelection()">
+                <i class="fa-solid fa-boxes-stacked"></i>
+              </button>
+            </div>
           </div>
-          <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowPedidoSelection()">
-            <i class="pi pi-search"></i> Buscar un pedido
-          </button>
-        </div>
 
-        <!-- Botón de Guardar -->
-       
-        <div class="text-center mt-5">
+          <div formGroupName="pedidos" class="row">
+            <div class="col-8">
+              <div class="form-group">
+                <mat-form-field >
+                  <mat-label>Pedido:</mat-label>
+                  <input matInput formControlName="id" placeholder="ID pedido" required readonly>
+                </mat-form-field>
+              </div>
+            </div>
+              <div class="col-4">
+                <button style="margin-bottom: 10px" class="btn btn-primary" type="button"
+                  (click)="onShowPedidoSelection()">
+                  <i class="fa-solid fa-cart-plus"></i> 
+                </button>
+              </div>
+            </div>
 
-          <p-button type="submit">Guardar</p-button>
+            <!-- Botón de Guardar -->
 
-        </div>
+            <div class="text-center mt-5">
+
+              <p-button type="submit">Guardar</p-button>
+
+            </div>
       </form>
     </div>
   </div>

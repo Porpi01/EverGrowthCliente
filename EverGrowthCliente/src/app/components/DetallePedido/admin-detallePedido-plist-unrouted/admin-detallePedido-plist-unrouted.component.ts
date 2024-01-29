@@ -110,8 +110,8 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
       data: {
         id: detallePedido.id
       },
-      header: 'View detallePedido',
-      width: '50%',
+      header: 'Ver DetallePedido',
+      width: '60%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: false
@@ -127,16 +127,16 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
         this.DetallePedidoService.removeOne(this.pedidoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The detallePedido has been removed.' });
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'El Detalle Pedido se ha eliminado' });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The detallePedido hasn\'t been removed.' });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'El Detalle Pedido no se ha eliminado' });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The detallePedido hasn\'t been removed.' });
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'El Detalle Pedido no se ha eliminado' });
       }
     });
   }

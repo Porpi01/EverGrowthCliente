@@ -14,9 +14,9 @@
         <!-- ID field - Only shown in EDIT mode -->
         <div class="form-group">
           <mat-form-field *ngIf="operation == 'EDIT'">
-            <mat-label>ID:</mat-label>
+            <mat-label>Id:</mat-label>
             <input matInput formControlName="id" placeholder="ID" required readonly>
-            <mat-hint align="end">(Cannot change this number)</mat-hint>
+            <mat-hint align="end">No se puede modificar</mat-hint>
           </mat-form-field>
         </div>
 
@@ -29,7 +29,7 @@
               <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
-            <div *ngIf="hasError('fecha_pedido', 'required')" class="text-danger">La fecha de pedido es obligatoria.
+            <div *ngIf="hasError('fecha_pedido', 'required')" class="text-danger">Campo obligatorio
             </div>
           </mat-form-field>
         </div>
@@ -43,7 +43,7 @@
               <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
-            <div *ngIf="hasError('fecha_entrega', 'required')" class="text-danger">La fecha de entrega es obligatoria.
+            <div *ngIf="hasError('fecha_entrega', 'required')" class="text-danger">Campo obligatorio
             </div>
           </mat-form-field>
         </div>
@@ -51,22 +51,26 @@
         <mat-radio-group aria-label="Estado pedido" formControlName="estado_pedido" required>
           <mat-radio-button [value]="true">Entregado</mat-radio-button>
           <mat-radio-button [value]="false">No entregado</mat-radio-button>
-          <mat-error *ngIf="hasError('estado_pedido', 'required')">Estado pedido es requerido</mat-error>
+          <mat-error *ngIf="hasError('estado_pedido', 'required')">Campo obligatorio</mat-error>
         </mat-radio-group>
 
 
 
         <!-- User ID field -->
-        <div formGroupName="user">
+        <div formGroupName="user" class="row">
+          <div class="col-8">
           <div class="form-group">
             <mat-form-field>
               <mat-label>User ID:</mat-label>
               <input matInput formControlName="id" placeholder="User ID" required readonly>
             </mat-form-field>
           </div>
+          </div>
+          <div class="col-4">
           <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowUsersSelection()">
-            <i class="pi pi-search"></i> Buscar un Usuario
+            <i class="fa-solid fa-person-circle-plus"></i> 
           </button>
+        </div>
         </div>
 
         <div class="text-center mt-5">

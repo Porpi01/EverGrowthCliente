@@ -32,17 +32,20 @@
       <p-table [value]="productos">
         <ng-template pTemplate="header">
           <tr>
+            <th (click)="doOrder('id')">Id</th>
             <th (click)="doOrder('nombre')">Nombre</th>
             <th (click)="doOrder('precio')">Precio</th>
             <th (click)="doOrder('stock')">Stock</th>
             <th (click)="doOrder('imagen')">Imagen</th>
             <th>Valoraciones</th>
+            <th>Carritos</th>
             <th>Categoria</th>
             <th>Acciones</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-producto of oPage?.content class="align-middle">
           <tr>
+            <td>{{ producto.id }}</td>
             <td>{{ producto.nombre }}</td>
             <td>{{ producto.precio | Precio }}</td>
             <td>{{ producto.stock }}</td>
@@ -65,7 +68,14 @@
               <span *ngIf="producto.valoracion===0">0</span>
             </td>
             <td class="text-center">
-              <a [routerLink]="['/admin','categoria','plist','bycategoria',producto.categoria.id]">
+
+              <a [routerLink]="['/admin','producto','plist','bycarrito',producto.id]" *ngIf="producto.carritos>0">
+                {{ producto.carritos }}
+              </a>
+              <span *ngIf="producto.carritos==0">0</span>
+            </td>
+            <td class="text-center">
+              <a [routerLink]="['/admin','producto','plist','bycategoria',producto.categoria.id]">
                 ({{ producto.categoria.id }})({{ producto.categoria.nombre }})
               </a>
             </td>
@@ -92,11 +102,13 @@
         </ng-template>
         <ng-template pTemplate="footer">
           <tr>
+            <th (click)="doOrder('id')">Id</th>
             <th (click)="doOrder('nombre')">Nombre</th>
             <th (click)="doOrder('precio')">Precio</th>
             <th (click)="doOrder('stock')">Stock</th>
             <th (click)="doOrder('imagen')">Imagen</th>
             <th>Valoraciones</th>
+            <th>Carritos</th>
             <th>Categoria</th>
             <th>Acciones</th>
           </tr>

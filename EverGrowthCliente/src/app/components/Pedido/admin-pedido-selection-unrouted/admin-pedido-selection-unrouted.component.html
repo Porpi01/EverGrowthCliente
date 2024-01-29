@@ -9,7 +9,7 @@
 <p-divider></p-divider>
 <div class="d-flex align-items-center justify-content-center">
   <span class="p-input-icon-left">
-    <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+    <i class="fa-solid fa-magnifying-glass" style="font-size: 1em;"></i>
     <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
       style="width: 100%; height: 30px;" />
   </span>
@@ -27,7 +27,6 @@
         <th (click)="doOrder('fecha_pedido')">Fecha pedido</th>
         <th (click)="doOrder('fecha_entrega')">Fecha entrega</th>
         <th (click)="doOrder('estado_pedido')">Estado pedido</th>
-        <th>Usuarios</th>
         <th>Facturas</th>
         <th>Acciones</th>
       </tr>
@@ -37,13 +36,16 @@
         <td>{{ pedido.id }}</td>
         <td>{{ pedido.fecha_pedido }}</td>
         <td>{{ pedido.fecha_entrega}}</td>
-        <td>{{ pedido.estado_pedido }}</td>
-
+          
+        <td class="text-center">
+          <span *ngIf="pedido.estado_pedido ==true">Entregado</span>
+          <span *ngIf="pedido.estado_pedido ==false">No entregado</span>
+        </td>
+<td></td>
 
         <td class="text-center">
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <button class="btn btn-primary" (click)="onSelectPedido(pedido)"><i
-                class="pi pi-plus-circle"></i></button>
+            <button class="btn btn-primary" (click)="onSelectPedido(pedido)"><i class="fa-solid fa-circle-plus"></i></button>
           </div>
         </td>
       </tr>

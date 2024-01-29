@@ -7,16 +7,28 @@
 </div>
 
 <p-divider></p-divider>
-<div class="d-flex align-items-center justify-content-center">
-  <span class="p-input-icon-left">
-    <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
-    <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"  style="width: 100%; height: 30px;" />
-  </span>
-  <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
-    [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
-  <h3 class="mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
-</div>
-<div class="container mb-5 mt-3" >          
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-9 col-md-12 col-sm-12">
+      <div class="d-flex align-items-center">
+        <span class="p-input-icon-left">
+          <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+          <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
+            style="width: 100%; height: 30px;" />
+        </span>
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!"
+          [rows]="oPaginatorState.rows!" [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]"
+          class="mx-2"></p-paginator>
+      </div>
+    </div>
+    <div class="col-lg-2 col-md-12 d-none d-md-block">
+      <h3 class="text-center mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
+    </div>
+  </div>
+
+
+  <div class="row justify-content-center">
+    <div class="col-lg-12 col-md-12 col-sm-12">        
 
   <p-table [value]="pedidos">
 
@@ -27,6 +39,7 @@
         <th (click)="doOrder('fecha_entrega')">Fecha entrega</th>
         <th (click)="doOrder('estado_pedido')">Estado pedido</th>
         <th >Usuarios</th>
+        <th>Detalles Pedido</th>
         <th >Facturas</th>
         <th>Acciones</th>
       </tr>
@@ -36,27 +49,40 @@
         <td>{{ pedido.id }}</td>
         <td>{{ pedido.fecha_pedido | date: 'dd/MM/yyyy'}}</td>
         <td>{{ pedido.fecha_entrega | date: 'dd/MM/yyyy'}}</td>
-        <td>{{ pedido.estado_pedido }}</td>
-        
+       
+        <td class="text-center">
+          <span *ngIf="pedido.estado_pedido ==true">Entregado</span>
+          <span *ngIf="pedido.estado_pedido ==false">No entregado</span>
+        </td>
     
         <td class="text-center">
-          <a [routerLink]="['/admin','usuario','plist','byusuario',pedido.user.id]">({{pedido.user.id}})({{pedido.user.nombre}})({{pedido.user.apellido1}}) </a>
+          <a [routerLink]="['/admin','usuario','plist','bypedido',pedido.user.id]">({{pedido.user.id}})({{pedido.user.nombre}})({{pedido.user.apellido1}}) </a>
         </td>
         
-        <td></td>
         <td class="text-center">
 
-          <div  class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <p-button [rounded]="true" [outlined]="true" [routerLink]="['/admin','pedido','view',pedido.id]"><i
-                class="fa-solid fa-eye" ></i></p-button>
+          <a [routerLink]="['/admin','detallePedido','plist','bypedido',pedido.detallePedidos.id]" *ngIf="pedido.detallePedidos>0">
+            {{ pedido.detallePedidos }}
+          </a>
+          <span *ngIf="pedido.detallePedidos==0">0</span>
+        </td>
+        <td></td>
 
-            <p-button [rounded]="true" severity="success" [outlined]="true"[routerLink]="['/admin','pedido','edit',pedido.id]"><i
-                class="fa-solid fa-pen-to-square"></i></p-button>
-            <p-button [rounded]="true" severity="warning" [outlined]="true" (click)="doView(pedido)"><i class="fa-solid fa-circle-up"></i></p-button>
-     
-            <p-button [rounded]="true" severity="danger" [outlined]="true" *ngIf="pedido.categoria===0" 
-              (click)="doRemove(pedido)"><i class="fa-solid fa-trash"></i></p-button>
-          </div>
+        <td class="text-center">
+
+          <a  [routerLink]="['/admin','pedido','view',pedido.id]"  class="icon-link"><i
+            class="fa-solid fa-eye" ></i></a>
+
+          <a [routerLink]="['/admin','pedido','edit',pedido.id]"  class="icon-link"><i
+            class="fa-solid fa-pen-to-square"></i>
+          </a>
+
+          <a (click)="doView(pedido)"  class="icon-link"><i class="fa-solid fa-circle-up"></i>
+          </a>
+          <a *ngIf="pedido.categoria===0" 
+          (click)="doRemove(pedido)"><i class="fa-solid fa-trash"  class="icon-link"></i>
+          </a>
+
         </td>
 
       </tr>
@@ -68,6 +94,7 @@
         <th (click)="doOrder('fecha_entrega')">Fecha entrega</th>
         <th (click)="doOrder('estado_pedido')">Estado pedido</th>
         <th >Usuarios</th>
+        <th>Detalles Pedido</th>
         <th >Facturas</th>
         <th>Acciones</th>
       </tr>
@@ -77,18 +104,18 @@
 </div>
 
 
-<p-confirmDialog #cd [style]="{ width: '30vw' }">
+<p-confirmDialog #cd >
   <ng-template pTemplate="header">
-    <h5><i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem"></i> User removal</h5>
-  </ng-template>
+    <h5 class="confirm-dialog-header">Eliminar pedido</h5>  </ng-template>
   <ng-template pTemplate="message">
     <div class="container d-flex align-items-center justify-content-center">
-   
+      <app-admin-pedido-detail-unrouted [id]="pedidoToRemove!.id"></app-admin-pedido-detail-unrouted>
+
     </div>
   </ng-template>
   <ng-template pTemplate="footer">
-    <p>¿Seguro que quieres eliminar este usuario?</p>
-    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
-    <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Sí" (click)="cd.accept()"></button>
+    <p>¿Seguro que quieres eliminar este pedido?</p>
+    <button class="btn btn-primary mx-1" pButton  label="No" (click)="cd.reject()"></button>
+    <button class="btn btn-danger mx-1" pButton  label="Sí" (click)="cd.accept()"></button>
   </ng-template>
 </p-confirmDialog>

@@ -110,8 +110,8 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
       data: {
         id: pedido.id
       },
-      header: 'View pedido',
-      width: '50%',
+      header: 'Vista de pedido',
+      width: '60%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: false
@@ -127,16 +127,16 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
         this.PedidoService.removeOne(this.pedidoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'The pedido has been removed.' });
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'El pedido ha sido eliminado' });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The pedido hasn\'t been removed.' });
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'El pedido no ha sido eliminado' });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'The pedido hasn\'t been removed.' });
+        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'El pedido no ha sido eliminado' });
       }
     });
   }

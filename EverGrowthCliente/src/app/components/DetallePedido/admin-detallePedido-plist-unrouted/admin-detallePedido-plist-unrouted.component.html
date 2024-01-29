@@ -10,13 +10,14 @@
 <div class="d-flex align-items-center justify-content-center">
   <span class="p-input-icon-left">
     <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
-    <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"  style="width: 100%; height: 30px;" />
+    <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
+      style="width: 100%; height: 30px;" />
   </span>
   <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
     [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
   <h3 class="mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
 </div>
-<div class="container mb-5 mt-3" >          
+<div class="container mb-5 mt-3">
 
   <p-table [value]="detallePedidos">
 
@@ -26,39 +27,42 @@
         <th (click)="doOrder('cantidad')">Cantidad</th>
         <th (click)="doOrder('precio_unitario')">Precio Unitario</th>
         <th>Precio total</th>
-        <th >Productos</th>
-        <th >Pedidos</th>
-        <th >Acciones</th>
+        <th>Productos</th>
+        <th>Pedidos</th>
+        <th>Acciones</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-detallePedido of oPage?.content class="align-middle">
-      <tr >
+      <tr>
         <td>{{ detallePedido.id }}</td>
         <td>{{ detallePedido.cantidad }}</td>
         <td>{{ detallePedido.precio_unitario }}</td>
         <td>{{ calculateTotalPrice(detallePedido.cantidad, detallePedido.precio_unitario) }}</td>
-    
+
         <td class="text-center">
-          <a [routerLink]="['/admin','producto','plist','byproducto',detallePedido.productos.id]">({{detallePedido.productos.id}}) ({{detallePedido.productos.nombre}})</a>
+          <a [routerLink]="['/admin','producto','plist','byproducto',detallePedido.productos.id]">({{detallePedido.productos.id}})
+            ({{detallePedido.productos.nombre}})</a>
         </td>
-        
+
         <td class="text-center">
-          <a [routerLink]="['/admin','pedido','plist','bypedido',detallePedido.pedidos.id]">({{detallePedido.pedidos.id}})</a>
+          <a
+            [routerLink]="['/admin','pedido','plist','bypedido',detallePedido.pedidos.id]">({{detallePedido.pedidos.id}})</a>
         </td>
-        
+
         <td class="text-center">
 
-          <div  class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <p-button [rounded]="true" [outlined]="true" [routerLink]="['/admin','detallePedido','view',detallePedido.id]"><i
-                class="fa-solid fa-eye" ></i></p-button>
+          <a [routerLink]="['/admin','detallePedido','view',detallePedido.id]" class="icon-link"><i
+              class="fa-solid fa-eye"></i></a>
 
-            <p-button [rounded]="true" severity="success" [outlined]="true"[routerLink]="['/admin','detallePedido','edit',detallePedido.id]"><i
-                class="fa-solid fa-pen-to-square"></i></p-button>
-            <p-button [rounded]="true" severity="warning" [outlined]="true"><i class="fa-solid fa-circle-up"></i></p-button>
-     
-            <p-button [rounded]="true" severity="danger" [outlined]="true" *ngIf="detallePedido.categoria===0" 
-              (click)="doRemove(detallePedido)"><i class="fa-solid fa-trash"></i></p-button>
-          </div>
+          <a [routerLink]="['/admin','detallePedido','edit',detallePedido.id]" class="icon-link"><i
+              class="fa-solid fa-pen-to-square"></i>
+          </a>
+
+          <a (click)="doView(detallePedido)" class="icon-link"><i class="fa-solid fa-circle-up"></i>
+          </a>
+          <a *ngIf="detallePedido.categoria===0" (click)="doRemove(detallePedido)"><i class="fa-solid fa-trash"></i>
+          </a>
+
         </td>
 
       </tr>
@@ -69,9 +73,9 @@
         <th (click)="doOrder('cantidad')">Cantidad</th>
         <th (click)="doOrder('precio_unitario')">Precio Unitario</th>
         <th>Precio total</th>
-        <th >Productos</th>
-        <th >Pedidos</th>
-        <th >Acciones</th>
+        <th>Productos</th>
+        <th>Pedidos</th>
+        <th>Acciones</th>
       </tr>
     </ng-template>
   </p-table>
@@ -85,7 +89,7 @@
   </ng-template>
   <ng-template pTemplate="message">
     <div class="container d-flex align-items-center justify-content-center">
-   
+
     </div>
   </ng-template>
   <ng-template pTemplate="footer">

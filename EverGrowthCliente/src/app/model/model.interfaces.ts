@@ -79,7 +79,8 @@ export interface IProducto extends IEntity {
     imagen: string,
     stock: number,
     categoria: ICategoria
-    valoracion: number
+    valoracion: number,
+    carritos: number
 
 }
 

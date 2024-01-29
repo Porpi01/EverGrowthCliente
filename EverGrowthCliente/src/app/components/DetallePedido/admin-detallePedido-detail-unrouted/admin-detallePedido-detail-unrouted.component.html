@@ -1,33 +1,34 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-lg-5 col-md-5 d-none d-md-block">
+      <i class="fa-solid fa-circle-info"></i>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-12">
       <p-card class="custom-card">
-        <ng-template pTemplate="header">
-          <i class="fa-solid fa-circle-info"></i>
-        </ng-template>
         <ng-template pTemplate="content">
           <div>
+            <h1>DETALLE PEDIDO</h1>
             <div><strong>Cantidad:</strong> {{ detallePedidos.cantidad }}</div>
             <div><strong>Precio Unitario:</strong> {{ detallePedidos.precio_unitario }}</div>
-           
+
             <div *ngIf="detallePedidos.pedidos">
               <strong>Pedido:</strong>
               <ng-container *ngIf="detallePedidos.pedidos.id">
-                <a [routerLink]="['/admin','usuario','view',detallePedidos.pedidos.id]">
-                  {{ detallePedidos.pedidos.id }} 
+                <a [routerLink]="['/admin','pedido','view',detallePedidos.pedidos.id]">
+                  {{ detallePedidos.pedidos.id }}
                 </a>
               </ng-container>
             </div>
-         
-            <div *ngIf="detallePedidos.productos">
+
+            <div *ngIf="detallePedidos.productos ">
               <strong>Producto:</strong>
               <ng-container *ngIf="detallePedidos.productos.id">
-                <a [routerLink]="['/admin','producto','plist','byproducto',detallePedidos.productos.id]">
+                <a [routerLink]="['/admin','producto','plist','bydetallePedido',detallePedidos.productos.id]">
                   {{ detallePedidos.productos.id }} {{ detallePedidos.productos.nombre}}
                 </a>
               </ng-container>
             </div>
-           
+
           </div>
         </ng-template>
       </p-card>

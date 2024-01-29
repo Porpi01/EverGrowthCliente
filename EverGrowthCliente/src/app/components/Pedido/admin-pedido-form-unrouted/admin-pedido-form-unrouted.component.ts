@@ -63,7 +63,7 @@ export class AdminPedidoFormUnroutedComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
-          this.snackBar.open('Error reading user from server', '', { duration: 2000 });
+          this.snackBar.open('Error al leer los epdidos del servidor', '', { duration: 2000 });
         }
       });
     } else {
@@ -84,7 +84,7 @@ export class AdminPedidoFormUnroutedComponent implements OnInit {
           next: (data: IPedido) => {
             this.pedido = {"user": {}} as IPedido;
             this.initializeForm(this.pedido);
-            this.snackBar.open('The user create has been successful', '', { duration: 2000 });
+            this.snackBar.open('Pedido creado', '', { duration: 2000 });
             console.log(this.pedido.id);
 
             this.router.navigate(['/admin', 'pedido', 'view', data]);
@@ -92,7 +92,7 @@ export class AdminPedidoFormUnroutedComponent implements OnInit {
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.snackBar.open('The user create hasn\'t been successful', '', { duration: 2000 });
+            this.snackBar.open('Pedido no creado', '', { duration: 2000 });
           }
         });
       } else {
@@ -100,12 +100,12 @@ export class AdminPedidoFormUnroutedComponent implements OnInit {
           next: (data: IPedido) => {
             this.pedido = data;
             this.initializeForm(this.pedido);
-            this.snackBar.open('The user has been updated successfully', '', { duration: 2000 });
+            this.snackBar.open('Pedido actualizado', '', { duration: 2000 });
             this.router.navigate(['/admin', 'pedido', 'view', this.pedido.id]);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.snackBar.open('Failed to update the user', '', { duration: 2000 });
+            this.snackBar.open('Pedido no actualizado', '', { duration: 2000 });
           }
         });
       }
@@ -114,7 +114,7 @@ export class AdminPedidoFormUnroutedComponent implements OnInit {
 
   onShowUsersSelection() {
     this.oDynamicDialogRef = this.dialogService.open(AdminUserSelectionUnroutedComponent, {
-      header: 'Select a Usuario',
+      header: 'Selecciona un usuario',
       width: '80%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,

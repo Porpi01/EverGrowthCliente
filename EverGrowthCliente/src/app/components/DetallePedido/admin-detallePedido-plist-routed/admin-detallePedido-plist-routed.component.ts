@@ -10,11 +10,12 @@ import { Router } from '@angular/router';
   selector: 'app-admin-detallePedido-plist-routed',
   templateUrl: './admin-detallePedido-plist-routed.component.html',
   styleUrls: ['./admin-detallePedido-plist-routed.component.css'],
-  providers: [ConfirmationService, MessageService]})
+  providers: [ConfirmationService, MessageService]
+})
 
 export class AdminDetallePedidoPlistRoutedComponent implements OnInit {
 
- 
+
   forceReload: Subject<boolean> = new Subject<boolean>();
   items: MenuItem[] | undefined;
   bLoading: boolean = false;
@@ -43,7 +44,7 @@ export class AdminDetallePedidoPlistRoutedComponent implements OnInit {
     ];
   }
 
-  
+
   doGenerateRandom(amount: number) {
     this.bLoading = true;
     const totalSteps = 10;
@@ -57,11 +58,11 @@ export class AdminDetallePedidoPlistRoutedComponent implements OnInit {
         clearInterval(intervalId);
         this.DetallePedidoService.generateRandom(amount).subscribe({
           next: (oResponse: number) => {
-            this.MessageService.add({ severity: 'success', detail: 'Now there are ' + oResponse + ' detalles pedidos', life: 2000 });
+            this.MessageService.add({ severity: 'success', detail: 'Hay ' + oResponse + ' detalles pedidos', life: 2000 });
             this.bLoading = false;
           },
           error: (oError: HttpErrorResponse) => {
-            this.MessageService.add({ severity: 'error', detail: 'Error generating detalles pedidos: ' + oError.message, life: 2000 });
+            this.MessageService.add({ severity: 'error', detail: 'Error al generar detalles pedidos: ' + oError.message, life: 2000 });
             this.bLoading = false;
           }
         });
@@ -74,9 +75,9 @@ export class AdminDetallePedidoPlistRoutedComponent implements OnInit {
 
     this.ConfirmationService.confirm({
       target: $event.target as EventTarget,
-      message: 'Are you sure you want to remove all detalles pedidos?',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Yes',
+      message: '¿Seguro que quieres eliminar los detalle pedidos?',
+      icon: 'fa-solid fa-triangle-exclamation',
+      acceptLabel: 'Sí',
       rejectLabel: 'No',
       accept: () => {
         console.log('Accept block reached');
@@ -86,7 +87,7 @@ export class AdminDetallePedidoPlistRoutedComponent implements OnInit {
             this.MessageService.add({
               severity: 'success',
               summary: 'Success',
-              detail: `Now there are ${oResponse} detalles pedidos.`,
+              detail: `Hay ${oResponse} detalles pedidos.`,
               life: 2000
             });
 
@@ -98,7 +99,7 @@ export class AdminDetallePedidoPlistRoutedComponent implements OnInit {
             this.MessageService.add({
               severity: 'error',
               summary: 'Error',
-              detail: `Error emptying detalles pedidos: ${oError.message}`,
+              detail: `Error al borrar: ${oError.message}`,
               life: 2000
             });
 
@@ -111,7 +112,7 @@ export class AdminDetallePedidoPlistRoutedComponent implements OnInit {
         this.MessageService.add({
           severity: 'info',
           summary: 'Info',
-          detail: 'Operation cancelled!',
+          detail: 'Operación cancelada',
           life: 2000
         });
 

@@ -55,11 +55,11 @@ export class AdminPedidoPlistRoutedComponent implements OnInit {
         clearInterval(intervalId);
         this.PedidoService.generateRandom(amount).subscribe({
           next: (oResponse: number) => {
-            this.MessageService.add({ severity: 'success', detail: 'Now there are ' + oResponse + ' pedidos', life: 2000 });
+            this.MessageService.add({ severity: 'success', detail: 'Hay ' + oResponse + ' pedidos', life: 2000 });
             this.bLoading = false;
           },
           error: (oError: HttpErrorResponse) => {
-            this.MessageService.add({ severity: 'error', detail: 'Error generating pedidos: ' + oError.message, life: 2000 });
+            this.MessageService.add({ severity: 'error', detail: 'Error al generar pedidos: ' + oError.message, life: 2000 });
             this.bLoading = false;
           }
         });
@@ -72,9 +72,9 @@ export class AdminPedidoPlistRoutedComponent implements OnInit {
 
     this.ConfirmationService.confirm({
       target: $event.target as EventTarget,
-      message: 'Are you sure you want to remove all pedidos?',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Yes',
+      message: '¿Seguro que quieres eliminar los pedidos?',
+      icon: 'fa-solid fa-triangle-exclamation',
+      acceptLabel: 'Sí',
       rejectLabel: 'No',
       accept: () => {
         console.log('Accept block reached');
@@ -83,8 +83,8 @@ export class AdminPedidoPlistRoutedComponent implements OnInit {
             console.log('Success response:', oResponse);
             this.MessageService.add({
               severity: 'success',
-              summary: 'Success',
-              detail: `Now there are ${oResponse} pedidos.`,
+
+              detail: `Hay ${oResponse} pedidos.`,
               life: 2000
             });
 
@@ -95,8 +95,8 @@ export class AdminPedidoPlistRoutedComponent implements OnInit {
             console.error('Error response:', oError);
             this.MessageService.add({
               severity: 'error',
-              summary: 'Error',
-              detail: `Error emptying pedidos: ${oError.message}`,
+         
+              detail: `Error al borrar los pedidos: ${oError.message}`,
               life: 2000
             });
 
@@ -108,8 +108,8 @@ export class AdminPedidoPlistRoutedComponent implements OnInit {
         console.log('Reject block reached');
         this.MessageService.add({
           severity: 'info',
-          summary: 'Info',
-          detail: 'Operation cancelled!',
+
+          detail: 'Operación cancelada',
           life: 2000
         });
 

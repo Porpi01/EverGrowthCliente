@@ -13,10 +13,10 @@
             <div><strong>Precio:</strong> {{ productos.precio }}</div>
             <div><strong>Stock:</strong> {{ productos.stock }}</div>
             <div><strong>Imagen:</strong> </div>
-            <div *ngIf="productos.categoria">
+            <div *ngIf="productos.categoria !== undefined">
               <strong>Categoría:</strong>
               <ng-container *ngIf="productos.categoria.id">
-                <a [routerLink]="['/admin','categoria','plist','bycategoria',productos.categoria.id]">
+                <a [routerLink]="['/admin','categoria','plist','bypedido',productos.categoria.id]">
                   {{ productos.categoria.id }} {{ productos.categoria.nombre}}
                 </a>
               </ng-container>
@@ -33,10 +33,8 @@
                 <span>0</span>
               </ng-template>
             </div>
-            <button  class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
-
+            <button class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
           </div>
-
         </ng-template>
       </p-card>
     </div>
