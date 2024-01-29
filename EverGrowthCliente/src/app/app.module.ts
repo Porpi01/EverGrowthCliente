@@ -10,7 +10,7 @@ import { AdminUserPlistUnroutedComponent } from './components/Usuario/admin-user
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { UsuarioService } from './service/Usuario.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PaginatorModule } from 'primeng/paginator';
 import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -95,6 +95,11 @@ import { AdminCarritoEditRoutedComponent } from './components/Carrito/admin-carr
 import { TrimPipe } from './pipes/trimString.pipe';
 import { AdminProductoEditRoutedComponent } from './components/Producto/admin-producto-edit-routed/admin-producto-edit-routed.component';
 import { PrecioPipe } from './pipes/Precio.pipe';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { SesionService } from './service/Sesion.service';
+import { CryptoService } from './service/Crypto.service';
+import { LoginComponent } from './components/Shared/Login/Login.component';
+import { LogoutComponent } from './components/Shared/Logout/Logout.component';
 
 
 @NgModule({
@@ -104,6 +109,8 @@ import { PrecioPipe } from './pipes/Precio.pipe';
     FooterComponent,
     PrecioPipe,
     TrimPipe,
+    LogoutComponent,
+    LoginComponent,
 
 
     //Componentes entidad Usuario
@@ -223,9 +230,11 @@ import { PrecioPipe } from './pipes/Precio.pipe';
     FormBuilder,
     DialogService,
     MediaService,
-
+    SesionService,
+    CryptoService,
    {provide:MAT_NATIVE_DATE_FORMATS, useValue: 'es-ES'},
    {provide:MAT_DATE_LOCALE, useValue: 'es-ES'},
+   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
    
 
   ],

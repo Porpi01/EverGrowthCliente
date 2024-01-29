@@ -1,4 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { SesionService } from './../../../service/Sesion.service';
 
 @Component({
   selector: 'app-Login',
@@ -7,9 +12,62 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginForm: FormGroup;
+  status: HttpErrorResponse | null = null;
+
+  constructor(
+    private fb: FormBuilder,
+    private SesionService: SesionService,
+    private oMatSnackBar: MatSnackBar,
+    private oRouter: Router,
+    private CryptoService: CryptoService
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.SesionService.login(this.loginForm.value.username, this.CryptoService.getSHA256(this.loginForm.value.password)).subscribe({
+        next: (data: string) => {
+          this.SesionService.setToken(data);
+          this.SesionService.emit({ type: 'login' });
+          this.oMatSnackBar.open("Login successful.", '', { duration: 2000 });
+          if (this.loginForm.value.username === 'Kirachan') {
+            this.oRouter.navigate(['/home']); 
+          } else {
+            this.oRouter.navigate(['/userhome']); 
+          }
+        },
+        error: (error: HttpErrorResponse) => {
+          this.status = error;
+          this.oMatSnackBar.open("Error in login operation.", '', { duration: 2000 });
+        }
+      });
+    }
+  }
+  onReset() {
+    this.loginForm.reset();
+  }
+
+  loginAdmin() {
+    this.loginForm.setValue({
+     
+      username: 'anita17',
+      password: 'foxforum'
+     
+    })
+  }
+
+  loginUser() {
+    this.loginForm.setValue({
+      username: 'moni01',
+      password: 'foxforum'
+    })
+  }
 }

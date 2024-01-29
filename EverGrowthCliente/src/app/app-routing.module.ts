@@ -28,8 +28,15 @@ import { AdminCarritoNewRoutedComponent } from './components/Carrito/admin-carri
 import { AdminCarritoEditRoutedComponent } from './components/Carrito/admin-carrito-edit-routed/admin-carrito-edit-routed.component';
 import { AdminDetallePedidoNewRoutedComponent } from './components/DetallePedido/admin-detallePedido-new-routed/admin-detallePedido-new-routed.component';
 import { AdminProductoEditRoutedComponent } from './components/Producto/admin-producto-edit-routed/admin-producto-edit-routed.component';
+import { LoginComponent } from './components/Shared/Login/Login.component';
+import { LogoutComponent } from './components/Shared/Logout/Logout.component';
 
 const routes: Routes = [
+
+
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
+
 //Usuario
   { path: 'admin/usuario/plist', component: AdminUserPlistRoutedComponent },
   { path: 'admin/usuario/new', component: AdminUserNewRoutedComponent },
