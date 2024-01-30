@@ -30,10 +30,12 @@ import { AdminDetallePedidoNewRoutedComponent } from './components/DetallePedido
 import { AdminProductoEditRoutedComponent } from './components/Producto/admin-producto-edit-routed/admin-producto-edit-routed.component';
 import { LoginComponent } from './components/Shared/Login/Login.component';
 import { LogoutComponent } from './components/Shared/Logout/Logout.component';
+import { HomeComponent } from './components/Shared/Home/Home.component';
 
 const routes: Routes = [
 
-
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
 

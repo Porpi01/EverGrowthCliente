@@ -19,33 +19,49 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/valoracion'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/valoracion/plist"><i class="fas fa-star"></i> Valoracion</a>
+              routerLink="/admin/valoracion/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-star"></i> Valoracion</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/usuario'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/usuario/plist"><i class="fas fa-user"></i> Usuario</a>
+              routerLink="/admin/usuario/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-user"></i> Usuario</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/producto'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/producto/plist"><i class="fas fa-box"></i> Producto</a>
+              routerLink="/admin/producto/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-box"></i> Producto</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/pedido'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/pedido/plist"><i class="fas fa-shopping-cart"></i> Pedido</a>
+              routerLink="/admin/pedido/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-shopping-cart"></i> Pedido</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/detallePedido'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/detallePedido/plist"><i class="fas fa-receipt"></i> DetallePedido</a>
+              routerLink="/admin/detallePedido/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-receipt"></i> DetallePedido</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/categoria'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/categoria/plist"><i class="fas fa-tags"></i> Categoria</a>
+              routerLink="/admin/categoria/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-tags"></i> Categoria</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/carrito'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/carrito/plist"><i class="fas fa-shopping-basket"></i> Carrito</a>
+              routerLink="/admin/carrito/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-shopping-basket"></i> Carrito</a>
           </li>
         </ul>
+        
+        <div class="ms-auto d-flex">
+          <span class="navbar-text mx-1" *ngIf="strUserName">
+              <a class="nav-link" (click)="doSessionUserView($event)"  href="#">{{strUserName}}</a>
+          </span>
+          <span class="navbar-text mx-1" *ngIf="!strUserName">
+              No logueado
+          </span>
+          <span class="navbar-text mx-1">
+              <a class="nav-link" routerLink="/login" href="#" *ngIf="!strUserName" [class.active]="strUrl.startsWith('/login')">Login</a>
+          </span>
+          <span class="navbar-text mx-1">
+              <a class="nav-link" routerLink="/logout" href="#" *ngIf="strUserName" [class.active]="strUrl.startsWith('/logout')">Logout</a>
+          </span>
+      
+      </div>
       </div>
     </div>
   </div>

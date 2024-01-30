@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { IToken, IUsuario, SessionEvent } from '../model/model.interfaces';
 import { UsuarioService } from './Usuario.service';
+import { API_URL } from 'src/environment/environment';
 
 @Injectable()
 export class SesionService {
 
-  sUrl: string = "http://localhost:8085/session";
+  sUrl: string = API_URL + "/sesion";
 
   subjectSession = new Subject<SessionEvent>();
 

@@ -100,6 +100,8 @@ import { SesionService } from './service/Sesion.service';
 import { CryptoService } from './service/Crypto.service';
 import { LoginComponent } from './components/Shared/Login/Login.component';
 import { LogoutComponent } from './components/Shared/Logout/Logout.component';
+import { HomeComponent } from './components/Shared/Home/Home.component';
+import { UserUserDetailUnroutedComponent } from './components/Usuario/user-user-detail-unrouted/user-user-detail-unrouted.component';
 
 
 @NgModule({
@@ -111,7 +113,7 @@ import { LogoutComponent } from './components/Shared/Logout/Logout.component';
     TrimPipe,
     LogoutComponent,
     LoginComponent,
-
+    HomeComponent,
 
     //Componentes entidad Usuario
     AdminUserPlistRoutedComponent,
@@ -122,6 +124,7 @@ import { LogoutComponent } from './components/Shared/Logout/Logout.component';
     AdminUserDetailUnroutedComponent,
     AdminUserEditRoutedComponent,
     AdminUserSelectionUnroutedComponent,
+    UserUserDetailUnroutedComponent,
     
 
     //Componentes entidad Valoracion

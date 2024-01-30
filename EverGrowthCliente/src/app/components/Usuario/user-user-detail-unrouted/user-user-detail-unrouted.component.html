@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-5 d-none d-md-block">
+      <i class="fa-solid fa-circle-info"></i>
+    </div>
+
+    <div class="col-lg-7 col-md-7 col-sm-12">
+      <p-card class="custom-card">
+        <ng-template pTemplate="content">
+          <div>
+            <h1>USUARIO</h1>
+            <div><strong>Nombre:</strong> {{ usuarios.nombre }}</div>
+            <div><strong>Apellido1:</strong> {{ usuarios.apellido1 }}</div>
+            <div><strong>Apellido2:</strong> {{ usuarios.apellido2 }}</div>
+            <div><strong>Email:</strong> {{ usuarios.email }}</div>
+            <div><strong>Teléfono:</strong> {{ usuarios.telefono }}</div>
+            <div><strong>Dirección:</strong> {{ usuarios.direccion }}</div>
+            <div><strong>Username:</strong> {{ usuarios.username }}</div>
+            <div><strong>Rol:</strong>   
+              <span *ngIf="usuarios.rol==false">User</span>
+              <span *ngIf="usuarios.rol==true">Admin</span>
+            </div>
+            <div *ngIf="usuarios.valoracion !== undefined">
+              <strong>Valoraciones:</strong>
+              <ng-container *ngIf="usuarios.valoracion > 0; else noValoraciones">
+                <a [routerLink]="['/admin','valoracion','plist','byusuario',usuarios.id]">
+                  {{ usuarios.valoracion }}
+                </a>
+              </ng-container>
+              <ng-template #noValoraciones>
+                <span>0</span>
+              </ng-template>
+            </div>
+
+            <div *ngIf="usuarios.carritos !== undefined">
+              <strong>Carritos:</strong>
+              <ng-container *ngIf="usuarios.carritos > 0; else noCarritos">
+                <a [routerLink]="['/admin','usuario','plist','bycarrito',usuarios.id]">
+                  {{ usuarios.carritos }}
+                </a>
+              </ng-container>
+              <ng-template #noCarritos>
+                <span>0</span>
+              </ng-template>
+            </div>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>
