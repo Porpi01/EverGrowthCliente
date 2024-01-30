@@ -1,0 +1,60 @@
+/* Estilos para el contenedor principal */
+.container {
+    margin-top: 50px;
+  }
+  
+  /* Estilos para el título del formulario */
+  h1{
+    text-align: center;
+    font-weight: bold;
+    }
+    
+  
+  /* Estilos para el panel */
+  p-panel {
+    width: 80%; /* Ancho del panel */
+    max-width: 400px; /* Ancho máximo del panel */
+    margin: auto; /* Centrar horizontalmente */
+    padding: 20px;
+    background-color: #e8e9eb;
+    border-radius: 8px; /* Borde redondeado */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+  }
+  
+  /* Estilos para los input groups */
+  .p-inputgroup {
+    margin-bottom: 15px; /* Espacio entre grupos */
+  }
+  
+  /* Estilos para los iconos dentro de los input groups */
+  .p-inputgroup-addon .fa {
+    font-size: 18px; /* Tamaño del icono */
+    color: #6c757d; /* Color gris oscuro */
+  }
+  
+  /* Estilos para los campos de entrada dentro de los input groups */
+  .form-control {
+    width: 100%; /* Ancho completo */
+    padding: 10px;
+    border: 1px solid #ced4da; /* Borde */
+    border-radius: 5px; /* Borde redondeado */
+  }
+  
+  /* Estilos para los botones */
+  .btn {
+    background-color: #ef6461 !important;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 20px; 
+  }
+  
+  
+  a {
+    font-size: 12px;
+    color: #6c757d;
+    text-decoration: none;
+  }
+ 

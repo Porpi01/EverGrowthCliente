@@ -102,6 +102,7 @@ import { LoginComponent } from './components/Shared/Login/Login.component';
 import { LogoutComponent } from './components/Shared/Logout/Logout.component';
 import { HomeComponent } from './components/Shared/Home/Home.component';
 import { UserUserDetailUnroutedComponent } from './components/Usuario/user-user-detail-unrouted/user-user-detail-unrouted.component';
+import { PanelModule } from 'primeng/panel';
 
 
 @NgModule({
@@ -213,7 +214,8 @@ import { UserUserDetailUnroutedComponent } from './components/Usuario/user-user-
     OrderListModule,
     PickListModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    PanelModule
    
 
 

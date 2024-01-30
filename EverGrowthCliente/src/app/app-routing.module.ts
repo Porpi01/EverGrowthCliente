@@ -48,8 +48,8 @@ const routes: Routes = [
   
 //Valoracion
   { path: 'admin/valoracion/plist', component: AdminValoracionPlistRoutedComponent },
-  { path: 'admin/valoracion/plist/byusuario/:id', component: AdminValoracionPlistRoutedComponent },
-  { path: 'admin/valoracion/plist/byproducto/:id', component: AdminValoracionPlistRoutedComponent },
+  { path: 'admin/valoracion/plist/byusuario/:idusuario', component: AdminValoracionPlistRoutedComponent },
+  { path: 'admin/valoracion/plist/byproducto/:idproducto', component: AdminValoracionPlistRoutedComponent },
   { path: 'admin/valoracion/view/:id', component: AdminValoracionViewRoutedComponent },
   { path: 'admin/valoracion/new', component: AdminValoracionNewRoutedComponent },
   { path: 'admin/valoracion/edit/:id', component: AdminValoracionEditRoutedComponent },
@@ -58,7 +58,7 @@ const routes: Routes = [
 
 //Producto
   { path: 'admin/producto/plist', component: AdminProductoPlistRoutedComponent },
-  { path: 'admin/producto/plist/bycategoria/:id', component: AdminProductoPlistRoutedComponent },
+  { path: 'admin/producto/plist/bycategoria/:idcategoria', component: AdminProductoPlistRoutedComponent },
   { path: 'admin/producto/view/:id', component: AdminProductoViewRoutedComponent },
   { path: 'admin/producto/new', component: AdminProductoNewRoutedComponent },
   { path: 'admin/producto/edit/:id', component: AdminProductoEditRoutedComponent },
@@ -67,7 +67,7 @@ const routes: Routes = [
 
 //Pedido
 { path: 'admin/pedido/plist', component: AdminPedidoPlistRoutedComponent },
-{ path: 'admin/pedido/plist/byusuario/:id', component: AdminPedidoPlistRoutedComponent },
+{ path: 'admin/pedido/plist/byusuario/:idusuario', component: AdminPedidoPlistRoutedComponent },
 { path: 'admin/pedido/view/:id', component: AdminPedidoViewRoutedComponent },
 { path: 'admin/pedido/new', component: AdminPedidoNewRoutedComponent},
 { path: 'admin/pedido/edit/:id', component: AdminPedidoEditRoutedComponent},
@@ -76,8 +76,8 @@ const routes: Routes = [
 
 //DetallePedido
 { path: 'admin/detallePedido/plist', component: AdminDetallePedidoPlistRoutedComponent },
-{ path: 'admin/detallePedido/plist/bypedido/:id', component: AdminDetallePedidoPlistRoutedComponent },
-{ path: 'admin/detallePedido/plist/byproducto/:id', component: AdminDetallePedidoPlistRoutedComponent },
+{ path: 'admin/detallePedido/plist/bypedido/:idpedido', component: AdminDetallePedidoPlistRoutedComponent },
+{ path: 'admin/detallePedido/plist/byproducto/:idproducto', component: AdminDetallePedidoPlistRoutedComponent },
 { path: 'admin/detallePedido/view/:id', component: AdminDetallePedidoViewRoutedComponent },
 { path: 'admin/detallePedido/new', component: AdminDetallePedidoNewRoutedComponent},
 { path: 'admin/detallePedido/edit/:id', component: AdminDetallePedidoEditRoutedComponent},
@@ -94,8 +94,8 @@ const routes: Routes = [
 
 //Carrito
 { path: 'admin/carrito/plist', component: AdminCarritoPlistRoutedComponent },
-{ path: 'admin/carrito/plist/byusuario/:id', component: AdminCarritoPlistRoutedComponent },
-{ path: 'admin/carrito/plist/byproducto/:id', component: AdminCarritoPlistRoutedComponent },
+{ path: 'admin/carrito/plist/byusuario/:idusuario', component: AdminCarritoPlistRoutedComponent },
+{ path: 'admin/carrito/plist/byproducto/:idproducto', component: AdminCarritoPlistRoutedComponent },
 { path: 'admin/carrito/view/:id', component: AdminCarritoViewRoutedComponent },
 { path: 'admin/carrito/new', component: AdminCarritoNewRoutedComponent},
 { path: 'admin/carrito/edit/:id', component: AdminCarritoEditRoutedComponent},

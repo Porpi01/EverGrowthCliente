@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-auto">
       <div class="d-flex justify-content-center mb-3">
-        <h1 class="my-5">Login Form</h1>
+        <h1 class="my-5">Inicio de sesión</h1>
       </div>
     </div>
   </div>
@@ -10,35 +10,46 @@
 
 <div class="col-12">
   <div class="d-flex justify-content-center my-3">
-    <div class="login-form">
+    <p-panel>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Username" formControlName="username">
-          <mat-error *ngIf="loginForm.get('username')?.hasError('required')">Username is required</mat-error>
-        </mat-form-field>
-
-        <div class="mt-3">
-          <mat-form-field class="full-width">
-            <input matInput type="password" placeholder="Password" formControlName="password">
-            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
-            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 6 characters length</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="control-group text-center mt-3">
-          <button class="btn btn-danger m-2" type="submit" color="primary">Iniciar sesión</button>
-          <button class="btn btn-danger m-2" type="button" color="warn" (click)="onReset()">Reset</button>
+        <div class="p-grid p-dir-col">
+          <div class="p-col">
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">
+                <i class="fa-solid fa-user"></i>              
+              </span>
+              <input id="username" type="text" pInputText formControlName="username" class="form-control" placeholder="Usuario" matInput>
+            </div>
+            <mat-error *ngIf="loginForm.get('username')?.hasError('required')">Usuario requerido</mat-error>
+          </div>
+          <div class="p-col">
+            <div class="p-inputgroup">
+              <span class="p-inputgroup-addon">
+                <i class="fa-regular fa-eye-slash"></i>
+                            </span>
+              <input id="password" type="password" pInputText formControlName="password" class="form-control" placeholder="Contraseña" matInput>
+            </div>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Contraseña requerida</mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 6 caracteres</mat-error>
+          </div>
+          <div class="p-col">
+            <button pButton type="submit" label="Iniciar sesión" class="btn btn-danger m-2" [disabled]="!loginForm.valid"></button>
+            <button pButton type="button" label="Limpiar" class="btn btn-danger m-2" (click)="onReset()"></button>
+          </div>
+          <div class="p-col">
+            <a href="#" class="forgot-password-link">¿Olvidaste la contraseña?</a>
+          </div>
         </div>
       </form>
-    </div>
+    </p-panel>
   </div>
 
   <div class="col-12 mt-5">
     <div class="card">
       <div class="card-body">
         <div class="control-group text-center mt-3">
-          <button class="btn btn-danger m-2" (click)="loginAdmin()">Log in as admin</button>
-          <button class="btn btn-success m-2" (click)="loginUser()">Log in as user</button>
+          <button pButton type="button" label="Ingresar como Administrador" class="btn btn-danger m-2" (click)="loginAdmin()"></button>
+          <button pButton type="button" label="Ingresar como Usuario" class="btn btn-success m-2" (click)="loginUser()"></button>
         </div>
       </div>
     </div>
