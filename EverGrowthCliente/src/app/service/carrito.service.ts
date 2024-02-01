@@ -19,6 +19,9 @@ export class CarritoService {
     return this.http.get<ICarrito>(this.sUrl + "/" + id);
   }
 
+  countCarritos(): Observable<number> {
+    return this.http.get<number>(this.sUrl + "/cantidad" );
+  }
 
   getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, strFilter?: string): Observable<ICarritoPage> {
     let sUrl_filter: string;
@@ -55,6 +58,5 @@ export class CarritoService {
   empty(): Observable<number> {
     return this.http.delete<number>(this.sUrl + "/empty");
   }
-
 
 }

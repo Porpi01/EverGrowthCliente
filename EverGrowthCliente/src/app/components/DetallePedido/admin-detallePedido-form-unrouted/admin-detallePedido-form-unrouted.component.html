@@ -28,7 +28,7 @@
         <div class="form-group">
           <mat-form-field>
             <mat-label>Precio Unitario</mat-label>
-            <input matInput formControlName="precio_unitario" type="number" step="0.01">
+            <input matInput formControlName="precio_unitario" type="number" step="0.01" required>
             <mat-error *ngIf="hasError('precio_unitario', 'required')">Campo requerido</mat-error>
           </mat-form-field>
         </div>

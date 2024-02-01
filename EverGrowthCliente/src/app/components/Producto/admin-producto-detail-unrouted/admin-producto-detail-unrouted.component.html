@@ -7,13 +7,16 @@
     <div class="col-lg-7 col-md-7 col-sm-12">
       <p-card class="custom-card">
         <ng-template pTemplate="content">
-          <div>
+          <div  >
             <h1>PRODUCTO</h1>
             <div><strong>Nombre:</strong> {{ productos.nombre }}</div>
             <div><strong>Precio:</strong> {{ productos.precio }}</div>
             <div><strong>Stock:</strong> {{ productos.stock }}</div>
-            <div><strong>Imagen:</strong> </div>
-            <div *ngIf="productos.categoria !== undefined">
+            <div><strong >Imagen:</strong> <img class="rounded" class="img-thumbnail" [src]="productos.imagen" alt="Imagen del producto" >
+            </div>
+          
+          
+            <div  *ngIf="productos.categoria !== undefined">
               <strong>Categoría:</strong>
               <ng-container *ngIf="productos.categoria.id">
                 <a [routerLink]="['/admin','categoria','plist','bypedido',productos.categoria.id]">

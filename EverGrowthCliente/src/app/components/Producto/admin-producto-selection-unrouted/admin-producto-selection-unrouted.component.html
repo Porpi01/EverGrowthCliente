@@ -35,15 +35,10 @@
         <td>{{ producto.nombre }}</td>
         <td>{{ producto.precio }}</td>
         <td>{{ producto.stock }}</td>
-        <td></td>
-        <ng-container *ngIf="url; else noImage">
           <td>
-            <img [src]="url" alt="Imagen del producto" class="img-fluid" style="max-width: 100px; max-height: 100px;" />
+            <img class="rounded" class="img-thumbnail" [src]="producto.imagen" alt="Imagen del producto" >
           </td>
-        </ng-container>
-
-        <ng-template #noImage>
-        </ng-template>
+    
         <td class="text-center">
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
             <button class="btn btn-primary" (click)="onSelectProducto(producto)"><i

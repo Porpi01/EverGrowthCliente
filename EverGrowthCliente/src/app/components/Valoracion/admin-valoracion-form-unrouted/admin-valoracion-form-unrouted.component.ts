@@ -1,16 +1,15 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit, Input } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from "@angular/forms";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { DynamicDialogRef, DialogService } from "primeng/dynamicdialog";
-import { formOperation, IValoracion, ICategoria, IUsuario, IProducto } from "src/app/model/model.interfaces";
+import { formOperation, IValoracion, IUsuario, IProducto } from "src/app/model/model.interfaces";
 import { ValoracionService } from "src/app/service/Valoracion.service";
 import { AdminUserSelectionUnroutedComponent } from "../../Usuario/admin-user-selection-unrouted/admin-user-selection-unrouted.component";
 import { AdminProductoSelectionUnroutedComponent } from "../../Producto/admin-producto-selection-unrouted/admin-producto-selection-unrouted.component";
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS } from "@angular/material/core";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
-import { MessageService } from "primeng/api";
+import { MessageService } from 'primeng/api';
 
 export function startWithCapitalLetter(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {

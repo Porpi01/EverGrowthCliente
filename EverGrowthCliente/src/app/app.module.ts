@@ -14,7 +14,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PaginatorModule } from 'primeng/paginator';
 import { DividerModule } from 'primeng/divider';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService  } from 'primeng/api';
 import { ToolbarModule } from 'primeng/toolbar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { InputTextModule } from 'primeng/inputtext';
@@ -53,7 +53,7 @@ import { CardModule } from 'primeng/card';
 import { AdminUserDetailUnroutedComponent } from './components/Usuario/admin-user-detail-unrouted/admin-user-detail-unrouted.component';
 import { AdminUserEditRoutedComponent } from './components/Usuario/admin-user-edit-routed/admin-user-edit-routed.component';
 import { DataViewModule } from 'primeng/dataview';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService} from 'primeng/dynamicdialog';
 import { AdminValoracionDetailUnroutedComponent } from './components/Valoracion/admin-valoracion-detail-unrouted/admin-valoracion-detail-unrouted.component';
 import { AdminValoracionViewRoutedComponent } from './components/Valoracion/admin-valoracion-view-routed/admin-valoracion-view-routed.component';
 import { AdminProductoViewRoutedComponent } from './components/Producto/admin-producto-view-routed/admin-producto-view-routed.component';
@@ -77,7 +77,7 @@ import { AdminProductoSelectionUnroutedComponent } from './components/Producto/a
 import { AdminValoracionNewRoutedComponent } from './components/Valoracion/admin-valoracion-new-routed/admin-valoracion-new-routed.component';
 import { AdminValoracionFormUnroutedComponent } from './components/Valoracion/admin-valoracion-form-unrouted/admin-valoracion-form-unrouted.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { AdminValoracionEditRoutedComponent } from './components/Valoracion/admin-valoracion-edit-routed/admin-valoracion-edit-routed.component';
 import { AdminPedidoEditRoutedComponent } from './components/Pedido/admin-pedido-edit-routed/admin-pedido-edit-routed.component';
 import { AdminPedidoSelectionUnroutedComponent } from './components/Pedido/admin-pedido-selection-unrouted/admin-pedido-selection-unrouted.component';
@@ -103,6 +103,7 @@ import { LogoutComponent } from './components/Shared/Logout/Logout.component';
 import { HomeComponent } from './components/Shared/Home/Home.component';
 import { UserUserDetailUnroutedComponent } from './components/Usuario/user-user-detail-unrouted/user-user-detail-unrouted.component';
 import { PanelModule } from 'primeng/panel';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 @NgModule({
@@ -205,6 +206,7 @@ import { PanelModule } from 'primeng/panel';
     FormsModule,
     ReactiveFormsModule,
     MessagesModule,
+
     MatSelectModule,
     MatInputModule,
     MatFormFieldModule,
@@ -215,7 +217,9 @@ import { PanelModule } from 'primeng/panel';
     PickListModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    PanelModule
+    PanelModule,
+    FileUploadModule,
+
    
 
 
@@ -233,10 +237,12 @@ import { PanelModule } from 'primeng/panel';
     ConfirmationService,
     MessageService,
     FormBuilder,
+
     DialogService,
     MediaService,
     SesionService,
     CryptoService,
+    
    {provide:MAT_NATIVE_DATE_FORMATS, useValue: 'es-ES'},
    {provide:MAT_DATE_LOCALE, useValue: 'es-ES'},
    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

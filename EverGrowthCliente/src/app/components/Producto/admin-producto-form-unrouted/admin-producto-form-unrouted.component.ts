@@ -29,6 +29,7 @@ export class AdminProductoFormUnroutedComponent implements OnInit {
 
   oDynamicDialogRef: DynamicDialogRef | undefined;
   url?: string;
+  selectedImageUrl: string | undefined;
 
 
   constructor(
@@ -49,8 +50,8 @@ export class AdminProductoFormUnroutedComponent implements OnInit {
       id: [producto.id],
       nombre: [producto.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
       precio: [producto.precio, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-      stock: [producto.stock, [Validators.required]],
-      imagen: [null, Validators.required],
+      stock: [producto.stock, [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      imagen: [producto.imagen, Validators.required],
       categoria: this.FormBuilder.group({
         id: [categoriaID]
       }),
@@ -61,9 +62,11 @@ export class AdminProductoFormUnroutedComponent implements OnInit {
   ngOnInit() {
     if (this.operation == 'EDIT') {
       this.ProductoService.getOne(this.id).subscribe({
+     
         next: (data: IProducto) => {
           this.producto = data;
           this.initializeForm(this.producto);
+          console.log(this.producto.imagen);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -133,18 +136,22 @@ export class AdminProductoFormUnroutedComponent implements OnInit {
     });
   }
 
-  upload(event: any) {
+  onFileSelected(event: any) {
     const file = event.target.files[0];
-    console.log(file, 'file');
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
-      this.MediaService.uploadFile(formData).subscribe(response => {
-        console.log(response, 'response');
-        this.url = response.url;
-      }
-
-      );
+      this.MediaService.uploadFile(formData).subscribe({
+        next: (response) => {
+          this.selectedImageUrl = response.url; // Asignar la URL del archivo seleccionado
+          this.producto.imagen = response.url;
+          this.productForm.controls['imagen'].patchValue(response.url);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.status = error;
+          this.MatSnackBar.open('Error al subir la imagen', '', { duration: 2000 });
+        }
+      });
     }
   }
 }

@@ -16,7 +16,7 @@
           <mat-form-field  *ngIf="operation == 'EDIT'">
             <mat-label>ID:</mat-label>
             <input matInput formControlName="id" placeholder="ID" required readonly>
-            <mat-hint align="end">(Cannot change this number)</mat-hint>
+            <mat-hint align="end">No se puede cambiar</mat-hint>
           </mat-form-field>
         </div>
         
@@ -26,9 +26,9 @@
             <mat-label>Nombre:</mat-label>
             <input matInput formControlName="nombre" placeholder="Nombre" required>
             <mat-hint align="end">(3 a 255 caracteres de longitud)</mat-hint>
-            <mat-error *ngIf="hasError('nombre', 'required')">El nombre es obligatorio</mat-error>
-            <mat-error *ngIf="hasError('nombre', 'minlength')">El nombre debe tener al menos 3 caracteres</mat-error>
-            <mat-error *ngIf="hasError('nombre', 'maxlength')">El nombre excede el límite de caracteres</mat-error>
+            <mat-error *ngIf="hasError('nombre', 'required')">Campo obligatorio</mat-error>
+            <mat-error *ngIf="hasError('nombre', 'minlength')">Mínimo 3 caracteres</mat-error>
+            <mat-error *ngIf="hasError('nombre', 'maxlength')">Excede el límite de caracteres</mat-error>
           </mat-form-field>
         </div>
 
@@ -36,44 +36,44 @@
         <div class="form-group">
           <mat-form-field>
             <mat-label>Precio:</mat-label>
-            <input matInput type="number" formControlName="precio" placeholder="Precio" required>
-            <mat-error *ngIf="hasError('precio', 'required')">El precio es obligatorio</mat-error>
-            <mat-error *ngIf="hasError('precio', 'min')">El precio debe ser mayor a 0</mat-error>
+            <input matInput type="number" formControlName="precio" placeholder="Precio" step="0.01" required>
+            <mat-error *ngIf="hasError('precio', 'required')">Campo obligatorio</mat-error>
+            <mat-error *ngIf="hasError('precio', 'pattern')">Debe ser mayor a 0</mat-error>
           </mat-form-field>
         </div>
 
-        <!-- Stock field -->
-        <div class="form-group">
-          <mat-form-field>
-            <mat-label>Stock:</mat-label>
-            <input matInput type="number" formControlName="stock" placeholder="Stock" required>
-            <mat-error *ngIf="hasError('stock', 'required')">El stock es obligatorio</mat-error>
-          </mat-form-field>
-        </div>
+      <!-- Stock field -->
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Stock:</mat-label>
+          <input matInput type="number" formControlName="stock" placeholder="Stock" required>
+          <mat-error *ngIf="hasError('stock', 'required')"> Campo obligatorio</mat-error>
+          <mat-error *ngIf="hasError('stock', 'pattern')">Debe ser mayor a 0</mat-error>
 
-        <!-- Imagen field -->
-        <div class="form-group">
-          <mat-form-field>
-            <mat-label>Imagen:</mat-label>
-            <input type="file" formControlName="imagen" (change)="upload($event)" style="display: none" #fileInput>
-            <p-button [rounded]="true" [outlined]="true" (click)="fileInput.click()">
-              <i class="fa-solid fa-image"></i>
-            </p-button>
-            <mat-error *ngIf="hasError('imagen', 'required')">La imagen es obligatoria</mat-error>
-          </mat-form-field>
-        </div>
+        </mat-form-field>
+      </div>
 
+      <div class="form-group">
+        <label for="imagen">Imagen:</label>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" required>
+        <mat-error *ngIf="hasError('imagen', 'required')">Campo obligatorio</mat-error>
+
+      </div>
         <!-- Categoría field -->
-        <div formGroupName="categoria">
+        <div formGroupName="categoria" class="row">
+          <div class="col-8">
           <div class="form-group">
-            <mat-form-field [style.width.px]="350">
+            <mat-form-field >
               <mat-label>Categoría:</mat-label>
               <input matInput formControlName="id" placeholder="ID categoría" required readonly>
             </mat-form-field>
           </div>
+          </div>
+          <div class="col-4">
           <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowCategoriaSelection()">
-            <i class="pi pi-search"></i> Buscar una categoría
+            <i class="fas fa-tags"></i> 
           </button>
+        </div>
         </div>
        
         <!-- Botón de Guardar -->

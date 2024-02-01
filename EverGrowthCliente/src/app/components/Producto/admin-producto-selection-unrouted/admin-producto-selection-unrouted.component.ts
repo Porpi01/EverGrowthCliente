@@ -52,6 +52,7 @@ export class AdminProductoSelectionUnroutedComponent implements OnInit {
             this.productos = data.content;
             this.oPaginatorState.pageCount = data.totalPages;
             console.log(this.oPaginatorState);
+        
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
