@@ -52,25 +52,7 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
   }
 
 
-  onInputChange(query: string): void {
-    if (query.length > 2) {
-      this.CarritoService
-        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
-        .subscribe({
-          next: (data: ICarritoPage) => {
-            this.oPage = data;
-            this.carrito = data.content;
-            this.oPaginatorState.pageCount = data.totalPages;
-            console.log(this.oPaginatorState);
-          },
-          error: (error: HttpErrorResponse) => {
-            this.status = error;
-          }
-        });
-    } else {
-      this.getPage();
-    }
-  }
+
 
   getPage(): void {
     this.CarritoService

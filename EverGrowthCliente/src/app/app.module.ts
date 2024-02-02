@@ -104,6 +104,7 @@ import { HomeComponent } from './components/Shared/Home/Home.component';
 import { UserUserDetailUnroutedComponent } from './components/Usuario/user-user-detail-unrouted/user-user-detail-unrouted.component';
 import { PanelModule } from 'primeng/panel';
 import { FileUploadModule } from 'primeng/fileupload';
+import { CarouselModule } from 'primeng/carousel';
 
 
 @NgModule({
@@ -206,7 +207,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     FormsModule,
     ReactiveFormsModule,
     MessagesModule,
-
+    CarouselModule,
     MatSelectModule,
     MatInputModule,
     MatFormFieldModule,
@@ -219,6 +220,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     MatNativeDateModule,
     PanelModule,
     FileUploadModule,
+
 
    
 

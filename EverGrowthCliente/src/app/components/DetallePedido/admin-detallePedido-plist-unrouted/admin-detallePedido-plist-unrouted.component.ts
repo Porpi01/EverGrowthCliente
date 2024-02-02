@@ -50,25 +50,7 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
   }
 
 
-  onInputChange(query: string): void {
-    if (query.length > 2) {
-      this.DetallePedidoService
-        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
-        .subscribe({
-          next: (data: IDetallePedidoPage) => {
-            this.oPage = data;
-            this.detallePedidos = data.content;
-            this.oPaginatorState.pageCount = data.totalPages;
-            console.log(this.oPaginatorState);
-          },
-          error: (error: HttpErrorResponse) => {
-            this.status = error;
-          }
-        });
-    } else {
-      this.getPage();
-    }
-  }
+
 
   getPage(): void {
     this.DetallePedidoService

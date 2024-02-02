@@ -5,7 +5,7 @@ import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ValoracionService } from './../../../service/Valoracion.service';
-import { IValoracion, IValoracionPage } from 'src/app/model/model.interfaces';
+import { IProducto, IUsuario, IValoracion, IValoracionPage } from 'src/app/model/model.interfaces';
 import { AdminValoracionDetailUnroutedComponent } from '../admin-valoracion-detail-unrouted/admin-valoracion-detail-unrouted.component';
 
 @Component({
@@ -27,6 +27,8 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
   valoraciones: IValoracion[] = [];
   valoracionToRemove: IValoracion | null = null;
   ref: DynamicDialogRef | undefined;
+  oUsuario: IUsuario | null = null;
+  oProducto: IProducto | null = null;
  
   value: string = '';
 

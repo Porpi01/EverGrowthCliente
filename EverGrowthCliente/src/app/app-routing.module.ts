@@ -43,6 +43,7 @@ const routes: Routes = [
   { path: 'admin/usuario/plist', component: AdminUserPlistRoutedComponent },
   { path: 'admin/usuario/new', component: AdminUserNewRoutedComponent },
   { path: 'admin/usuario/view/:id', component: AdminUserViewRoutedComponent },
+  { path: 'admin/usuario/plist/bypedido/:idpedido', component: AdminUserPlistRoutedComponent },
   { path: 'admin/usuario/edit/:id', component: AdminUserEditRoutedComponent },
 
   

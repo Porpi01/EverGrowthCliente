@@ -86,7 +86,7 @@ export class AdminPedidoFormUnroutedComponent implements OnInit {
             this.initializeForm(this.pedido);
             this.snackBar.open('Pedido creado', '', { duration: 2000 });
             console.log(this.pedido.id);
-
+console.log(this.pedido.fecha_pedido)
             this.router.navigate(['/admin', 'pedido', 'view', data]);
 
           },

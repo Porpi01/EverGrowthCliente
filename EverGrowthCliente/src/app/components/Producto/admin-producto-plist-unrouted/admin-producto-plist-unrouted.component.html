@@ -57,14 +57,14 @@
     
             <td class="text-center">
 
-              <a [routerLink]="['/admin','producto','plist','byvaloracion',producto.id]" *ngIf="producto.valoracion>0">
+              <a [routerLink]="['/admin','producto','plist','byvaloracion',producto.valoracion.id]" *ngIf="producto.valoracion>0">
                 {{ producto.valoracion }}
               </a>
               <span *ngIf="producto.valoracion===0">0</span>
             </td>
             <td class="text-center">
 
-              <a [routerLink]="['/admin','producto','plist','bycarrito',producto.id]" *ngIf="producto.carritos>0">
+              <a [routerLink]="['/admin','producto','plist','bycarrito',producto.carritos.id]" *ngIf="producto.carritos>0">
                 {{ producto.carritos }}
               </a>
               <span *ngIf="producto.carritos==0">0</span>

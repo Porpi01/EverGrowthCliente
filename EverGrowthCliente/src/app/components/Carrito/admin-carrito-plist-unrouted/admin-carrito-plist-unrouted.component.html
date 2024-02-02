@@ -6,25 +6,21 @@
   </div>
 </div>
 
+
 <p-divider></p-divider>
 <div class="container">
   <div class="row justify-content-center align-items-center">
-    <div class="col-lg-9 col-md-12 col-sm-12">
+    <div class="col-lg-8 col-md-12 col-sm-12">
       <div class="d-flex align-items-center">
-        <span class="p-input-icon-left">
-          <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
-          <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
-            style="width: 100%; height: 30px;" />
-        </span>
+       
         <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!"
           [rows]="oPaginatorState.rows!" [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]"
           class="mx-2"></p-paginator>
-      </div>
-    </div>
-    <div class="col-lg-2 col-md-12 d-none d-md-block">
       <h3 class="text-center mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
     </div>
   </div>
+  </div>
+
 
 
   <div class="row justify-content-center">
@@ -47,11 +43,11 @@
             <td>{{ carritos.cantidad}}</td>
 
             <td class="text-center">
-              <a [routerLink]="['/admin','usuario','plist','byusuario',carritos.user.id]">({{carritos.user.id}})
+              <a [routerLink]="['/admin','carrito','plist','byusuario',carritos.user.id]">({{carritos.user.id}})
                 ({{carritos.user.nombre}})({{carritos.user.apellido1}}) </a>
             </td>
             <td class="text-center">
-              <a [routerLink]="['/admin','producto','plist','byproducto',carritos.producto.id]">({{carritos.producto.id}})({{carritos.producto.nombre}})
+              <a [routerLink]="['/admin','carrito','plist','byproducto',carritos.producto.id]">({{carritos.producto.id}})({{carritos.producto.nombre}})
               </a>
             </td>
 

@@ -1,5 +1,5 @@
 <div style="text-align: center; margin-top: 50px;">
-  <h1>DETALLE PEDIDOS</h1>
+  <h1>DETALLES PEDIDOS</h1>
   </div>
   <div class="container">
     <div *ngIf="bLoading" class="progress card m-5">
@@ -15,11 +15,11 @@
           <p-toolbar *ngIf="!bLoading">
   
             <div class="p-toolbar-group-start ">
-              <p-button class="custom-button" [rounded]="true" severity="primary mx-1"
+              <p-button class="custom-button"  class="px-2" 
                 (click)="doGenerateRandom(10)">+10</p-button>
-              <p-button class="custom-button" [rounded]="true" severity="primary mx-1"
+              <p-button class="custom-button" class="px-2" 
                 (click)="doGenerateRandom(50)">+50</p-button>
-              <p-button class="custom-button" [rounded]="true" severity="primary mx-1"
+              <p-button class="custom-button"  class="px-2" 
                 (click)="doGenerateRandom(100)">+100</p-button>
             </div>
   
