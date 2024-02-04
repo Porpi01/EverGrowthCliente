@@ -1,0 +1,54 @@
+
+<div>
+<h1>EverGrowth</h1>
+</div>
+
+
+<div class="p-grid">
+  <!-- Columna de Categorías -->
+  <div class="col-lg-2 col-md-2 col-sm-2 categoria-column">
+    <h1>Categorías</h1>
+    <ul class="categoria-list">
+      <li *ngFor="let cat of categoria" class="categoria-item">
+        {{ cat.nombre }} - {{ cat.productos }} 
+      </li>
+    </ul>
+  </div>
+
+<!-- Columna de Productos -->
+<div class="col-lg-9 productos-column">
+  <div class="row align-items-center mb-3">
+    <div class="col-lg-9">
+      <span class="p-input-icon-left">
+        <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+        <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)" class="form-control"/>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <ng-container *ngFor="let producto of productos">
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+        <p-card >
+          <ng-template pTemplate="content">
+            <div class="product-info">
+              <img [src]="producto.imagen" alt="Imagen del producto" class="product-image"(click)="doView(producto)" >
+              <div class="product-details">
+                <p class="product-name">{{producto.nombre}}</p>
+                <p class="product-price">{{producto.precio}} €</p>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <button pButton type="button" label="Añadir" (click)="addToCart(producto)" class="p-button-success"> <i class="fa-solid fa-cart-shopping"></i> </button>
+          </ng-template>
+        </p-card>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div class="d-flex justify-content-center mb-3">
+  <button pButton type="button" label="Anterior" (click)="cargarPagina(-1)" class="p-button-success mr-2"></button>
+  <button pButton type="button" label="Siguiente" (click)="cargarPagina(1)" class="p-button-success mr-2"></button>
+</div>
+
+

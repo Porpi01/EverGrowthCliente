@@ -57,7 +57,7 @@
         
         <td class="text-center">
 
-          <a [routerLink]="['/admin','pedido','plist','bydetallePedido',pedido.detallePedidos.id]" *ngIf="pedido.detallePedidos>0">
+          <a [routerLink]="['/admin','detallePedido','plist','bypedido',pedido.id]" *ngIf="pedido.detallePedidos>0">
             {{ pedido.detallePedidos }}
           </a>
           <span *ngIf="pedido.detallePedidos==0">0</span>

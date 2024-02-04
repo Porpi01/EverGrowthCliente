@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <!-- Imagen del producto -->
+    <div class="col-lg-4">
+      <img [src]="productos.imagen" alt="Imagen del producto" class="img-fluid">
+    </div>
+
+    <!-- Información del producto -->
+    <div class="col-lg-4">
+      <h1>{{ productos.nombre }}</h1>
+      <p> {{ productos.valoracion }} opiniones</p>
+      <p>Descripción del producto: {{ productos.descripcion }}</p>
+    </div>
+
+
+    <div class="col-lg-4">
+     <h2>{{ productos.precio }} € </h2>
+          <p> Stock:{{ productos.stock }}</p>
+        
+    <!-- Botón de añadir al carrito -->
+    <div class="col-lg-4">
+      <button type="button" class="btn btn-primary btn-lg btn-block" (click)="addToCart(productos)">Añadir</button>
+    </div>
+ 
+</div>
+
+<div *ngIf="valoraciones.length > 0">
+  <h3>Valoraciones:</h3>
+  <ul>
+    <li *ngFor="let valoracion of valoraciones">
+      <p>{{ valoracion.user }}</p>
+      <p> {{ valoracion.titulo }}</p>
+      <p>{{valoracion.mensaje}}</p>
+      <p>{{valoracion.fecha}}</p>
+    </li>
+  </ul>
+</div>

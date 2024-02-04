@@ -36,6 +36,7 @@
             <th (click)="doOrder('nombre')">Nombre</th>
             <th (click)="doOrder('precio')">Precio</th>
             <th (click)="doOrder('stock')">Stock</th>
+            <th (click)="doOrder('descripcion')">Descripción</th>
             <th (click)="doOrder('imagen')">Imagen</th>
             <th>Valoraciones</th>
             <th>Carritos</th>
@@ -49,6 +50,7 @@
             <td>{{ producto.nombre }}</td>
             <td>{{ producto.precio }}</td>
             <td>{{ producto.stock }}</td>
+            <td>{{producto.descripcion | trim:40 }}</td>
             <td>
               <img [src]="producto.imagen" alt="Imagen del producto">
             </td>
@@ -57,14 +59,14 @@
     
             <td class="text-center">
 
-              <a [routerLink]="['/admin','producto','plist','byvaloracion',producto.valoracion.id]" *ngIf="producto.valoracion>0">
+              <a [routerLink]="['/admin','valoracion','plist','byproducto',producto.id]" *ngIf="producto.valoracion>0">
                 {{ producto.valoracion }}
               </a>
               <span *ngIf="producto.valoracion===0">0</span>
             </td>
             <td class="text-center">
 
-              <a [routerLink]="['/admin','producto','plist','bycarrito',producto.carritos.id]" *ngIf="producto.carritos>0">
+              <a [routerLink]="['/admin','carrito','plist','byproducto',producto.id]" *ngIf="producto.carritos>0">
                 {{ producto.carritos }}
               </a>
               <span *ngIf="producto.carritos==0">0</span>

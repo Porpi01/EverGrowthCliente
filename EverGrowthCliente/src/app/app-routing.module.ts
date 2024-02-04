@@ -31,6 +31,8 @@ import { AdminProductoEditRoutedComponent } from './components/Producto/admin-pr
 import { LoginComponent } from './components/Shared/Login/Login.component';
 import { LogoutComponent } from './components/Shared/Logout/Logout.component';
 import { HomeComponent } from './components/Shared/Home/Home.component';
+import { HomeUserComponent } from './components/Shared/HomeUser/HomeUser.component';
+import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
 
 const routes: Routes = [
 
@@ -38,6 +40,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
+  { path: 'userhome', component: HomeUserComponent },
+  
 
 //Usuario
   { path: 'admin/usuario/plist', component: AdminUserPlistRoutedComponent },
@@ -45,7 +49,7 @@ const routes: Routes = [
   { path: 'admin/usuario/view/:id', component: AdminUserViewRoutedComponent },
   { path: 'admin/usuario/plist/bypedido/:idpedido', component: AdminUserPlistRoutedComponent },
   { path: 'admin/usuario/edit/:id', component: AdminUserEditRoutedComponent },
-
+  
   
 //Valoracion
   { path: 'admin/valoracion/plist', component: AdminValoracionPlistRoutedComponent },
@@ -63,6 +67,7 @@ const routes: Routes = [
   { path: 'admin/producto/view/:id', component: AdminProductoViewRoutedComponent },
   { path: 'admin/producto/new', component: AdminProductoNewRoutedComponent },
   { path: 'admin/producto/edit/:id', component: AdminProductoEditRoutedComponent },
+  { path: 'user/producto/view/:id', component: UserProductoViewRoutedComponent },
 
   
 

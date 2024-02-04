@@ -14,36 +14,35 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" [class.active]="strUrl=='/home'||strUrl=='/'" aria-current="page" routerLink="/home"><i
-                class="fas fa-home"></i> Inicio</a>
+            <a class="nav-link" [class.active]="strUrl=='/home'||strUrl=='/'" aria-current="page" routerLink="/home"> Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/valoracion'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/valoracion/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-star"></i> Valoracion</a>
+              routerLink="/admin/valoracion/plist" *ngIf="strUserName && oSessionUser?.rol==false"> Valoracion</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/usuario'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/usuario/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-user"></i> Usuario</a>
+              routerLink="/admin/usuario/plist" *ngIf="strUserName && oSessionUser?.rol==false"> Usuario</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/producto'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/producto/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-box"></i> Producto</a>
+              routerLink="/admin/producto/plist" *ngIf="strUserName && oSessionUser?.rol==false">Producto</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/pedido'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/pedido/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-shopping-cart"></i> Pedido</a>
+              routerLink="/admin/pedido/plist" *ngIf="strUserName && oSessionUser?.rol==false"> Pedido</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/detallePedido'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/detallePedido/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-receipt"></i> DetallePedido</a>
+              routerLink="/admin/detallePedido/plist" *ngIf="strUserName && oSessionUser?.rol==false"> DetallePedido</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/categoria'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/categoria/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-tags"></i> Categoria</a>
+              routerLink="/admin/categoria/plist" *ngIf="strUserName && oSessionUser?.rol==false">Categoria</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/carrito'||strUrl=='/'" aria-current="page"
-              routerLink="/admin/carrito/plist" *ngIf="strUserName && oSessionUser?.rol==false"><i class="fas fa-shopping-basket"></i> Carrito</a>
+              routerLink="/admin/carrito/plist" *ngIf="strUserName && oSessionUser?.rol==false"> Carrito</a>
           </li>
         </ul>
         

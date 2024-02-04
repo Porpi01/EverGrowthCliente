@@ -2,10 +2,20 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CategoriaService } from './../../../service/Categoria.service';
 import { ICategoria, formOperation } from 'src/app/model/model.interfaces';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
+
+export function startWithCapitalLetter(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value: string = control.value;
+    if (value && value.charAt(0) !== value.charAt(0).toUpperCase()) {
+      return { 'startWithCapitalLetter': { value: control.value } };
+    }
+    return null;
+  };
+}
 
 @Component({
   selector: 'app-admin-categoria-form-unrouted',
@@ -38,7 +48,7 @@ export class AdminCategoriaFormUnroutedComponent implements OnInit {
   initializeForm(categoria: ICategoria) {
     this.categoriaForm = this.formBuilder.group({
       id: [categoria.id],
-      nombre: [categoria.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      nombre: [categoria.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255),startWithCapitalLetter()]],
 
     });
   }

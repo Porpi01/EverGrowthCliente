@@ -105,6 +105,9 @@ import { UserUserDetailUnroutedComponent } from './components/Usuario/user-user-
 import { PanelModule } from 'primeng/panel';
 import { FileUploadModule } from 'primeng/fileupload';
 import { CarouselModule } from 'primeng/carousel';
+import { HomeUserComponent } from './components/Shared/HomeUser/HomeUser.component';
+import { UserProductoDetailUnroutedComponent } from './components/Producto/user-producto-detail-unrouted/user-producto-detail-unrouted.component';
+import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
 
 
 @NgModule({
@@ -117,6 +120,7 @@ import { CarouselModule } from 'primeng/carousel';
     LogoutComponent,
     LoginComponent,
     HomeComponent,
+    HomeUserComponent,
 
     //Componentes entidad Usuario
     AdminUserPlistRoutedComponent,
@@ -148,6 +152,8 @@ import { CarouselModule } from 'primeng/carousel';
     AdminProductoFormUnroutedComponent,
     AdminProductoSelectionUnroutedComponent,
     AdminProductoEditRoutedComponent,
+    UserProductoDetailUnroutedComponent,
+    UserProductoViewRoutedComponent,
 
     //Componentes entidad Pedido
     AdminPedidoPlistUnroutedComponent,

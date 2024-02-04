@@ -13,7 +13,7 @@
             <div *ngIf="carritos.producto">
               <strong>Producto:</strong>
               <ng-container *ngIf="carritos.producto.id">
-                <a [routerLink]="['/admin','carritos','view',carritos.producto.id]">
+                <a [routerLink]="['/admin','producto','view',carritos.producto.id]">
                   {{ carritos.producto.nombre }} 
                 </a>
               </ng-container>

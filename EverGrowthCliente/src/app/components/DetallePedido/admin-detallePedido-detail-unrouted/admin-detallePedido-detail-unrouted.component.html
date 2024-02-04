@@ -23,7 +23,7 @@
             <div *ngIf="detallePedidos.productos ">
               <strong>Producto:</strong>
               <ng-container *ngIf="detallePedidos.productos.id">
-                <a [routerLink]="['/admin','producto','plist','bydetallePedido',detallePedidos.productos.id]">
+                <a [routerLink]="['/admin','producto','view',detallePedidos.productos.id]">
                   {{ detallePedidos.productos.id }} {{ detallePedidos.productos.nombre}}
                 </a>
               </ng-container>

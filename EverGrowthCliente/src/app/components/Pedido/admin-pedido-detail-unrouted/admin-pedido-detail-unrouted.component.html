@@ -18,7 +18,7 @@
             <div *ngIf="pedidos.detallePedidos !== undefined">
               <strong>Detalles Pedidos:</strong>
               <ng-container *ngIf="pedidos.detallePedidos > 0; else noDetallePedidos">
-                <a [routerLink]="['/admin','detallePedido','plist','bydetallePedido',pedidos.id]">
+                <a [routerLink]="['/admin','detallePedido','bydetallePedido',pedidos.id]">
                   {{ pedidos.detallePedidos }}
                 </a>
               </ng-container>
@@ -30,7 +30,7 @@
             <div *ngIf="pedidos.user !== undefined">
               <strong>Usuarios:</strong>
               <ng-container *ngIf="pedidos.user.id">
-                <a [routerLink]="['/admin','pedidos','plist','byusuario',pedidos.user.id]">
+                <a [routerLink]="['/admin','usuario','view',pedidos.user.id]">
                   {{ pedidos.user.id }} {{ pedidos.user.nombre}} {{ pedidos.user.apellido1}}
                 </a>
               </ng-container>

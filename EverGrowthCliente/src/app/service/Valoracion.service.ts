@@ -15,7 +15,9 @@ export class ValoracionService {
   getOne(id: number): Observable<IValoracion> {
     return this.http.get<IValoracion>(this.sUrl + "/" + id);
   }
-
+  getValoracionesPorProducto(idProducto: number): Observable<IValoracion[]> {
+    return this.http.get<IValoracion[]>(`${this.sUrl}/${idProducto}`);
+  }
 
   getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, strFilter?: string): Observable<IValoracionPage> {
     let sUrl_filter: string;

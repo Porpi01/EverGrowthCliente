@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ICategoria, IProducto, formOperation } from 'src/app/model/model.interfaces';
@@ -9,6 +9,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AdminCategoriaSelectionUnroutedComponent } from '../../Categoria/admin-categoria-selection-unrouted/admin-categoria-selection-unrouted.component';
 import { MediaService } from './../../../service/Media.service';
+
+export function startWithCapitalLetter(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value: string = control.value;
+    if (value && value.charAt(0) !== value.charAt(0).toUpperCase()) {
+      return { 'startWithCapitalLetter': { value: control.value } };
+    }
+    return null;
+  };
+}
 
 
 @Component({
@@ -48,9 +58,10 @@ export class AdminProductoFormUnroutedComponent implements OnInit {
     this.productForm = this.FormBuilder.group({
       
       id: [producto.id],
-      nombre: [producto.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      nombre: [producto.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255),startWithCapitalLetter()]],
       precio: [producto.precio, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       stock: [producto.stock, [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      descripcion: [producto.descripcion, [Validators.required, Validators.minLength(3), Validators.maxLength(255),startWithCapitalLetter()]],
       imagen: [producto.imagen, Validators.required],
       categoria: this.FormBuilder.group({
         id: [categoriaID]

@@ -39,9 +39,13 @@ export class LoginComponent implements OnInit {
           this.SesionService.setToken(data);
           this.SesionService.emit({ type: 'login' });
           this.oMatSnackBar.open("Login successful.", '', { duration: 2000 });
-        
-            this.oRouter.navigate(['/home']); 
-         
+          if (this.loginForm.value.username === 'anita17') {
+            this.oRouter.navigate(['/home']);
+
+          } else {
+            this.oRouter.navigate(['/userhome']);
+
+          }
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -56,10 +60,10 @@ export class LoginComponent implements OnInit {
 
   loginAdmin() {
     this.loginForm.setValue({
-     
+
       username: 'anita17',
       password: 'foxforum'
-     
+
     })
   }
 

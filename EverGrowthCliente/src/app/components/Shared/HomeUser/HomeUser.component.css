@@ -4,13 +4,7 @@
     justify-content: space-around;
    
   }
-  .custom-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 50px; /* Altura fija para todos los cards */
-    width: 30%;
-  }
+
   
   .product-info {
     padding: 16px;
@@ -43,4 +37,32 @@
   .product-price {
     font-weight: bold;
     color: #333;
+  }
+  .categoria-column {
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  .categoria-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .categoria-item {
+    margin-bottom: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    padding: 8px;
+    border-radius: 4px;
+  }
+  
+  .categoria-item:hover {
+    background-color: #e0e0e0;
+  }
+
+  input {
+    width: 200%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
   }

@@ -25,10 +25,11 @@
           <mat-form-field>
             <mat-label>Nombre:</mat-label>
             <input matInput formControlName="nombre" placeholder="Nombre" required>
-            <mat-hint align="end">(3 a 255 caracteres de longitud)</mat-hint>
+       
             <mat-error *ngIf="hasError('nombre', 'required')">Campo obligatorio</mat-error>
             <mat-error *ngIf="hasError('nombre', 'minlength')">Mínimo 3 caracteres</mat-error>
             <mat-error *ngIf="hasError('nombre', 'maxlength')">Excede el límite de caracteres</mat-error>
+            <mat-error *ngIf="hasError('nombre', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
           </mat-form-field>
         </div>
 
@@ -49,6 +50,18 @@
           <input matInput type="number" formControlName="stock" placeholder="Stock" required>
           <mat-error *ngIf="hasError('stock', 'required')"> Campo obligatorio</mat-error>
           <mat-error *ngIf="hasError('stock', 'pattern')">Debe ser mayor a 0</mat-error>
+
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field>
+          <mat-label>Descripción:</mat-label>
+          <textarea matInput formControlName="descripcion" placeholder="Descripción" required></textarea>
+          <mat-error *ngIf="hasError('descripcion', 'required')">Campo obligatorio</mat-error>
+          <mat-error *ngIf="hasError('descripcion', 'minlength')">Mínimo 3 caracteres</mat-error>
+          <mat-error *ngIf="hasError('descripcion', 'maxlength')">Excede el límite de caracteres</mat-error>
+          <mat-error *ngIf="hasError('descripcion', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
 
         </mat-form-field>
       </div>
