@@ -108,6 +108,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { HomeUserComponent } from './components/Shared/HomeUser/HomeUser.component';
 import { UserProductoDetailUnroutedComponent } from './components/Producto/user-producto-detail-unrouted/user-producto-detail-unrouted.component';
 import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -226,8 +227,7 @@ import { UserProductoViewRoutedComponent } from './components/Producto/user-prod
     MatNativeDateModule,
     PanelModule,
     FileUploadModule,
-
-
+  
    
 
 

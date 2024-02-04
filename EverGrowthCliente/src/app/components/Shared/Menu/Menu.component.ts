@@ -75,6 +75,22 @@ export class MenuComponent implements OnInit {
     });
   }
 
+  doSessionUserView($event: Event) {
+    if (this.oSessionUser) {
+      let ref: DynamicDialogRef | undefined;
+      ref = this.oDialogService.open(UserUserDetailUnroutedComponent, {
+        data: {
+          id: this.oSessionUser.id
+        },
+        header: "Vista de usuario",
+        width: '50%',
+        contentStyle: { overflow: 'auto' },
+        baseZIndex: 10000,
+        maximizable: false
+      });
+    }
+    return false;
+  }
 
-
+  
 }

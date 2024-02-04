@@ -23,15 +23,3 @@
     </div>
  
 </div>
-
-<div *ngIf="valoraciones.length > 0">
-  <h3>Valoraciones:</h3>
-  <ul>
-    <li *ngFor="let valoracion of valoraciones">
-      <p>{{ valoracion.user }}</p>
-      <p> {{ valoracion.titulo }}</p>
-      <p>{{valoracion.mensaje}}</p>
-      <p>{{valoracion.fecha}}</p>
-    </li>
-  </ul>
-</div>

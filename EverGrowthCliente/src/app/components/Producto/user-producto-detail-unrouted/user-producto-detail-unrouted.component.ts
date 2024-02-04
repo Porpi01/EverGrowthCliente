@@ -34,7 +34,7 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
   ngOnInit() {
     console.log(this.id);   
     this.getOne();
-    this.getValoraciones();
+   
   }
 
   getOne(): void {
@@ -50,18 +50,7 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
     });
   }
 
-  getValoraciones(): void {
-    this.ValoracionService.getValoracionesPorProducto(this.id).subscribe({
-      next: (data: IValoracion[]) => {
-        this.valoraciones = data;
-        console.log(this.valoraciones);   
-        console.log()
-      },
-      error: (error: HttpErrorResponse) => {
-        this.status = error;
-      }
-    });
-  }
+
 
   addToCart(producto: IProducto) {
     this.productosSeleccionados.push(producto);
