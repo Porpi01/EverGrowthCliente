@@ -4,6 +4,7 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { ValoracionService } from './../../../service/Valoracion.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -18,13 +19,23 @@ export class AdminValoracionPlistRoutedComponent implements OnInit {
   items: MenuItem[] | undefined;
   bLoading: boolean = false;
   loadingProgress: number = 0;
+  id_usuario: number ;
+  id_producto: number ;
+
   constructor(
     private ValoracionService: ValoracionService,
     private ConfirmationService: ConfirmationService,
     private router: Router,
-    private MessageService: MessageService
+    private MessageService: MessageService,
+    private ActivatedRoute: ActivatedRoute,
 
-  ) { }
+
+  ) {
+    this.id_usuario = parseInt(this.ActivatedRoute.snapshot.paramMap.get("idusuario") ?? "0");
+    this.id_producto = parseInt(this.ActivatedRoute.snapshot.paramMap.get("idproducto") ?? "0");
+    console.log('id_usuario:', this.id_usuario);
+    console.log('id_producto:', this.id_producto);
+   }
 
   ngOnInit() {
     this.items = [

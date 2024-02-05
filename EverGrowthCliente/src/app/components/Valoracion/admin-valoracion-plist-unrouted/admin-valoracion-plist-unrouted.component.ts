@@ -7,6 +7,8 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ValoracionService } from './../../../service/Valoracion.service';
 import { IProducto, IUsuario, IValoracion, IValoracionPage } from 'src/app/model/model.interfaces';
 import { AdminValoracionDetailUnroutedComponent } from '../admin-valoracion-detail-unrouted/admin-valoracion-detail-unrouted.component';
+import { UsuarioService } from 'src/app/service/Usuario.service';
+import { ProductoService } from 'src/app/service/Producto.service';
 
 @Component({
   selector: 'app-admin-valoracion-plist-unrouted',
@@ -17,7 +19,8 @@ import { AdminValoracionDetailUnroutedComponent } from '../admin-valoracion-deta
 export class AdminValoracionPlistUnroutedComponent implements OnInit {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
-  
+ @Input() id_usuario: number = 0;
+ @Input() id_producto: number= 0;
 
   oPage: IValoracionPage | undefined;
   orderField: string = 'id';
@@ -36,14 +39,26 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
     private ValoracionService: ValoracionService,
     private ConfirmationService: ConfirmationService,
     private DialogService: DialogService,
-    private MessageService: MessageService
+    private MessageService: MessageService,
+    private UsuarioService: UsuarioService,
+    private ProductoService: ProductoService,
+
 
     
   ) { 
+   
   }
 
   ngOnInit() {
     this.getPage();
+
+    if (this.id_usuario > 0) {
+      this.getUsuario();
+      
+    }
+    if (this.id_producto > 0) {
+      this.getProducto();
+    }
     this.forceReload.subscribe({
       next: (v) => {
         if (v) {
@@ -57,7 +72,7 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
   onInputChange(query: string): void {
     if (query.length > 2) {
       this.ValoracionService
-        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
+        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_usuario, this.id_producto, query)
         .subscribe({
           next: (data: IValoracionPage) => {
             this.oPage = data;
@@ -80,7 +95,9 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
         this.oPaginatorState.rows,
         this.oPaginatorState.page,
         this.orderField,
-        this.orderDirection
+        this.orderDirection,
+        this.id_usuario, 
+        this.id_producto
       )
       .subscribe({
         next: (data: IValoracionPage) => {
@@ -89,6 +106,8 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
           this.valoraciones = data.content;
           console.log(this.oPaginatorState);
           console.log(this.valoraciones);
+          console.log(this.id_usuario)
+          console.log(this.id_producto)
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -147,5 +166,30 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
     });
   }
 
-  
+  getUsuario(): void {
+    this.UsuarioService.getOne(this.id_usuario).subscribe({
+      next: (data: IUsuario) => {
+        this.oUsuario = data;
+
+        console.log(this.oUsuario.id);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.status = error;
+      }
+
+    })
+  }
+
+  getProducto(): void {
+    this.ProductoService.getOne(this.id_producto).subscribe({
+      next: (data: IProducto) => {
+        this.oProducto = data;
+      },
+      error: (error: HttpErrorResponse) => {
+        this.status = error;
+      }
+
+    })
+  }
+
 }

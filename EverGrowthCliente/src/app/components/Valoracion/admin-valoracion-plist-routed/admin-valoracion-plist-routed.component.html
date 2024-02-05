@@ -29,7 +29,8 @@
   </div>
 </div>
 
-<app-admin-valoracion-plist-unrouted [forceReload]="forceReload" *ngIf="!bLoading"></app-admin-valoracion-plist-unrouted>
+<app-admin-valoracion-plist-unrouted [forceReload]="forceReload"  [id_usuario]="id_usuario"
+[id_producto]="id_producto"*ngIf="!bLoading"></app-admin-valoracion-plist-unrouted>
 
 <p-confirmPopup></p-confirmPopup>
 <p-messages></p-messages>

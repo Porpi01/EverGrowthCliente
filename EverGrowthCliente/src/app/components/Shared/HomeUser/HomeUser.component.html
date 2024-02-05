@@ -1,9 +1,18 @@
-
-<div>
-<h1>EverGrowth</h1>
+<div class="container">
+  <div class="row align-items-center">
+     <div class="col-lg-3">
+      <h1>EverGrowth</h1>
+     </div>
+     <div class="col-lg-8">
+      
+      <span class="p-input-icon-left">
+        <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
+        <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
+         />
+      </span>
+     </div>
+  </div>
 </div>
-
-
 <div class="p-grid">
   <!-- Columna de Categorías -->
   <div class="col-lg-2 col-md-2 col-sm-2 categoria-column">
@@ -17,14 +26,7 @@
 
 <!-- Columna de Productos -->
 <div class="col-lg-9 productos-column">
-  <div class="row align-items-center mb-3">
-    <div class="col-lg-9">
-      <span class="p-input-icon-left">
-        <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
-        <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)" class="form-control"/>
-      </span>
-    </div>
-  </div>
+   
   <div class="row">
     <ng-container *ngFor="let producto of productos">
       <div class="col-lg-3 col-md-4 col-sm-6 mb-3">

@@ -17,17 +17,31 @@ export class ValoracionService {
   }
  
 
-  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, strFilter?: string): Observable<IValoracionPage> {
+  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_usuario: number , id_producto: number, strFilter?: string): Observable<IValoracionPage> {
     let sUrl_filter: string;
     if (!size) size = 10;
     if (!page) page = 0;
+
+    let strUrlUser = "";
+    if (id_usuario > 0) {
+        strUrlUser = "&usuario=" + id_usuario;
+    }
+
+    let strUrlProduct = "";
+    if (id_producto > 0) {
+      strUrlProduct = "&producto=" + id_producto;
+    }
+
     if (strFilter && strFilter.trim().length > 0) {
       sUrl_filter = `&filter=${strFilter}`;
     } else {
       sUrl_filter = "";
     }
-    return this.http.get<IValoracionPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_filter);
+  
+    return this.http.get<IValoracionPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection+strUrlUser + strUrlProduct  + sUrl_filter);
   }
+
+
 
   removeOne(id: number | undefined): Observable<number> {
     if (id) {
