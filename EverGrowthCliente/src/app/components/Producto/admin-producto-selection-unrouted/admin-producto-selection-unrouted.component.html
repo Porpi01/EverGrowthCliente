@@ -24,6 +24,7 @@
       <tr>
         <th (click)="doOrder('nombre')">Nombre</th>
         <th (click)="doOrder('precio')">Precio</th>
+        <th (click)="doOrder('descripcion')">Descripción</th>
         <th (click)="doOrder('stock')">Stock</th>
         <th (click)="doOrder('imagen')">Imagen</th>
         <th>Acciones</th>
@@ -34,6 +35,7 @@
       <tr>
         <td>{{ producto.nombre }}</td>
         <td>{{ producto.precio }}</td>
+        <td>{{ producto.descripcion }}</td>
         <td>{{ producto.stock }}</td>
           <td>
             <img class="rounded" class="img-thumbnail" [src]="producto.imagen" alt="Imagen del producto" >

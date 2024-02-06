@@ -4,9 +4,11 @@ import { ConfirmEventType, ConfirmationService, MessageService } from 'primeng/a
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
 import { DetallePedidoService } from 'src/app/service/DetallePedido.service';
-import { IDetallePedido, IDetallePedidoPage, IPedido, IPedidoPage } from 'src/app/model/model.interfaces';
+import { IDetallePedido, IDetallePedidoPage, IPedido, IPedidoPage, IProducto } from 'src/app/model/model.interfaces';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AdminDetallePedidoDetailUnroutedComponent } from '../admin-detallePedido-detail-unrouted/admin-detallePedido-detail-unrouted.component';
+import { ProductoService } from './../../../service/Producto.service';
+import { PedidoService } from 'src/app/service/Pedido.service';
 
 @Component({
   selector: 'app-admin-detallePedido-plist-unrouted',
@@ -17,6 +19,8 @@ import { AdminDetallePedidoDetailUnroutedComponent } from '../admin-detallePedid
 export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
+  @Input() id_pedido: number = 0;
+  @Input() id_producto: number = 0;
   
 
   oPage: IDetallePedidoPage | undefined;
@@ -27,6 +31,8 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
   detallePedidos: IDetallePedido[] = [];
   pedidoToRemove: IDetallePedido | null = null;
   ref: DynamicDialogRef | undefined;
+  oPedido: IPedido | null = null;
+  oProducto:IProducto | null = null;
  
   value: string = '';
 
@@ -34,12 +40,26 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
     private DetallePedidoService: DetallePedidoService,
     private ConfirmationService: ConfirmationService,
     private DialogService: DialogService,
-    private MessageService: MessageService
+    private MessageService: MessageService,
+    private ProductoService: ProductoService,
+    private PedidoService: PedidoService
   ) { 
   }
 
   ngOnInit() {
     this.getPage();
+
+    if (this.id_pedido > 0) {
+      this.getPedido();
+      console.log(this.id_pedido);
+      
+    }
+    if (this.id_producto > 0) {
+      this.getProducto();
+      console.log(this.id_producto);
+      
+    }
+
     this.forceReload.subscribe({
       next: (v) => {
         if (v) {
@@ -58,7 +78,9 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
         this.oPaginatorState.rows,
         this.oPaginatorState.page,
         this.orderField,
-        this.orderDirection
+        this.orderDirection,
+        this.id_pedido,
+        this.id_producto,
       )
       .subscribe({
         next: (data: IDetallePedidoPage) => {
@@ -125,6 +147,30 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
 
   calculateTotalPrice(quantity: number, unitPrice: number): number {
     return quantity * unitPrice;
+  }
+
+  getProducto(): void {
+    this.ProductoService.getOne(this.id_producto).subscribe({
+      next: (data: IProducto) => {
+        this.oProducto = data;
+      },
+      error: (error: HttpErrorResponse) => {
+        this.status = error;
+      }
+
+    })
+  }
+
+  getPedido(): void {
+    this.PedidoService.getOne(this.id_pedido).subscribe({
+      next: (data: IPedido) => {
+        this.oPedido = data;
+      },
+      error: (error: HttpErrorResponse) => {
+        this.status = error;
+      }
+
+    })
   }
 }
 

@@ -14,7 +14,7 @@
             <div *ngIf="categorias.productos !== undefined">
               <strong>Productos:</strong>
               <ng-container *ngIf="categorias.productos > 0; else noProductos">
-                <a [routerLink]="['/admin','categoria','plist','byproducto',categorias.id]">
+                <a [routerLink]="['/admin','producto','plist','bycategoria',categorias.id]">
                   {{ categorias.productos }}
                 </a>
               </ng-container>

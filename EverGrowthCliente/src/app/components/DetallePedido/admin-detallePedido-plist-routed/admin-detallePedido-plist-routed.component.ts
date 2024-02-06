@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { DetallePedidoService } from './../../../service/DetallePedido.service';
@@ -20,13 +20,19 @@ export class AdminDetallePedidoPlistRoutedComponent implements OnInit {
   items: MenuItem[] | undefined;
   bLoading: boolean = false;
   loadingProgress: number = 0;
+  id_pedido: number = 0;
+  id_producto: number = 0;
   constructor(
     private DetallePedidoService: DetallePedidoService,
     private router: Router,
     private MessageService: MessageService,
     private ConfirmationService: ConfirmationService,
+    private ActivatedRoute: ActivatedRoute,
 
-  ) { }
+  ) {
+    this.id_pedido = parseInt(this.ActivatedRoute.snapshot.paramMap.get("idpedido") ?? "0");
+    this.id_producto = parseInt(this.ActivatedRoute.snapshot.paramMap.get("idproducto") ?? "0");
+   }
 
   ngOnInit() {
     this.items = [

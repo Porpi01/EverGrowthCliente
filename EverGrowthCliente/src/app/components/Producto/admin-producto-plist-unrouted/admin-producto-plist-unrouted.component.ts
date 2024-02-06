@@ -5,10 +5,11 @@ import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
 
 import { ProductoService } from './../../../service/Producto.service';
-import { IProducto, IProductoPage } from 'src/app/model/model.interfaces';
+import { ICategoria, IProducto, IProductoPage } from 'src/app/model/model.interfaces';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AdminProductoDetailUnroutedComponent } from '../admin-producto-detail-unrouted/admin-producto-detail-unrouted.component';
 import { MediaService } from './../../../service/Media.service';
+import { CategoriaService } from './../../../service/Categoria.service';
 @Component({
   selector: 'app-admin-producto-plist-unrouted',
   templateUrl: './admin-producto-plist-unrouted.component.html',
@@ -18,6 +19,7 @@ import { MediaService } from './../../../service/Media.service';
 export class AdminProductoPlistUnroutedComponent implements OnInit {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
+  @Input() id_categoria: number = 0;
 
 
   oPage: IProductoPage | undefined;
@@ -29,6 +31,7 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
   productoToRemove: IProducto | null = null;
   imagenBase64: string | null = null;
   ref: DynamicDialogRef | undefined;
+  oCategoria: ICategoria | null = null;
 
   value: string = '';
   url?: string;
@@ -40,12 +43,18 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
     private DialogService: DialogService,
     private MessageService: MessageService,
     private MediaService: MediaService,
+    private CategoriaService: CategoriaService
 
   ) {
   }
 
   ngOnInit(): void {
     this.getPage();
+
+    if (this.id_categoria > 0) {
+      this.getCategoria();
+      
+    }
     this.forceReload.subscribe({
       next: (v) => {
         if (v) {
@@ -61,7 +70,7 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
   onInputChange(query: string): void {
     if (query.length > 2) {
       this.ProductoService
-        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
+        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_categoria, query)
         .subscribe({
           next: (data: IProductoPage) => {
             this.oPage = data;
@@ -84,7 +93,8 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
         this.oPaginatorState.rows,
         this.oPaginatorState.page,
         this.orderField,
-        this.orderDirection
+        this.orderDirection,
+        this.id_categoria,
       )
       .subscribe({
         next: (data: IProductoPage) => {
@@ -161,6 +171,20 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
 
       );
     }
+  }
+
+  getCategoria(): void {
+    this.CategoriaService.getOne(this.id_categoria).subscribe({
+      next: (data: ICategoria) => {
+        this.oCategoria = data;
+
+        console.log(this.oCategoria.id);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.status = error;
+      }
+
+    })
   }
 
 }

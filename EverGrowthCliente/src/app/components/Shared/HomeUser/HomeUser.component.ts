@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
 export class HomeUserComponent implements OnInit {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
-  @Input() id_pedido: number = 0; //filter by user
+  @Input() id_categoria: number = 0; //filter by user
   productosSeleccionados: IProducto[] = [];
   oPage: IProductoPage | undefined;
   oPedido: IPedido | null = null;
@@ -35,6 +35,7 @@ export class HomeUserComponent implements OnInit {
   status: HttpErrorResponse | null = null;
   oProductoToRemove: IProducto | null = null;
   ref: DynamicDialogRef | undefined;
+  oCategoria: ICategoria | null = null;
   strUserName: string = '';
 
   constructor(
@@ -51,8 +52,8 @@ export class HomeUserComponent implements OnInit {
     this.strUserName = this.SesionService.getUsername();
     this.getPage();
     this.getCategorias();
-    if (this.id_pedido > 0) {
-      this.getUser();
+    if (this.id_categoria > 0) {
+      this.getCategoria();
     }
     this.forceReload.subscribe({
       next: (v) => {
@@ -67,7 +68,7 @@ export class HomeUserComponent implements OnInit {
   onInputChange(query: string): void {
     if (query.length > 2) {
       this.productoService
-        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
+        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_categoria, query)
         .subscribe({
           next: (data: IProductoPage) => {
             this.oPage = data;
@@ -90,7 +91,8 @@ export class HomeUserComponent implements OnInit {
         this.productosPorPagina,
         this.oPaginatorState.page,
         this.orderField,
-        this.orderDirection
+        this.orderDirection,
+        this.id_categoria
       )
       .subscribe({
         next: (data: IProductoPage) => {
@@ -121,10 +123,10 @@ export class HomeUserComponent implements OnInit {
     this.getPage();
   }
 
-  getUser(): void {
-    this.pedidoService.getOne(this.id_pedido).subscribe({
-      next: (data: IPedido) => {
-        this.oPedido = data;
+  getCategoria(): void {
+    this.CategoriaService.getOne(this.id_categoria).subscribe({
+      next: (data: ICategoria) => {
+        this.oCategoria = data;
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;

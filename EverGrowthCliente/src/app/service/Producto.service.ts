@@ -16,16 +16,21 @@ export class ProductoService {
   }
 
 
-  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, strFilter?: string): Observable<IProductoPage> {
+  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_categoria:number, strFilter?: string): Observable<IProductoPage> {
     let sUrl_filter: string;
     if (!size) size = 10;
     if (!page) page = 0;
+
+    let sUrl_categoria = "";
+    if (id_categoria > 0) {
+      sUrl_categoria = "&categoria=" + id_categoria;
+    }
     if (strFilter && strFilter.trim().length > 0) {
       sUrl_filter = `&filter=${strFilter}`;
     } else {
       sUrl_filter = "";
     }
-    return this.http.get<IProductoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_filter);
+    return this.http.get<IProductoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_categoria + sUrl_filter);
   }
 
   removeOne(id: number | undefined): Observable<number> {

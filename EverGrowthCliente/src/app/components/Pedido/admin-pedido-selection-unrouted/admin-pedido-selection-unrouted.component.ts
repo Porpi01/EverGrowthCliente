@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IPedido, IPedidoPage } from 'src/app/model/model.interfaces';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -12,6 +12,9 @@ import { PedidoService } from './../../../service/Pedido.service';
   styleUrls: ['./admin-pedido-selection-unrouted.component.css']
 })
 export class AdminPedidoSelectionUnroutedComponent implements OnInit {
+
+  @Input() id_usuario: number = 0;
+
   oPage: IPedidoPage | undefined;
   orderField: string = 'id';
   orderDirection: string = 'asc';
@@ -42,7 +45,7 @@ export class AdminPedidoSelectionUnroutedComponent implements OnInit {
   onInputChange(query: string): void {
     if (query.length > 2) {
       this.PedidoService
-        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
+        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_usuario, query)
         .subscribe({
           next: (data: IPedidoPage) => {
             this.oPage = data;
@@ -65,7 +68,9 @@ export class AdminPedidoSelectionUnroutedComponent implements OnInit {
         this.oPaginatorState.rows,
         this.oPaginatorState.page,
         this.orderField,
-        this.orderDirection
+        this.orderDirection,
+        this.id_usuario
+
       )
       .subscribe({
         next: (data: IPedidoPage) => {

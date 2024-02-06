@@ -17,16 +17,22 @@ export class PedidoService {
   }
 
 
-  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, strFilter?: string): Observable<IPedidoPage> {
+  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_usuario:number,strFilter?: string): Observable<IPedidoPage> {
     let sUrl_filter: string;
     if (!size) size = 10;
     if (!page) page = 0;
+
+    let sUrl_usuario = "";
+    if (id_usuario > 0) {
+      sUrl_usuario = "&usuario=" + id_usuario;
+    }
+
     if (strFilter && strFilter.trim().length > 0) {
       sUrl_filter = `&filter=${strFilter}`;
     } else {
       sUrl_filter = "";
     }
-    return this.http.get<IPedidoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_filter);
+    return this.http.get<IPedidoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection +  sUrl_usuario + sUrl_filter);
   }
 
   removeOne(id: number | undefined): Observable<number> {

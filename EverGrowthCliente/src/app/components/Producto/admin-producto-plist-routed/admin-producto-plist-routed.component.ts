@@ -4,6 +4,8 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { ProductoService } from './../../../service/Producto.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-admin-producto-plist-routed',
@@ -17,13 +19,18 @@ export class AdminProductoPlistRoutedComponent implements OnInit {
   items: MenuItem[] | undefined;
   bLoading: boolean = false;
   loadingProgress: number = 0;
+  id_categoria: number = 0;
   constructor(
     private ProductoService: ProductoService,
     private router: Router,
     private MessageService: MessageService,
     private ConfirmationService: ConfirmationService,
+    private ActivatedRoute: ActivatedRoute,
 
-  ) { }
+  ) { 
+    this.id_categoria = parseInt(this.ActivatedRoute.snapshot.paramMap.get("idcategoria") ?? "0");
+
+  }
 
   ngOnInit() {
     this.items = [

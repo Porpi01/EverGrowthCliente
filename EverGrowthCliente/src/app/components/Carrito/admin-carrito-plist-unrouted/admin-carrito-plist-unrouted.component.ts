@@ -3,11 +3,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ICarrito, ICarritoPage } from 'src/app/model/model.interfaces';
+import { ICarrito, ICarritoPage, IProducto, IUsuario } from 'src/app/model/model.interfaces';
 import { CarritoService } from './../../../service/Carrito.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AdminCarritoDetailUnroutedComponent } from '../admin-carrito-detail-unrouted/admin-carrito-detail-unrouted.component';
+import { UsuarioService } from './../../../service/Usuario.service';
+import { ProductoService } from './../../../service/Producto.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ import { AdminCarritoDetailUnroutedComponent } from '../admin-carrito-detail-unr
 export class AdminCarritoPlistUnroutedComponent implements OnInit {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
-  
+  @Input() id_usuario: number = 0;
+  @Input() id_producto: number = 0;
 
   oPage: ICarritoPage | undefined;
   orderField: string = 'id';
@@ -29,6 +31,8 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
   carrito: ICarrito[] = [];
   carritoToRemove: ICarrito | null = null;
   ref: DynamicDialogRef | undefined;
+  oUsuario: IUsuario | null = null;
+  oProducto: IProducto | null = null;
  
   value: string = '';
 
@@ -36,12 +40,26 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
     private CarritoService: CarritoService,
     private ConfirmationService: ConfirmationService,
     private DialogService: DialogService,
-    private MessageService: MessageService
+    private MessageService: MessageService,
+    private UsuarioService: UsuarioService,
+    private ProductoService: ProductoService,
   ) { 
   }
 
   ngOnInit() {
     this.getPage();
+
+    if (this.id_usuario > 0) {
+      this.getUsuario();
+      console.log(this.id_usuario);
+      
+    }
+    if (this.id_producto > 0) {
+      this.getProducto();
+      console.log(this.id_producto);
+      
+    }
+
     this.forceReload.subscribe({
       next: (v) => {
         if (v) {
@@ -60,7 +78,9 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
         this.oPaginatorState.rows,
         this.oPaginatorState.page,
         this.orderField,
-        this.orderDirection
+        this.orderDirection,
+        this.id_producto,
+        this.id_usuario,
       )
       .subscribe({
         next: (data: ICarritoPage) => {
@@ -125,5 +145,30 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
     });
   }
 
+  getUsuario(): void {
+    this.UsuarioService.getOne(this.id_usuario).subscribe({
+      next: (data: IUsuario) => {
+        this.oUsuario = data;
+
+        console.log(this.oUsuario.id);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.status = error;
+      }
+
+    })
+  }
+
+  getProducto(): void {
+    this.ProductoService.getOne(this.id_producto).subscribe({
+      next: (data: IProducto) => {
+        this.oProducto = data;
+      },
+      error: (error: HttpErrorResponse) => {
+        this.status = error;
+      }
+
+    })
+  }
 
 }

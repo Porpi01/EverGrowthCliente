@@ -16,16 +16,26 @@ export class DetallePedidoService {
     return this.http.get<IDetallePedido>(this.sUrl + "/" + id);
   }
 
-  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, strFilter?: string): Observable<IDetallePedidoPage> {
+  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_pedido:number , id_producto:number, strFilter?: string): Observable<IDetallePedidoPage> {
     let sUrl_filter: string;
     if (!size) size = 10;
     if (!page) page = 0;
+
+    let strUrlPedido = "";
+    if (id_pedido > 0) {
+        strUrlPedido = "&pedido=" + id_pedido;
+    }
+
+    let strUrlProducto = "";
+    if (id_producto > 0) {
+      strUrlProducto = "&producto=" + id_producto;
+    }
     if (strFilter && strFilter.trim().length > 0) {
       sUrl_filter = `&filter=${strFilter}`;
     } else {
       sUrl_filter = "";
     }
-    return this.http.get<IDetallePedidoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_filter);
+    return this.http.get<IDetallePedidoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + strUrlPedido + strUrlProducto + sUrl_filter);
   }
 
   removeOne(id: number | undefined): Observable<number> {

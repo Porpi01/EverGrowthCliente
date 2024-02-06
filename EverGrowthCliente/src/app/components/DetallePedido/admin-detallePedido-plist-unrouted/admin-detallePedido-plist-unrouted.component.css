@@ -40,24 +40,12 @@
     color:#d4605e; /* Cambia el color del icono al pasar el ratón sobre él */
   }
 
+  .btn {
+    background-color: #ef6461  !important;
+    color: #fff;
+    border: none;
+    padding: 5 10px;
+    border-radius: 5px;
   
-.confirm-dialog-header {
-padding: 1rem;
-font-size: 20px;
-font-weight: bold;
-text-align: center;
-}
-
-.confirm-dialog-footer .btn-secondary {
-background-color: #ef6461; 
-color: #fff; 
-padding: 1rem 1rem; 
-}
-
-
-.confirm-dialog-footer .btn-danger {
-background-color: #ef6461;
-color: #fff; 
-padding: 1rem 1rem; 
-}
+  }
 

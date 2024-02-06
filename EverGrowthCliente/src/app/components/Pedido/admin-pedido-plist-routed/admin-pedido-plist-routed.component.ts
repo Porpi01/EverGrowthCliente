@@ -4,6 +4,7 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { PedidoService } from './../../../service/Pedido.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin-pedido-plist-routed',
@@ -17,13 +18,18 @@ export class AdminPedidoPlistRoutedComponent implements OnInit {
   items: MenuItem[] | undefined;
   bLoading: boolean = false;
   loadingProgress: number = 0;
+  id_usuario: number = 0;
   constructor(
     private PedidoService: PedidoService,
     private router: Router,
     private MessageService: MessageService,
     private ConfirmationService: ConfirmationService,
+    private ActivatedRoute: ActivatedRoute,
 
-  ) { }
+  ) {
+    this.id_usuario = parseInt(this.ActivatedRoute.snapshot.paramMap.get("idusuario") ?? "0");
+    console.log(this.id_usuario);
+   }
 
   ngOnInit() {
     this.items = [

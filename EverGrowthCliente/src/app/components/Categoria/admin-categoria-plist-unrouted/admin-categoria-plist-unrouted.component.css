@@ -48,16 +48,5 @@ font-weight: bold;
 text-align: center;
 }
 
-.confirm-dialog-footer .btn-secondary {
-background-color: #ef6461; 
-color: #fff; 
-padding: 1rem 1rem; 
-}
 
-
-.confirm-dialog-footer .btn-danger {
-background-color: #ef6461;
-color: #fff; 
-padding: 1rem 1rem; 
-}
 

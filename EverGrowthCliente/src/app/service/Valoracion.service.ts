@@ -38,7 +38,7 @@ export class ValoracionService {
       sUrl_filter = "";
     }
   
-    return this.http.get<IValoracionPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection+strUrlUser + strUrlProduct  + sUrl_filter);
+    return this.http.get<IValoracionPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + strUrlUser + strUrlProduct  + sUrl_filter);
   }
 
 

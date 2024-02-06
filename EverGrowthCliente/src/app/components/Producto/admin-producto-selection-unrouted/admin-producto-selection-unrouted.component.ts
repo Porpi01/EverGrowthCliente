@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
@@ -12,6 +12,9 @@ import { ProductoService } from './../../../service/Producto.service';
   styleUrls: ['./admin-producto-selection-unrouted.component.css']
 })
 export class AdminProductoSelectionUnroutedComponent implements OnInit {
+
+  @Input() id_categoria: number = 0;
+
 
   oPage: IProductoPage | undefined;
   orderField: string = 'id';
@@ -45,7 +48,7 @@ export class AdminProductoSelectionUnroutedComponent implements OnInit {
   onInputChange(query: string): void {
     if (query.length > 2) {
       this.ProductoService
-        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
+        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_categoria, query)
         .subscribe({
           next: (data: IProductoPage) => {
             this.oPage = data;
@@ -69,7 +72,8 @@ export class AdminProductoSelectionUnroutedComponent implements OnInit {
         this.oPaginatorState.rows,
         this.oPaginatorState.page,
         this.orderField,
-        this.orderDirection
+        this.orderDirection,
+        this.id_categoria
       )
       .subscribe({
         next: (data: IProductoPage) => {

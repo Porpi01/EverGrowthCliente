@@ -23,16 +23,26 @@ export class CarritoService {
     return this.http.get<number>(this.sUrl + "/cantidad" );
   }
 
-  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, strFilter?: string): Observable<ICarritoPage> {
+  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_producto:number, id_usuario:number, strFilter?: string): Observable<ICarritoPage> {
     let sUrl_filter: string;
     if (!size) size = 10;
     if (!page) page = 0;
+
+    let strUrlProducto = "";
+    if (id_producto > 0) {
+      strUrlProducto = "&producto=" + id_producto;
+    }
+
+    let strUrlUsuario = "";
+    if (id_usuario > 0) {
+      strUrlUsuario = "&usuario=" + id_usuario;
+    }
     if (strFilter && strFilter.trim().length > 0) {
       sUrl_filter = `&filter=${strFilter}`;
     } else {
       sUrl_filter = "";
     }
-    return this.http.get<ICarritoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_filter);
+    return this.http.get<ICarritoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + strUrlUsuario + strUrlProducto +  sUrl_filter);
   }
 
   removeOne(id: number | undefined): Observable<number> {

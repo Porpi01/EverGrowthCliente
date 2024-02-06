@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { Subject } from 'rxjs';
 import { CarritoService } from './../../../service/Carrito.service';
@@ -19,13 +19,21 @@ export class AdminCarritoPlistRoutedComponent implements OnInit {
   items: MenuItem[] | undefined;
   bLoading: boolean = false;
   loadingProgress: number = 0;
+  id_usuario: number ;
+  id_producto: number ;
+
   constructor(
     private CarritoService: CarritoService,
     private MessageService: MessageService,    
     private ConfirmationService: ConfirmationService,
     private router: Router,
+    private ActivatedRoute: ActivatedRoute,
 
-  ) { }
+
+  ) {
+    this.id_usuario = parseInt(this.ActivatedRoute.snapshot.paramMap.get("idusuario") ?? "0");
+    this.id_producto = parseInt(this.ActivatedRoute.snapshot.paramMap.get("idproducto") ?? "0");
+   }
 
   ngOnInit() {
     this.items = [
