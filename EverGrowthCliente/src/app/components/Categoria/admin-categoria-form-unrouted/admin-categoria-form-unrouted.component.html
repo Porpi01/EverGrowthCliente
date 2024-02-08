@@ -28,6 +28,12 @@
           <mat-error *ngIf="hasError('nombre', 'maxlength')">Límite excedido</mat-error>
         </mat-form-field>
 
+        <div class="form-group">
+          <label for="imagen">Imagen:</label>
+          <input type="file" (change)="onFileSelected($event)" accept="image/*" required>
+          <mat-error *ngIf="hasError('imagen', 'required')">Campo obligatorio</mat-error>
+  
+        </div>
 
         <div class="text-center mt-5">
           <p-button type="submit">Guardar</p-button>

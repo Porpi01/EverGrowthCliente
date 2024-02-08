@@ -10,7 +10,8 @@
           <div>
             <h1>CATEGORIA</h1>
             <div><strong>Nombre:</strong> {{ categorias.nombre }}</div>
-           
+            <div><strong >Imagen:</strong> <img class="rounded" class="img-thumbnail" [src]="categorias.imagen" alt="Imagen del producto" >
+            </div>
             <div *ngIf="categorias.productos !== undefined">
               <strong>Productos:</strong>
               <ng-container *ngIf="categorias.productos > 0; else noProductos">

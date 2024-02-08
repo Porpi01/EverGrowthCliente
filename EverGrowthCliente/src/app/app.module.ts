@@ -108,7 +108,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { HomeUserComponent } from './components/Shared/HomeUser/HomeUser.component';
 import { UserProductoDetailUnroutedComponent } from './components/Producto/user-producto-detail-unrouted/user-producto-detail-unrouted.component';
 import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
-
+import { UserValoracionPlistUnroutedComponent } from './components/Valoracion/user-valoracion-plist-unrouted/user-valoracion-plist-unrouted.component';
+import { HomeLogoutComponent } from './components/Shared/HomeLogout/HomeLogout.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +122,7 @@ import { UserProductoViewRoutedComponent } from './components/Producto/user-prod
     LoginComponent,
     HomeComponent,
     HomeUserComponent,
+    HomeLogoutComponent,
 
     //Componentes entidad Usuario
     AdminUserPlistRoutedComponent,
@@ -142,6 +144,7 @@ import { UserProductoViewRoutedComponent } from './components/Producto/user-prod
     AdminValoracionNewRoutedComponent,
     AdminValoracionFormUnroutedComponent,
     AdminValoracionEditRoutedComponent,
+    UserValoracionPlistUnroutedComponent,
 
     //Componentes entidad Producto
     AdminProductoPlistUnroutedComponent,

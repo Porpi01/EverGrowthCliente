@@ -6,27 +6,23 @@
     <div class="col-lg-5 col-md-6 col-sm-6">
       <span class="p-input-icon-left">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)" />
+        <input type="text" pInputText [(ngModel)]="value" [disabled]="true"  />
       </span>
     </div>
   </div>
+</div>
 
 
-
+<div class="container">
   <div class="row">
     <!-- Columna de Categorías -->
     <div class="col-lg-2 col-md-2 col-sm-2">
       <h1>Categorías</h1>
       <ul class="categoria-list">
-        <li *ngFor="let cat of categoria" class="categoria-item" (click)="filtrarPorCategoria(cat.id)"
-          [class.active]="cat.id === idCategoriaFiltrada && filtrandoPorCategoria">
-          <img  [src]="cat.imagen" class="img-thumbnail"alt="Imagen del producto" >
+        <li *ngFor="let cat of categoria" class="categoria-item">
           {{ cat.nombre }} ({{ cat.productos }})
         </li>
       </ul>
-      <!-- Botón para quitar el filtro -->
-      <button *ngIf="filtrandoPorCategoria" pButton type="button" (click)="quitarFiltro()"
-        class="btn btn-primary">Quitar filtro</button>
     </div>
 
     <!-- Columna de Productos -->
@@ -36,14 +32,14 @@
           <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
             <p-card [header]="producto.nombre">
               <ng-template pTemplate="header">
-                <img [src]="producto.imagen" alt="Imagen del producto" class="product-image" (click)="doView(producto)">
+                <img [src]="producto.imagen" alt="Imagen del producto" class="product-image">
               </ng-template>
 
               <p>Precio: {{producto.precio}} €</p>
 
                <ng-template pTemplate="footer">
                 <div class="d-grid gap-2">
-                  <button pButton type="button" label="Añadir" (click)="addToCart(producto)" class="btn btn-primary btn-block">
+                  <button pButton type="button" label="Añadir"  [disabled]="true" class="btn btn-primary btn-block">
                     <i class="fa-solid fa-cart-shopping"></i>
                   </button>
                 </div>
@@ -61,8 +57,8 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12 d-flex justify-content-center mb-3">
-      <button pButton type="button" label="Anterior" (click)="cargarPagina(-1)" class="btn btn-primary  me-2"></button>
-      <button pButton type="button" label="Siguiente" (click)="cargarPagina(1)" class="btn btn-primary "></button>
+      <button pButton type="button" label="Anterior"  [disabled]="true" class="btn btn-primary  me-2"></button>
+      <button pButton type="button" label="Siguiente"  [disabled]="true" class="btn btn-primary "></button>
     </div>
   </div>
 </div>

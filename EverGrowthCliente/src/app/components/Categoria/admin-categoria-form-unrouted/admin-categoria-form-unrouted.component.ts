@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
+import { MediaService } from './../../../service/Media.service';
 
 export function startWithCapitalLetter(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -33,14 +34,15 @@ export class AdminCategoriaFormUnroutedComponent implements OnInit {
   status: HttpErrorResponse | null = null;
 
   oDynamicDialogRef: DynamicDialogRef | undefined;
-
+  url?: string;
+  selectedImageUrl: string | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
     private CategoriaService: CategoriaService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private dialogService: DialogService,
+    private MediaService: MediaService
   ) {
     this.initializeForm(this.categoria);
   }
@@ -49,7 +51,7 @@ export class AdminCategoriaFormUnroutedComponent implements OnInit {
     this.categoriaForm = this.formBuilder.group({
       id: [categoria.id],
       nombre: [categoria.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255),startWithCapitalLetter()]],
-
+      imagen: [categoria.imagen, Validators.required],
     });
   }
 
@@ -108,6 +110,25 @@ export class AdminCategoriaFormUnroutedComponent implements OnInit {
           }
         });
       }
+    }
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      this.MediaService.uploadFile(formData).subscribe({
+        next: (response) => {
+          this.selectedImageUrl = response.url; // Asignar la URL del archivo seleccionado
+          this.categoria.imagen = response.url;
+          this.categoriaForm.controls['imagen'].patchValue(response.url);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.status = error;
+          this.snackBar.open('Error al subir la imagen', '', { duration: 2000 });
+        }
+      });
     }
   }
 

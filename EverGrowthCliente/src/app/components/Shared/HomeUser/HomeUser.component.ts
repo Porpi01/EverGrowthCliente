@@ -20,16 +20,16 @@ import { Router } from '@angular/router';
 })
 export class HomeUserComponent implements OnInit {
 
-  @Input() forceReload: Subject<boolean> = new Subject<boolean>();
-  @Input() id_categoria: number = 0; //filter by user
+  @Input() id_categoria: number = 0; // Filtro por categoría
+  id_producto: number = 0;
   productosSeleccionados: IProducto[] = [];
   oPage: IProductoPage | undefined;
-  oPedido: IPedido | null = null;
-  orderField: string = "id";
-  orderDirection: string = "asc";
   productos: IProducto[] = [];
+  
   categoria: ICategoria[] = [];
   productosPorPagina: number = 8;
+  orderField: string = 'id';
+  orderDirection: string = 'asc';
   oPaginatorState = { first: 0, rows: this.productosPorPagina, page: 0, pageCount: 0 };
   value: string = '';
   status: HttpErrorResponse | null = null;
@@ -37,33 +37,24 @@ export class HomeUserComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
   oCategoria: ICategoria | null = null;
   strUserName: string = '';
+  idCategoriaFiltrada: number | null = null;
+filtrandoPorCategoria: boolean = false;
 
   constructor(
     private productoService: ProductoService,
-    public dialogService: DialogService,
- 
-    private pedidoService: PedidoService,
-    private SesionService: SesionService,
+    private sesionService: SesionService,
     private CategoriaService: CategoriaService,
-    private oRouter: Router,
+    private oRouter: Router
   ) { }
 
   ngOnInit() {
-    this.strUserName = this.SesionService.getUsername();
+    this.strUserName = this.sesionService.getUsername();
     this.getPage();
     this.getCategorias();
     if (this.id_categoria > 0) {
       this.getCategoria();
     }
-    this.forceReload.subscribe({
-      next: (v) => {
-        if (v) {
-          this.getPage();
-        }
-      }
-    });
   }
-
 
   onInputChange(query: string): void {
     if (query.length > 2) {
@@ -85,6 +76,11 @@ export class HomeUserComponent implements OnInit {
     }
   }
 
+  onPageChange(event: PaginatorState) {
+    this.oPaginatorState.rows = this.productosPorPagina;
+    this.getPage();
+  }
+
   getPage(): void {
     this.productoService
       .getPage(
@@ -98,19 +94,13 @@ export class HomeUserComponent implements OnInit {
         next: (data: IProductoPage) => {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
-          this.productos = data.content; 
-          
+          this.productos = data.content;
           console.log(this.productos);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
         },
       });
-  }
-
-  onPageChange(event: PaginatorState) {
-    this.oPaginatorState.rows = this.productosPorPagina;
-    this.getPage();
   }
 
   doOrder(fieldorder: string) {
@@ -174,7 +164,41 @@ export class HomeUserComponent implements OnInit {
     this.oRouter.navigate(['/user', 'producto', 'view', producto.id]);
   }
 
+  // Método para filtrar por categoría cuando se hace clic en una categoría
+  filtrarPorCategoria(idCategoria: number): void {
+    this.id_categoria = idCategoria;
+    this.getPage(); 
+    this.idCategoriaFiltrada = idCategoria;
+    this.filtrandoPorCategoria = true;
+  }
+
+  quitarFiltro(): void {
+    this.value = ''; // Limpiar el valor del filtro de búsqueda
+    console.log(this.value);
+    
+    this.productoService.getPage(
+        this.productosPorPagina,
+        this.oPaginatorState.page,
+        this.orderField,
+        this.orderDirection,
+        0 // Filtro por categoría establecido a 0 para mostrar todos los productos
+    ).subscribe({
+        next: (data: IProductoPage) => {
+            this.oPage = data;
+            this.oPaginatorState.pageCount = data.totalPages;
+            this.productos = data.content;
+            console.log(this.productos);
+        },
+        error: (error: HttpErrorResponse) => {
+            this.status = error;
+        }
+    });
+    
+    this.id_categoria = 0; // Restablecer el valor de id_categoria a 0
+    console.log(this.id_categoria);
+    
+    this.filtrandoPorCategoria = false; // Desactivar la bandera de filtrado por categoría
+    console.log(this.filtrandoPorCategoria);
 }
 
-
-
+}

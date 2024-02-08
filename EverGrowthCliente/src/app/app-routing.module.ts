@@ -33,14 +33,18 @@ import { LogoutComponent } from './components/Shared/Logout/Logout.component';
 import { HomeComponent } from './components/Shared/Home/Home.component';
 import { HomeUserComponent } from './components/Shared/HomeUser/HomeUser.component';
 import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
+import { HomeLogoutComponent } from './components/Shared/HomeLogout/HomeLogout.component';
 
 const routes: Routes = [
 
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeLogoutComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'userhome', component: HomeUserComponent },
+  { path: 'homelogout', component: HomeLogoutComponent },
+
+  
   
 
 //Usuario

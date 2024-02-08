@@ -23,10 +23,10 @@ export class LogoutComponent implements OnInit {
     this.SesionService.logout();
     this.SesionService.emit({ type: 'logout' });
     this.oMatSnackBar.open("Logout successfull.", '', { duration: 2000 });
-    this.oRouter.navigate(['/home']);
+    this.oRouter.navigate(['/homelogout']);
   }
 
   cancel() {
-    this.oRouter.navigate(['/home']);
+    this.oRouter.navigate(['/homelogout']);
   }
 }

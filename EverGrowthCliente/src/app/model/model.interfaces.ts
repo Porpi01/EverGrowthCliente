@@ -113,7 +113,8 @@ export interface IDetallePedido extends IEntity {
 export interface IDetallePedidoPage extends IPage<IDetallePedido> {
 }
 export interface ICategoria extends IEntity {
-    nombre: string
+    nombre: string,
+    imagen: string,
     productos: number
 }
 

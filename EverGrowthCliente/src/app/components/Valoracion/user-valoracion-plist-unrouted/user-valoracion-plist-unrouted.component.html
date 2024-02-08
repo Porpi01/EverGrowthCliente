@@ -1,0 +1,44 @@
+<div *ngIf="status != null">
+  <div class="d-flex justify-content-center my-3">
+    <div class="alert alert-danger" role="alert">
+      {{ status!.error.message }} - {{ status!.message }}
+    </div>
+  </div>
+</div>
+
+<p-divider></p-divider>
+
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-9 col-md-12 col-sm-12">
+      <div class="d-flex align-items-center">
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
+          [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <ng-container *ngIf="oPage?.content">
+        <div class="row">
+          <div class="col-md-4" *ngFor="let valoracion of oPage?.content">
+            <p-card>
+              <ng-template pTemplate="title">
+                {{ valoracion.titulo | trim:25 }}
+              </ng-template>
+              <ng-template pTemplate="subtitle">
+                {{ valoracion.fecha | date: 'dd/MM/yyyy' }}
+              </ng-template>
+              <ng-template pTemplate="content">
+                <p>{{ valoracion.mensaje | trim:25 }}</p>
+                <div>Usuario: {{ valoracion.user.nombre }} {{ valoracion.user.apellido1 }}</div>
+                <div>Producto: {{ valoracion.producto.nombre }}</div>
+              </ng-template>
+            </p-card>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

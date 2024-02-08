@@ -13,7 +13,9 @@ import { ValoracionService } from './../../../service/Valoracion.service';
 export class UserProductoDetailUnroutedComponent implements OnInit {
 
   @Input() id: number = 1;
-  idProducto: number = 1;
+
+  id_producto: number = 0;
+  id_usuario: number = 0;
   productosSeleccionados: IProducto[] = [];
   productos: IProducto = {} as IProducto;
   status: HttpErrorResponse | null = null;
@@ -21,28 +23,31 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
 
   constructor(
     private productoService: ProductoService,
-  private ValoracionService: ValoracionService,
+    private ValoracionService: ValoracionService,
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig
-  ) { 
+  ) {
     if (config && config.data) {
       this.id = config.data.id;
       console.log(this.config.data);
     }
+ 
   }
 
   ngOnInit() {
-    console.log(this.id);   
+    console.log(this.id);
     this.getOne();
-   
+
   }
+
+
 
   getOne(): void {
     this.productoService.getOne(this.id).subscribe({
       next: (data: IProducto) => {
         this.productos = data;
-        console.log(this.productos);    
-        console.log(data.nombre);  
+        console.log(this.productos);
+        console.log(data.nombre);
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;
@@ -50,7 +55,9 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
     });
   }
 
-
+  onThreadChange(oProducto: IProducto) {
+    this.id_producto = oProducto.id;
+  }
 
   addToCart(producto: IProducto) {
     this.productosSeleccionados.push(producto);

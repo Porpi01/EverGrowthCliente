@@ -1,7 +1,11 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">EverGrowth</a>
+    <a class="navbar-brand" [routerLink]="strUserName ? (oSessionUser?.rol ? '/userhome' : '/home') : '/'">
+      <img src="http://127.0.0.1:8085/media/Logo-removebg-preview.png"  width="150px" height="30px" alt="Nombre del logotipo">
+     
+    </a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas"
       aria-controls="navbarOffcanvas">
       <span class="navbar-toggler-icon"></span>
@@ -13,6 +17,7 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/home'||strUrl=='/'" aria-current="page" routerLink="/home" *ngIf="strUserName && oSessionUser?.rol==false"> Inicio</a>
           </li>

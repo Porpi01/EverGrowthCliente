@@ -1,0 +1,64 @@
+/* Estilos para el contenedor principal */
+.container {
+    margin-top: 20px;
+    background-color: #f4f4f1;
+  }
+  
+
+  
+  .img-fluid {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Para mantener la proporción de aspecto */
+  }
+  
+  .product-details {
+    padding: 20px;
+  }
+  
+  .product-details h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .product-description {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  .price-stock {
+    margin-bottom: 15px;
+  }
+  
+  .price {
+    font-size: 20px;
+    color: #007bff;
+  }
+  
+  .stock {
+    font-size: 16px;
+  }
+  
+  .rating {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 15px;
+  }
+ 
+  
+  /* Estilos para el botón de añadir al carrito */
+  .btn-primary {
+    background-color: #ef6461; /* Verde */
+    border-color: #ef6461; /* Verde */
+  }
+  
+
+  
+  /* Estilos para la sección de valoraciones */
+  .valoraciones {
+    margin-top: 20px;
+  }
+  
+  .valoraciones h2 {
+    color: #343a40; /* Color oscuro para el título de las valoraciones */
+  }

@@ -32,6 +32,7 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
   imagenBase64: string | null = null;
   ref: DynamicDialogRef | undefined;
   oCategoria: ICategoria | null = null;
+  
 
   value: string = '';
   url?: string;

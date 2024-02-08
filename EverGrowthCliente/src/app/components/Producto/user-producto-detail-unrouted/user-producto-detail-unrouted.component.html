@@ -1,25 +1,36 @@
 <div class="container">
   <div class="row">
-    <!-- Imagen del producto -->
+    <!-- Información del producto -->
     <div class="col-lg-4">
       <img [src]="productos.imagen" alt="Imagen del producto" class="img-fluid">
     </div>
 
-    <!-- Información del producto -->
-    <div class="col-lg-4">
-      <h1>{{ productos.nombre }}</h1>
-      <p> {{ productos.valoracion }} opiniones</p>
-      <p>Descripción del producto: {{ productos.descripcion }}</p>
+    <div class="col-lg-8">
+      <div class="product-details">
+        <h1>{{ productos.nombre }}</h1>
+        <p class="product-description">{{ productos.descripcion }}</p>
+        <div class="price-stock">
+          <p class="price">{{ productos.precio }} €</p>
+          <p class="stock">Stock: {{ productos.stock }}</p>
+        </div>
+        <p class="rating">{{ productos.valoracion }} opiniones</p>
+        <button type="button" class="btn btn-primary btn-lg" (click)="addToCart(productos)">Añadir al carrito</button>
+      </div>
     </div>
-
-
-    <div class="col-lg-4">
-     <h2>{{ productos.precio }} € </h2>
-          <p> Stock:{{ productos.stock }}</p>
-        
-    <!-- Botón de añadir al carrito -->
-    <div class="col-lg-4">
-      <button type="button" class="btn btn-primary btn-lg btn-block" (click)="addToCart(productos)">Añadir</button>
-    </div>
- 
+  </div>
 </div>
+
+<!-- Sección de valoraciones -->
+<div class="valoraciones">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="valoraciones">
+        <h2>Valoraciones</h2>
+        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 valoraciones">
+          <app-user-valoracion-plist-unrouted   [id_producto_filter]="productos.id"></app-user-valoracion-plist-unrouted>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
