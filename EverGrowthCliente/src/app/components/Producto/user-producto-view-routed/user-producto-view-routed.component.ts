@@ -9,12 +9,17 @@ import { ActivatedRoute } from '@angular/router';
 export class UserProductoViewRoutedComponent implements OnInit {
 
   id: number = 1;
+ 
+
 
   constructor(
     private oActivatedRoute: ActivatedRoute
   ) {
-    this.id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") || "1");
-  }
+    this.id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") || "1"); 
+  
+
+   }
+
 
   ngOnInit() {
   }

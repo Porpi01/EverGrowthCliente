@@ -19,10 +19,8 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
 
 
- 
-  @Input() id_producto_filter: number = 0;
-
-id_usuario_filter: number = 0; //filter by user
+  @Input() id_usuario: number = 0;
+  @Input() id: number= 0;
 
   oPage: IValoracionPage | undefined;
   orderField: string = 'id';
@@ -55,9 +53,12 @@ id_usuario_filter: number = 0; //filter by user
     this.getPage();
 
  
-    if (this.id_producto_filter > 0) {
+    if (this.id_usuario > 0) {
+      this.getUsuario();
+      
+    }
+    if (this.id > 0) {
       this.getProducto();
-     
     }
     this.forceReload.subscribe({
       next: (v) => {
@@ -76,8 +77,8 @@ id_usuario_filter: number = 0; //filter by user
         this.oPaginatorState.page,
         this.orderField,
         this.orderDirection,
-        this.id_producto_filter,
-        this.id_usuario_filter
+        this.id_usuario, 
+        this.id
       
       )
       .subscribe({
@@ -87,8 +88,7 @@ id_usuario_filter: number = 0; //filter by user
           this.valoraciones = data.content;
           console.log(this.oPaginatorState);
           console.log(this.valoraciones);
-          console.log(this.id_usuario_filter)
-          console.log(this.id_producto_filter)
+         
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -148,9 +148,22 @@ id_usuario_filter: number = 0; //filter by user
   }
 
 
+  getUsuario(): void {
+    this.UsuarioService.getOne(this.id_usuario).subscribe({
+      next: (data: IUsuario) => {
+        this.oUsuario = data;
+
+        console.log(this.oUsuario.id);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.status = error;
+      }
+
+    })
+  }
 
   getProducto(): void {
-    this.ProductoService.getOne(this.id_producto_filter).subscribe({
+    this.ProductoService.getOne(this.id).subscribe({
       next: (data: IProducto) => {
         this.oProducto = data;
       },

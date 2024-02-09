@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-5 d-none d-md-block">
+      <i class="fa-solid fa-circle-info"></i>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-12">
+      <p-card class="custom-card">
+        <ng-template pTemplate="content">
+          <div>
+            <h1>CARRITO</h1>
+          <div><strong>Cantidad:</strong> {{ carritos.cantidad }}</div>
+      
+            <div *ngIf="carritos.producto">
+              <strong>Producto:</strong>
+              <ng-container *ngIf="carritos.producto.id">
+                <a [routerLink]="['/admin','producto','view',carritos.producto.id]">
+                  {{ carritos.producto.nombre }} 
+                </a>
+              </ng-container>
+            </div>
+            <div *ngIf="carritos.user">
+              <strong>Usuario:</strong>
+              <ng-container *ngIf="carritos.user.id">
+                <a [routerLink]="['/admin','usuario','view',carritos.user.id]">
+                  {{ carritos.user.nombre }}  {{ carritos.user.apellido1 }} 
+                </a>
+              </ng-container>
+            </div>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>

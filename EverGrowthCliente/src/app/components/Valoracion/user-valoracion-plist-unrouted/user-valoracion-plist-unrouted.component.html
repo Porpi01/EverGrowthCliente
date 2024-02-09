@@ -1,3 +1,4 @@
+
 <div *ngIf="status != null">
   <div class="d-flex justify-content-center my-3">
     <div class="alert alert-danger" role="alert">
@@ -7,10 +8,9 @@
 </div>
 
 <p-divider></p-divider>
-
 <div class="container">
   <div class="row justify-content-center align-items-center">
-    <div class="col-lg-9 col-md-12 col-sm-12">
+    <div class="col-lg-12 col-md-12 col-sm-12">
       <div class="d-flex align-items-center">
         <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
           [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
@@ -19,26 +19,38 @@
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="col-lg-7 col-md-6 col-sm-6">
+      <!-- Contenedor con información de las valoraciones -->
       <ng-container *ngIf="oPage?.content">
         <div class="row">
-          <div class="col-md-4" *ngFor="let valoracion of oPage?.content">
-            <p-card>
+          <div class="col-lg-12 col-md-12 col-sm-12" *ngFor="let valoracion of oPage?.content">
+            <p-card class="custom-card">
               <ng-template pTemplate="title">
-                {{ valoracion.titulo | trim:25 }}
+                <div>{{ valoracion.titulo }}</div>
               </ng-template>
               <ng-template pTemplate="subtitle">
-                {{ valoracion.fecha | date: 'dd/MM/yyyy' }}
+                <span class="custom-badge float-left">{{ valoracion.fecha | date: 'dd/MM/yyyy' }}</span>
               </ng-template>
               <ng-template pTemplate="content">
-                <p>{{ valoracion.mensaje | trim:25 }}</p>
-                <div>Usuario: {{ valoracion.user.nombre }} {{ valoracion.user.apellido1 }}</div>
-                <div>Producto: {{ valoracion.producto.nombre }}</div>
+                <div class="card-content">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="user-info">{{ valoracion.user.nombre }} {{ valoracion.user.apellido1 }}</div>
+                    <div class="message">{{ valoracion.mensaje }}</div>
+                  </div>
+                </div>
               </ng-template>
             </p-card>
           </div>
         </div>
       </ng-container>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-6">
+      <div class="valoraciones">
+        <h1>Preguntas y respuestas</h1>
+        <p>Pregunta sobre este artículo y recibirás respuestas de la comunidad de EverGrowth</p>
+        <button type="button" class="btn btn-primary btn-lg mt-3">Hacer valoración</button>
+      </div>
     </div>
   </div>
 </div>

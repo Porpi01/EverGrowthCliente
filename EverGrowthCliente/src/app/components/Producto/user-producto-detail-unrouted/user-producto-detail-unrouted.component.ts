@@ -1,9 +1,14 @@
 import { Component, Input, OnInit, Optional } from '@angular/core';
-import { IProducto, IValoracion } from 'src/app/model/model.interfaces';
+import { IProducto, IUsuario, IValoracion } from 'src/app/model/model.interfaces';
 import { ProductoService } from './../../../service/Producto.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { ValoracionService } from './../../../service/Valoracion.service';
+import { SesionService } from 'src/app/service/Sesion.service';
+import { ConfirmationService } from 'primeng/api';
+import { CarritoService } from './../../../service/Carrito.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-producto-detail-unrouted',
@@ -25,7 +30,12 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
     private productoService: ProductoService,
     private ValoracionService: ValoracionService,
     @Optional() public ref: DynamicDialogRef,
-    @Optional() public config: DynamicDialogConfig
+    @Optional() public config: DynamicDialogConfig,
+    private SesionService: SesionService,
+    private ConfirmationService: ConfirmationService,
+    private CarritoService: CarritoService,
+    private matSnackBar: MatSnackBar,
+    private router: Router
   ) {
     if (config && config.data) {
       this.id = config.data.id;
@@ -59,10 +69,52 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
     this.id_producto = oProducto.id;
   }
 
-  addToCart(producto: IProducto) {
-    this.productosSeleccionados.push(producto);
-    console.log(`Producto '${producto.nombre}' añadido al carrito.`);
+  getTotalAPagar(): number {
+    const totalAPagar = this.productosSeleccionados.reduce((total, producto) => total + producto.precio, 0);
+    return totalAPagar;
   }
+
+  addToCart(product: IProducto) {
+    this.productosSeleccionados.push(product);
+    console.log(`Producto '${product.nombre}' añadido al carrito.`);
+  }
+
+  makeProductPurhase(product: IProducto): void {
+    this.SesionService.getSessionUser()?.subscribe({
+      next: (user: IUsuario) => {
+        if (user) {
+          this.ConfirmationService.confirm({
+            message: '¿Quieres comprar el producto?',
+            accept: () => {
+              const cantidad = 1;
+              this.CarritoService.makeProductPurhase(product.id, user.id, cantidad).subscribe({
+                next: () => {
+                  this.matSnackBar.open('Producto comprado', 'Aceptar', {duration: 3000});
+                  this.router.navigate(['/usuario', 'carrito', 'plist', user.id]);
+                  console.log('Producto comprado');
+                },
+                error: (err: HttpErrorResponse) => {
+                  this.status = err;
+                  this.matSnackBar.open('Error al comprar el producto', 'Aceptar', {duration: 3000});
+                }
+              });
+              },
+            reject: () => {
+              this.matSnackBar.open('Compra cancelada', 'Aceptar', {duration: 3000});
+            }
+            })
+        } else {
+          this.matSnackBar.open('Debes estar logueado para comprar productos', 'Aceptar', {duration: 3000});
+        };
+        },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+        this.matSnackBar.open('Error al obtener el usuario', 'Aceptar', {duration: 3000});
+      }
+      });
+    }
+
+  
 }
 
 

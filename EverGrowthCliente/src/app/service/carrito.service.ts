@@ -69,4 +69,8 @@ export class CarritoService {
     return this.http.delete<number>(this.sUrl + "/empty");
   }
 
+  makeProductPurhase(product_id: number, user_id: number, amount: number): Observable<ICarrito> {
+    return this.http.post<ICarrito>(this.sUrl + '/añadirProducto/' + product_id + '/' + user_id + '/' + amount, {});
+}
+
 }

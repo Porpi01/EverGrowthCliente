@@ -110,6 +110,7 @@ import { UserProductoDetailUnroutedComponent } from './components/Producto/user-
 import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
 import { UserValoracionPlistUnroutedComponent } from './components/Valoracion/user-valoracion-plist-unrouted/user-valoracion-plist-unrouted.component';
 import { HomeLogoutComponent } from './components/Shared/HomeLogout/HomeLogout.component';
+import { UserCarritoDetailUnorutedComponent } from './components/Carrito/user-carrito-detail-unoruted/user-carrito-detail-unoruted.component';
 
 @NgModule({
   declarations: [
@@ -195,7 +196,9 @@ import { HomeLogoutComponent } from './components/Shared/HomeLogout/HomeLogout.c
     AdminCarritoDetailUnroutedComponent,
     AdminCarritoNewRoutedComponent ,
     AdminCarritoFormUnroutedComponent,
-    AdminCarritoEditRoutedComponent
+    AdminCarritoEditRoutedComponent,
+    UserCarritoDetailUnorutedComponent
+
 
   ],
   imports: [

@@ -110,7 +110,6 @@ const routes: Routes = [
 { path: 'admin/carrito/new', component: AdminCarritoNewRoutedComponent},
 { path: 'admin/carrito/edit/:id', component: AdminCarritoEditRoutedComponent},
 
-
 ];
 
 @NgModule({

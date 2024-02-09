@@ -1,64 +1,50 @@
-/* Estilos para el contenedor principal */
-.container {
-    margin-top: 20px;
-    background-color: #f4f4f1;
-  }
-  
+.shipping-details {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+}
 
-  
-  .img-fluid {
-    width: 100%;
-    height: auto;
-    object-fit: cover; /* Para mantener la proporción de aspecto */
-  }
-  
-  .product-details {
-    padding: 20px;
-  }
-  
-  .product-details h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .product-description {
-    font-size: 16px;
-    margin-bottom: 15px;
-  }
-  
-  .price-stock {
-    margin-bottom: 15px;
-  }
-  
-  .price {
-    font-size: 20px;
-    color: #007bff;
-  }
-  
-  .stock {
-    font-size: 16px;
-  }
-  
-  .rating {
-    font-size: 14px;
-    color: #6c757d;
-    margin-bottom: 15px;
-  }
- 
-  
-  /* Estilos para el botón de añadir al carrito */
-  .btn-primary {
-    background-color: #ef6461; /* Verde */
-    border-color: #ef6461; /* Verde */
-  }
-  
+.shipping-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
 
-  
-  /* Estilos para la sección de valoraciones */
-  .valoraciones {
-    margin-top: 20px;
-  }
-  
-  .valoraciones h2 {
-    color: #343a40; /* Color oscuro para el título de las valoraciones */
-  }
+.shipping-info {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+.form-group {
+  margin-top: 20px;
+}
+
+.form-label {
+  font-size: 18px;
+  color: #333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #ef6461;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  font-size: 18px;
+  cursor: pointer;
+
+}
+
