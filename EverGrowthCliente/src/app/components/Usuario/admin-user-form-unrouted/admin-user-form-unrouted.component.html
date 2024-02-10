@@ -88,8 +88,8 @@
         </div>
 
         <mat-radio-group aria-label="Tipo de usuario" formControlName="rol" required>
-          <mat-radio-button [value]="true">Admin</mat-radio-button>
-          <mat-radio-button [value]="false">User</mat-radio-button>
+          <mat-radio-button [value]="false">Admin</mat-radio-button>
+          <mat-radio-button [value]="true">User</mat-radio-button>
           <mat-error *ngIf="hasError('rol', 'required')">Campo obligatorio</mat-error>
         </mat-radio-group>
 

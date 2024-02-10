@@ -59,8 +59,8 @@
             <td class="d-none d-sm-table-cell">{{ user.direccion }}</td>
             <td>{{ user.username }}</td>
             <td class="text-center">
-              <span *ngIf="user.rol==true">Admin</span>
-              <span *ngIf="user.rol==false">User</span>
+              <span *ngIf="user.rol==false">Admin</span>
+              <span *ngIf="user.rol==true">User</span>
             </td>
             <td class="text-center">
               <a [routerLink]="['/admin','pedido','plist','byusuario',user.id]" *ngIf="user.pedidos>0">{{user.pedidos}}</a>

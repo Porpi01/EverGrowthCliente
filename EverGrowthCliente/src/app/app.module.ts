@@ -111,6 +111,9 @@ import { UserProductoViewRoutedComponent } from './components/Producto/user-prod
 import { UserValoracionPlistUnroutedComponent } from './components/Valoracion/user-valoracion-plist-unrouted/user-valoracion-plist-unrouted.component';
 import { HomeLogoutComponent } from './components/Shared/HomeLogout/HomeLogout.component';
 import { UserCarritoDetailUnorutedComponent } from './components/Carrito/user-carrito-detail-unoruted/user-carrito-detail-unoruted.component';
+import { UserCarritoViewRoutedComponent } from './components/Carrito/user-carrito-view-routed/user-carrito-view-routed.component';
+import { UserValoracionFormUnroutedComponent } from './components/Valoracion/user-valoracion-form-unrouted/user-valoracion-form-unrouted.component';
+import { UserValoracionNewRoutedComponent } from './components/Valoracion/user-valoracion-new-routed/user-valoracion-new-routed.component';
 
 @NgModule({
   declarations: [
@@ -146,6 +149,8 @@ import { UserCarritoDetailUnorutedComponent } from './components/Carrito/user-ca
     AdminValoracionFormUnroutedComponent,
     AdminValoracionEditRoutedComponent,
     UserValoracionPlistUnroutedComponent,
+    UserValoracionFormUnroutedComponent,
+    UserValoracionNewRoutedComponent,
 
     //Componentes entidad Producto
     AdminProductoPlistUnroutedComponent,
@@ -197,7 +202,8 @@ import { UserCarritoDetailUnorutedComponent } from './components/Carrito/user-ca
     AdminCarritoNewRoutedComponent ,
     AdminCarritoFormUnroutedComponent,
     AdminCarritoEditRoutedComponent,
-    UserCarritoDetailUnorutedComponent
+    UserCarritoDetailUnorutedComponent,
+    UserCarritoViewRoutedComponent
 
 
   ],

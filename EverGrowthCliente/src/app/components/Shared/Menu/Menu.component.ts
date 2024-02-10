@@ -6,6 +6,7 @@ import { IUsuario, SessionEvent } from 'src/app/model/model.interfaces';
 import { SesionService } from 'src/app/service/Sesion.service';
 import { UsuarioService } from 'src/app/service/Usuario.service';
 import { UserUserDetailUnroutedComponent } from '../../Usuario/user-user-detail-unrouted/user-user-detail-unrouted.component';
+import { UserCarritoViewRoutedComponent } from '../../Carrito/user-carrito-view-routed/user-carrito-view-routed.component';
 
 
 @Component({
@@ -83,6 +84,23 @@ export class MenuComponent implements OnInit {
           id: this.oSessionUser.id
         },
         header: "Vista de usuario",
+        width: '50%',
+        contentStyle: { overflow: 'auto' },
+        baseZIndex: 10000,
+        maximizable: false
+      });
+    }
+    return false;
+  }
+
+  mostrarCarrito($event: Event) {
+    if (this.oSessionUser) {
+      let ref: DynamicDialogRef | undefined;
+      ref = this.oDialogService.open(UserCarritoViewRoutedComponent, {
+        data: {
+          id: this.oSessionUser.id
+        },
+        header: "Vista del carrito",
         width: '50%',
         contentStyle: { overflow: 'auto' },
         baseZIndex: 10000,

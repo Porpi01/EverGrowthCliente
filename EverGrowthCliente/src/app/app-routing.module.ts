@@ -34,6 +34,8 @@ import { HomeComponent } from './components/Shared/Home/Home.component';
 import { HomeUserComponent } from './components/Shared/HomeUser/HomeUser.component';
 import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
 import { HomeLogoutComponent } from './components/Shared/HomeLogout/HomeLogout.component';
+import { UserCarritoViewRoutedComponent } from './components/Carrito/user-carrito-view-routed/user-carrito-view-routed.component';
+import { UserValoracionNewRoutedComponent } from './components/Valoracion/user-valoracion-new-routed/user-valoracion-new-routed.component';
 
 const routes: Routes = [
 
@@ -62,6 +64,9 @@ const routes: Routes = [
   { path: 'admin/valoracion/view/:id', component: AdminValoracionViewRoutedComponent },
   { path: 'admin/valoracion/new', component: AdminValoracionNewRoutedComponent },
   { path: 'admin/valoracion/edit/:id', component: AdminValoracionEditRoutedComponent },
+  { path: 'usuario/valoracion/new', component: UserValoracionNewRoutedComponent },
+
+  
 
 
 
@@ -109,6 +114,7 @@ const routes: Routes = [
 { path: 'admin/carrito/view/:id', component: AdminCarritoViewRoutedComponent },
 { path: 'admin/carrito/new', component: AdminCarritoNewRoutedComponent},
 { path: 'admin/carrito/edit/:id', component: AdminCarritoEditRoutedComponent},
+{ path: 'usuario/carrito/view/:id', component: UserCarritoViewRoutedComponent },
 
 ];
 

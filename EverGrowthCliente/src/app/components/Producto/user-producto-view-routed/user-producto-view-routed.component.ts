@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { IProducto } from 'src/app/model/model.interfaces';
 
 @Component({
   selector: 'app-user-producto-view-routed',
@@ -9,7 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 export class UserProductoViewRoutedComponent implements OnInit {
 
   id: number = 1;
- 
+  actualizarValoraciones: Subject<boolean> = new Subject<boolean>();
+
 
 
   constructor(
@@ -19,6 +22,9 @@ export class UserProductoViewRoutedComponent implements OnInit {
   
 
    }
+   onValoracionChange(oProducto: Boolean) {
+    this.actualizarValoraciones.next(true);
+  }
 
 
   ngOnInit() {

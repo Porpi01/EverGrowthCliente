@@ -39,8 +39,8 @@
         <td>{{ user.email }}</td>
         <td>{{ user.username }}</td>
         <td class="text-center">
-          <span *ngIf="user.rol==true">Admin</span>
-          <span *ngIf="user.rol==false">User</span>
+          <span *ngIf="user.rol==false">Admin</span>
+          <span *ngIf="user.rol==true">User</span>
         </td>
         <td class="text-center">
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">

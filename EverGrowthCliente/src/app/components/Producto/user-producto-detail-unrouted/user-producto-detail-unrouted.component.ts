@@ -6,9 +6,10 @@ import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { ValoracionService } from './../../../service/Valoracion.service';
 import { SesionService } from 'src/app/service/Sesion.service';
 import { ConfirmationService } from 'primeng/api';
-import { CarritoService } from './../../../service/Carrito.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { PedidoService } from 'src/app/service/Pedido.service';
+
 
 @Component({
   selector: 'app-user-producto-detail-unrouted',
@@ -33,7 +34,7 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
     @Optional() public config: DynamicDialogConfig,
     private SesionService: SesionService,
     private ConfirmationService: ConfirmationService,
-    private CarritoService: CarritoService,
+    private PedidoService: PedidoService,
     private matSnackBar: MatSnackBar,
     private router: Router
   ) {
@@ -65,10 +66,7 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
     });
   }
 
-  onThreadChange(oProducto: IProducto) {
-    this.id_producto = oProducto.id;
-  }
-
+ 
   getTotalAPagar(): number {
     const totalAPagar = this.productosSeleccionados.reduce((total, producto) => total + producto.precio, 0);
     return totalAPagar;
@@ -76,7 +74,9 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
 
   addToCart(product: IProducto) {
     this.productosSeleccionados.push(product);
+    console.log(this.productosSeleccionados);
     console.log(`Producto '${product.nombre}' añadido al carrito.`);
+    this.matSnackBar.open('Producto añadido', 'Aceptar', {duration: 3000});
   }
 
   makeProductPurhase(product: IProducto): void {
@@ -87,10 +87,10 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
             message: '¿Quieres comprar el producto?',
             accept: () => {
               const cantidad = 1;
-              this.CarritoService.makeProductPurhase(product.id, user.id, cantidad).subscribe({
+              this.PedidoService.makeProductPurhase(product.id, user.id, cantidad).subscribe({
                 next: () => {
                   this.matSnackBar.open('Producto comprado', 'Aceptar', {duration: 3000});
-                  this.router.navigate(['/usuario', 'carrito', 'plist', user.id]);
+                  this.router.navigate(['/usuario', 'carrito', 'view', product.id]);
                   console.log('Producto comprado');
                 },
                 error: (err: HttpErrorResponse) => {

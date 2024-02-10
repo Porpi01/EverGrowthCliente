@@ -17,8 +17,8 @@
             <div><strong>Dirección:</strong> {{ usuarios.direccion }}</div>
             <div><strong>Username:</strong> {{ usuarios.username }}</div>
             <div><strong>Rol:</strong>   
-              <span *ngIf="usuarios.rol==false">User</span>
-              <span *ngIf="usuarios.rol==true">Admin</span>
+              <span *ngIf="usuarios.rol==false">Admin</span>
+              <span *ngIf="usuarios.rol==true">User</span>
             </div>
             <div *ngIf="usuarios.valoracion !== undefined">
               <strong>Valoraciones:</strong>

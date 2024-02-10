@@ -2,12 +2,16 @@
   background-color: #f8f9fa;
   padding: 20px;
   border-radius: 5px;
+
+
 }
 
 .shipping-title {
   font-size: 24px;
   color: #333;
   margin-bottom: 15px;
+  font-size: 16px;
+
 }
 
 .shipping-info {
@@ -48,3 +52,8 @@
 
 }
 
+.product-details{
+  font-size: 16px;
+  text-align: justify;
+
+}

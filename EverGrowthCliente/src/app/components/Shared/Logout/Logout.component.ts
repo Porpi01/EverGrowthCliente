@@ -26,7 +26,24 @@ export class LogoutComponent implements OnInit {
     this.oRouter.navigate(['/homelogout']);
   }
 
-  cancel() {
-    this.oRouter.navigate(['/homelogout']);
+  isUserAdmin(): boolean {
+
+    return false;
+  
   }
+
+  cancel() {
+
+        if (this.isUserAdmin()==false) {
+            this.oRouter.navigate(['/home']); // Redirige al home del administrador
+            console.log("admin");
+        } else {
+            this.oRouter.navigate(['/userhome']); // Redirige al home del usuario normal
+            console.log("userhome");
+        }
+    }
+
+
+
+
 }

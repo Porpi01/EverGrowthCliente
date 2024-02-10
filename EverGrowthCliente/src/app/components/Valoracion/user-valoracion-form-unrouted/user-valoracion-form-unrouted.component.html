@@ -1,0 +1,55 @@
+<div *ngIf="status !== null">
+  <div class="d-flex justify-content-center my-3">
+    <div class="alert alert-danger" role="alert">
+      {{ status!.error.message }} - {{ status!.message }}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="status == null">
+  <div class="container col-12">
+    <div class="d-flex justify-content-center my-3">
+      <form [formGroup]="valoracionForm" (ngSubmit)="onSubmit()">
+        
+     
+        
+        <!-- Titulo field -->
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Título:</mat-label>
+            <input matInput formControlName="titulo" placeholder="Título" required>
+            <mat-error *ngIf="hasError('titulo', 'required')">Campo obligatorio</mat-error>
+            <mat-error *ngIf="hasError('titulo', 'minlength')">Mínimo 3 caracteres</mat-error>
+            <mat-error *ngIf="hasError('titulo', 'maxlength')">Límite excedidos</mat-error>
+            <mat-error *ngIf="hasError('titulo', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
+          </mat-form-field>
+        </div>
+
+    
+
+        <!-- Mensaje field -->
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Mensaje:</mat-label>
+            <textarea matInput formControlName="mensaje" placeholder="Mensaje" required></textarea>
+            <mat-error *ngIf="hasError('mensaje', 'required')">El mensaje es obligatorio</mat-error>
+            <mat-error *ngIf="hasError('mensaje', 'minlength')">El mensaje debe tener al menos 3 caracteres</mat-error>
+            <mat-error *ngIf="hasError('mensaje', 'maxlength')">El mensaje excede el límite de caracteres</mat-error>
+            <mat-error *ngIf="hasError('mensaje', 'startWithCapitalLetter')">El mensaje debe comenzar con mayúscula</mat-error>
+
+          </mat-form-field>
+        </div>
+
+      
+
+       
+       
+        <div class="text-center mt-5">
+          <button class="btn btn-primary" type="submit">Crear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<p-messages></p-messages>

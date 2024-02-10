@@ -68,9 +68,8 @@ export class CarritoService {
   empty(): Observable<number> {
     return this.http.delete<number>(this.sUrl + "/empty");
   }
-
-  makeProductPurhase(product_id: number, user_id: number, amount: number): Observable<ICarrito> {
-    return this.http.post<ICarrito>(this.sUrl + '/añadirProducto/' + product_id + '/' + user_id + '/' + amount, {});
-}
+  addToCart(idUsuario: number, idProducto: number): Observable<number> {
+    return this.http.post<number>(this.sUrl +"/agregarProducto?idUsuario=${idUsuario}&idProducto=${idProducto}", null);
+  }
 
 }

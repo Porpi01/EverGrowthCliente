@@ -59,4 +59,9 @@ export class PedidoService {
     return this.http.delete<number>(this.sUrl + "/empty");
   }
 
+  makeProductPurhase(product_id: number, user_id: number, amount: number): Observable<IPedido> {
+    return this.http.post<IPedido>(this.sUrl + '/sumarProducto/' + product_id + '/' + user_id + '/' + amount, {});
+}
+
+
 }
