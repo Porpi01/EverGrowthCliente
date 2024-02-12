@@ -10,6 +10,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AdminProductoDetailUnroutedComponent } from '../admin-producto-detail-unrouted/admin-producto-detail-unrouted.component';
 import { MediaService } from './../../../service/Media.service';
 import { CategoriaService } from './../../../service/Categoria.service';
+
 @Component({
   selector: 'app-admin-producto-plist-unrouted',
   templateUrl: './admin-producto-plist-unrouted.component.html',

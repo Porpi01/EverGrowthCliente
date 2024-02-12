@@ -16,11 +16,33 @@ import { SesionService } from 'src/app/service/Sesion.service';
   styleUrls: ['./user-valoracion-plist-unrouted.component.css']
 })
 export class UserValoracionPlistUnroutedComponent implements OnInit {
-  @Input() forceReload: Subject<boolean> = new Subject<boolean>();
   @Output() valoracion_change = new EventEmitter<Boolean>();
 
-  @Input() id_usuario: number = 0;
-  @Input() id: number= 0;
+  @Input() 
+  set id_usuario(value: number) {
+   if(value){
+    this.id_usuario_filter = value;
+   }else{
+    this.id_usuario_filter = 0;
+   }
+   this.getPage();
+  }
+  get id_usuario(): number {
+    return this.id_usuario_filter;
+  }
+  @Input() 
+  set id_producto(value: number) {
+    if(value){
+      this.id_producto_filter = value;
+      this.getProducto();
+     }else{
+      this.id_producto_filter = 0;
+     }
+     this.getPage();
+  }
+  get id_producto(): number {
+    return this.id_producto_filter;
+  }
 
   oPage: IValoracionPage | undefined;
   orderField: string = 'id';
@@ -34,6 +56,8 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
   oProducto: IProducto | null = null;
 
   value: string = '';
+  id_usuario_filter: number = 0;
+  id_producto_filter: number = 0;
 
   constructor(
     private ValoracionService: ValoracionService,
@@ -56,16 +80,10 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
       this.getUsuario();
       
     }
-    if (this.id > 0) {
+    if (this.id_producto > 0) {
       this.getProducto();
     }
-    this.forceReload.subscribe({
-      next: (v) => {
-        if (v) {
-          this.getPage();
-        }
-      },
-    });
+   
   }
 
 
@@ -76,8 +94,8 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
         this.oPaginatorState.page,
         this.orderField,
         this.orderDirection,
-        this.id_usuario, 
-        this.id
+        this.id_usuario_filter, 
+        this.id_producto_filter
       
       )
       .subscribe({
@@ -87,6 +105,10 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
           this.valoraciones = data.content;
           console.log(this.oPaginatorState);
           console.log(this.valoraciones);
+          console.log(this.id_producto);
+          console.log(this.id_usuario);
+          console.log(this.id_producto_filter);
+          console.log(this.id_usuario_filter);
          
         },
         error: (error: HttpErrorResponse) => {
@@ -108,12 +130,12 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
   }
 
  
-  postNewThread(): void {
-    if (this.id > 0 && this.SesionService.isSessionActive()) {
+  postNuevaValoracion(): void {
+    if (this.id_producto_filter > 0 && this.SesionService.isSessionActive()) {
 
       this.ref = this.DialogService.open(UserValoracionFormUnroutedComponent, {
         data: {
-          id_thread: this.id,
+          id_producto: this.id_producto_filter,
         },
         header: 'Nueva valoración',
         width: '40%',
@@ -122,7 +144,7 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
         maximizable: false
       });
 
-      this.ref.onClose.subscribe((nThread: number) => {
+      this.ref.onClose.subscribe((nProducto: number) => {
         this.getPage();
         this.valoracion_change.emit(true);
       });
@@ -149,7 +171,7 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
   }
 
   getProducto(): void {
-    this.ProductoService.getOne(this.id).subscribe({
+    this.ProductoService.getOne(this.id_producto).subscribe({
       next: (data: IProducto) => {
         this.oProducto = data;
       },
@@ -157,6 +179,41 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
         this.status = error;
       }
 
+    })
+  }
+
+  getValoraciones() {
+    const rows: number = this.oPaginatorState.rows ?? 0;
+    const page: number = this.oPaginatorState.page ?? 0;
+    this.ValoracionService.getPage(
+      this.oPaginatorState.rows,
+      this.oPaginatorState.page,
+      this.orderField,
+      this.orderDirection,
+      this.id_usuario_filter, 
+      this.id_producto_filter).subscribe({
+      next: (page: IValoracionPage) => {
+        this.oPage = page;
+        this.oPaginatorState.pageCount = page.totalPages;
+      },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+      }
+    })
+  }
+
+  isUsuarioValoracion(valoracion: IValoracion): boolean {
+    return this.oUsuario !== null && valoracion.user  .id === this.oUsuario.id;
+  }
+
+  borrarValoracion(id_valoracion: number) {
+    this.ValoracionService.removeOne(id_valoracion).subscribe({
+      next: () => {
+        this.getValoraciones();
+      },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+      }
     })
   }
 

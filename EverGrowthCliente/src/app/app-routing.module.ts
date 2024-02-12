@@ -31,20 +31,18 @@ import { AdminProductoEditRoutedComponent } from './components/Producto/admin-pr
 import { LoginComponent } from './components/Shared/Login/Login.component';
 import { LogoutComponent } from './components/Shared/Logout/Logout.component';
 import { HomeComponent } from './components/Shared/Home/Home.component';
-import { HomeUserComponent } from './components/Shared/HomeUser/HomeUser.component';
 import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
-import { HomeLogoutComponent } from './components/Shared/HomeLogout/HomeLogout.component';
 import { UserCarritoViewRoutedComponent } from './components/Carrito/user-carrito-view-routed/user-carrito-view-routed.component';
 import { UserValoracionNewRoutedComponent } from './components/Valoracion/user-valoracion-new-routed/user-valoracion-new-routed.component';
 
 const routes: Routes = [
 
-  { path: '', component: HomeLogoutComponent },
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
-  { path: 'userhome', component: HomeUserComponent },
-  { path: 'homelogout', component: HomeLogoutComponent },
+  
+
 
   
   

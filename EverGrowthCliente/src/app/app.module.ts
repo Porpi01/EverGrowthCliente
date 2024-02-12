@@ -105,15 +105,14 @@ import { UserUserDetailUnroutedComponent } from './components/Usuario/user-user-
 import { PanelModule } from 'primeng/panel';
 import { FileUploadModule } from 'primeng/fileupload';
 import { CarouselModule } from 'primeng/carousel';
-import { HomeUserComponent } from './components/Shared/HomeUser/HomeUser.component';
 import { UserProductoDetailUnroutedComponent } from './components/Producto/user-producto-detail-unrouted/user-producto-detail-unrouted.component';
 import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
 import { UserValoracionPlistUnroutedComponent } from './components/Valoracion/user-valoracion-plist-unrouted/user-valoracion-plist-unrouted.component';
-import { HomeLogoutComponent } from './components/Shared/HomeLogout/HomeLogout.component';
 import { UserCarritoDetailUnorutedComponent } from './components/Carrito/user-carrito-detail-unoruted/user-carrito-detail-unoruted.component';
 import { UserCarritoViewRoutedComponent } from './components/Carrito/user-carrito-view-routed/user-carrito-view-routed.component';
 import { UserValoracionFormUnroutedComponent } from './components/Valoracion/user-valoracion-form-unrouted/user-valoracion-form-unrouted.component';
 import { UserValoracionNewRoutedComponent } from './components/Valoracion/user-valoracion-new-routed/user-valoracion-new-routed.component';
+import { UserProductoPlistUnroutedComponent } from './components/Producto/user-producto-plist-unrouted/user-producto-plist-unrouted.component';
 
 @NgModule({
   declarations: [
@@ -125,8 +124,8 @@ import { UserValoracionNewRoutedComponent } from './components/Valoracion/user-v
     LogoutComponent,
     LoginComponent,
     HomeComponent,
-    HomeUserComponent,
-    HomeLogoutComponent,
+ 
+ 
 
     //Componentes entidad Usuario
     AdminUserPlistRoutedComponent,
@@ -163,6 +162,7 @@ import { UserValoracionNewRoutedComponent } from './components/Valoracion/user-v
     AdminProductoEditRoutedComponent,
     UserProductoDetailUnroutedComponent,
     UserProductoViewRoutedComponent,
+    UserProductoPlistUnroutedComponent,
 
     //Componentes entidad Pedido
     AdminPedidoPlistUnroutedComponent,

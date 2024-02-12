@@ -1,27 +1,24 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ConfirmationService } from 'primeng/api';
-import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
-import { PaginatorState } from 'primeng/paginator';
-import { Subject } from 'rxjs';
-import { IProducto, IProductoPage, IPedido, ICategoria, ICategoriaPage } from 'src/app/model/model.interfaces';
-import { PedidoService } from 'src/app/service/Pedido.service';
-import { ProductoService } from 'src/app/service/Producto.service';
-import { SesionService } from './../../../service/Sesion.service';
-import { CategoriaService } from './../../../service/Categoria.service';
-import { AdminProductoDetailUnroutedComponent } from '../../Producto/admin-producto-detail-unrouted/admin-producto-detail-unrouted.component';
 import { Router } from '@angular/router';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { PaginatorState } from 'primeng/paginator';
+import { IProducto, IProductoPage, ICategoria, ICategoriaPage } from 'src/app/model/model.interfaces';
+import { ProductoService } from 'src/app/service/Producto.service';
+import { SesionService } from 'src/app/service/Sesion.service';
+import { CategoriaService } from './../../../service/Categoria.service';
 
 @Component({
-  selector: 'app-HomeUser',
-  templateUrl: './HomeUser.component.html',
-  styleUrls: ['./HomeUser.component.css']
+  selector: 'app-user-producto-plist-unrouted',
+  templateUrl: './user-producto-plist-unrouted.component.html',
+  styleUrls: ['./user-producto-plist-unrouted.component.css']
 })
-export class HomeUserComponent implements OnInit {
+export class UserProductoPlistUnroutedComponent implements OnInit {
+
 
   @Input() id_categoria: number = 0; // Filtro por categoría
   id_producto: number = 0;
+  id_usuario: number = 0;
   productosSeleccionados: IProducto[] = [];
   oPage: IProductoPage | undefined;
   productos: IProducto[] = [];

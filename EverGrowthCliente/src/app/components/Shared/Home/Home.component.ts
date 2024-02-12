@@ -5,10 +5,12 @@ import { ConfirmationService } from 'primeng/api';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
-import { IPedido, IProducto, IProductoPage } from 'src/app/model/model.interfaces';
+import { IPedido, IProducto, IProductoPage, IUsuario } from 'src/app/model/model.interfaces';
 import { ProductoService } from './../../../service/Producto.service';
 import { PedidoService } from './../../../service/Pedido.service';
-import { SesionService } from 'src/app/service/Sesion.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { SesionService } from './../../../service/Sesion.service';
+import { UsuarioService } from './../../../service/Usuario.service';
 
 @Component({
   selector: 'app-Home',
@@ -18,13 +20,39 @@ import { SesionService } from 'src/app/service/Sesion.service';
 export class HomeComponent implements OnInit {
 
 
+  username: string = '';
+  userSession: IUsuario | null = null;
+  url: string = '';
+
+
   constructor(
-  
-  ) { }
+    private Router: Router,
+    private SesionService: SesionService,
+    private UsuarioService: UsuarioService,
+  ) {
+    console.log('MenuUnroutedComponent creado'); 
+
+    this.Router.events.subscribe((ev) => {
+      if (ev instanceof NavigationEnd) {
+        this.url = ev.url;
+      }
+    })
+
+    this.username = SesionService.getUsername();
+    this.UsuarioService.getByUsername(this.SesionService.getUsername()).subscribe({
+      next: (user: IUsuario) => {
+        this.userSession = user;
+        console.log('User Session:', this.userSession); // Agrega este log
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    });
+   }
 
   ngOnInit() {
-  
   }
+
 
 
 }

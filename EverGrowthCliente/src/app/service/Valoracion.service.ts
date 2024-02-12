@@ -41,7 +41,13 @@ export class ValoracionService {
     return this.http.get<IValoracionPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + strUrlUser + strUrlProduct  + sUrl_filter);
   }
 
+  getValoracionPageByUsuario(usuarioId: number, size: number, page: number, sort: string, direction: string): Observable<IValoracionPage> {
+    return this.http.get<IValoracionPage>(this.sUrl + '/usuario/' + usuarioId + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+}
 
+getValoracionPageByProducto(productoId: number, page: number, size: number, sort: string, direction: string): Observable<IValoracionPage> {
+    return this.http.get<IValoracionPage>(this.sUrl + '/camiseta/' + productoId + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+}
 
   removeOne(id: number | undefined): Observable<number> {
     if (id) {

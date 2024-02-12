@@ -22,25 +22,15 @@ export class LogoutComponent implements OnInit {
   logout() {
     this.SesionService.logout();
     this.SesionService.emit({ type: 'logout' });
-    this.oMatSnackBar.open("Logout successfull.", '', { duration: 2000 });
-    this.oRouter.navigate(['/homelogout']);
+    this.oMatSnackBar.open("Sesión cerrada.", '', { duration: 2000 });
+    this.oRouter.navigate(['/home']);
   }
 
-  isUserAdmin(): boolean {
-
-    return false;
-  
-  }
 
   cancel() {
+    this.oRouter.navigate(['/home']);
 
-        if (this.isUserAdmin()==false) {
-            this.oRouter.navigate(['/home']); // Redirige al home del administrador
-            console.log("admin");
-        } else {
-            this.oRouter.navigate(['/userhome']); // Redirige al home del usuario normal
-            console.log("userhome");
-        }
+     
     }
 
 

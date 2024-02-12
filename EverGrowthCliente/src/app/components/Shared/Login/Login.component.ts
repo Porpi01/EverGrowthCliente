@@ -36,16 +36,14 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.SesionService.login(this.loginForm.value.username, this.CryptoService.getSHA256(this.loginForm.value.password)).subscribe({
         next: (data: string) => {
+          
           this.SesionService.setToken(data);
           this.SesionService.emit({ type: 'login' });
           this.oMatSnackBar.open("Login successful.", '', { duration: 2000 });
-          if (this.loginForm.value.username === 'anita17') {
+          
             this.oRouter.navigate(['/home']);
 
-          } else {
-            this.oRouter.navigate(['/userhome']);
-
-          }
+    
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
