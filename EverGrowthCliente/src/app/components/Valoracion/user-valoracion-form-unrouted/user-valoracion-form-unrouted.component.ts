@@ -96,10 +96,10 @@ initializeForm(valoracion: IValoracion) {
     fecha: [new Date(valoracion.fecha), [Validators.required]],
     mensaje: [valoracion.mensaje, [Validators.required, Validators.minLength(3), Validators.maxLength(2048), startWithCapitalLetter()]],
     user: this.formBuilder.group({
-      id: [valoracion.user.id, Validators.required]
+      id: [this.id_usuario, Validators.required]
     }),
     producto: this.formBuilder.group({
-      id: [valoracion.producto.id, Validators.required]
+      id: [this.id_producto, Validators.required]
     
     }),
     
@@ -107,12 +107,12 @@ initializeForm(valoracion: IValoracion) {
 
 }
 onSubmit() {
-  if (this.usuario && this.producto) {
+ 
     const valoracion = this.valoracionForm.value;
     valoracion.user = this.usuario;
-    console.log(valoracion.user)
+    console.log( "iD USUARIO: " + valoracion.user)
     valoracion.producto = this.producto;
-    console.log(valoracion.producto)
+    console.log("ID PRODUCTO" + valoracion.producto)
 
     this.valoracionService.newOne(valoracion).subscribe({
       next: (data: IValoracion) => {
@@ -124,9 +124,7 @@ onSubmit() {
         this.MessageService.add({ severity: 'error', detail: 'Aceptar', life: 2000 });
       }
     });
-  } else {
-    this.MessageService.add({ severity: 'error', detail: 'Usuario o producto no cargados', life: 2000 });
-  }
+  
 }
 
 

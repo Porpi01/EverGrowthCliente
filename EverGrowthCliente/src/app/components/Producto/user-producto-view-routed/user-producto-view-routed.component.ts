@@ -9,9 +9,9 @@ import { IProducto } from 'src/app/model/model.interfaces';
   styleUrls: ['./user-producto-view-routed.component.css']
 })
 export class UserProductoViewRoutedComponent implements OnInit {
+  forceReload: Subject<boolean> = new Subject<boolean>();
 
   id: number = 0;
-  actualizarValoraciones: Subject<boolean> = new Subject<boolean>();
 
 
 
@@ -19,16 +19,14 @@ export class UserProductoViewRoutedComponent implements OnInit {
     private oActivatedRoute: ActivatedRoute
   ) {
     this.id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") || "1"); 
+
    
     
-  console.log( "Id producto" + this.id);
+  console.log( "Id producto" + "" + this.id);
 
 
    }
-   onValoracionChange(oProducto: Boolean) {
-    this.actualizarValoraciones.next(true);
-  }
-
+ 
 
   ngOnInit() {
   }

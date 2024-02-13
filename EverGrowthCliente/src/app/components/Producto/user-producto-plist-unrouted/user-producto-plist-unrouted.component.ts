@@ -36,6 +36,8 @@ export class UserProductoPlistUnroutedComponent implements OnInit {
   strUserName: string = '';
   idCategoriaFiltrada: number | null = null;
 filtrandoPorCategoria: boolean = false;
+producto: IProducto[] = [];
+
 
   constructor(
     private productoService: ProductoService,
@@ -51,7 +53,10 @@ filtrandoPorCategoria: boolean = false;
     if (this.id_categoria > 0) {
       this.getCategoria();
     }
+ 
   }
+
+
 
   onInputChange(query: string): void {
     if (query.length > 2) {

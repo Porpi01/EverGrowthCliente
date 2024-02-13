@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
     this.loginForm.setValue({
 
       username: 'anita17',
-      password: 'foxforum'
+      password: 'EverGrowth'
 
     })
   }
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
   loginUser() {
     this.loginForm.setValue({
       username: 'moni01',
-      password: 'foxforum'
+      password: 'EverGrowth'
     })
   }
 }

@@ -55,7 +55,11 @@
     box-sizing: border-box;
   }
   
-  
+  .imagen {
+    width:100%;
+    height: 100%;
+    margin-right: 15px;
+  }
 
   .categoria-item.active {
     background-color: #f0f0f0;

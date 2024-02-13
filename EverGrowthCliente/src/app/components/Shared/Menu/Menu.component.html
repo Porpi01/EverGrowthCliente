@@ -22,7 +22,7 @@
             <a class="nav-link" [class.active]="strUrl=='/home'||strUrl=='/'" aria-current="page" routerLink="/home" *ngIf="strUserName && oSessionUser?.rol==false"> Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="strUrl=='/userhome'||strUrl=='/'" aria-current="page" routerLink="/userhome" *ngIf="strUserName && oSessionUser?.rol==true"> Inicio</a>
+            <a class="nav-link" [class.active]="strUrl=='/userhome'||strUrl=='/'" aria-current="page" routerLink="/home" *ngIf="strUserName && oSessionUser?.rol==true"> Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [class.active]="strUrl=='/admin/valoracion'||strUrl=='/'" aria-current="page"

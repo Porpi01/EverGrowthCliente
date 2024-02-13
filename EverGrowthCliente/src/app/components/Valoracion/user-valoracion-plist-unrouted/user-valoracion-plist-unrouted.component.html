@@ -8,24 +8,13 @@
 </div>
 
 <p-divider></p-divider>
-<div class="container">
-  <div class="row justify-content-center align-items-center">
-    <div class="col-lg-10 col-md-12 col-sm-12">
-      <div class="flex align-items-center justify-content-start">
-      
-        <p-paginator (onPageChange)="onPageChange($event)" [first]="paginatorState.first!"
-        [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [showFirstLastIcon]="false" 
-            [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} de {totalRecords}" ></p-paginator>
-    </div>
-    </div>
-  </div>
 
+<div class="valoraciones">
   <div class="row justify-content-center">
-    <div class="col-lg-7 col-md-6 col-sm-6">
-      <!-- Contenedor con información de las valoraciones -->
+    <div class="col-lg-9 col-md-6 col-sm-6">
       <ng-container *ngIf="page?.content">
         <div class="row">
-          <div class="col-lg-8 col-md-12 col-sm-12" *ngFor="let valoracion of page?.content">
+          <div class="col-lg-6 col-md-12 col-sm-12" *ngFor="let valoracion of page?.content">
             <p-card class="custom-card">
               <ng-template pTemplate="title">
                 <div>{{ valoracion.titulo }}</div>
@@ -38,9 +27,9 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="user-info">{{ valoracion.user.nombre }} {{ valoracion.user.apellido1 }}</div>
                     <div class="message">{{ valoracion.mensaje }}</div>
-                    <button *ngIf="isUsuarioValoracion(valoracion)" (click)="borrarValoracion(valoracion.id)" class="button is-danger">Borrar valoración</button>
-
                   </div>
+                  <button *ngIf="isUsuarioValoracion(valoracion)" (click)="borrarValoracion(valoracion.id)" type="button" class="btn btn-primary btn-lg mt-3">Borrar valoración</button>
+
                 </div>
               </ng-template>
             </p-card>
@@ -49,8 +38,8 @@
       </ng-container>
     </div>
 
-    <div class="col-lg-5 col-md-6 col-sm-6">
-      <div class="valoraciones">
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="crearValoraciones">
           <h1>Valora el producto</h1>
           <p>¡Queremos conocer tu opinión sobre nuestro producto! Tu valoración nos ayuda a mejorar y a ofrecerte mejores productos.</p>
           <button type="button" class="btn btn-primary btn-lg mt-3" (click)="postNuevaValoracion()">Hacer valoración</button>

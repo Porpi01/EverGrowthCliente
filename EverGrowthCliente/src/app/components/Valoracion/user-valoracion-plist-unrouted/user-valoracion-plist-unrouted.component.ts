@@ -6,7 +6,6 @@ import { IValoracionPage, IValoracion, IUsuario, IProducto,  } from 'src/app/mod
 import { ValoracionService } from './../../../service/Valoracion.service';
 import { SesionService } from './../../../service/Sesion.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { UserValoracionFormUnroutedComponent } from '../user-valoracion-form-unrouted/user-valoracion-form-unrouted.component';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { UserProductoValoracionUnroutedComponent } from '../../Producto/user-producto-valoracion-unrouted/user-producto-valoracion-unrouted.component';
 
@@ -20,7 +19,6 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
   @Input() id_producto: number = 0;
   @Input() id_usuario: number = 0;
-  @Output() valoracion_change = new EventEmitter<Boolean>();
 
 
 
@@ -28,7 +26,7 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
   producto: IProducto | null = null;
   orderField: string = 'id';
   orderDirection: string = 'asc';
-  paginatorState: PaginatorState = { first: 0, rows: 3, page: 0, pageCount: 0 };
+  paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
   usuario: IUsuario | null = null;
   ref: DynamicDialogRef | undefined;
@@ -46,7 +44,7 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
 
   ngOnInit() {
     this.getValoraciones();
-    this.getPage();
+
     this.forceReload.subscribe({
       next: (v) => {
         if (v) {
@@ -64,46 +62,15 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
     })
   }
 
-  getPage(): void {
-    this.ValoracionService
-      .getPage(
-        this.paginatorState.rows,
-        this.paginatorState.page,
-        this.orderField,
-        this.orderDirection,
-        this.id_producto, 
-        this.id_usuario
-      
-      )
-      .subscribe({
-        next: (data: IValoracionPage) => {
-          this.page = data;
-          this.paginatorState.pageCount = data.totalPages;
-          this.valoraciones = data.content;
-          console.log(this.paginatorState);
-          console.log(this.valoraciones);
-          console.log(this.id_producto);
-          console.log(this.id_usuario);
-          
-         
-        },
-        error: (error: HttpErrorResponse) => {
-          this.status = error;
-        },
-      });
-  }
+ 
 
   onPageChange(event: PaginatorState) {
     this.paginatorState.rows = event.rows;
     this.paginatorState.page = event.page;
-    this.getPage();
+  
   }
 
-  doOrder(fieldorder: string) {
-    this.orderField = fieldorder;
-    this.orderDirection = this.orderDirection === 'asc' ? 'desc' : 'asc';
-    this.getPage();
-  }
+
 
  
 
@@ -133,12 +100,15 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
 
   borrarValoracion(id_valoracion: number) {
     this.ConfirmationService.confirm({
+   
       message: '¿Estás seguro de que quieres borrar la valoración?',
       accept: () => {
+        console.log(id_valoracion);
         this.ValoracionService.removeOne(id_valoracion).subscribe({
           next: () => {
             this.getValoraciones();
             this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'La valoración ha sido eliminada' });
+            console.log(this.usuario?.id);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
@@ -166,11 +136,14 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
         maximizable: false
       });
 
-      this.ref.onClose.subscribe((nProducto: number) => {
-        this.getPage();
-        this.valoracion_change.emit(true);
-      });
-    }
+      this.ref.onClose.subscribe({
+        next: (v) => {
+          if (v) {
+            this.getValoraciones();
+          }
+        }
+      })
    
+    }
   }
 }

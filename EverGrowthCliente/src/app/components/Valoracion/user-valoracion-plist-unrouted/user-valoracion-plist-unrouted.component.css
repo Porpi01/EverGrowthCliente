@@ -10,8 +10,10 @@
 
   .card-content {
     margin-top: 1rem;
+    
   }
 
+  
   .user-info {
     font-weight: bold;
   }
@@ -22,16 +24,15 @@
  }
 
 
-.valoraciones {
+.crearValoraciones {
     background-color: #f8f9fa;
     padding: 8px 15px;
     border-radius: 5px;
     font-size: 16px;
-
+ ;
 
 
 }
-
 
 .btn-primary {
     background-color: #ef6461;

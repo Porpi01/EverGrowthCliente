@@ -37,9 +37,10 @@ export class UserProductoValoracionUnroutedComponent implements OnInit {
     public oDynamicDialogConfig: DynamicDialogConfig,
     public DialogService: DialogService
   ) {
-    this.id_producto = this.oDynamicDialogConfig.data.id_producto;
     this.id_usuario = this.oDynamicDialogConfig.data.id_usuario;
-    }
+    console.log(this.id_usuario)
+    this.id_producto = this.oDynamicDialogConfig.data.id_producto;
+    console.log(this.id_producto)}
    
     public hasError = (controlName: string, errorName: string) => {
       return this.valoracionForm.controls[controlName].hasError(errorName);
@@ -51,10 +52,11 @@ if(this.id_usuario !== undefined) {
   this.UsuarioService.getOne(this.id_usuario).subscribe({
     next:(usuario: IUsuario) => {
       this.usuario = usuario;
+      console.log(this.usuario)
     },
     error: (error) => {
       this.status = error
-      this.MessageService.add({ severity: 'error',detail: 'Aceptar',  life: 2000});
+      this.MessageService.add({ severity: 'error',detail: 'No se puede crear la valoración',  life: 2000});
     }
   });
 
@@ -64,6 +66,7 @@ if(this.id_producto !== undefined) {
   this.ProductoService.getOne(this.id_producto).subscribe({
     next:(producto: IProducto) => {
       this.producto = producto;
+      console.log(this.producto)
     },
     error: (error) => {
       this.status = error
@@ -82,26 +85,33 @@ initializeForm(valoracion: IValoracion) {
     fecha: [new Date(valoracion.fecha), [Validators.required]],
     mensaje: [valoracion.mensaje, [Validators.required, Validators.minLength(3), Validators.maxLength(2048), startWithCapitalLetter()]],
     user: this.formBuilder.group({
-      id: [valoracion.user?.id, Validators.required]
+      id: [this.id_usuario, Validators.required]
     }),
     producto: this.formBuilder.group({
-      id: [valoracion.producto?.id, Validators.required]
+      id: [this.id_producto, Validators.required]
+    
     }),
+    
   });
-}
-  onSubmit() {
 
-      const valoracion = this.valoracionForm.value;
-      this.valoracionService.newOne(valoracion).subscribe({
-        next: (data: IValoracion) => {
-          this.MessageService.add({ severity: 'success', detail: 'Valoración creada',  life: 2000});
-          this.oDynamicDialogRef.close(data);
-        },
-        error: (err) => {
-          this.status = err;
-          this.MessageService.add({ severity: 'error', detail: 'Aceptar',  life: 2000});        }
-      });
-    }
+}
+onSubmit() {
+ 
+    const valoracion = this.valoracionForm.value;
+   
+    this.valoracionService.newOne(valoracion).subscribe({
+      next: (data: IValoracion) => {
+        this.MessageService.add({ severity: 'success', detail: 'Valoración creada', life: 2000 });
+        this.oDynamicDialogRef.close(data);
+      },
+      error: (err) => {
+        this.status = err;
+        this.MessageService.add({ severity: 'error', detail: 'Aceptar', life: 2000 });
+      }
+    });
+  
+}
+
 
     onCancel() {
       this.oDynamicDialogRef.close();
