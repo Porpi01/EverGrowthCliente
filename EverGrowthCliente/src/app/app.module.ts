@@ -113,6 +113,7 @@ import { UserCarritoViewRoutedComponent } from './components/Carrito/user-carrit
 import { UserValoracionFormUnroutedComponent } from './components/Valoracion/user-valoracion-form-unrouted/user-valoracion-form-unrouted.component';
 import { UserValoracionNewRoutedComponent } from './components/Valoracion/user-valoracion-new-routed/user-valoracion-new-routed.component';
 import { UserProductoPlistUnroutedComponent } from './components/Producto/user-producto-plist-unrouted/user-producto-plist-unrouted.component';
+import { UserProductoValoracionUnroutedComponent } from './components/Producto/user-producto-valoracion-unrouted/user-producto-valoracion-unrouted.component';
 
 @NgModule({
   declarations: [
@@ -163,6 +164,7 @@ import { UserProductoPlistUnroutedComponent } from './components/Producto/user-p
     UserProductoDetailUnroutedComponent,
     UserProductoViewRoutedComponent,
     UserProductoPlistUnroutedComponent,
+    UserProductoValoracionUnroutedComponent,
 
     //Componentes entidad Pedido
     AdminPedidoPlistUnroutedComponent,

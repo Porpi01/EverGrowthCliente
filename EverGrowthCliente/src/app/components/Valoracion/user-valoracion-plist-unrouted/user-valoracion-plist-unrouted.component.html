@@ -13,9 +13,9 @@
     <div class="col-lg-10 col-md-12 col-sm-12">
       <div class="flex align-items-center justify-content-start">
       
-        <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!"
-        [rows]="oPaginatorState.rows!" [totalRecords]="oPage?.totalElements || 0" [showFirstLastIcon]="false" 
-            [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} of {totalRecords}" ></p-paginator>
+        <p-paginator (onPageChange)="onPageChange($event)" [first]="paginatorState.first!"
+        [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [showFirstLastIcon]="false" 
+            [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} de {totalRecords}" ></p-paginator>
     </div>
     </div>
   </div>
@@ -23,9 +23,9 @@
   <div class="row justify-content-center">
     <div class="col-lg-7 col-md-6 col-sm-6">
       <!-- Contenedor con información de las valoraciones -->
-      <ng-container *ngIf="oPage?.content">
+      <ng-container *ngIf="page?.content">
         <div class="row">
-          <div class="col-lg-8 col-md-12 col-sm-12" *ngFor="let valoracion of oPage?.content">
+          <div class="col-lg-8 col-md-12 col-sm-12" *ngFor="let valoracion of page?.content">
             <p-card class="custom-card">
               <ng-template pTemplate="title">
                 <div>{{ valoracion.titulo }}</div>

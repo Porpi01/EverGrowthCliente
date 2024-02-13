@@ -1,16 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ConfirmationService } from 'primeng/api';
-import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
-import { PaginatorState } from 'primeng/paginator';
-import { Subject } from 'rxjs';
-import { IPedido, IProducto, IProductoPage, IUsuario } from 'src/app/model/model.interfaces';
-import { ProductoService } from './../../../service/Producto.service';
-import { PedidoService } from './../../../service/Pedido.service';
+
 import { NavigationEnd, Router } from '@angular/router';
 import { SesionService } from './../../../service/Sesion.service';
 import { UsuarioService } from './../../../service/Usuario.service';
+import { IUsuario } from 'src/app/model/model.interfaces';
 
 @Component({
   selector: 'app-Home',

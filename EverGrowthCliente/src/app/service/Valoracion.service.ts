@@ -42,11 +42,11 @@ export class ValoracionService {
   }
 
   getValoracionPageByUsuario(usuarioId: number, size: number, page: number, sort: string, direction: string): Observable<IValoracionPage> {
-    return this.http.get<IValoracionPage>(this.sUrl + '/usuario/' + usuarioId + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+    return this.http.get<IValoracionPage>(this.sUrl + '/byusuario/' + usuarioId + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
 }
 
 getValoracionPageByProducto(productoId: number, page: number, size: number, sort: string, direction: string): Observable<IValoracionPage> {
-    return this.http.get<IValoracionPage>(this.sUrl + '/camiseta/' + productoId + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+    return this.http.get<IValoracionPage>(this.sUrl + '/byproducto/' + productoId + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
 }
 
   removeOne(id: number | undefined): Observable<number> {

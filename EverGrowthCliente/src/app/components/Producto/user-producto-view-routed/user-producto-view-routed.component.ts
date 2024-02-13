@@ -12,15 +12,17 @@ export class UserProductoViewRoutedComponent implements OnInit {
 
   id: number = 0;
   actualizarValoraciones: Subject<boolean> = new Subject<boolean>();
-  id_usuario: number = 0;
+
 
 
   constructor(
     private oActivatedRoute: ActivatedRoute
   ) {
     this.id = parseInt(this.oActivatedRoute.snapshot.paramMap.get("id") || "1"); 
+   
     
-  console.log(this.id);
+  console.log( "Id producto" + this.id);
+
 
    }
    onValoracionChange(oProducto: Boolean) {

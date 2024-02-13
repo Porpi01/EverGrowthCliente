@@ -1,14 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
+import { Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
-import { IValoracionPage, IValoracion, IUsuario, IProducto } from 'src/app/model/model.interfaces';
+import { IValoracionPage, IValoracion, IUsuario, IProducto,  } from 'src/app/model/model.interfaces';
 import { ValoracionService } from './../../../service/Valoracion.service';
-import { UsuarioService } from './../../../service/Usuario.service';
-import { ProductoService } from './../../../service/Producto.service';
+import { SesionService } from './../../../service/Sesion.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { UserValoracionFormUnroutedComponent } from '../user-valoracion-form-unrouted/user-valoracion-form-unrouted.component';
-import { SesionService } from 'src/app/service/Sesion.service';
+import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
+import { UserProductoValoracionUnroutedComponent } from '../../Producto/user-producto-valoracion-unrouted/user-producto-valoracion-unrouted.component';
+
 
 @Component({
   selector: 'app-user-valoracion-plist-unrouted',
@@ -16,99 +17,74 @@ import { SesionService } from 'src/app/service/Sesion.service';
   styleUrls: ['./user-valoracion-plist-unrouted.component.css']
 })
 export class UserValoracionPlistUnroutedComponent implements OnInit {
+  @Input() forceReload: Subject<boolean> = new Subject<boolean>();
+  @Input() id_producto: number = 0;
+  @Input() id_usuario: number = 0;
   @Output() valoracion_change = new EventEmitter<Boolean>();
 
-  @Input() 
-  set id_usuario(value: number) {
-   if(value){
-    this.id_usuario_filter = value;
-   }else{
-    this.id_usuario_filter = 0;
-   }
-   this.getPage();
-  }
-  get id_usuario(): number {
-    return this.id_usuario_filter;
-  }
-  @Input() 
-  set id_producto(value: number) {
-    if(value){
-      this.id_producto_filter = value;
-      this.getProducto();
-     }else{
-      this.id_producto_filter = 0;
-     }
-     this.getPage();
-  }
-  get id_producto(): number {
-    return this.id_producto_filter;
-  }
 
-  oPage: IValoracionPage | undefined;
+
+  page: IValoracionPage | undefined;
+  producto: IProducto | null = null;
   orderField: string = 'id';
   orderDirection: string = 'asc';
-  oPaginatorState: PaginatorState = { first: 0, rows: 2, page: 0, pageCount: 0 };
+  paginatorState: PaginatorState = { first: 0, rows: 3, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
-  valoraciones: IValoracion[] = [];
-  valoracionToRemove: IValoracion | null = null;
+  usuario: IUsuario | null = null;
   ref: DynamicDialogRef | undefined;
-  oUsuario: IUsuario | null = null;
-  oProducto: IProducto | null = null;
+  valoraciones: IValoracion[] = [];
 
-  value: string = '';
-  id_usuario_filter: number = 0;
-  id_producto_filter: number = 0;
 
   constructor(
     private ValoracionService: ValoracionService,
+    private SesionService: SesionService,
+    private ConfirmationService: ConfirmationService,
+    private MessageService: MessageService,
     private DialogService: DialogService,
-    private UsuarioService: UsuarioService,
-    private ProductoService: ProductoService,
-    private SesionService: SesionService
 
-
-
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
+    this.getValoraciones();
     this.getPage();
-
- 
-    if (this.id_usuario > 0) {
-      this.getUsuario();
-      
-    }
-    if (this.id_producto > 0) {
-      this.getProducto();
-    }
-   
+    this.forceReload.subscribe({
+      next: (v) => {
+        if (v) {
+          this.getValoraciones();}
+      }
+    });
+    this.SesionService.getSessionUser()?.subscribe({
+      next: (usuario: IUsuario) => {
+        this.usuario = usuario;
+        this.id_usuario = usuario.id;
+      },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+      }
+    })
   }
-
 
   getPage(): void {
     this.ValoracionService
       .getPage(
-        this.oPaginatorState.rows,
-        this.oPaginatorState.page,
+        this.paginatorState.rows,
+        this.paginatorState.page,
         this.orderField,
         this.orderDirection,
-        this.id_usuario_filter, 
-        this.id_producto_filter
+        this.id_producto, 
+        this.id_usuario
       
       )
       .subscribe({
         next: (data: IValoracionPage) => {
-          this.oPage = data;
-          this.oPaginatorState.pageCount = data.totalPages;
+          this.page = data;
+          this.paginatorState.pageCount = data.totalPages;
           this.valoraciones = data.content;
-          console.log(this.oPaginatorState);
+          console.log(this.paginatorState);
           console.log(this.valoraciones);
           console.log(this.id_producto);
           console.log(this.id_usuario);
-          console.log(this.id_producto_filter);
-          console.log(this.id_usuario_filter);
+          
          
         },
         error: (error: HttpErrorResponse) => {
@@ -118,8 +94,8 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
   }
 
   onPageChange(event: PaginatorState) {
-    this.oPaginatorState.rows = event.rows;
-    this.oPaginatorState.page = event.page;
+    this.paginatorState.rows = event.rows;
+    this.paginatorState.page = event.page;
     this.getPage();
   }
 
@@ -130,12 +106,58 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
   }
 
  
-  postNuevaValoracion(): void {
-    if (this.id_producto_filter > 0 && this.SesionService.isSessionActive()) {
 
-      this.ref = this.DialogService.open(UserValoracionFormUnroutedComponent, {
+  getValoraciones() {
+    const rows: number = this.paginatorState.rows ?? 0;
+    const page: number = this.paginatorState.page ?? 0;
+    this.ValoracionService.getValoracionPageByProducto(this.id_producto, page, rows, this.orderField, this.orderDirection).subscribe({
+      next: (page: IValoracionPage) => {
+        this.page = page;
+        this.paginatorState.pageCount = page.totalPages;
+      },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+      }
+    })
+  }
+
+
+  recargarValoraciones() {
+    this.getValoraciones();
+  }
+
+  isUsuarioValoracion(valoracion: IValoracion): boolean {
+    return this.usuario !== null && valoracion.user.id === this.usuario.id;
+   
+  }
+
+  borrarValoracion(id_valoracion: number) {
+    this.ConfirmationService.confirm({
+      message: '¿Estás seguro de que quieres borrar la valoración?',
+      accept: () => {
+        this.ValoracionService.removeOne(id_valoracion).subscribe({
+          next: () => {
+            this.getValoraciones();
+            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'La valoración ha sido eliminada' });
+          },
+          error: (err: HttpErrorResponse) => {
+            this.status = err;
+            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'La valoración no se ha podido eliminar' });
+          }
+        })
+      }
+    });
+    
+  }
+
+  postNuevaValoracion(): void {
+    if (this.id_producto > 0 && this.SesionService.isSessionActive()) {
+
+      this.ref = this.DialogService.open(UserProductoValoracionUnroutedComponent, {
         data: {
-          id_producto: this.id_producto_filter,
+          id_producto: this.id_producto,
+          id_usuario: this.id_usuario
+          
         },
         header: 'Nueva valoración',
         width: '40%',
@@ -151,70 +173,4 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
     }
    
   }
-
-
-
-
-
-  getUsuario(): void {
-    this.UsuarioService.getOne(this.id_usuario).subscribe({
-      next: (data: IUsuario) => {
-        this.oUsuario = data;
-
-        console.log(this.oUsuario.id);
-      },
-      error: (error: HttpErrorResponse) => {
-        this.status = error;
-      }
-
-    })
-  }
-
-  getProducto(): void {
-    this.ProductoService.getOne(this.id_producto).subscribe({
-      next: (data: IProducto) => {
-        this.oProducto = data;
-      },
-      error: (error: HttpErrorResponse) => {
-        this.status = error;
-      }
-
-    })
-  }
-
-  getValoraciones() {
-    const rows: number = this.oPaginatorState.rows ?? 0;
-    const page: number = this.oPaginatorState.page ?? 0;
-    this.ValoracionService.getPage(
-      this.oPaginatorState.rows,
-      this.oPaginatorState.page,
-      this.orderField,
-      this.orderDirection,
-      this.id_usuario_filter, 
-      this.id_producto_filter).subscribe({
-      next: (page: IValoracionPage) => {
-        this.oPage = page;
-        this.oPaginatorState.pageCount = page.totalPages;
-      },
-      error: (err: HttpErrorResponse) => {
-        this.status = err;
-      }
-    })
-  }
-
-  isUsuarioValoracion(valoracion: IValoracion): boolean {
-    return this.oUsuario !== null && valoracion.user  .id === this.oUsuario.id;
-  }
-
-  borrarValoracion(id_valoracion: number) {
-    this.ValoracionService.removeOne(id_valoracion).subscribe({
-      next: () => {
-        this.getValoraciones();
-      },
-      error: (err: HttpErrorResponse) => {
-        this.status = err;
-      }
-    })
-  }
-
 }

@@ -1,32 +1,21 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
-import { ValidatorFn, AbstractControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { MessageService } from 'primeng/api';
-import { DynamicDialogRef, DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import {  IValoracion, IUsuario, IProducto } from 'src/app/model/model.interfaces';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DynamicDialogRef, DynamicDialogConfig, DialogService } from 'primeng/dynamicdialog';
+import { IValoracion, IUsuario, IProducto } from 'src/app/model/model.interfaces';
 import { ValoracionService } from 'src/app/service/Valoracion.service';
+import { startWithCapitalLetter } from '../admin-producto-form-unrouted/admin-producto-form-unrouted.component';
 import { UsuarioService } from './../../../service/Usuario.service';
 import { ProductoService } from './../../../service/Producto.service';
-
-
-export function startWithCapitalLetter(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const value: string = control.value;
-    if (value && value.charAt(0) !== value.charAt(0).toUpperCase()) {
-      return { 'startWithCapitalLetter': { value: control.value } };
-    }
-    return null;
-  };
-}
-
+import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-user-valoracion-form-unrouted',
-  templateUrl: './user-valoracion-form-unrouted.component.html',
-  styleUrls: ['./user-valoracion-form-unrouted.component.css']
+  selector: 'app-user-producto-valoracion-unrouted',
+  templateUrl: './user-producto-valoracion-unrouted.component.html',
+  styleUrls: ['./user-producto-valoracion-unrouted.component.css']
 })
-export class UserValoracionFormUnroutedComponent implements OnInit {
+export class UserProductoValoracionUnroutedComponent implements OnInit {
+
 
   valoracionForm!: FormGroup;
   valoracion: IValoracion = { fecha: new Date(Date.now()), user: { id: 0 }, producto: { id: 0 } } as IValoracion;
@@ -48,10 +37,9 @@ export class UserValoracionFormUnroutedComponent implements OnInit {
     public oDynamicDialogConfig: DynamicDialogConfig,
     public DialogService: DialogService
   ) {
-    this.id_usuario = this.oDynamicDialogConfig.data.id_usuario;
-    console.log(this.id_usuario)
     this.id_producto = this.oDynamicDialogConfig.data.id_producto;
-    console.log(this.id_producto)}
+    this.id_usuario = this.oDynamicDialogConfig.data.id_usuario;
+    }
    
     public hasError = (controlName: string, errorName: string) => {
       return this.valoracionForm.controls[controlName].hasError(errorName);
@@ -63,11 +51,10 @@ if(this.id_usuario !== undefined) {
   this.UsuarioService.getOne(this.id_usuario).subscribe({
     next:(usuario: IUsuario) => {
       this.usuario = usuario;
-      console.log(this.usuario)
     },
     error: (error) => {
       this.status = error
-      this.MessageService.add({ severity: 'error',detail: 'No se puede crear la valoración',  life: 2000});
+      this.MessageService.add({ severity: 'error',detail: 'Aceptar',  life: 2000});
     }
   });
 
@@ -77,7 +64,6 @@ if(this.id_producto !== undefined) {
   this.ProductoService.getOne(this.id_producto).subscribe({
     next:(producto: IProducto) => {
       this.producto = producto;
-      console.log(this.producto)
     },
     error: (error) => {
       this.status = error
@@ -96,42 +82,30 @@ initializeForm(valoracion: IValoracion) {
     fecha: [new Date(valoracion.fecha), [Validators.required]],
     mensaje: [valoracion.mensaje, [Validators.required, Validators.minLength(3), Validators.maxLength(2048), startWithCapitalLetter()]],
     user: this.formBuilder.group({
-      id: [valoracion.user.id, Validators.required]
+      id: [valoracion.user?.id, Validators.required]
     }),
     producto: this.formBuilder.group({
-      id: [valoracion.producto.id, Validators.required]
-    
+      id: [valoracion.producto?.id, Validators.required]
     }),
-    
   });
-
 }
-onSubmit() {
-  if (this.usuario && this.producto) {
-    const valoracion = this.valoracionForm.value;
-    valoracion.user = this.usuario;
-    console.log(valoracion.user)
-    valoracion.producto = this.producto;
-    console.log(valoracion.producto)
+  onSubmit() {
 
-    this.valoracionService.newOne(valoracion).subscribe({
-      next: (data: IValoracion) => {
-        this.MessageService.add({ severity: 'success', detail: 'Valoración creada', life: 2000 });
-        this.oDynamicDialogRef.close(data);
-      },
-      error: (err) => {
-        this.status = err;
-        this.MessageService.add({ severity: 'error', detail: 'Aceptar', life: 2000 });
-      }
-    });
-  } else {
-    this.MessageService.add({ severity: 'error', detail: 'Usuario o producto no cargados', life: 2000 });
-  }
-}
-
+      const valoracion = this.valoracionForm.value;
+      this.valoracionService.newOne(valoracion).subscribe({
+        next: (data: IValoracion) => {
+          this.MessageService.add({ severity: 'success', detail: 'Valoración creada',  life: 2000});
+          this.oDynamicDialogRef.close(data);
+        },
+        error: (err) => {
+          this.status = err;
+          this.MessageService.add({ severity: 'error', detail: 'Aceptar',  life: 2000});        }
+      });
+    }
 
     onCancel() {
       this.oDynamicDialogRef.close();
     }
     
+
 }
