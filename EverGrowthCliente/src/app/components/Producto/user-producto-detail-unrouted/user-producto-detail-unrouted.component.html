@@ -35,9 +35,9 @@
           <!-- Campo de entrada para la cantidad -->
           <div class="form-group mt-3">
             <label for="cantidad" class="form-label">Cantidad:</label>
-            <input type="number" id="cantidad" class="form-control"  min="1">
+            <input type="number" id="cantidad" class="form-control" min="1" [(ngModel)]="cantidadSeleccionada">
           </div>
-          <button type="button" class="btn btn-primary btn-lg mt-3  me-2" (click)="addToCart(productos)">Añadir al carrito</button>
+          <button type="button" class="btn btn-primary btn-lg mt-3  me-2" (click)="agregarAlCarrito()">Añadir al carrito</button>
           <button type="button" class="btn btn-primary btn-lg mt-3" (click)="makeProductPurhase(productos)">Comprar</button>
          
         </div>

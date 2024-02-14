@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, Optional } from '@angular/core';
-import { ICategoria, IDetallePedido } from 'src/app/model/model.interfaces';
-import { CategoriaService } from './../../../service/Categoria.service';
+import { ICategoria } from 'src/app/model/model.interfaces';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { Router } from '@angular/router';
+import { CategoriaService } from './../../../service/Categoria.service';
 
 @Component({
   selector: 'app-admin-categoria-detail-unrouted',

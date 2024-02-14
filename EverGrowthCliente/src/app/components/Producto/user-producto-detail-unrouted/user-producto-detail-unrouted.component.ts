@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Optional } from '@angular/core';
-import { IProducto, IUsuario, IValoracion } from 'src/app/model/model.interfaces';
+import { ICarrito, IProducto, IUsuario, IValoracion } from 'src/app/model/model.interfaces';
 import { ProductoService } from './../../../service/Producto.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
@@ -9,6 +9,8 @@ import { ConfirmationService } from 'primeng/api';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { PedidoService } from 'src/app/service/Pedido.service';
+import { CarritoService } from './../../../service/Carrito.service';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -24,8 +26,12 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
   id_usuario: number = 0;
   productosSeleccionados: IProducto[] = [];
   productos: IProducto = {} as IProducto;
+  usuario: IUsuario | null = null;
   status: HttpErrorResponse | null = null;
   valoraciones: IValoracion[] = [];
+  carrito: ICarrito = { user: {}, producto: {}, cantidad: 0 } as ICarrito;
+  cantidadSeleccionada: number = 1;
+
 
   constructor(
     private productoService: ProductoService,
@@ -36,12 +42,24 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
     private ConfirmationService: ConfirmationService,
     private PedidoService: PedidoService,
     private matSnackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private CarritoService: CarritoService
   ) {
-    if (config && config.data) {
-      this.id = config.data.id;
-      console.log(this.config.data);
+    if (config) {
+      if (config.data) {
+        this.id = config.data.id;
+      }
+    
     }
+    this.SesionService.getSessionUser()?.subscribe({
+      next: (usuario: IUsuario) => {
+        this.usuario = usuario;
+        this.id_usuario = usuario.id;
+      },
+      error: (err: HttpErrorResponse) => {
+        this.status = err;
+      }
+    })
  
   }
 
@@ -72,11 +90,27 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
     return totalAPagar;
   }
 
-  addToCart(product: IProducto) {
-    this.productosSeleccionados.push(product);
-    console.log(this.productosSeleccionados);
-    console.log(`Producto '${product.nombre}' añadido al carrito.`);
-    this.matSnackBar.open('Producto añadido', 'Aceptar', {duration: 3000});
+  agregarAlCarrito(): void {
+    if (this.SesionService.isSessionActive()) {
+      this.carrito.user = { username: this.SesionService.getUsername() } as IUsuario;
+      console.log(this.carrito.user);
+      // Accede al primer producto del array de productos
+      this.carrito.producto = { id: this.productos.id } as IProducto;
+      console.log(this.carrito.producto);
+      this.carrito.cantidad = this.cantidadSeleccionada;
+      console.log(this.carrito.cantidad);
+      this.CarritoService.newOne(this.carrito).subscribe({
+        next: (data: ICarrito) => {
+          this.carrito = data;
+          this.matSnackBar.open('Producto añadido al carrito', 'Aceptar', { duration: 3000 });
+          this.router.navigate(['/usuario', 'carrito', 'plist']);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.status = err;
+          this.matSnackBar.open('Error al añadir el producto al carrito', 'Aceptar', { duration: 3000 });
+        }
+      });
+    }
   }
 
   makeProductPurhase(product: IProducto): void {

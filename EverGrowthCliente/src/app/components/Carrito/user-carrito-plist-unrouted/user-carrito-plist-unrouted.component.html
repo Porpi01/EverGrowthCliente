@@ -1,0 +1,46 @@
+<div class="container" *ngIf="page && page.content.length > 0">
+  <table class="table is-fullwidth is-bordered">
+    <thead>
+      <tr>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Descripción</th>
+        <th>Cantidad</th>
+        <th>Coste Total</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let carrito of page?.content">
+        <td><img [src]="carrito.producto.imagen" alt="Imagen del producto" ></td>
+        <td>{{carrito.producto.nombre}}</td>
+        <td>{{carrito.producto.precio | Precio }}</td>
+        <td>{{carrito.producto.descripcion}}</td>
+        
+        <td>
+          <button class="btn btn-primary" (click)="updateCantidad(carrito, carrito.cantidad - 1)">-</button>
+          {{carrito.cantidad}}
+          <button  class="btn btn-primary" (click)="updateCantidad(carrito, carrito.cantidad + 1)">+</button>
+        </td>
+        <td>{{ precioIndividualMap.get(carrito.id) | currency }} </td>
+
+        <td>
+          <button class="btn btn-primary" (click)="eliminarDelCarrito(carrito.id)">Eliminar</button>
+          <button class="btn btn-primary" (click)="comprarUnicoCarrito(carrito.id)">Comprar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+</div>
+
+<div class="container" *ngIf="page && page.content.length === 0">
+  <p>Todavía no has añadido nada a tu carrito.</p>
+</div>
+
+<p-confirmPopup></p-confirmPopup>

@@ -20,10 +20,10 @@ export class CarritoService {
   }
 
   countCarritos(): Observable<number> {
-    return this.http.get<number>(this.sUrl + "/cantidad" );
+    return this.http.get<number>(this.sUrl + "/cantidad");
   }
 
-  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_producto:number, id_usuario:number, strFilter?: string): Observable<ICarritoPage> {
+  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_producto: number, id_usuario: number, strFilter?: string): Observable<ICarritoPage> {
     let sUrl_filter: string;
     if (!size) size = 10;
     if (!page) page = 0;
@@ -42,7 +42,7 @@ export class CarritoService {
     } else {
       sUrl_filter = "";
     }
-    return this.http.get<ICarritoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + strUrlUsuario + strUrlProducto +  sUrl_filter);
+    return this.http.get<ICarritoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + strUrlUsuario + strUrlProducto + sUrl_filter);
   }
 
   removeOne(id: number | undefined): Observable<number> {
@@ -69,7 +69,27 @@ export class CarritoService {
     return this.http.delete<number>(this.sUrl + "/empty");
   }
   addToCart(idUsuario: number, idProducto: number): Observable<number> {
-    return this.http.post<number>(this.sUrl +"/agregarProducto?idUsuario=${idUsuario}&idProducto=${idProducto}", null);
+    return this.http.post<number>(this.sUrl + "/agregarProducto?idUsuario=${idUsuario}&idProducto=${idProducto}", null);
+  }
+
+  getCarritosByUsuario(usuarioId: number, size: number, page: number, sort: string, direction: string): Observable<ICarritoPage> {
+    return this.http.get<ICarritoPage>(this.sUrl + '/usuario/' + usuarioId + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+  }
+
+  getCarritoByUsuarioAndPRoducto(usuarioId: number, productoId: number): Observable<ICarrito> {
+    return this.http.get<ICarrito>(this.sUrl + '/usuario/' + usuarioId + '/producto/' + productoId);
+  }
+
+  deleteCarritoByUsuario(usuarioId: number): Observable<number> {
+    return this.http.delete<number>(this.sUrl + '/usuario/' + usuarioId);
+  }
+
+  getCosteCarrito(id: number): Observable<number> {
+    return this.http.get<number>(this.sUrl + '/coste/' + id);
+  }
+
+  getCosteCarritoByUsuario(usuarioId: number): Observable<number> {
+    return this.http.get<number>(this.sUrl + '/costetotal/' + usuarioId);
   }
 
 }

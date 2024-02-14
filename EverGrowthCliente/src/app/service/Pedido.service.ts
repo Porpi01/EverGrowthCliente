@@ -60,7 +60,22 @@ export class PedidoService {
   }
 
   makeProductPurhase(product_id: number, user_id: number, amount: number): Observable<IPedido> {
-    return this.http.post<IPedido>(this.sUrl + '/sumarProducto/' + product_id + '/' + user_id + '/' + amount, {});
+    return this.http.post<IPedido>(this.sUrl + '/realizarCompraProducto/' + product_id + '/' + user_id + '/' + amount, {});
+}
+
+getCompraByUsuarioId(usuarioId: number, size: number, page: number, direction: string, sort: string): Observable<IPedidoPage> {
+  return this.http.get<IPedidoPage>(this.sUrl + '/usuario/' + usuarioId + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+}
+createCompraUnicoCarrito(usuarioId: number, carritoId: number): Observable<IPedido> {
+  return this.http.post<IPedido>(this.sUrl + '/realizarCompraUnicoCarrito/' + usuarioId + '/' + carritoId, {});
+}
+
+createCompraTodosCarritos(usuarioId: number): Observable<IPedido> {
+  return this.http.post<IPedido>(this.sUrl + '/realizarCompraTodosCarritos/' + usuarioId, {});
+}
+
+createCompraProducto(productoId: number, usuarioId: number, cantidad: number): Observable<IPedido> {
+  return this.http.post<IPedido>(this.sUrl+ '/realizarCompraProducto/' + productoId + '/' + usuarioId + '/' + cantidad, {});
 }
 
 

@@ -109,11 +109,14 @@ import { UserProductoDetailUnroutedComponent } from './components/Producto/user-
 import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
 import { UserValoracionPlistUnroutedComponent } from './components/Valoracion/user-valoracion-plist-unrouted/user-valoracion-plist-unrouted.component';
 import { UserCarritoDetailUnorutedComponent } from './components/Carrito/user-carrito-detail-unoruted/user-carrito-detail-unoruted.component';
-import { UserCarritoViewRoutedComponent } from './components/Carrito/user-carrito-view-routed/user-carrito-view-routed.component';
 import { UserValoracionFormUnroutedComponent } from './components/Valoracion/user-valoracion-form-unrouted/user-valoracion-form-unrouted.component';
 import { UserValoracionNewRoutedComponent } from './components/Valoracion/user-valoracion-new-routed/user-valoracion-new-routed.component';
 import { UserProductoPlistUnroutedComponent } from './components/Producto/user-producto-plist-unrouted/user-producto-plist-unrouted.component';
 import { UserProductoValoracionUnroutedComponent } from './components/Producto/user-producto-valoracion-unrouted/user-producto-valoracion-unrouted.component';
+import { UserCarritoPlistUnroutedComponent } from './components/Carrito/user-carrito-plist-unrouted/user-carrito-plist-unrouted.component';
+import { UserCarritoPlistRoutedComponent } from './components/Carrito/user-carrito-plist-routed/user-carrito-plist-routed.component';
+import { UserPedidoDetailUnroutedComponent } from './components/Pedido/user-pedido-detail-unrouted/user-pedido-detail-unrouted.component';
+import { UserPedidoViewRoutedComponent } from './components/Pedido/user-pedido-view-routed/user-pedido-view-routed.component';
 
 @NgModule({
   declarations: [
@@ -175,6 +178,8 @@ import { UserProductoValoracionUnroutedComponent } from './components/Producto/u
     AdminPedidoSelectionUnroutedComponent,
     AdminPedidoFormUnroutedComponent,
     AdminPedidoNewRoutedComponent,
+    UserPedidoDetailUnroutedComponent,
+    UserPedidoViewRoutedComponent,
 
     //Componentes entidad DetallePedido
     AdminDetallePedidoPlistUnroutedComponent,
@@ -205,7 +210,8 @@ import { UserProductoValoracionUnroutedComponent } from './components/Producto/u
     AdminCarritoFormUnroutedComponent,
     AdminCarritoEditRoutedComponent,
     UserCarritoDetailUnorutedComponent,
-    UserCarritoViewRoutedComponent
+    UserCarritoPlistUnroutedComponent,
+    UserCarritoPlistRoutedComponent
 
 
   ],
