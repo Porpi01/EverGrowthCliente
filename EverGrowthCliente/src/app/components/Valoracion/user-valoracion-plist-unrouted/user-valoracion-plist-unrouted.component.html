@@ -18,6 +18,8 @@
             <p-card class="custom-card">
               <ng-template pTemplate="title">
                 <div>{{ valoracion.titulo }}</div>
+                <button *ngIf="isUsuarioValoracion(valoracion)" (click)="borrarValoracion(valoracion.id)" type="button" class="btn btn-primary btn-lg mt-3"> <i class="fa-solid fa-trash"></i></button>
+
               </ng-template>
               <ng-template pTemplate="subtitle">
                 <span class="custom-badge">{{ valoracion.fecha | date: 'dd/MM/yyyy' }}</span>
@@ -28,7 +30,6 @@
                     <div class="user-info">{{ valoracion.user.nombre }} {{ valoracion.user.apellido1 }}</div>
                     <div class="message">{{ valoracion.mensaje }}</div>
                   </div>
-                  <button *ngIf="isUsuarioValoracion(valoracion)" (click)="borrarValoracion(valoracion.id)" type="button" class="btn btn-primary btn-lg mt-3">Borrar valoración</button>
 
                 </div>
               </ng-template>

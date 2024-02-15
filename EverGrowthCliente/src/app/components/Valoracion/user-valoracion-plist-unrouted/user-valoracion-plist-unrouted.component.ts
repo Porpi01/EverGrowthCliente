@@ -8,6 +8,7 @@ import { SesionService } from './../../../service/Sesion.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { UserProductoValoracionUnroutedComponent } from '../../Producto/user-producto-valoracion-unrouted/user-producto-valoracion-unrouted.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -39,6 +40,7 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
     private ConfirmationService: ConfirmationService,
     private MessageService: MessageService,
     private DialogService: DialogService,
+    private MatSnackBar: MatSnackBar
 
   ) { }
 
@@ -129,7 +131,7 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
           id_usuario: this.id_usuario
           
         },
-        header: 'Nueva valoración',
+        header: 'Comparte tu opinión',
         width: '40%',
         contentStyle: { overflow: 'auto' },
         baseZIndex: 10000,
@@ -144,6 +146,8 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
         }
       })
    
+    }else {
+  this.MatSnackBar.open('Debes estar logueado para valorar un producto', 'Aceptar', { duration: 3000 });
     }
   }
 }

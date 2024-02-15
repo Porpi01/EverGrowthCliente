@@ -15,7 +15,7 @@
       <tr *ngFor="let carrito of page?.content">
         <td><img [src]="carrito.producto.imagen" alt="Imagen del producto" ></td>
         <td>{{carrito.producto.nombre}}</td>
-        <td>{{carrito.producto.precio | Precio }}</td>
+        <td>{{carrito.producto.precio | Precio }} Є</td>
         <td>{{carrito.producto.descripcion}}</td>
         
         <td>
@@ -23,7 +23,7 @@
           {{carrito.cantidad}}
           <button  class="btn btn-primary" (click)="updateCantidad(carrito, carrito.cantidad + 1)">+</button>
         </td>
-        <td>{{ precioIndividualMap.get(carrito.id) | currency }} </td>
+        <td>{{ precioIndividualMap.get(carrito.id) | Precio }} </td>
 
         <td >
           <button class="btn btn-primary" (click)="eliminarDelCarrito(carrito.id)"><i

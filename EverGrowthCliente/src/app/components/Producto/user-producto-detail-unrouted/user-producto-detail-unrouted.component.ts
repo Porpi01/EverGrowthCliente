@@ -104,6 +104,8 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
           this.matSnackBar.open('Error al añadir el producto al carrito', 'Aceptar', { duration: 3000 });
         }
       });
+    }else {
+      this.matSnackBar.open('Debes iniciar sesión para añadir productos al carrito', 'Aceptar', { duration: 3000 });
     }
   }
 

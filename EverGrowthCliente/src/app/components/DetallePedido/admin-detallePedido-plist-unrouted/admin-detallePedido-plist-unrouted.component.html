@@ -59,7 +59,7 @@
             <td>{{ detallePedido.id }}</td>
             <td>{{ detallePedido.cantidad }}</td>
             <td>{{ detallePedido.precio_unitario }}</td>
-            <td>{{ calculateTotalPrice(detallePedido.cantidad, detallePedido.precio_unitario) | currency}}</td>
+            <td>{{ calculateTotalPrice(detallePedido.cantidad, detallePedido.precio_unitario) }} Є</td>
 
             <td class="text-center">
               <a [routerLink]="['/admin','detallePedido','plist','byproducto',detallePedido.productos.id]">({{detallePedido.productos.id}})
