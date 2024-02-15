@@ -11,12 +11,15 @@
   .card-content {
     margin-top: 1rem;
     
+    
   }
 
   
   .user-info {
     font-weight: bold;
+    
   }
+
 
 
  p-card {
@@ -25,9 +28,9 @@
 
 
 .crearValoraciones {
-    background-color: #f8f9fa;
-    padding: 8px 15px;
-    border-radius: 5px;
+    background-color: #f5f4ed;
+    padding: 20px;
+  border-radius: 5px;
     font-size: 16px;
  ;
 

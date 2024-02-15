@@ -39,11 +39,13 @@
               </ng-template>
 
               <p>Precio: {{producto.precio}} €</p>
+              <p class="stock" *ngIf="producto.stock === 0">Sin existencias</p>
+              <p class="stock" *ngIf="producto.stock > 0">En Existencias</p>
 
                <ng-template pTemplate="footer">
-                <div *ngIf="strUserName" class="d-grid gap-2">
-                  <button pButton type="button" label="Añadir" (click)="agregarAlCarrito(producto)" class="btn btn-primary btn-block">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                <div *ngIf="strUserName && producto.stock != 0" class="d-grid gap-2">
+                  <button pButton type="button" label="Añadir al carrito" (click)="agregarAlCarrito(producto)" class="btn btn-primary btn-block">
+                    
                   </button>
                 </div>
               </ng-template>

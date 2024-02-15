@@ -13,4 +13,24 @@ img {
     margin-left: 1px;
  
   }
+
+  .container {
+    background-color: #e8e9eb;
+    padding: 10px;
+    border-radius: 5px;
+    
+  }
+  .cantidad-container i {
+
+    cursor: pointer; 
+    margin-right: 3px;
+    color:#ef6461 ;
+  }
   
+  .acciones-container i {
+    cursor: pointer; 
+    margin-right: 3px;
+    color:#ef6461;
+    font-size: 20px;
+    align-items: center;
+  }

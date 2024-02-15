@@ -109,7 +109,6 @@ import { UserProductoDetailUnroutedComponent } from './components/Producto/user-
 import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
 import { UserValoracionPlistUnroutedComponent } from './components/Valoracion/user-valoracion-plist-unrouted/user-valoracion-plist-unrouted.component';
 import { UserCarritoDetailUnorutedComponent } from './components/Carrito/user-carrito-detail-unoruted/user-carrito-detail-unoruted.component';
-import { UserValoracionNewRoutedComponent } from './components/Valoracion/user-valoracion-new-routed/user-valoracion-new-routed.component';
 import { UserProductoPlistUnroutedComponent } from './components/Producto/user-producto-plist-unrouted/user-producto-plist-unrouted.component';
 import { UserProductoValoracionUnroutedComponent } from './components/Producto/user-producto-valoracion-unrouted/user-producto-valoracion-unrouted.component';
 import { UserCarritoPlistUnroutedComponent } from './components/Carrito/user-carrito-plist-unrouted/user-carrito-plist-unrouted.component';
@@ -151,7 +150,6 @@ import { UserPedidoViewRoutedComponent } from './components/Pedido/user-pedido-v
     AdminValoracionFormUnroutedComponent,
     AdminValoracionEditRoutedComponent,
     UserValoracionPlistUnroutedComponent,
-    UserValoracionNewRoutedComponent,
 
     //Componentes entidad Producto
     AdminProductoPlistUnroutedComponent,

@@ -1,11 +1,16 @@
 .shipping-details {
-  background-color: #f8f9fa;
+  background-color: #f5f4ed;
   padding: 20px;
   border-radius: 5px;
-
-
 }
 
+
+.product-details{
+  background-color: #f5f4ed;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top:20px;
+}
 .shipping-title {
   font-size: 24px;
   color: #333;
@@ -56,4 +61,14 @@
   font-size: 16px;
   text-align: justify;
 
+}
+
+.product-image-container {
+  border: 2px solid #000000; 
+  padding: 5px; 
+}
+
+.product-image {
+  width: 100%; 
+  height: auto; 
 }

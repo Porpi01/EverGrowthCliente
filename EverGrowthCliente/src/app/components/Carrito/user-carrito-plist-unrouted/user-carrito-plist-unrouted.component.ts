@@ -83,43 +83,56 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
   }
 
   updateCantidad(carrito: ICarrito, nuevaCantidad: number): void {
-    carrito.user = { id: carrito.user.id } as IUsuario;
-    carrito.producto = { id: carrito.producto.id } as IProducto;
-    carrito.cantidad = nuevaCantidad;
-    if (nuevaCantidad == 0) {
-      this.eliminarDelCarrito(carrito.id)
+    const stockDisponible = carrito.producto.stock;
+  
+    if (nuevaCantidad >= 0 && nuevaCantidad <= stockDisponible) {
+      carrito.user = { id: carrito.user.id } as IUsuario;
+      carrito.producto = { id: carrito.producto.id } as IProducto;
+      carrito.cantidad = nuevaCantidad;
+  
+      if (nuevaCantidad === 0) {
+        this.eliminarDelCarrito(carrito.id);
+      } else {
+        this.CarritoService.updateOne(carrito).subscribe({
+          next: (data: ICarrito) => {
+            this.matSnackBar.open('Cantidad actualizada', 'Aceptar', { duration: 3000 });
+            this.getCosteCarrito(data);
+            this.updateCosteTotal();
+            this.getCarritos();
+          },
+          error: (err: HttpErrorResponse) => {
+            this.status = err;
+            this.matSnackBar.open('Error al actualizar la cantidad', 'Aceptar', { duration: 3000 });
+          }
+        });
+      }
     } else {
-      this.CarritoService.updateOne(carrito).subscribe({
-        next: (data: ICarrito) => {
-          this.matSnackBar.open('Cantidad actualizada', 'Aceptar', { duration: 3000 });
-          this.getCosteCarrito(data);
-          this.updateCosteTotal();
-          this.getCarritos();
-        },
-        error: (err: HttpErrorResponse) => {
-          this.status = err;
-          this.matSnackBar.open('Error al actualizar la cantidad', 'Aceptar', { duration: 3000 })
-        }
-      })
+      this.matSnackBar.open('No hay suficiente stock disponible', 'Aceptar', { duration: 3000 });
     }
   }
 
   updateCosteTotal(): void {
-    this.SesionService.getSessionUser()?.subscribe({
-      next: (user: IUsuario) => {
-        this.user = user;
-        this.CarritoService.getCosteCarritoByUsuario(this.user.id).subscribe({
-          next: (coste: number) => {
-            this.costeTotal = coste;
-          },
-          error: (err: HttpErrorResponse) => {
-            this.status = err;
-            this.matSnackBar.open('Error al recuperar el coste total', 'Aceptar', { duration: 3000 })
-          }
-        })
-      }
-    })
+    if (this.user) {
+      this.CarritoService.getCosteCarritoByUsuario(this.user.id).subscribe({
+        next: (coste: number) => {
+          this.costeTotal = coste;
+        },
+        error: (err: HttpErrorResponse) => {
+          this.status = err;
+          this.matSnackBar.open('Error al recuperar el coste total', 'Aceptar', { duration: 3000 });
+        }
+      });
+    } else {
+      this.SesionService.getSessionUser()?.subscribe({
+        next: (user: IUsuario) => {
+          this.user = user;
+          this.updateCosteTotal(); // Llamada recursiva para actualizar el costo total una vez que se ha obtenido el usuario
+        }
+      });
+    }
   }
+
+  
 
   onPageChange(event: PaginatorState) {
     this.paginatorState.rows = event.rows;
@@ -183,9 +196,7 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
   }
 
   eliminarDelCarrito(id_carrito: number): void {
-    this.confirmationService.confirm({
-      message: '¿Desea eliminar este carrito?',
-      accept: () => {
+  
         this.CarritoService.removeOne(id_carrito).subscribe({
           next: () => {
             this.matSnackBar.open('Carrito eliminado', 'Aceptar', { duration: 3000 });
@@ -196,8 +207,7 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
             this.matSnackBar.open('Error al eliminar el carrito', 'Aceptar', { duration: 3000 })
           }
         });
-      }
-    });
+    
   }
 
   eliminarTodosCarritos(id_user: number): void {
@@ -216,5 +226,9 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
         });
       }
     });
+  }
+
+  volverAtras() {
+    this.router.navigate(['/home']);
   }
 }
