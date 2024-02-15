@@ -4,7 +4,6 @@ const offcanvas = document.querySelector('.offcanvas');
 
 // Agregar un event listener al botón del toggler
 toggler.addEventListener('click', function () {
-  // Alternar la clase 'show' en el offcanvas para abrir o cerrar
   offcanvas.classList.toggle('show');
 });
 

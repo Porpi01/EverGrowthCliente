@@ -9,18 +9,19 @@ import { IProducto, IUsuario, IValoracion, IValoracionPage } from 'src/app/model
 import { AdminValoracionDetailUnroutedComponent } from '../admin-valoracion-detail-unrouted/admin-valoracion-detail-unrouted.component';
 import { UsuarioService } from 'src/app/service/Usuario.service';
 import { ProductoService } from 'src/app/service/Producto.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-valoracion-plist-unrouted',
   templateUrl: './admin-valoracion-plist-unrouted.component.html',
   styleUrls: ['./admin-valoracion-plist-unrouted.component.css'],
-  providers: [ConfirmationService,MessageService]
+  providers: [ConfirmationService]
 })
 export class AdminValoracionPlistUnroutedComponent implements OnInit {
 
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
- @Input() id_usuario: number = 0;
- @Input() id_producto: number= 0;
+  @Input() id_usuario: number = 0;
+  @Input() id_producto: number = 0;
 
   oPage: IValoracionPage | undefined;
   orderField: string = 'id';
@@ -32,21 +33,19 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
   oUsuario: IUsuario | null = null;
   oProducto: IProducto | null = null;
- 
+
   value: string = '';
 
   constructor(
     private ValoracionService: ValoracionService,
     private ConfirmationService: ConfirmationService,
     private DialogService: DialogService,
-    private MessageService: MessageService,
     private UsuarioService: UsuarioService,
     private ProductoService: ProductoService,
+    private MatSnackBar: MatSnackBar
 
+  ) {
 
-    
-  ) { 
-   
   }
 
   ngOnInit() {
@@ -54,7 +53,7 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
 
     if (this.id_usuario > 0) {
       this.getUsuario();
-      
+
     }
     if (this.id_producto > 0) {
       this.getProducto();
@@ -96,7 +95,7 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
         this.oPaginatorState.page,
         this.orderField,
         this.orderDirection,
-        this.id_usuario, 
+        this.id_usuario,
         this.id_producto
       )
       .subscribe({
@@ -131,8 +130,8 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
     this.ref = this.DialogService.open(AdminValoracionDetailUnroutedComponent, {
       data: {
         id: valoracion.id,
-        openedFromView: true, 
-    
+        openedFromView: true,
+
       },
       header: 'Vista de la valoración',
       width: '60%',
@@ -140,32 +139,40 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
       baseZIndex: 10000,
       maximizable: false
     });
- 
+
   }
 
 
   doRemove(valoracion: IValoracion) {
     this.valoracionToRemove = valoracion;
-  
+
     this.ConfirmationService.confirm({
       accept: () => {
         this.ValoracionService.removeOne(this.valoracionToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'La valoración ha sido eliminada' });
+            this.MatSnackBar.open('La valoración ha sido eliminada', 'Cerrar', {
+              duration: 2000,
+
+            });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'La valoración no se ha podido eliminar' });
+            this.MatSnackBar.open('La valoración no se ha podido eliminar', 'Cerrar', {
+              duration: 2000,
+
+            });
           }
         });
       },
       reject: () => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'La valoración no ha sido eliminada' });
+        this.MatSnackBar.open('La valoración no ha sido eliminada', 'Cerrar', {
+          duration: 2000,
+
+        });
       }
     });
   }
-
   getUsuario(): void {
     this.UsuarioService.getOne(this.id_usuario).subscribe({
       next: (data: IUsuario) => {

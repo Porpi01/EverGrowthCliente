@@ -41,8 +41,8 @@
     cursor: pointer;
     padding: 8px;
     border-radius: 4px;
-    background-color: #ebeae4;
-  }
+    background-color: #f5f4ed;
+  } 
   
   
   .categoria-item:hover {
@@ -62,7 +62,7 @@
   }
 
   .categoria-item.active {
-    background-color: #f0f0f0;
+    background-color: #f5f4ed;
     font-weight: bold;
   }
   

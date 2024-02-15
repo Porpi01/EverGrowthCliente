@@ -8,13 +8,14 @@ import { PedidoService } from '../../../service/Pedido.service';
 import { AdminPedidoDetailUnroutedComponent } from '../admin-pedido-detail-unrouted/admin-pedido-detail-unrouted.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UsuarioService } from './../../../service/Usuario.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
   selector: 'app-admin-pedido-plist-unroutedç',
   templateUrl: './admin-pedido-plist-unrouted.component.html',
   styleUrls: ['./admin-pedido-plist-unrouted.component.css'],
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService]
 })
 export class AdminPedidoPlistUnroutedComponent implements OnInit {
   @Input() forceReload: Subject<boolean> = new Subject<boolean>();
@@ -36,9 +37,9 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
   constructor(
     private PedidoService: PedidoService,
     private ConfirmationService: ConfirmationService,
-    private MessageService: MessageService,
     private DialogService: DialogService,
-    private UsuarioService: UsuarioService
+    private UsuarioService: UsuarioService,
+    private MatSnackBar: MatSnackBar
 
   ) {
   }
@@ -103,7 +104,7 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
         id: pedido.id
       },
       header: 'Vista de pedido',
-      width: '60%',
+      width: '70%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: false
@@ -119,16 +120,16 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
         this.PedidoService.removeOne(this.pedidoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'El pedido ha sido eliminado' });
+            this.MatSnackBar.open('El pedido ha sido eliminado', 'Cerrar', { duration: 2000, });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'El pedido no ha sido eliminado' });
+            this.MatSnackBar.open(`Error: ${error.message}`, 'Cerrar', { duration: 2000, });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'El pedido no ha sido eliminado' });
+        this.MatSnackBar.open('Operación cancelada', 'Cerrar', { duration: 2000, });
       }
     });
   }

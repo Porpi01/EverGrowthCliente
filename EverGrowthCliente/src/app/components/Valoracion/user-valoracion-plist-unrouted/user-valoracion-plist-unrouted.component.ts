@@ -1,11 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output,  } from '@angular/core';
+import { Component, Input, OnInit,   } from '@angular/core';
 import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
 import { IValoracionPage, IValoracion, IUsuario, IProducto,  } from 'src/app/model/model.interfaces';
 import { ValoracionService } from './../../../service/Valoracion.service';
 import { SesionService } from './../../../service/Sesion.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { UserProductoValoracionUnroutedComponent } from '../../Producto/user-producto-valoracion-unrouted/user-producto-valoracion-unrouted.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -38,7 +38,6 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
     private ValoracionService: ValoracionService,
     private SesionService: SesionService,
     private ConfirmationService: ConfirmationService,
-    private MessageService: MessageService,
     private DialogService: DialogService,
     private MatSnackBar: MatSnackBar
 
@@ -102,24 +101,27 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
 
   borrarValoracion(id_valoracion: number) {
     this.ConfirmationService.confirm({
-   
       message: '¿Estás seguro de que quieres borrar la valoración?',
       accept: () => {
         console.log(id_valoracion);
         this.ValoracionService.removeOne(id_valoracion).subscribe({
           next: () => {
             this.getValoraciones();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'La valoración ha sido eliminada' });
+            this.MatSnackBar.open('La valoración ha sido eliminada', 'Cerrar', {
+              duration: 2000,
+            });
             console.log(this.usuario?.id);
           },
           error: (err: HttpErrorResponse) => {
             this.status = err;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'La valoración no se ha podido eliminar' });
+            this.MatSnackBar.open('La valoración no se ha podido eliminar', 'Cerrar', {
+              duration: 2000,
+            
+            });
           }
-        })
+        });
       }
     });
-    
   }
 
   postNuevaValoracion(): void {

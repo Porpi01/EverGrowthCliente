@@ -30,6 +30,8 @@
             ],
             "scripts": [
 
+              "./src/app/scripts.js"
+
             ]
           },
           "configurations": {
@@ -94,7 +96,7 @@
               "src/styles.css"
             ],
             "scripts": [
-              
+
 
             ]
           }

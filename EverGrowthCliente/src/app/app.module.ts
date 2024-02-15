@@ -115,7 +115,7 @@ import { UserCarritoPlistUnroutedComponent } from './components/Carrito/user-car
 import { UserCarritoPlistRoutedComponent } from './components/Carrito/user-carrito-plist-routed/user-carrito-plist-routed.component';
 import { UserPedidoDetailUnroutedComponent } from './components/Pedido/user-pedido-detail-unrouted/user-pedido-detail-unrouted.component';
 import { UserPedidoViewRoutedComponent } from './components/Pedido/user-pedido-view-routed/user-pedido-view-routed.component';
-
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -242,6 +242,7 @@ import { UserPedidoViewRoutedComponent } from './components/Pedido/user-pedido-v
     MatNativeDateModule,
     PanelModule,
     FileUploadModule,
+    DialogModule
   
    
 

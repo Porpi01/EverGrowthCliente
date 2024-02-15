@@ -10,12 +10,13 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AdminProductoDetailUnroutedComponent } from '../admin-producto-detail-unrouted/admin-producto-detail-unrouted.component';
 import { MediaService } from './../../../service/Media.service';
 import { CategoriaService } from './../../../service/Categoria.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-producto-plist-unrouted',
   templateUrl: './admin-producto-plist-unrouted.component.html',
   styleUrls: ['./admin-producto-plist-unrouted.component.css'],
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService,]
 })
 export class AdminProductoPlistUnroutedComponent implements OnInit {
 
@@ -43,9 +44,9 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
     private ProductoService: ProductoService,
     private ConfirmationService: ConfirmationService,
     private DialogService: DialogService,
-    private MessageService: MessageService,
     private MediaService: MediaService,
-    private CategoriaService: CategoriaService
+    private CategoriaService: CategoriaService,
+    private MatSnackBar: MatSnackBar
 
   ) {
   }
@@ -146,16 +147,16 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
         this.ProductoService.removeOne(this.productoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'El producto ha sido eliminado' });
+            this.MatSnackBar.open('El producto ha sido eliminado', 'Cerrar', { duration: 2000 });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'El producto no ha sido eliminado' });
+            this.MatSnackBar.open('Error al eliminar el producto', 'Cerrar', { duration: 2000 });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'El producto no ha sido eliminado' });
+        this.MatSnackBar.open('El producto no ha sido eliminado', 'Cerrar', { duration: 2000 });
       }
     });
   }

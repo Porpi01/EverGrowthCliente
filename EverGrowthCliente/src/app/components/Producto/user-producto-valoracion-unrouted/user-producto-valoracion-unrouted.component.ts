@@ -7,7 +7,7 @@ import { ValoracionService } from 'src/app/service/Valoracion.service';
 import { startWithCapitalLetter } from '../admin-producto-form-unrouted/admin-producto-form-unrouted.component';
 import { UsuarioService } from './../../../service/Usuario.service';
 import { ProductoService } from './../../../service/Producto.service';
-import { MessageService } from 'primeng/api';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-producto-valoracion-unrouted',
@@ -32,10 +32,11 @@ export class UserProductoValoracionUnroutedComponent implements OnInit {
     private valoracionService: ValoracionService,
     private UsuarioService: UsuarioService,
     private ProductoService: ProductoService,
-    private MessageService: MessageService,
     public oDynamicDialogRef: DynamicDialogRef,
     public oDynamicDialogConfig: DynamicDialogConfig,
-    public DialogService: DialogService
+    public DialogService: DialogService,
+    private MatSnackBar: MatSnackBar
+
   ) {
     this.id_usuario = this.oDynamicDialogConfig.data.id_usuario;
     console.log(this.id_usuario)
@@ -56,7 +57,7 @@ if(this.id_usuario !== undefined) {
     },
     error: (error) => {
       this.status = error
-      this.MessageService.add({ severity: 'error',detail: 'No se puede crear la valoración',  life: 2000});
+      this.MatSnackBar.open('Error al obtener el usuario', 'Cerrar', { duration: 2000 });
     }
   });
 
@@ -70,7 +71,7 @@ if(this.id_producto !== undefined) {
     },
     error: (error) => {
       this.status = error
-      this.MessageService.add({ severity: 'error', detail: 'Aceptar',  life: 2000});
+      this.MatSnackBar.open('Error al obtener el producto', 'Cerrar', { duration: 2000 });
     }
   });
 }
@@ -101,12 +102,12 @@ onSubmit() {
    
     this.valoracionService.newOne(valoracion).subscribe({
       next: (data: IValoracion) => {
-        this.MessageService.add({ severity: 'success', detail: 'Valoración creada', life: 2000 });
+        this.MatSnackBar.open('Valoración creada', 'Cerrar', { duration: 2000 });
         this.oDynamicDialogRef.close(data);
       },
       error: (err) => {
         this.status = err;
-        this.MessageService.add({ severity: 'error', detail: 'Aceptar', life: 2000 });
+        this.MatSnackBar.open('Error al crear la valoración', 'Cerrar', { duration: 2000 });
       }
     });
   

@@ -9,13 +9,14 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AdminCarritoDetailUnroutedComponent } from '../admin-carrito-detail-unrouted/admin-carrito-detail-unrouted.component';
 import { UsuarioService } from './../../../service/Usuario.service';
 import { ProductoService } from './../../../service/Producto.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
   selector: 'app-admin-carrito-plist-unrouted',
   templateUrl: './admin-carrito-plist-unrouted.component.html',
   styleUrls: ['./admin-carrito-plist-unrouted.component.css'],
-  providers: [ConfirmationService,MessageService]
+  providers: [ConfirmationService]
 })
 export class AdminCarritoPlistUnroutedComponent implements OnInit {
 
@@ -40,9 +41,9 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
     private CarritoService: CarritoService,
     private ConfirmationService: ConfirmationService,
     private DialogService: DialogService,
-    private MessageService: MessageService,
     private UsuarioService: UsuarioService,
     private ProductoService: ProductoService,
+    private MatSnackBar : MatSnackBar
   ) { 
   }
 
@@ -131,16 +132,16 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
         this.CarritoService.removeOne(this.carritoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'El carrito ha sido eliminado' });
+            this.MatSnackBar.open('El carrito ha sido eliminado', 'Cerrar', { duration: 2000, panelClass: ['success-snackbar'] });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'El carrito no ha sido eliminado' });
+            this.MatSnackBar.open('El carrito no ha sido eliminado', 'Cerrar', { duration: 2000, panelClass: ['error-snackbar'] });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'El carrito no ha sido eliminado' });
+        this.MatSnackBar.open('El carrito no ha sido eliminado', 'Cerrar', { duration: 2000, panelClass: ['info-snackbar'] });
       }
     });
   }

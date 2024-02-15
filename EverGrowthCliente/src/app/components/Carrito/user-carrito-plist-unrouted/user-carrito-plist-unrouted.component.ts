@@ -28,6 +28,8 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
   paginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
   precioIndividualMap: Map<number, number> = new Map<number, number>();
+  displayDialog: boolean = false;
+
 
   constructor(
     private CarritoService: CarritoService,

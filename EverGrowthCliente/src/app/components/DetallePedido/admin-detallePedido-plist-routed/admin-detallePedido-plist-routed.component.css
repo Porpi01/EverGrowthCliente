@@ -19,3 +19,12 @@ p-messages {
 background: #ef6461;
 }
 
+.btn-primary {
+  background-color: #ef6461;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+
+
+}

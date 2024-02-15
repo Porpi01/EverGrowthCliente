@@ -35,5 +35,10 @@
   </div>
   <app-admin-detallePedido-plist-unrouted  [forceReload]="forceReload" [id_pedido]="id_pedido" [id_producto]="id_producto" *ngIf="!bLoading" ></app-admin-detallePedido-plist-unrouted>
 
-<p-confirmPopup></p-confirmPopup>
-<p-messages></p-messages>
+  <p-dialog header="Confirmación" [(visible)]="displayDialog" [modal]="true" [responsive]="true" [closable]="false">
+    <p>¿Seguro qué quiere eliminar los detalle pedidos?</p>
+    <p-footer>
+      <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="Sí"  (click)="doEmpty()"></button>
+      <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No"  (click)="displayDialog = false" ></button>
+    </p-footer>
+  </p-dialog>

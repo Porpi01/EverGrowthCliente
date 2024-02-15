@@ -7,12 +7,13 @@ import { ICategoriaPage, ICategoria } from 'src/app/model/model.interfaces';
 import { CategoriaService } from './../../../service/Categoria.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AdminCategoriaDetailUnroutedComponent } from '../admin-categoria-detail-unrouted/admin-categoria-detail-unrouted.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-categoria-plist-unrouted',
   templateUrl: './admin-categoria-plist-unrouted.component.html',
   styleUrls: ['./admin-categoria-plist-unrouted.component.css'],
-  providers: [ConfirmationService,MessageService]
+  providers: [ConfirmationService,]
 })
 export class AdminCategoriaPlistUnroutedComponent implements OnInit {
 
@@ -34,7 +35,7 @@ export class AdminCategoriaPlistUnroutedComponent implements OnInit {
     private CategoriaService: CategoriaService,
     private ConfirmationService: ConfirmationService,
     private DialogService: DialogService,
-    private MessageService: MessageService
+    private MatSnackBar: MatSnackBar
   ) { 
   }
 
@@ -126,16 +127,16 @@ export class AdminCategoriaPlistUnroutedComponent implements OnInit {
         this.CategoriaService.removeOne(this.categoriaToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'La categoría ha sido eliminada' });
+            this.MatSnackBar.open('El Detalle Pedido se ha eliminado', 'Cerrar', { duration: 2000 });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'La categoría no ha sido eliminada' });
+            this.MatSnackBar.open('El Detalle Pedido no se ha eliminado', 'Cerrar', { duration: 2000 });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'La categoría no ha sido eliminada' });
+        this.MatSnackBar.open('El Detalle Pedido no se ha eliminado', 'Cerrar', { duration: 2000 });
       }
     });
   }

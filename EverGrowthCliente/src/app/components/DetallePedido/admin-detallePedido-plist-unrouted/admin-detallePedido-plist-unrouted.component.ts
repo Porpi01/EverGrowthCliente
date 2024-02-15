@@ -9,6 +9,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AdminDetallePedidoDetailUnroutedComponent } from '../admin-detallePedido-detail-unrouted/admin-detallePedido-detail-unrouted.component';
 import { ProductoService } from './../../../service/Producto.service';
 import { PedidoService } from 'src/app/service/Pedido.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-detallePedido-plist-unrouted',
@@ -42,7 +43,8 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
     private DialogService: DialogService,
     private MessageService: MessageService,
     private ProductoService: ProductoService,
-    private PedidoService: PedidoService
+    private PedidoService: PedidoService,
+    private MatSnackBar : MatSnackBar
   ) { 
   }
 
@@ -131,16 +133,16 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
         this.DetallePedidoService.removeOne(this.pedidoToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'El Detalle Pedido se ha eliminado' });
+            this.MatSnackBar.open('El Detalle Pedido se ha eliminado', 'Cerrar', { duration: 2000 });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'El Detalle Pedido no se ha eliminado' });
+            this.MatSnackBar.open('El Detalle Pedido no se ha eliminado', 'Cerrar', { duration: 2000 });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'El Detalle Pedido no se ha eliminado' });
+        this.MatSnackBar.open('El Detalle Pedido no se ha eliminado', 'Cerrar', { duration: 2000 });
       }
     });
   }

@@ -10,6 +10,7 @@ import { AdminProductoSelectionUnroutedComponent } from "../../Producto/admin-pr
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS } from "@angular/material/core";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { MessageService } from 'primeng/api';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export function startWithCapitalLetter(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -51,7 +52,8 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
     private valoracionService: ValoracionService,
     private router: Router,
     private dialogService: DialogService,
-    private MessageService: MessageService
+    private MessageService: MessageService,
+    private MatSnackBar: MatSnackBar
   ) {
     this.initializeForm(this.valoracion);
   }
@@ -83,7 +85,9 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           this.status = error;
 
-          this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'La creación de la valoración no ha sido exitosa' });
+          this.MatSnackBar.open('No se ha podido actualizar la valoración', 'Cerrar', {
+            duration: 2000,        
+          });
         }
       });
     } else {
@@ -106,17 +110,19 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
             this.valoracion = {"user": {}, "producto": {}} as IValoracion;
             this.initializeForm(this.valoracion);
 
-            this.MessageService.add({ severity: 'success',  detail: 'La creación de la valoración ha sido exitosa', life: 2000});
+            this.MatSnackBar.open('La creación de la valoración ha sido exitosa', 'Cerrar', {
+              duration: 2000,});            
             console.log(this.valoracion.id);
             console.log('Mensaje agregado con éxito al MessageService');          
             this.router.navigate(['/admin', 'valoracion', 'view', data]);
-         
-
+    
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail:'La creación de la valoración no ha sido exitosa' });
-          }
+            this.MatSnackBar.open('La creación de la valoración no ha sido exitosa', 'Cerrar', {
+              duration: 2000,
+        
+            });          }
         });
       } else {
         this.valoracionService.updateOne(this.valoracionForm.value).subscribe({
@@ -125,14 +131,19 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
             this.initializeForm(this.valoracion);
 
 
-            this.MessageService.add({ severity: 'success', summary: 'Success', detail: 'La valoracion se ha actualizado correctamente' });
-            this.router.navigate(['/admin', 'valoracion', 'view', this.valoracion.id]);
+            this.MatSnackBar.open('La valoración se ha actualizado correctamente', 'Cerrar', {
+              duration: 2000,
+         
+            });           
+             this.router.navigate(['/admin', 'valoracion', 'view', this.valoracion.id]);
           
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MessageService.add({ severity: 'error', summary: 'Error', detail: 'The valoracion no se ha actualizado'});
-            
+            this.MatSnackBar.open('La valoración no se ha actualizado', 'Cerrar', {
+              duration: 2000,
+              panelClass: ['snackbar-error']
+            });            
           }
         });
       }

@@ -33,7 +33,6 @@ export class AdminProductoSelectionUnroutedComponent implements OnInit {
 
   constructor(
     private ProductoService: ProductoService,
-    private dialogService: DialogService,
     public oDynamicDialogRef: DynamicDialogRef
   ) {
     this.formGroup = new FormGroup({
