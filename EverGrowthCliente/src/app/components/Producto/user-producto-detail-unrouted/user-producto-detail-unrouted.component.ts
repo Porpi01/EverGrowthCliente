@@ -3,14 +3,10 @@ import { ICarrito, IProducto, IUsuario, IValoracion } from 'src/app/model/model.
 import { ProductoService } from './../../../service/Producto.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { ValoracionService } from './../../../service/Valoracion.service';
 import { SesionService } from 'src/app/service/Sesion.service';
-import { ConfirmationService } from 'primeng/api';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { PedidoService } from 'src/app/service/Pedido.service';
 import { CarritoService } from './../../../service/Carrito.service';
-import { Subject } from 'rxjs';
 
 
 @Component({
@@ -35,12 +31,10 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
 
   constructor(
     private productoService: ProductoService,
-    private ValoracionService: ValoracionService,
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig,
     private SesionService: SesionService,
-    private ConfirmationService: ConfirmationService,
-    private PedidoService: PedidoService,
+ 
     private matSnackBar: MatSnackBar,
     private router: Router,
     private CarritoService: CarritoService
@@ -113,40 +107,7 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
     }
   }
 
-  makeProductPurhase(product: IProducto): void {
-    this.SesionService.getSessionUser()?.subscribe({
-      next: (user: IUsuario) => {
-        if (user) {
-          this.ConfirmationService.confirm({
-            message: '¿Quieres comprar el producto?',
-            accept: () => {
-              const cantidad = 1;
-              this.PedidoService.makeProductPurhase(product.id, user.id, cantidad).subscribe({
-                next: () => {
-                  this.matSnackBar.open('Producto comprado', 'Aceptar', {duration: 3000});
-                  this.router.navigate(['/usuario', 'carrito', 'view', product.id]);
-                  console.log('Producto comprado');
-                },
-                error: (err: HttpErrorResponse) => {
-                  this.status = err;
-                  this.matSnackBar.open('Error al comprar el producto', 'Aceptar', {duration: 3000});
-                }
-              });
-              },
-            reject: () => {
-              this.matSnackBar.open('Compra cancelada', 'Aceptar', {duration: 3000});
-            }
-            })
-        } else {
-          this.matSnackBar.open('Debes estar logueado para comprar productos', 'Aceptar', {duration: 3000});
-        };
-        },
-      error: (err: HttpErrorResponse) => {
-        this.status = err;
-        this.matSnackBar.open('Error al obtener el usuario', 'Aceptar', {duration: 3000});
-      }
-      });
-    }
+ 
 
   
 }

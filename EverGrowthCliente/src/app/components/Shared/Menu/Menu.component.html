@@ -68,7 +68,7 @@
               <a class="nav-link" routerLink="/logout" href="#" *ngIf="strUserName" [class.active]="strUrl.startsWith('/logout')">Logout</a>
           </span>
           <span class="navbar-text mx-1">
-            <i (click)="mostrarCarrito($event)" class="fa-solid fa-cart-shopping"></i>
+            <i  *ngIf="!strUserName || (oSessionUser && oSessionUser.rol === true)" (click)="mostrarCarrito($event)" class="fa-solid fa-cart-shopping"></i>
                   </span>
                   
       </div>

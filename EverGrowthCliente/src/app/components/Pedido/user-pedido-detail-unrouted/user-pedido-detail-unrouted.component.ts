@@ -49,6 +49,6 @@ export class UserPedidoDetailUnroutedComponent implements OnInit {
   }
 
   volverAtras() {
-    this.router.navigate(['/admin/pedido/plist']);
+    this.router.navigate(['/home']);
   }
 }

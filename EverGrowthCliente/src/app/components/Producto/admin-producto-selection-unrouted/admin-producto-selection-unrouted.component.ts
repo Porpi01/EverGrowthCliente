@@ -79,7 +79,7 @@ export class AdminProductoSelectionUnroutedComponent implements OnInit {
         next: (data: IProductoPage) => {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
-          this.productos = data.content;
+          this.productos = data.content.filter((producto: IProducto) => producto.stock > 0);
           console.log(this.oPaginatorState);
           console.log(this.productos);
         },

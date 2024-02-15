@@ -3,10 +3,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PaginatorState } from 'primeng/paginator';
-import { IProducto, IProductoPage, ICategoria, ICategoriaPage } from 'src/app/model/model.interfaces';
+import { IProducto, IProductoPage, ICategoria, ICategoriaPage, ICarrito, IUsuario } from 'src/app/model/model.interfaces';
 import { ProductoService } from 'src/app/service/Producto.service';
 import { SesionService } from 'src/app/service/Sesion.service';
 import { CategoriaService } from './../../../service/Categoria.service';
+import { CarritoService } from './../../../service/Carrito.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-producto-plist-unrouted',
@@ -36,14 +38,19 @@ export class UserProductoPlistUnroutedComponent implements OnInit {
   strUserName: string = '';
   idCategoriaFiltrada: number | null = null;
 filtrandoPorCategoria: boolean = false;
-producto: IProducto[] = [];
+
+carrito: ICarrito = { user: {}, producto: {}, cantidad: 0 } as ICarrito;
+
 
 
   constructor(
     private productoService: ProductoService,
     private sesionService: SesionService,
     private CategoriaService: CategoriaService,
-    private oRouter: Router
+    private oRouter: Router,
+    private CarritoService: CarritoService,
+ 
+    private matSnackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -201,6 +208,25 @@ producto: IProducto[] = [];
     
     this.filtrandoPorCategoria = false; // Desactivar la bandera de filtrado por categoría
     console.log(this.filtrandoPorCategoria);
+}
+
+agregarAlCarrito(producto: IProducto): void {
+  if (this.sesionService.isSessionActive()) {
+      this.carrito.user = {username: this.sesionService.getUsername()} as IUsuario; 
+      this.carrito.producto = {id: producto.id} as IProducto;
+      this.carrito.cantidad = 1;
+      this.CarritoService.newOne(this.carrito).subscribe({
+        next: (data: ICarrito) => {
+          this.carrito = data;
+          this.matSnackBar.open('Camiseta añadida al carrito', 'Aceptar', {duration: 3000});
+          this.oRouter.navigate(['/usuario', 'carrito', 'plist']);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.status = err;
+          this.matSnackBar.open('Error al añadir la camiseta al carrito', 'Aceptar', {duration: 3000});
+        }
+      });
+  }
 }
 
 }
