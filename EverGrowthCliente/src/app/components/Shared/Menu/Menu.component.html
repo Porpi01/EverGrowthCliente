@@ -3,17 +3,16 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="/home">
       <img src="http://localhost:8085/media/Logo-removebg-preview%20(1).png" width="120px" height="30px" alt="Nombre del logotipo">
-     
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas"
       aria-controls="navbarOffcanvas">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="navbarOffcanvas" aria-labelledby="navbarOffcanvasLabel">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="navbarOffcanvas" aria-labelledby="offcanvasLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="navbarOffcanvasLabel">Menú</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close text-reset" id="navbarOffcanvas" data-bs-toggle="offcanvas2" data-bs-target="#navbarOffcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -22,34 +21,34 @@
             <a class="nav-link" [class.active]="strUrl=='/home'||strUrl=='/'" aria-current="page" routerLink="/home" *ngIf="strUserName && oSessionUser?.rol==false"> Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="strUrl=='/userhome'||strUrl=='/'" aria-current="page" routerLink="/home" *ngIf="strUserName && oSessionUser?.rol==true"> Inicio</a>
+            <a class="nav-link" [class.active]="strUrl=='/home'||strUrl=='/'" aria-current="page" routerLink="/home" *ngIf="strUserName && oSessionUser?.rol==true"> Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="strUrl=='/admin/valoracion'||strUrl=='/'" aria-current="page"
+            <a class="nav-link" [class.active]="strUrl=='/admin/valoracion/plist'||strUrl=='/'" aria-current="page"
               routerLink="/admin/valoracion/plist" *ngIf="strUserName && oSessionUser?.rol==false"> Valoracion</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="strUrl=='/admin/usuario'||strUrl=='/'" aria-current="page"
+            <a class="nav-link" [class.active]="strUrl=='/admin/usuario/plist'||strUrl=='/'" aria-current="page"
               routerLink="/admin/usuario/plist" *ngIf="strUserName && oSessionUser?.rol==false"> Usuario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="strUrl=='/admin/producto'||strUrl=='/'" aria-current="page"
+            <a class="nav-link" [class.active]="strUrl=='/admin/producto/plist'||strUrl=='/'" aria-current="page"
               routerLink="/admin/producto/plist" *ngIf="strUserName && oSessionUser?.rol==false">Producto</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="strUrl=='/admin/pedido'||strUrl=='/'" aria-current="page"
+            <a class="nav-link" [class.active]="strUrl=='/admin/pedido/plist'||strUrl=='/'" aria-current="page"
               routerLink="/admin/pedido/plist" *ngIf="strUserName && oSessionUser?.rol==false"> Pedido</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="strUrl=='/admin/detallePedido'||strUrl=='/'" aria-current="page"
+            <a class="nav-link" [class.active]="strUrl=='/admin/detallePedido/plist'||strUrl=='/'" aria-current="page"
               routerLink="/admin/detallePedido/plist" *ngIf="strUserName && oSessionUser?.rol==false"> DetallePedido</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="strUrl=='/admin/categoria'||strUrl=='/'" aria-current="page"
+            <a class="nav-link" [class.active]="strUrl=='/admin/categoria/plist'||strUrl=='/'" aria-current="page"
               routerLink="/admin/categoria/plist" *ngIf="strUserName && oSessionUser?.rol==false">Categoria</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="strUrl=='/admin/carrito'||strUrl=='/'" aria-current="page"
+            <a class="nav-link" [class.active]="strUrl=='/admin/carrito/plist'||strUrl=='/'" aria-current="page"
               routerLink="/admin/carrito/plist" *ngIf="strUserName && oSessionUser?.rol==false"> Carrito</a>
           </li>
         </ul>
@@ -78,4 +77,3 @@
   </div>
 </nav>
 
-<script src="../../../scripts.js"></script>

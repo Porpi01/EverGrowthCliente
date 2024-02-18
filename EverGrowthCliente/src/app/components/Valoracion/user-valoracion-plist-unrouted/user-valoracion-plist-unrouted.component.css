@@ -1,55 +1,63 @@
 
+.title{
+  margin-bottom: 15px;
+}
+
 .custom-badge {
-    background-color: #e4b363;
-    color: #fff;
-    padding: 6px 12px;
-   border-radius: 5px;
+  background-color: #e4b363;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 5px;
 
-  
-  }
 
-  .card-content {
-    margin-top: 1rem;
-    
-    
-  }
+}
 
-  
-  .user-info {
-    font-weight: bold;
-    
-  }
+.card-content {
+  margin-top: 1rem;
+}
+
+
+.user-info {
+  font-weight: bold;
+
+}
 
 
 
- p-card {
-    padding: 4px 4px;
- }
+p-card {
+  padding: 4px 4px;
+}
 
 
 .crearValoraciones {
-    background-color: #f5f4ed;
-    padding: 20px;
+  background-color: #f5f4ed;
+  padding: 20px;
   border-radius: 5px;
-    font-size: 16px;
- ;
+  font-size: 16px;
+ 
 
 
 }
 
 .btn-primary {
-    background-color: #ef6461;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 15px;
-    font-size: 16px;
-    margin-bottom: 10px;
- 
-  }
+  background-color: #ef6461;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  font-size: 16px;
+  margin-bottom: 10px;
 
-  .info {
-    font-size: 16px;
-    margin-top: 10px;
-    text-align: justify;
-  }
+
+}
+
+.info {
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: justify;
+}
+
+.message {
+  font-size: 16px;
+  margin-left: 10px;
+}

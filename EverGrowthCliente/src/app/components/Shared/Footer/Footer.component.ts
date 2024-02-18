@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IUsuario } from 'src/app/model/model.interfaces';
 
 @Component({
   selector: 'app-Footer',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  strUserName: string = "";
+  oSessionUser: IUsuario | null = null;
+
   constructor() { }
 
   ngOnInit() {
+    console.log(this.oSessionUser)
   }
 
 }

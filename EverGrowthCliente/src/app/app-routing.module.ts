@@ -44,8 +44,6 @@ const routes: Routes = [
   
 
 
-  
-  
 
 //Usuario
   { path: 'admin/usuario/plist', component: AdminUserPlistRoutedComponent },

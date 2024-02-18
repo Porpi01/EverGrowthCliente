@@ -60,12 +60,14 @@
 .product-details{
   font-size: 16px;
   text-align: justify;
+  margin-bottom: 10px;
 
 }
 
 .product-image-container {
-  border: 2px solid #000000; 
+  border: 7px solid #f5f4ed; 
   padding: 5px; 
+  border-radius: 5px;
 }
 
 .product-image {
