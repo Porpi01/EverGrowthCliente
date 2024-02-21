@@ -127,16 +127,16 @@ export class AdminCategoriaPlistUnroutedComponent implements OnInit {
         this.CategoriaService.removeOne(this.categoriaToRemove?.id).subscribe({
           next: () => {
             this.getPage();
-            this.MatSnackBar.open('El Detalle Pedido se ha eliminado', 'Cerrar', { duration: 2000 });
+            this.MatSnackBar.open('La categoría se ha eliminado', 'Cerrar', { duration: 2000 });
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
-            this.MatSnackBar.open('El Detalle Pedido no se ha eliminado', 'Cerrar', { duration: 2000 });
+            this.MatSnackBar.open('La categoría no se ha eliminado', 'Cerrar', { duration: 2000 });
           }
         });
       },
       reject: (type: ConfirmEventType) => {
-        this.MatSnackBar.open('El Detalle Pedido no se ha eliminado', 'Cerrar', { duration: 2000 });
+        this.MatSnackBar.open('La categoríano se ha eliminado', 'Cerrar', { duration: 2000 });
       }
     });
   }
