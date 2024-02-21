@@ -4,46 +4,18 @@
       <!-- Columna para el nombre de la empresa y el teléfono -->
       <div class="col-md-6">
         <div class="company-info">
-          <h3> ¡Bienvenido a EverGrowth!</h3>
-      <p><i class="fas fa-phone"></i> Teléfono: 632-876-300</p>
-      <p><i class="fas fa-envelope"></i> Email: everGrowth&#64;gmail.com
-      </p>
+          <h3>¡Bienvenido a EverGrowth!</h3>
+          <p><i class="fas fa-phone"></i> Teléfono: 632-876-300</p>
+          <p><i class="fas fa-envelope"></i> Email: everGrowth&#64;gmail.com</p>
         </div>
       </div>
       <!-- Columna para el mapa de navegación -->
       <div class="col-md-6">
         <div class="map-navigation">
-          <h3>Mapa de Navegación</h3>
           <div class="row">
             <div class="col-md-6">
               <ul class="list-unstyled">
                 <li><a href="/home">Inicio</a></li>
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/valoracion/plist">Valoraciones</a></li>
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/valoracion/new">Nueva valoración</a></li>
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/usuario/plist">Usuario</a></li>
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/usuario/new">Nuevo usuario</a></li>
-              </ul>
-            </div>
-            <div class="col-md-6">
-              <ul class="list-unstyled">
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/producto/plist">Productos</a></li>
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/producto/new">Nuevo producto</a></li>
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/categoria/plist">Categorías</a></li>
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/categoria/new">Nueva categoría</a></li>
-              </ul>
-            </div>
-            <div class="col-md-6">
-              <ul class="list-unstyled">
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/pedido/plist">Pedidos</a></li>
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/pedido/new">Nuevo pedido</a></li>
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/detallePedido/plist">Detalles pedidos</a></li>
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/detallePedido/new">Nuevo detalle pedido</a></li>
-              </ul>
-            </div>
-            <div class="col-md-6">
-              <ul class="list-unstyled">
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/carrito/plist">Carrito</a></li>
-                <li *ngIf="strUserName && oSessionUser?.rol==false"><a href="/admin/carrito/new">Nuevo carrito</a></li>
               </ul>
             </div>
           </div>
