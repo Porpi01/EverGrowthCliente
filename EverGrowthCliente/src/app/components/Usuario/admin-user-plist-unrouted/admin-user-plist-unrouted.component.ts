@@ -117,6 +117,7 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
       },
       header: 'Vista del usuario',
       width: '60%',
+      height: '100%',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: false

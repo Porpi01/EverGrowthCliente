@@ -134,7 +134,7 @@ carrito: ICarrito = { user: {}, producto: {}, cantidad: 0 } as ICarrito;
   }
 
   getCategorias(): void {
-    this.CategoriaService.getPage(undefined, undefined, 'id', 'asc').subscribe({
+    this.CategoriaService.getPage(12, 0, 'id', 'asc').subscribe({
       next: (data: ICategoriaPage) => {
         this.categoria = data.content;
       },

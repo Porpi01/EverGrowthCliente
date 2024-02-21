@@ -61,7 +61,7 @@ export class AdminProductoFormUnroutedComponent implements OnInit {
       nombre: [producto.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255),startWithCapitalLetter()]],
       precio: [producto.precio, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       stock: [producto.stock, [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
-      descripcion: [producto.descripcion, [Validators.required, Validators.minLength(3), Validators.maxLength(255),startWithCapitalLetter()]],
+      descripcion: [producto.descripcion, [Validators.required, Validators.minLength(3), Validators.maxLength(2048),startWithCapitalLetter()]],
       imagen: [producto.imagen, Validators.required],
       categoria: this.FormBuilder.group({
         id: [categoriaID]

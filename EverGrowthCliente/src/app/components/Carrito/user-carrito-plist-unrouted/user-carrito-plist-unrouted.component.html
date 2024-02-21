@@ -1,48 +1,52 @@
 <div class="container" *ngIf="page && page.content.length > 0">
-  <table class="table is-fullwidth is-bordered">
-    <thead>
-      <tr>
-        <th>Imagen</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Descripción</th>
-        <th>Cantidad</th>
-        <th>Coste Total</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let carrito of page?.content">
-        <td><img [src]="carrito.producto.imagen" alt="Imagen del producto"></td>
-        <td>{{carrito.producto.nombre}}</td>
-        <td>{{carrito.producto.precio | Precio }} Є</td>
-        <td>{{carrito.producto.descripcion}}</td>
-        <td>
-          <div class="cantidad-container">
-            <i  class="fa-solid fa-minus btn-icon" (click)="updateCantidad(carrito, carrito.cantidad - 1)"></i>
-            <span>{{carrito.cantidad}}</span>
-            <i   class="fa-solid fa-plus btn-icon" (click)="updateCantidad(carrito, carrito.cantidad + 1)"></i>
-          </div>
-        </td>
-        <td>{{ precioIndividualMap.get(carrito.id) | Precio }}</td>
-        <td>
-          <div class="acciones-container">
-            <i class="fa-solid fa-trash btn-icon" (click)="eliminarDelCarrito(carrito.id)"></i>
-            <i class="fa-solid fa-bag-shopping btn-icon" (click)="comprarUnicoCarrito(carrito.id)"></i>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive"> <!-- Agregamos esta clase para que la tabla sea responsive -->
+    <table class="table is-fullwidth is-bordered">
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Coste Total</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let carrito of page?.content">
+          <td><img [src]="carrito.producto.imagen" alt="Imagen del producto"></td>
+          <td>{{carrito.producto.nombre}}</td>
+          <td>{{carrito.producto.precio | Precio }} Є</td>
+          <td>{{carrito.producto.descripcion}}</td>
+          <td>
+            <div class="cantidad-container">
+              <i class="fa-solid fa-minus btn-icon" (click)="updateCantidad(carrito, carrito.cantidad - 1)"></i>
+              <span>{{carrito.cantidad}}</span>
+              <i class="fa-solid fa-plus btn-icon" (click)="updateCantidad(carrito, carrito.cantidad + 1)"></i>
+            </div>
+          </td>
+          <td>{{ precioIndividualMap.get(carrito.id) | Precio }}</td>
+          <td>
+            <div class="acciones-container">
+              <i class="fa-solid fa-trash btn-icon" (click)="eliminarDelCarrito(carrito.id)"></i>
+              <i class="fa-solid fa-bag-shopping btn-icon" (click)="comprarUnicoCarrito(carrito.id)"></i>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  <div class="seguir-comprando-container">
+  <div class="seguir-comprando-container text-center"> <!-- Agregamos la clase text-center para centrar el botón -->
     <button class="btn btn-seguir-comprando" (click)="volverAtras()">Seguir Comprando</button>
   </div>
 </div>
 
 <div class="container" *ngIf="page && page.content.length === 0">
-  <h2>¡Tu carrito está vacío!</h2>
-  <p>Todavía no has añadido nada a tu carrito.</p>
+  <div class="text-center"> <!-- Centramos el contenido -->
+    <h2>¡Tu carrito está vacío!</h2>
+    <p>Todavía no has añadido nada a tu carrito.</p>
+  </div>
 </div>
 
 <p-confirmPopup></p-confirmPopup>

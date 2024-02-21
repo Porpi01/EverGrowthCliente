@@ -101,7 +101,7 @@ export class MenuComponent implements OnInit {
           id: this.oSessionUser.id
         },
         header: "Vista del carrito",
-        width: '50%',
+        width: '80%',
         contentStyle: { overflow: 'auto' },
         baseZIndex: 10000,
         maximizable: false

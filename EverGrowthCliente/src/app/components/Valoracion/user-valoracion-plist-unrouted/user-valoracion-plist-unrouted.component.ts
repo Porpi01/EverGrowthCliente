@@ -134,7 +134,7 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
           
         },
         header: 'Comparte tu opinión',
-        width: '40%',
+        width: '60%',
         contentStyle: { overflow: 'auto' },
         baseZIndex: 10000,
         maximizable: false

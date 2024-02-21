@@ -31,13 +31,14 @@
     <!-- Columna de Productos -->
     <div class="col-lg-10 col-md-10 col-sm-12">
       <div class="row">
-        <ng-container *ngFor="let producto of productos">
+        <ng-container  *ngFor="let producto of productos">
           <div class="col-lg-3 col-md-4 col-sm-6 ">
-            <p-card [header]="producto.nombre">
+            <p-card class="card" [header]="producto.nombre">
               <ng-template pTemplate="header">
                 <img [src]="producto.imagen" alt="Imagen del producto" class="product-image" (click)="doView(producto)">
               </ng-template>
 
+              <p>{{producto.descripcion}}</p>
               <p>Precio: {{producto.precio}} €</p>
               <p class="stock" *ngIf="producto.stock === 0">Sin existencias</p>
               <p class="stock" *ngIf="producto.stock > 0">En Existencias</p>

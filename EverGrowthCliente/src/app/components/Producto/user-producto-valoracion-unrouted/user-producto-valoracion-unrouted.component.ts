@@ -41,82 +41,84 @@ export class UserProductoValoracionUnroutedComponent implements OnInit {
     this.id_usuario = this.oDynamicDialogConfig.data.id_usuario;
     console.log(this.id_usuario)
     this.id_producto = this.oDynamicDialogConfig.data.id_producto;
-    console.log(this.id_producto)}
-   
-    public hasError = (controlName: string, errorName: string) => {
-      return this.valoracionForm.controls[controlName].hasError(errorName);
-    }
+    console.log(this.id_producto)
+  }
+
+  public hasError = (controlName: string, errorName: string) => {
+    return this.valoracionForm.controls[controlName].hasError(errorName);
+  }
 
   ngOnInit() {
-    
-if(this.id_usuario !== undefined) {
-  this.UsuarioService.getOne(this.id_usuario).subscribe({
-    next:(usuario: IUsuario) => {
-      this.usuario = usuario;
-      console.log(this.usuario)
-    },
-    error: (error) => {
-      this.status = error
-      this.MatSnackBar.open('Error al obtener el usuario', 'Cerrar', { duration: 2000 });
+
+    if (this.id_usuario !== undefined) {
+      this.UsuarioService.getOne(this.id_usuario).subscribe({
+        next: (usuario: IUsuario) => {
+          this.usuario = usuario;
+          console.log(this.usuario)
+        },
+        error: (error) => {
+          this.status = error
+          this.MatSnackBar.open('Error al obtener el usuario', 'Cerrar', { duration: 2000 });
+        }
+      });
+
     }
-  });
 
-}
-
-if(this.id_producto !== undefined) {
-  this.ProductoService.getOne(this.id_producto).subscribe({
-    next:(producto: IProducto) => {
-      this.producto = producto;
-      console.log(this.producto)
-    },
-    error: (error) => {
-      this.status = error
-      this.MatSnackBar.open('Error al obtener el producto', 'Cerrar', { duration: 2000 });
+    if (this.id_producto !== undefined) {
+      this.ProductoService.getOne(this.id_producto).subscribe({
+        next: (producto: IProducto) => {
+          this.producto = producto;
+          console.log(this.producto)
+        },
+        error: (error) => {
+          this.status = error
+          this.MatSnackBar.open('Error al obtener el producto', 'Cerrar', { duration: 2000 });
+        }
+      });
     }
-  });
-}
 
-this.initializeForm(this.valoracion);
+    this.initializeForm(this.valoracion);
 
-}
-initializeForm(valoracion: IValoracion) {
-  this.valoracionForm = this.formBuilder.group({
-    id: [valoracion.id],
-    titulo: [valoracion.titulo, [Validators.required, Validators.minLength(3), Validators.maxLength(255), startWithCapitalLetter()]],
-    fecha: [new Date(valoracion.fecha), [Validators.required]],
-    mensaje: [valoracion.mensaje, [Validators.required, Validators.minLength(3), Validators.maxLength(2048), startWithCapitalLetter()]],
-    user: this.formBuilder.group({
-      id: [this.id_usuario, Validators.required]
-    }),
-    producto: this.formBuilder.group({
-      id: [this.id_producto, Validators.required]
-    
-    }),
-    
-  });
+  }
+  initializeForm(valoracion: IValoracion) {
+    this.valoracionForm = this.formBuilder.group({
+      id: [valoracion.id],
+      titulo: [valoracion.titulo, [Validators.required, Validators.minLength(3), Validators.maxLength(255), startWithCapitalLetter()]],
+      fecha: [new Date(valoracion.fecha), [Validators.required]],
+      mensaje: [valoracion.mensaje, [Validators.required, Validators.minLength(3), Validators.maxLength(2048), startWithCapitalLetter()]],
+      user: this.formBuilder.group({
+        id: [this.id_usuario, Validators.required]
+      }),
+      producto: this.formBuilder.group({
+        id: [this.id_producto, Validators.required]
 
-}
-onSubmit() {
- 
+      }),
+
+    });
+
+  }
+  onSubmit() {
+
     const valoracion = this.valoracionForm.value;
-   
+
     this.valoracionService.newOne(valoracion).subscribe({
       next: (data: IValoracion) => {
         this.MatSnackBar.open('Valoración creada', 'Cerrar', { duration: 2000 });
         this.oDynamicDialogRef.close(data);
+
       },
       error: (err) => {
         this.status = err;
         this.MatSnackBar.open('Error al crear la valoración', 'Cerrar', { duration: 2000 });
       }
     });
-  
-}
+
+  }
 
 
-    onCancel() {
-      this.oDynamicDialogRef.close();
-    }
-    
+  onCancel() {
+    this.oDynamicDialogRef.close();
+  }
+
 
 }
