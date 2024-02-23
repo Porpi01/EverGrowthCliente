@@ -65,10 +65,10 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
       fecha: [valoracion.fecha, [Validators.required]],
       mensaje: [valoracion.mensaje, [Validators.required , Validators.minLength(3), Validators.maxLength(2048), startWithCapitalLetter()]],
       user: this.formBuilder.group({
-        id: [valoracion.user?.id, Validators.required]
+        id: [valoracion.user.id, Validators.required]
       }),
       producto: this.formBuilder.group({
-        id: [valoracion.producto?.id, Validators.required]
+        id: [valoracion.producto.id, Validators.required]
       })
     });
   }

@@ -9,6 +9,7 @@ import { ConfirmationService } from 'primeng/api';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { UserProductoValoracionUnroutedComponent } from '../../Producto/user-producto-valoracion-unrouted/user-producto-valoracion-unrouted.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
     private SesionService: SesionService,
     private ConfirmationService: ConfirmationService,
     private DialogService: DialogService,
-    private MatSnackBar: MatSnackBar
+    private MatSnackBar: MatSnackBar,
+    private router: Router,
 
   ) { }
 
@@ -150,6 +152,7 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
    
     }else {
   this.MatSnackBar.open('Debes estar logueado para valorar un producto', 'Aceptar', { duration: 3000 });
+  this.router.navigate(['/login']);
     }
   }
 }

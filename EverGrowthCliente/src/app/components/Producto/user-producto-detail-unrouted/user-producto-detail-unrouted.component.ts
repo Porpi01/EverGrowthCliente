@@ -107,6 +107,8 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
       }
     } else {
       this.matSnackBar.open('Debes iniciar sesión para añadir productos al carrito', 'Aceptar', { duration: 3000 });
+      this.router.navigate(['/login']);
+
     }
   }
 

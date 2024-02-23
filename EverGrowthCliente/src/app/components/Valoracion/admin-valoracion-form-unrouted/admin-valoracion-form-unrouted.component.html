@@ -10,7 +10,7 @@
   <div class="container col-12">
     <div class="d-flex justify-content-center my-3">
       <form [formGroup]="valoracionForm" (ngSubmit)="onSubmit()">
-        
+
         <!-- ID field - Only shown in EDIT mode -->
         <div class="form-group">
           <mat-form-field *ngIf="operation === 'EDIT'">
@@ -19,7 +19,7 @@
             <mat-hint align="end">No se puede modificar</mat-hint>
           </mat-form-field>
         </div>
-        
+
         <!-- Titulo field -->
         <div class="form-group">
           <mat-form-field>
@@ -52,7 +52,8 @@
             <mat-error *ngIf="hasError('mensaje', 'required')">El mensaje es obligatorio</mat-error>
             <mat-error *ngIf="hasError('mensaje', 'minlength')">El mensaje debe tener al menos 3 caracteres</mat-error>
             <mat-error *ngIf="hasError('mensaje', 'maxlength')">El mensaje excede el límite de caracteres</mat-error>
-            <mat-error *ngIf="hasError('mensaje', 'startWithCapitalLetter')">El mensaje debe comenzar con mayúscula</mat-error>
+            <mat-error *ngIf="hasError('mensaje', 'startWithCapitalLetter')">El mensaje debe comenzar con
+              mayúscula</mat-error>
 
           </mat-form-field>
         </div>
@@ -64,13 +65,14 @@
               <mat-form-field>
                 <mat-label>Id Usuario:</mat-label>
                 <input matInput formControlName="id" placeholder="Id Usuario" required readonly>
-
               </mat-form-field>
+              {{valoracion.user.nombre}} {{valoracion.user.apellido1}}
+
             </div>
           </div>
           <div class="col-4">
             <button class="btn btn-primary" type="button" (click)="onShowUsersSelection()">
-              <i class="fa-solid fa-person-circle-plus"></i> 
+              <i class="fa-solid fa-person-circle-plus"></i>
             </button>
           </div>
         </div>
@@ -79,21 +81,21 @@
         <!-- Producto field -->
         <div formGroupName="producto" class="row">
           <div class="col-8">
-          <div class="form-group">
-            <mat-form-field>
-              <mat-label>Id Producto:</mat-label>
-              <input matInput formControlName="id" placeholder="Id Producto" required readonly>
-
-            </mat-form-field>
-          </div>
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Id Producto:</mat-label>
+                <input matInput formControlName="id" placeholder="Id Producto" required readonly>
+              </mat-form-field>
+              {{valoracion.producto.nombre}}
+            </div>
           </div>
           <div class="col-4">
-          <button  class="btn btn-primary" type="button" (click)="onShowProductosSelection()">
-            <i class="fa-solid fa-boxes-stacked"></i>
-          </button>
+            <button class="btn btn-primary" type="button" (click)="onShowProductosSelection()">
+              <i class="fa-solid fa-boxes-stacked"></i>
+            </button>
+          </div>
         </div>
-        </div>
-       
+
         <div class="text-center mt-5">
           <button class="btn btn-primary" type="submit">Guardar</button>
         </div>

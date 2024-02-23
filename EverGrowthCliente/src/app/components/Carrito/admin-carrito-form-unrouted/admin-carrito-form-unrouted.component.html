@@ -33,6 +33,7 @@
               <mat-label>Producto:</mat-label>
               <input matInput formControlName="id" placeholder="ID Producto" required readonly>
             </mat-form-field>
+            {{ carrito.producto.nombre }}
           </div>
           </div>
           <div class="col-4">
@@ -49,6 +50,7 @@
               <mat-label>Usuario:</mat-label>
               <input matInput formControlName="id" placeholder="ID user" required readonly>
             </mat-form-field>
+            {{ carrito.user.nombre }} {{ carrito.user.apellido1 }}
           </div>
           </div>
           <div class="col-4">
