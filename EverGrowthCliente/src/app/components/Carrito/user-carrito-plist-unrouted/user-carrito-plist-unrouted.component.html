@@ -38,7 +38,7 @@
   <div class="seguir-comprando-container text-center"> <!-- Agregamos la clase text-center para centrar el botón -->
     <h3 class="title is-4">Total: {{ costeTotal.toFixed(2) + " €" }}</h3>
     <button class="btn btn-primary" (click)="comprarTodosCarritos()">Comprar</button>
-    <button class="btn btn-primary" (click)="user && eliminarTodosCarritos(user.id)">Vacíar la cesta</button>
+    <button class="btn btn-primary" (click)="user && eliminarTodosCarritos(user.id)">Vaciar cesta</button>
   </div>
   <div>
     <button class="btn btn-seguir-comprando" (click)="volverAtras()">Seguir Comprando</button>

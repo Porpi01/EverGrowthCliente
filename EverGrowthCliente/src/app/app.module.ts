@@ -116,6 +116,7 @@ import { UserCarritoPlistRoutedComponent } from './components/Carrito/user-carri
 import { UserPedidoDetailUnroutedComponent } from './components/Pedido/user-pedido-detail-unrouted/user-pedido-detail-unrouted.component';
 import { UserPedidoViewRoutedComponent } from './components/Pedido/user-pedido-view-routed/user-pedido-view-routed.component';
 import { DialogModule } from 'primeng/dialog';
+import { PDFService } from './service/PDF.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -258,6 +259,7 @@ import { DialogModule } from 'primeng/dialog';
     DetallePedidoService,
     CategoriaService,
     CarritoService,
+    PDFService,
     ConfirmationService,
     MessageService,
     FormBuilder,

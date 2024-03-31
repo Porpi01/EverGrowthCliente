@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { IPedido } from 'src/app/model/model.interfaces';
 import { PedidoService } from 'src/app/service/Pedido.service';
+import { PDFService } from './../../../service/PDF.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-pedido-detail-unrouted',
@@ -12,6 +14,7 @@ import { PedidoService } from 'src/app/service/Pedido.service';
 })
 export class UserPedidoDetailUnroutedComponent implements OnInit {
   @Input() id: number = 1;
+  @Input() forceReload: Subject<boolean> = new Subject<boolean>();
   pedidos: IPedido = {user:{} } as IPedido;
   status: HttpErrorResponse | null = null;
   
@@ -19,6 +22,7 @@ export class UserPedidoDetailUnroutedComponent implements OnInit {
   constructor(
     private PedidoService: PedidoService,
     private router: Router,
+    private PDFService : PDFService,
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig
   ) {
@@ -47,6 +51,27 @@ export class UserPedidoDetailUnroutedComponent implements OnInit {
       }
     });
   }
+
+     //Añado esto
+     imprimirFactura = (id_pedido: number) => {
+      this.PDFService.imprimirFactura(id_pedido);
+   
+    }
+  
+    togglePedidoActive(pedido: IPedido): void {
+      const pedidoToUpdate: IPedido = { ...pedido };
+     
+      pedidoToUpdate.active = !pedidoToUpdate.active;
+  
+      this.PedidoService.updateOne(pedidoToUpdate).subscribe({
+        next: () => {
+          this.forceReload.next(true);
+        },
+        error: (error) => {
+          pedidoToUpdate.active = !pedidoToUpdate.active;
+        }
+      });
+    }
 
   volverAtras() {
     this.router.navigate(['/home']);

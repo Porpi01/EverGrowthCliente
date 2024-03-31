@@ -96,7 +96,9 @@ export interface IPedido extends IEntity {
     estado_pedido: Boolean,
     factura:IPedido,
     user: IUsuario,
-    detallePedidos: number
+    detallePedidos: number,
+    active: boolean
+
 }
 
 export interface IPedidoPage extends IPage<IPedido> {
@@ -108,7 +110,8 @@ export interface IDetallePedido extends IEntity {
     precio_unitario: number,
     precio_total: number,
     productos: IProducto,
-    pedidos: IPedido
+    pedidos: IPedido,
+    active: boolean
 }
 export interface IDetallePedidoPage extends IPage<IDetallePedido> {
 }

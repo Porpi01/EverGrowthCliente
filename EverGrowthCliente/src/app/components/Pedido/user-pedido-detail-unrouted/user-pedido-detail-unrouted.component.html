@@ -23,7 +23,8 @@
               </ng-container>
             </div>
             
-            <div><strong>Factura:</strong> {{ pedidos.factura }}</div>
+            <div><strong>Factura:</strong> <a (click)="imprimirFactura(pedidos.id)"  class="icon-link"><i class="fa-solid fa-file-pdf"></i>
+            </a></div>
   
           
             

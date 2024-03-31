@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
-import { ICarrito, ICarritoPage, IPedido, IProducto, IUsuario } from 'src/app/model/model.interfaces';
+import { ICarrito, ICarritoPage, IDetallePedido, IPedido, IProducto, IUsuario } from 'src/app/model/model.interfaces';
 import { CarritoService } from './../../../service/Carrito.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmationService } from 'primeng/api';
@@ -9,6 +9,8 @@ import { PaginatorState } from 'primeng/paginator';
 import { Subject } from 'rxjs';
 import { SesionService } from 'src/app/service/Sesion.service';
 import { PedidoService } from 'src/app/service/Pedido.service';
+import { PDFService } from './../../../service/PDF.service';
+import { DetallePedidoService } from 'src/app/service/DetallePedido.service';
 
 @Component({
   selector: 'app-user-carrito-plist-unrouted',
@@ -37,7 +39,9 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
     private PedidoService: PedidoService,
     private router: Router,
     private matSnackBar: MatSnackBar,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private PDFService: PDFService,
+    private DetallePedidoService: DetallePedidoService
   ) { }
 
   ngOnInit() {
@@ -179,6 +183,8 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
             this.PedidoService.createCompraTodosCarritos(user.id).subscribe({
               next: (pedido: IPedido) => {
                 this.matSnackBar.open('Compra realizada', 'Aceptar', { duration: 3000 });
+                this.PDFService.imprimirFactura(pedido.id);
+                console.log('Pedido', pedido.id);
                 this.router.navigate(['/usuario', 'pedido', 'view', pedido.id]);
               },
               error: (err: HttpErrorResponse) => {
@@ -197,6 +203,7 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
 
   }
 
+    
   eliminarDelCarrito(id_carrito: number): void {
   
         this.CarritoService.removeOne(id_carrito).subscribe({

@@ -9,6 +9,7 @@ import { AdminPedidoDetailUnroutedComponent } from '../admin-pedido-detail-unrou
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UsuarioService } from './../../../service/Usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PDFService } from './../../../service/PDF.service';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
     private ConfirmationService: ConfirmationService,
     private DialogService: DialogService,
     private UsuarioService: UsuarioService,
-    private MatSnackBar: MatSnackBar
+    private MatSnackBar: MatSnackBar,
+    private PDFService : PDFService
 
   ) {
   }
@@ -133,6 +135,27 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
       }
     });
   }
+
+    //Añado esto
+    imprimirFactura = (id_pedido: number) => {
+      this.PDFService.imprimirFactura(id_pedido);
+   
+    }
+  
+    togglePedidoActive(pedido: IPedido): void {
+      const pedidoToUpdate: IPedido = { ...pedido };
+     
+      pedidoToUpdate.active = !pedidoToUpdate.active;
+  
+      this.PedidoService.updateOne(pedidoToUpdate).subscribe({
+        next: () => {
+          this.forceReload.next(true);
+        },
+        error: (error) => {
+          pedidoToUpdate.active = !pedidoToUpdate.active;
+        }
+      });
+    }
 
   getUsuario(): void {
     this.UsuarioService.getOne(this.id_usuario).subscribe({

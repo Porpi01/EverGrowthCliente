@@ -4,7 +4,9 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
 
 }
-
+.offcanvas{
+  background-color: #e4b363 ; 
+}
 .navbar-nav .nav-link {
   color: #313638; 
 

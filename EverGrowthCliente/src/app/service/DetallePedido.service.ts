@@ -62,5 +62,8 @@ export class DetallePedidoService {
     return this.http.delete<number>(this.sUrl + "/empty");
   }
 
+  getDetallesPorPedido(id_pedido: number): Observable<IDetallePedido[]> {
+    return this.http.get<IDetallePedido[]>(this.sUrl + "/pedido/" + id_pedido);
+  }
 
 }
