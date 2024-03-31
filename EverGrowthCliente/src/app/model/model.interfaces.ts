@@ -78,6 +78,7 @@ export interface IProducto extends IEntity {
     precio: number,
     imagen: string,
     stock: number,
+    iva: number,
     descripcion: string,
     categoria: ICategoria
     valoracion: number,
@@ -109,6 +110,7 @@ export interface IDetallePedido extends IEntity {
     cantidad: number,
     precio_unitario: number,
     precio_total: number,
+    iva: number,
     productos: IProducto,
     pedidos: IPedido,
     active: boolean

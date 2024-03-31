@@ -48,6 +48,7 @@
             <th (click)="doOrder('id')">Id</th>
             <th (click)="doOrder('cantidad')">Cantidad</th>
             <th (click)="doOrder('precio_unitario')">Precio Unitario</th>
+            <th (click)="doOrder('iva')">Iva</th>
             <th>Precio total</th>
             <th>Productos</th>
             <th>Pedidos</th>
@@ -59,7 +60,9 @@
             <td>{{ detallePedido.id }}</td>
             <td>{{ detallePedido.cantidad }}</td>
             <td>{{ detallePedido.precio_unitario }}</td>
-            <td>{{ calculateTotalPrice(detallePedido.cantidad, detallePedido.precio_unitario) }} Є</td>
+            <td>{{detallePedido.iva}}</td>
+            <td>{{ calculateTotalPrice(detallePedido, detallePedido.cantidad, detallePedido.precio_unitario) }} Є</td>
+           
 
             <td class="text-center">
               <a [routerLink]="['/admin','detallePedido','plist','byproducto',detallePedido.productos.id]">({{detallePedido.productos.id}})
@@ -94,6 +97,7 @@
             <th (click)="doOrder('id')">Id</th>
             <th (click)="doOrder('cantidad')">Cantidad</th>
             <th (click)="doOrder('precio_unitario')">Precio Unitario</th>
+            <th (click)="doOrder('iva')">Iva</th>
             <th>Precio total</th>
             <th>Productos</th>
             <th>Pedidos</th>

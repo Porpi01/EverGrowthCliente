@@ -19,127 +19,131 @@
         <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!"
           [rows]="oPaginatorState.rows!" [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]"
           class="mx-2"></p-paginator>
-          <h3 *ngIf="id_categoria > 0; else noFilter">
-            ({{ id_categoria }} - {{ oCategoria?.nombre }})
-            <a type="button" class="btn btn-primary " [routerLink]="['/admin', 'producto', 'plist']">Reset filter</a>
-          </h3>
-  
-          <ng-template #noFilter>
-         
-          </ng-template>
+        <h3 *ngIf="id_categoria > 0; else noFilter">
+          ({{ id_categoria }} - {{ oCategoria?.nombre }})
+          <a type="button" class="btn btn-primary " [routerLink]="['/admin', 'producto', 'plist']">Reset filter</a>
+        </h3>
+
+        <ng-template #noFilter>
+
+        </ng-template>
       </div>
     </div>
     <div>
-  <div class="row">
-    <div class="col-lg-12 col-md-12 d-flex align-items-center justify-content-center">
-     
-      <h3 class="text-center mb-0">Mostrando {{ oPage?.numberOfElements }} de {{ oPage?.totalElements }}</h3>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 d-flex align-items-center justify-content-center">
+
+          <h3 class="text-center mb-0">Mostrando {{ oPage?.numberOfElements }} de {{ oPage?.totalElements }}</h3>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <p-table [value]="productos">
+            <ng-template pTemplate="header">
+              <tr>
+                <th (click)="doOrder('id')">Id</th>
+                <th (click)="doOrder('nombre')">Nombre</th>
+                <th (click)="doOrder('descripcion')">Descripción</th>
+                <th (click)="doOrder('precio')">Precio</th>
+                <th (click)="doOrder('stock')">Stock</th>
+                <th (click)="doOrder('iva')">Iva</th>
+                <th (click)="doOrder('imagen')">Imagen</th>
+                <th>Valoraciones</th>
+                <th>Carritos</th>
+                <th>Categoria</th>
+                <th>Acciones</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-producto of oPage?.content class="align-middle">
+              <tr>
+                <td>{{ producto.id }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{producto.descripcion | trim:40 }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.iva }}</td>
+                <td>
+                  <img [src]="producto.imagen" alt="Imagen del producto">
+                </td>
+
+
+
+                <td class="text-center">
+
+                  <a [routerLink]="['/admin','valoracion','plist','byproducto',producto.id]"
+                    *ngIf="producto.valoracion>0">
+                    {{ producto.valoracion }}
+                  </a>
+                  <span *ngIf="producto.valoracion===0">0</span>
+                </td>
+                <td class="text-center">
+
+                  <a [routerLink]="['/admin','carrito','plist','byproducto',producto.id]" *ngIf="producto.carritos>0">
+                    {{ producto.carritos }}
+                  </a>
+                  <span *ngIf="producto.carritos==0">0</span>
+                </td>
+                <td class="text-center">
+                  <a [routerLink]="['/admin','producto','plist','bycategoria',producto.categoria.id]">
+                    ({{ producto.categoria.id }})({{ producto.categoria.nombre }})
+                  </a>
+                </td>
+
+                <td class="text-center">
+
+                  <a [routerLink]="['/admin','producto','view',producto.id]" class="icon-link">
+                    <i class="fa-solid fa-eye"></i></a>
+
+                  <a [routerLink]="['/admin','producto','edit',producto.id]" class="icon-link">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </a>
+
+                  <a (click)="doView(producto)" class="icon-link"><i class="fa-solid fa-circle-up"></i>
+                  </a>
+                  <a *ngIf="producto.categoria===0" (click)="doRemove(producto)" class="icon-link"><i
+                      class="fa-solid fa-trash"></i>
+                  </a>
+
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <tr>
+                <th (click)="doOrder('id')">Id</th>
+                <th (click)="doOrder('nombre')">Nombre</th>
+                <th (click)="doOrder('descripcion')">Descripción</th>
+                <th (click)="doOrder('precio')">Precio</th>
+                <th (click)="doOrder('stock')">Stock</th>
+                <th (click)="doOrder('iva')">Iva</th>
+                <th (click)="doOrder('imagen')">Imagen</th>
+                <th>Valoraciones</th>
+                <th>Carritos</th>
+                <th>Categoria</th>
+                <th>Acciones</th>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="row justify-content-center">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-      <p-table [value]="productos">
-        <ng-template pTemplate="header">
-          <tr>
-            <th (click)="doOrder('id')">Id</th>
-            <th (click)="doOrder('nombre')">Nombre</th>
-            <th (click)="doOrder('precio')">Precio</th>
-            <th (click)="doOrder('stock')">Stock</th>
-            <th (click)="doOrder('descripcion')">Descripción</th>
-            <th (click)="doOrder('imagen')">Imagen</th>
-            <th>Valoraciones</th>
-            <th>Carritos</th>
-            <th>Categoria</th>
-            <th>Acciones</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-producto of oPage?.content class="align-middle">
-          <tr>
-            <td>{{ producto.id }}</td>
-            <td>{{ producto.nombre }}</td>
-            <td>{{ producto.precio }}</td>
-            <td>{{ producto.stock }}</td>
-            <td>{{producto.descripcion | trim:40 }}</td>
-            <td>
-              <img [src]="producto.imagen" alt="Imagen del producto">
-            </td>
-
-        
-    
-            <td class="text-center">
-
-              <a [routerLink]="['/admin','valoracion','plist','byproducto',producto.id]" *ngIf="producto.valoracion>0">
-                {{ producto.valoracion }}
-              </a>
-              <span *ngIf="producto.valoracion===0">0</span>
-            </td>
-            <td class="text-center">
-
-              <a [routerLink]="['/admin','carrito','plist','byproducto',producto.id]" *ngIf="producto.carritos>0">
-                {{ producto.carritos }}
-              </a>
-              <span *ngIf="producto.carritos==0">0</span>
-            </td>
-            <td class="text-center">
-              <a [routerLink]="['/admin','producto','plist','bycategoria',producto.categoria.id]">
-                ({{ producto.categoria.id }})({{ producto.categoria.nombre }})
-              </a>
-            </td>
-
-            <td class="text-center">
-
-              <a [routerLink]="['/admin','producto','view',producto.id]" class="icon-link">
-                <i class="fa-solid fa-eye"></i></a>
-
-              <a [routerLink]="['/admin','producto','edit',producto.id]" class="icon-link">
-                <i class="fa-solid fa-pen-to-square"></i>
-              </a>
-
-              <a (click)="doView(producto)" class="icon-link"><i class="fa-solid fa-circle-up"></i>
-              </a>
-              <a *ngIf="producto.categoria===0" (click)="doRemove(producto)" class="icon-link"><i
-                  class="fa-solid fa-trash"></i>
-              </a>
-             
-            </td>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <tr>
-            <th (click)="doOrder('id')">Id</th>
-            <th (click)="doOrder('nombre')">Nombre</th>
-            <th (click)="doOrder('precio')">Precio</th>
-            <th (click)="doOrder('stock')">Stock</th>
-            <th (click)="doOrder('descripcion')">Descripción</th>
-            <th (click)="doOrder('imagen')">Imagen</th>
-            <th>Valoraciones</th>
-            <th>Carritos</th>
-            <th>Categoria</th>
-            <th>Acciones</th>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-  </div>
-</div>
 
 
 
-<p-confirmDialog #cd [baseZIndex]="10000">
-  <ng-template pTemplate="header">
-    <h5 class="confirm-dialog-header">
-      Eliminar producto</h5>
-  </ng-template>
-  <ng-template pTemplate="message">
-    <div class="container d-flex align-items-center justify-content-center">
-      <app-admin-producto-detail-unrouted [id]="productoToRemove!.id"></app-admin-producto-detail-unrouted>
-    </div>
-  </ng-template>
-  <ng-template pTemplate="footer">
-    <p>¿Seguro que quieres eliminar este producto?</p>
-    <button class="btn btn-primary mx-1" pButton label="No" (click)="cd.reject()"></button>
-    <button class="btn btn-primary mx-1"pButton label="Sí" (click)="cd.accept()"></button>
-  </ng-template>
-</p-confirmDialog>
-<p-messages></p-messages>
+    <p-confirmDialog #cd [baseZIndex]="10000">
+      <ng-template pTemplate="header">
+        <h5 class="confirm-dialog-header">
+          Eliminar producto</h5>
+      </ng-template>
+      <ng-template pTemplate="message">
+        <div class="container d-flex align-items-center justify-content-center">
+          <app-admin-producto-detail-unrouted [id]="productoToRemove!.id"></app-admin-producto-detail-unrouted>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <p>¿Seguro que quieres eliminar este producto?</p>
+        <button class="btn btn-primary mx-1" pButton label="No" (click)="cd.reject()"></button>
+        <button class="btn btn-primary mx-1" pButton label="Sí" (click)="cd.accept()"></button>
+      </ng-template>
+    </p-confirmDialog>
+    <p-messages></p-messages>

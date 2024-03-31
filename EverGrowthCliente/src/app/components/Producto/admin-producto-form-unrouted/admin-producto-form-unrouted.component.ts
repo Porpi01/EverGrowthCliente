@@ -60,6 +60,7 @@ export class AdminProductoFormUnroutedComponent implements OnInit {
       id: [producto.id],
       nombre: [producto.nombre, [Validators.required, Validators.minLength(3), Validators.maxLength(255),startWithCapitalLetter()]],
       precio: [producto.precio, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      iva: [producto.iva, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
       stock: [producto.stock, [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
       descripcion: [producto.descripcion, [Validators.required, Validators.minLength(3), Validators.maxLength(2048),startWithCapitalLetter()]],
       imagen: [producto.imagen, Validators.required],

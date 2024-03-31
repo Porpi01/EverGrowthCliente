@@ -147,9 +147,11 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
     });
   }
 
-  calculateTotalPrice(quantity: number, unitPrice: number): number {
-    return quantity * unitPrice;
-  }
+  calculateTotalPrice(detallePedido: IDetallePedido, quantity: number, unitPrice: number): string {
+    const totalPrice = quantity * unitPrice;
+    const totalWithIVA = totalPrice + (totalPrice * detallePedido.iva);
+    return totalWithIVA.toFixed(2);
+}
 
   getProducto(): void {
     this.ProductoService.getOne(this.id_producto).subscribe({

@@ -84,10 +84,10 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
   getCosteCarrito(carrito: ICarrito): void {
     const precioProducto = carrito.producto.precio;
     const cantidad = carrito.cantidad;
-    const precioIndividual = precioProducto * cantidad;
+    const iva = carrito.producto.iva;
+    const precioIndividual = precioProducto * cantidad * (1 + iva);
     this.precioIndividualMap.set(carrito.id, precioIndividual);
-  }
-
+}
   updateCantidad(carrito: ICarrito, nuevaCantidad: number): void {
     const stockDisponible = carrito.producto.stock;
   
@@ -122,6 +122,7 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
       this.CarritoService.getCosteCarritoByUsuario(this.user.id).subscribe({
         next: (coste: number) => {
           this.costeTotal = coste;
+          console.log('Coste total', this.costeTotal);
         },
         error: (err: HttpErrorResponse) => {
           this.status = err;
@@ -136,7 +137,7 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
         }
       });
     }
-  }
+}
 
   
 

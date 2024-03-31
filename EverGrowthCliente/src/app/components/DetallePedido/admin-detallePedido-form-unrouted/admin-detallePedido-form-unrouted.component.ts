@@ -44,6 +44,7 @@ export class AdminDetallePedidoFormUnroutedComponent implements OnInit {
       id: [detallePedido.id],
       cantidad: [detallePedido.cantidad, [Validators.required]],
       precio_unitario: [detallePedido.precio_unitario, [Validators.required]],
+      iva: [detallePedido.iva, [Validators.required]],
       productos: this.formBuilder.group({
         id: [detallePedido.productos.id, Validators.required]
       }),

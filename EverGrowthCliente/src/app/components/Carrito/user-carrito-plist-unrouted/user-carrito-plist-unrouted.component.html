@@ -6,6 +6,7 @@
           <th>Imagen</th>
           <th>Nombre</th>
           <th>Precio</th>
+          <th>Iva</th>
           <th>Cantidad</th>
           <th>Coste Total</th>
           <th>Acciones</th>
@@ -16,6 +17,7 @@
           <td><img [src]="carrito.producto.imagen"  alt="Imagen del producto"></td>
           <td>{{carrito.producto.nombre}}</td>
           <td>{{carrito.producto.precio | Precio }} Є</td>
+          <td>{{carrito.producto.iva}} %</td>
           <td>
             <div class="cantidad-container">
               <i class="fa-solid fa-minus btn-icon" (click)="updateCantidad(carrito, carrito.cantidad - 1)"></i>

@@ -43,6 +43,16 @@
           </mat-form-field>
         </div>
 
+        <!-- Iva field -->
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label>Iva:</mat-label>
+            <input matInput type="number" formControlName="iva" placeholder="Iva" step="0.01" required>
+            <mat-error *ngIf="hasError('iva', 'required')">Campo obligatorio</mat-error>
+            <mat-error *ngIf="hasError('iva', 'pattern')">Debe ser mayor a 0</mat-error>
+          </mat-form-field>
+        </div>
+
       <!-- Stock field -->
       <div class="form-group">
         <mat-form-field>
