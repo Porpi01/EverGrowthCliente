@@ -72,7 +72,7 @@ export class PDFService {
     doc.setFontSize(11);
     doc.setFont('Arial', 'normal');
     doc.text(`Fecha de pedido: ${fechaPedidoFormateada}`, 10, 60 + index * 120);
-    doc.text(`Número de factura:  ${detallesPedido[0].pedidos.factura}`, 10, 64 + index * 120);
+    doc.text(`Número de factura:  ${detallesPedido[0].pedidos.id_factura}`, 10, 64 + index * 120);
 
     doc.setFontSize(13);
     doc.setFont('Arial', 'bold');
@@ -135,13 +135,11 @@ export class PDFService {
     // Agregar el costo de envío si la compra es inferior a 50
     let costoEnvio = 0;
     if (total < 50) {
-      costoEnvio = 7.21; // Costo de envío
-      doc.text("COSTES DE ENVÍO:", 135, 145 + index * 10);
-      doc.text(costoEnvio.toFixed(2) + "€", 180, 145 + index * 10);
-    }else {
-      doc.text("COSTES DE ENVÍO:", 135, 145 + index * 10);
-      doc.text(costoEnvio.toFixed(2) + "€", 180, 145 + index * 10);
+      costoEnvio = 7.21; 
     }
+
+    doc.text("COSTES DE ENVÍO:", 135, 145 + index * 10);
+    doc.text(costoEnvio.toFixed(2) + "€", 180, 145 + index * 10);
 
     // Calcular el total de IVA
     const totalIVA = totalConIVA - total;
@@ -155,6 +153,8 @@ export class PDFService {
     doc.text("TOTAL CON IVA:", 135, 155 + index * 10);
     doc.text(totalConEnvio.toFixed(2) + "€", 180, 155 + index * 10);
   }
+
+
   private pieDePagina(doc: any, numeroPaginas: number): void {
     const gris = "#ccc";
 
@@ -166,7 +166,7 @@ export class PDFService {
       doc.text("Términos y Condiciones:\n\n1. Los productos adquiridos a través de esta factura están sujetos a disponibilidad.\n2. Los precios indicados pueden estar sujetos a cambios sin previo aviso.\n3. Las devoluciones solo se aceptarán dentro de los 10 días posteriores a la compra.\n4. Los productos devueltos deben estar en condiciones originales y sin usar.\n\n¡Gracias por su compra!", 10, 200, { maxWidth: 190 });
 
       // Agregar formas de pago
-      doc.text("Formas de Pago: \n\n Aceptamos los siguientes métodos de pago: \n- Tarjeta de crédito \n- Transferencia bancaria \n- PayPal", 10, 243, { maxWidth: 190 });
+      doc.text("Formas de Pago: \n\n Aceptamos los siguientes métodos de pago: \n- Tarjeta de crédito \n- Transferencia bancaria \n- PayPal", 10, 250, { maxWidth: 190 });
 
 
       doc.setDrawColor(gris);

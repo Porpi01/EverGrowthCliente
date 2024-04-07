@@ -14,7 +14,7 @@
               <span *ngIf="pedidos.estado_pedido; else notDelivered">Entregado</span>
               <ng-template #notDelivered>No entregado</ng-template>
             </div>
-            <div><strong>Factura:</strong> {{ pedidos.factura }}</div>
+            <div><strong>Factura:</strong> {{ pedidos.id_factura }}</div>
             <div *ngIf="pedidos.detallePedidos !== undefined">
               <strong>Detalles Pedidos:</strong>
               <ng-container *ngIf="pedidos.detallePedidos > 0; else noDetallePedidos">

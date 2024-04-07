@@ -95,7 +95,7 @@ export interface IPedido extends IEntity {
     fecha_pedido: Date,
     fecha_entrega: Date,
     estado_pedido: Boolean,
-    factura:IPedido,
+    id_factura:IPedido,
     user: IUsuario,
     detallePedidos: number,
     active: boolean

@@ -77,7 +77,7 @@
           </a>
           <span *ngIf="pedido.detallePedidos==0">0</span>
         </td>
-        <td></td>
+        <td>{{pedido.id_factura}}</td>
 
         <td class="text-center">
 
@@ -90,8 +90,7 @@
 
           <a (click)="doView(pedido)"  class="icon-link"><i class="fa-solid fa-circle-up"></i>
           </a>
-          <a (click)="imprimirFactura(pedido.id)"  class="icon-link"><i class="fa-solid fa-file-pdf"></i>
-          </a>
+         
           <a *ngIf="pedido.categoria===0" 
           (click)="doRemove(pedido)"><i class="fa-solid fa-trash"  class="icon-link"></i>
           </a>

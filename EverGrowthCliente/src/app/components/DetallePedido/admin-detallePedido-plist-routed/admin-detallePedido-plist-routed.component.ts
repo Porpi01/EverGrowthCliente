@@ -27,8 +27,6 @@ export class AdminDetallePedidoPlistRoutedComponent implements OnInit {
   constructor(
     private DetallePedidoService: DetallePedidoService,
     private router: Router,
-    private MessageService: MessageService,
-    private ConfirmationService: ConfirmationService,
     private ActivatedRoute: ActivatedRoute,
     private MatSnackBar : MatSnackBar
 
@@ -68,18 +66,18 @@ export class AdminDetallePedidoPlistRoutedComponent implements OnInit {
         clearInterval(intervalId);
         this.DetallePedidoService.generateRandom(amount).subscribe({
           next: (oResponse: number) => {
-            this.MessageService.add({ severity: 'success', detail: 'Hay ' + oResponse + ' detalles pedidos', life: 2000 });
+            this.MatSnackBar.open(`Hay ${oResponse} detalles pedidos.`, 'Cerrar', {duration: 2000,});           
             this.bLoading = false;
+          
           },
           error: (oError: HttpErrorResponse) => {
-            this.MessageService.add({ severity: 'error', detail: 'Error al generar detalles pedidos: ' + oError.message, life: 2000 });
+            this.MatSnackBar.open(`Error al generar los detalles pedidos: ${oError.message}`, 'Cerrar', { duration: 2000,});
             this.bLoading = false;
           }
         });
       }
     }, 1000 / totalSteps);
   }
-
   doEmpty() {
     this.DetallePedidoService.empty().subscribe({
       next: (oResponse: number) => {

@@ -7,7 +7,7 @@
       <p-card class="custom-card">
         <ng-template pTemplate="content">
           <div>
-            <h1>PEDIDO</h1>
+            <h1>DETALLES DE LA COMPRA</h1>
             <div><strong>Fecha Pedido:</strong> {{ pedidos.fecha_pedido | date: 'dd/MM/yyyy' }}</div>
             <div><strong>Fecha entrega:</strong> {{ pedidos.fecha_entrega | date: 'dd/MM/yyyy' }}</div>
             <div *ngIf="pedidos.user !== undefined">
@@ -22,17 +22,17 @@
                 {{ pedidos.user.nombre}} {{ pedidos.user.apellido1}}
               </ng-container>
             </div>
+            <div>  <ng-container *ngIf="pedidos.id_factura">
+              <p class="mb-2"><strong>Número de factura: </strong>{{pedidos.id_factura}}</p>
+            </ng-container></div>
             
-            <div><strong>Factura:</strong> <a (click)="imprimirFactura(pedidos.id)"  class="icon-link"><i class="fa-solid fa-file-pdf"></i>
-            </a></div>
-  
-          
-            
+        
            
             <button class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
           </div>
         </ng-template>
       </p-card>
+   
     </div>
   </div>
 </div>
