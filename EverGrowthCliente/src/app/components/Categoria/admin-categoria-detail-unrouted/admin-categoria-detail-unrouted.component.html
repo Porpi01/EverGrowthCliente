@@ -23,10 +23,11 @@
                 <span>0</span>
               </ng-template>
             </div>
-            <button class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
           </div>
         </ng-template>
       </p-card>
+      <button *ngIf="mostrarBotones" class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
+
     </div>
   </div>
 </div>

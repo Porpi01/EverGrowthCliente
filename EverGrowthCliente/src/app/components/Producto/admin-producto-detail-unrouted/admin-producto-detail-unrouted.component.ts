@@ -15,7 +15,8 @@ export class AdminProductoDetailUnroutedComponent implements OnInit {
   @Input() id: number = 1;
   productos: IProducto = {} as IProducto;
   status: HttpErrorResponse | null = null;
-  
+  @Input() mostrarBotones: boolean = true;
+
 
   constructor(
     private ProductoService: ProductoService,

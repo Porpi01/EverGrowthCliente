@@ -18,7 +18,9 @@ export class AdminValoracionDetailUnroutedComponent implements OnInit {
   
   @Input() id: number = 1;
   @Input() openedFromView: boolean;
-  mostrarBotones: boolean;
+  @Input() mostrarBotones: boolean = true;
+
+
 
   valoraciones: IValoracion = {} as IValoracion;
   status: HttpErrorResponse | null = null;

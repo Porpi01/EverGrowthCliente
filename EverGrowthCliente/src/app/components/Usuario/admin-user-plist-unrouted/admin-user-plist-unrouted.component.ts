@@ -31,6 +31,7 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
   usuarios: IUsuario[] = [];
   userToRemove: IUsuario | null = null;
   ref: DynamicDialogRef | undefined;
+  mostrarBotones: boolean = true;
 
   value: string = '';
 
@@ -110,10 +111,14 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
+  
   doView(user: IUsuario) {
+    this.mostrarBotones = false; 
+    console.log(this.mostrarBotones)
     this.ref = this.DialogService.open(AdminUserDetailUnroutedComponent, {
+      
       data: {
-        id: user.id
+        id: user.id,
       },
       header: 'Vista del usuario',
       width: '60%',

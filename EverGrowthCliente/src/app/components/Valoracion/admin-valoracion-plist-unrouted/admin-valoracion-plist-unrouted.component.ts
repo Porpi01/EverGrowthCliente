@@ -33,7 +33,8 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
   oUsuario: IUsuario | null = null;
   oProducto: IProducto | null = null;
-
+  mostrarBotones: boolean = true;
+  
   value: string = '';
 
   constructor(

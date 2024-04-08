@@ -14,6 +14,7 @@ export class AdminCategoriaDetailUnroutedComponent implements OnInit {
 
 
   @Input() id: number = 1;
+  @Input() mostrarBotones: boolean = true;
   categorias: ICategoria = {} as ICategoria;
   status: HttpErrorResponse | null = null;
   

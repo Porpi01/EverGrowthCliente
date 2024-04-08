@@ -120,14 +120,14 @@
   </div>
 </div>
 
-<p-confirmDialog #cd [baseZIndex]="10000">
+<p-confirmDialog #cd [baseZIndex]="10000" [style]="{ 'width': '800px', 'height': '1000px' }">
   <ng-template pTemplate="header">
     <h5 class="confirm-dialog-header">
       Eliminar usuario</h5>
   </ng-template>
   <ng-template pTemplate="message">
     <div class="container d-flex align-items-center justify-content-center">
-      <app-admin-user-detail-unrouted [id]="userToRemove!.id"></app-admin-user-detail-unrouted>
+      <app-admin-user-detail-unrouted [mostrarBotones]="false" [id]="userToRemove!.id"></app-admin-user-detail-unrouted>
     </div>
   </ng-template>
   <ng-template pTemplate="footer">

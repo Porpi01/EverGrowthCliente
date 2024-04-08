@@ -12,9 +12,11 @@ import { Router } from '@angular/router';
 })
 export class AdminUserDetailUnroutedComponent implements OnInit {
   @Input() id: number = 1;
+  @Input() mostrarBotones: boolean = true;
+
   usuarios: IUsuario = {} as IUsuario;
   status: HttpErrorResponse | null = null;
-  mostrarBotones: boolean;
+
 
   constructor(
     private usuarioService: UsuarioService,
@@ -32,7 +34,7 @@ export class AdminUserDetailUnroutedComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.id);
-    
+    console.log(this.mostrarBotones);
     this.getOne();
   }
 
