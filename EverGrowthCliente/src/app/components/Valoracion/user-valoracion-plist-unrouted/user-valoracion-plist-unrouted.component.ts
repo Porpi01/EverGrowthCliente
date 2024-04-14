@@ -33,12 +33,13 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
   usuario: IUsuario | null = null;
   ref: DynamicDialogRef | undefined;
   valoraciones: IValoracion[] = [];
+  idValoracionToDelete: number | undefined;
+  displayDialog: boolean = false;
 
 
   constructor(
     private ValoracionService: ValoracionService,
     private SesionService: SesionService,
-    private ConfirmationService: ConfirmationService,
     private DialogService: DialogService,
     private MatSnackBar: MatSnackBar,
     private router: Router,
@@ -101,29 +102,30 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
    
   }
 
+
   borrarValoracion(id_valoracion: number) {
-    this.ConfirmationService.confirm({
-      message: '¿Estás seguro de que quieres borrar la valoración?',
-      accept: () => {
-        console.log(id_valoracion);
-        this.ValoracionService.removeOne(id_valoracion).subscribe({
-          next: () => {
-            this.getValoraciones();
-            this.MatSnackBar.open('La valoración ha sido eliminada', 'Cerrar', {
-              duration: 2000,
-            });
-            console.log(this.usuario?.id);
-          },
-          error: (err: HttpErrorResponse) => {
-            this.status = err;
-            this.MatSnackBar.open('La valoración no se ha podido eliminar', 'Cerrar', {
-              duration: 2000,
-            
-            });
-          }
-        });
-      }
-    });
+    this.idValoracionToDelete = id_valoracion;
+    this.displayDialog = true;
+  }
+  confirmDelete() {
+    if (this.idValoracionToDelete !== undefined) {
+      this.ValoracionService.removeOne(this.idValoracionToDelete).subscribe({
+        next: () => {
+          this.getValoraciones();
+          this.MatSnackBar.open('La valoración ha sido eliminada', 'Cerrar', { duration: 2000 });
+          console.log(this.usuario?.id);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.status = err;
+          this.MatSnackBar.open('La valoración no se ha podido eliminar', 'Cerrar', { duration: 2000 });
+        }
+      });
+    }
+    this.displayDialog = false;
+  }
+
+  cancelDelete() {
+    this.displayDialog = false;
   }
 
   postNuevaValoracion(): void {

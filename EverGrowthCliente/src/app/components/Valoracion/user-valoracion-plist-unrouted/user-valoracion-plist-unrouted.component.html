@@ -55,3 +55,11 @@
     </div>
   </div>
 </div>
+
+<p-dialog header="Confirmación" [(visible)]="displayDialog" [modal]="true" [responsive]="true" [closable]="false">
+  <p>¿Seguro que quieres borrar la valoración?</p>
+  <p-footer>
+    <button class="btn btn-primary mx-1" pButton icon="pi pi-check" label="Sí" (click)="confirmDelete()"></button>
+    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cancelDelete()"></button>
+  </p-footer>
+</p-dialog>

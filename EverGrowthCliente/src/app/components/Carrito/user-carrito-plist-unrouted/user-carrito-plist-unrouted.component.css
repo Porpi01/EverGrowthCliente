@@ -1,8 +1,4 @@
-img {
-    width: 10%;
-    height:20%;
-  
-  }
+
 
   .btn {
     background-color: #ef6461 !important;
@@ -33,4 +29,16 @@ img {
     color:#ef6461;
     font-size: 20px;
     align-items: center;
+  }
+
+  .btn-primary {
+    background-color: #ef6461;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  
+  
   }

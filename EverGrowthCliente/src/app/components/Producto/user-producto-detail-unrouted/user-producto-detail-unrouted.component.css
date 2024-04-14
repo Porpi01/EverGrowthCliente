@@ -64,13 +64,12 @@
 
 }
 
-.product-image-container {
+.imagen {
   border: 7px solid #f5f4ed; 
   padding: 5px; 
   border-radius: 5px;
+  max-width: 700px; 
+  max-height: 600px;
 }
 
-.product-image {
-  width: 100%; 
-  height: auto; 
-}
+

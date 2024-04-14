@@ -14,7 +14,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let carrito of page?.content">
-          <td><img [src]="carrito.producto.imagen"  alt="Imagen del producto"></td>
+          <td>
+            <img [src]="carrito.producto.imagen" alt="Imagen del producto" style="max-width: 100px;">
+          </td>
           <td>{{carrito.producto.nombre}}</td>
           <td>{{carrito.producto.precio | Precio }} Є</td>
           <td>{{carrito.producto.iva}} %</td>
@@ -29,7 +31,6 @@
           <td>
             <div class="acciones-container">
               <i class="fa-solid fa-trash btn-icon" (click)="eliminarDelCarrito(carrito.id)"></i>
-              <i class="fa-solid fa-bag-shopping btn-icon" (click)="comprarUnicoCarrito(carrito.id)"></i>
             </div>
           </td>
         </tr>
@@ -56,3 +57,19 @@
 </div>
 
 <p-confirmPopup></p-confirmPopup>
+
+<p-dialog header="Confirmación" [(visible)]="displayDialogCompra" [modal]="true" [responsive]="true" [closable]="false">
+  <p>¿Desea comprar todos los carritos?</p>
+  <p-footer>
+    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="Sí"   (click)="confirmCompra()"></button>
+    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No"  (click)="cancelCompra()"></button>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="Confirmación" [(visible)]="displayDialogBorrar" [modal]="true" [responsive]="true" [closable]="false">
+  <p>¿Desea eliminar todos los carritos?</p>
+  <p-footer>
+    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="Sí"(click)="confirmDelete()"></button>
+    <button class="btn btn-primary mx-1"pButton icon="pi pi-times" label="No" (click)="cancelDelete()"></button>
+  </p-footer>
+</p-dialog>
