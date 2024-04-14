@@ -15,7 +15,9 @@ export class DetallePedidoService {
   getOne(id: number): Observable<IDetallePedido> {
     return this.http.get<IDetallePedido>(this.sUrl + "/" + id);
   }
-
+  getTotal(): Observable<number> {
+    return this.http.get<number>(this.sUrl + "/total");
+  }
   getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_pedido:number , id_producto:number, strFilter?: string): Observable<IDetallePedidoPage> {
     let sUrl_filter: string;
     if (!size) size = 10;

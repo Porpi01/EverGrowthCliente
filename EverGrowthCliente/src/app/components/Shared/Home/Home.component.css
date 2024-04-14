@@ -44,3 +44,38 @@
     font-weight: bold;
     color: #333;
   }
+
+
+  .card {
+    margin-bottom: 20px; /* Espacio entre tarjetas */
+    border: 1px solid #ccc; /* Borde de la tarjeta */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra de la tarjeta */
+    margin-top: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.25rem; /* Tamaño del título de la tarjeta */
+    margin-bottom: 15px; /* Espacio inferior del título */
+  }
+  
+  .card-body {
+    padding: 20px; /* Espacio interno del contenido de la tarjeta */
+  }
+  
+  /* Estilos para la lista de elementos */
+  ul {
+    list-style: none; /* Elimina los estilos de viñeta de la lista */
+    padding: 0; /* Elimina el relleno predeterminado de la lista */
+  }
+  
+  ul li {
+    margin-bottom: 10px; /* Espacio entre elementos de la lista */
+    font-size: 1rem; /* Tamaño de fuente de los elementos de la lista */
+  }
+
+  h1{
+    text-align: center;
+    margin-top: 20px;
+
+  }

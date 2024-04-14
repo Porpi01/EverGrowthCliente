@@ -120,6 +120,10 @@ import { PDFService } from './service/PDF.service';
 import { UserDetallePedidoPlistUnroutedComponent } from './components/DetallePedido/user-detallePedido-plist-unrouted/user-detallePedido-plist-unrouted.component';
 import { UserPedidoPlistUnroutedComponent } from './components/Pedido/user-pedido-plist-unrouted/user-pedido-plist-unrouted.component';
 import { UserPedidoPlistRoutedComponent } from './components/Pedido/user-pedido-plist-routed/user-pedido-plist-routed.component';
+import { ChartModule } from 'primeng/chart';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -249,7 +253,8 @@ import { UserPedidoPlistRoutedComponent } from './components/Pedido/user-pedido-
     MatNativeDateModule,
     PanelModule,
     FileUploadModule,
-    DialogModule
+    DialogModule,
+    ChartModule
   
    
 

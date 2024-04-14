@@ -15,9 +15,11 @@ export class PedidoService {
   getOne(id: number): Observable<IPedido> {
     return this.http.get<IPedido>(this.sUrl + "/" + id);
   }
+  getTotal(): Observable<number> {
+    return this.http.get<number>(this.sUrl + "/total");
+  }
 
-
-  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_usuario:number,strFilter?: string): Observable<IPedidoPage> {
+  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_usuario: number, strFilter?: string): Observable<IPedidoPage> {
     let sUrl_filter: string;
     if (!size) size = 10;
     if (!page) page = 0;
@@ -32,7 +34,7 @@ export class PedidoService {
     } else {
       sUrl_filter = "";
     }
-    return this.http.get<IPedidoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection +  sUrl_usuario + sUrl_filter);
+    return this.http.get<IPedidoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_usuario + sUrl_filter);
   }
 
   removeOne(id: number | undefined): Observable<number> {
@@ -61,23 +63,24 @@ export class PedidoService {
 
   makeProductPurhase(product_id: number, user_id: number, amount: number): Observable<IPedido> {
     return this.http.post<IPedido>(this.sUrl + '/realizarCompraProducto/' + product_id + '/' + user_id + '/' + amount, {});
-}
+  }
 
-getCompraByUsuarioId(usuarioId: number, size: number, page: number, direction: string, sort: string): Observable<IPedidoPage> {
-  return this.http.get<IPedidoPage>(this.sUrl + '/usuario/' + usuarioId + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
-}
-createCompraUnicoCarrito(usuarioId: number, carritoId: number): Observable<IPedido> {
-  return this.http.post<IPedido>(this.sUrl + '/realizarCompraUnicoCarrito/' + usuarioId + '/' + carritoId, {});
-}
+  getCompraByUsuarioId(usuarioId: number, size: number, page: number, direction: string, sort: string): Observable<IPedidoPage> {
+    return this.http.get<IPedidoPage>(this.sUrl + '/usuario/' + usuarioId + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
+  }
+  createCompraUnicoCarrito(usuarioId: number, carritoId: number): Observable<IPedido> {
+    return this.http.post<IPedido>(this.sUrl + '/realizarCompraUnicoCarrito/' + usuarioId + '/' + carritoId, {});
+  }
 
-createCompraTodosCarritos(usuarioId: number): Observable<IPedido> {
-  return this.http.post<IPedido>(this.sUrl + '/realizarCompraTodosCarritos/' + usuarioId, {});
-}
+  createCompraTodosCarritos(usuarioId: number): Observable<IPedido> {
+    return this.http.post<IPedido>(this.sUrl + '/realizarCompraTodosCarritos/' + usuarioId, {});
+  }
 
-createCompraProducto(productoId: number, usuarioId: number, cantidad: number): Observable<IPedido> {
-  return this.http.post<IPedido>(this.sUrl+ '/realizarCompraProducto/' + productoId + '/' + usuarioId + '/' + cantidad, {});
-}
+  createCompraProducto(productoId: number, usuarioId: number, cantidad: number): Observable<IPedido> {
+    return this.http.post<IPedido>(this.sUrl + '/realizarCompraProducto/' + productoId + '/' + usuarioId + '/' + cantidad, {});
+  }
 
-
-
+  obtenerCantidadPedidosPorMes(): Observable<any> {
+    return this.http.get<any>(this.sUrl + '/cantidadPedidosPorMes');
+  }
 }

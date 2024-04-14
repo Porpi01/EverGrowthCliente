@@ -19,6 +19,10 @@ export class CarritoService {
     return this.http.get<ICarrito>(this.sUrl + "/" + id);
   }
 
+  getTotal(): Observable<number> {
+    return this.http.get<number>(this.sUrl + "/total");
+  }
+
   countCarritos(): Observable<number> {
     return this.http.get<number>(this.sUrl + "/cantidad");
   }

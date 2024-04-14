@@ -1,5 +1,51 @@
 <div class="section bg-slate-300" *ngIf="!username || (userSession && userSession.rol === true)">
-    <app-user-producto-plist-unrouted></app-user-producto-plist-unrouted>
+  <app-user-producto-plist-unrouted></app-user-producto-plist-unrouted>
+</div>
+<h1><strong>BIENVENIDO A EVERGROWTH</strong></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Productos con más stock</h2>
+          <p-chart type="doughnut" [data]="dataMasStock"></p-chart>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Productos con menos stock</h2>
+          <p-chart type="doughnut" [data]="dataMenosStock"></p-chart>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Cantidad Total</h2>
+          <ul class="list-unstyled">
+            <li>Usuarios: {{ totalUsuarios }}</li>
+            <li>Pedidos: {{ totalPedidos }}</li>
+            <li>Carritos: {{ totalCarritos }}</li>
+            <li>Categorías: {{ totalCategoria }}</li>
+            <li>Valoraciones: {{ totalValoraciones }}</li>
+            <li>Productos: {{ totalProducto }}</li>
+            <li>Detalles de Pedido: {{ totalDetalles }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
- 
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Gráfico de Pedidos</h2>
+          <p-chart type="bar" [data]="data" [options]="options"></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

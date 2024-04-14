@@ -16,6 +16,9 @@ export class ValoracionService {
     return this.http.get<IValoracion>(this.sUrl + "/" + id);
   }
  
+  getTotal(): Observable<number> {
+    return this.http.get<number>(this.sUrl + "/total");
+  }
 
   getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_usuario: number , id_producto: number, strFilter?: string): Observable<IValoracionPage> {
     let sUrl_filter: string;

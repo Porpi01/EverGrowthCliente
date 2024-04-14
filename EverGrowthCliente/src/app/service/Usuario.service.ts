@@ -16,6 +16,10 @@ export class UsuarioService {
     return this.http.get<IUsuario>(this.sUrl + "/" + id);
   }
 
+  getTotal(): Observable<number> {
+    return this.http.get<number>(this.sUrl + "/total");
+  }
+
   getByUsername(username: string): Observable<IUsuario> {
     return this.http.get<IUsuario>(this.sUrl + "/byUsername/" + username);
   }

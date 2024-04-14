@@ -18,7 +18,9 @@ export class CategoriaService {
   getOne(id: number): Observable<ICategoria> {
     return this.http.get<ICategoria>(this.sUrl + "/" + id);
   }
-
+  getTotal(): Observable<number> {
+    return this.http.get<number>(this.sUrl + "/total");
+  }
 
   getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, strFilter?: string): Observable<ICategoriaPage> {
     let sUrl_filter: string;

@@ -15,8 +15,19 @@ export class ProductoService {
     return this.http.get<IProducto>(this.sUrl + "/" + id);
   }
 
+  getTotal(): Observable<number> {
+    return this.http.get<number>(this.sUrl + "/total");
+  }
 
-  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_categoria:number, strFilter?: string): Observable<IProductoPage> {
+  getTop10ProductosMasStock(): Observable<IProducto[]> {
+    return this.http.get<IProducto[]>(this.sUrl + "/masStock");
+  }
+
+  getTop10ProductosMenosStock(): Observable<IProducto[]> {
+    return this.http.get<IProducto[]>(this.sUrl + "/menosStock");
+  }
+
+  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_categoria: number, strFilter?: string): Observable<IProductoPage> {
     let sUrl_filter: string;
     if (!size) size = 10;
     if (!page) page = 0;
@@ -57,5 +68,5 @@ export class ProductoService {
     return this.http.delete<number>(this.sUrl + "/empty");
   }
 
- 
+
 }
