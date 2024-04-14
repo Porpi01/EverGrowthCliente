@@ -1,46 +1,32 @@
-.footer{
-    background-color: #e4b363;
-    color: #ffffff;
-    text-align: center;
-    font-size: 12px;
-    font-weight: bold;
-    bottom: 0;
-    margin-top: 20px;
+.footer {
+  background-color: #e4b363 !important; 
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
 }
-.container {
-    width: 80%; /* Ancho del contenedor */
-    margin: 0 auto; /* Centrar el contenedor */
-  }
-  
-  .map-navigation h3 {
-    font-size: 24px; /* Tamaño de fuente para el título del mapa de navegación */
-    margin-bottom: 20px; /* Espaciado inferior del título */
-  }
-  
-  .map-navigation .row {
-    margin-left: -15px; /* Corrección del margen izquierdo de la fila */
-    margin-right: -15px; /* Corrección del margen derecho de la fila */
-  }
-  
-  .map-navigation .col-md-3 {
-    padding-left: 15px; /* Espaciado interno izquierdo de las columnas */
-    padding-right: 15px; /* Espaciado interno derecho de las columnas */
-  }
-  
-  .map-navigation ul {
-    list-style: none; /* Elimina los estilos de lista */
-    padding: 0; /* Elimina el relleno de la lista */
-  }
-  
-  .map-navigation ul li {
-    margin-bottom: 10px; /* Espaciado inferior entre elementos de lista */
-  }
-  
-  .map-navigation ul li a {
-    color: #fff; /* Color del texto de los enlaces */
-    text-decoration: none; /* Elimina el subrayado de los enlaces */
-  }
-  
-  .map-navigation ul li a:hover {
-    text-decoration: underline; /* Subrayado al pasar el ratón sobre los enlaces */
-  }
+
+.footer-column {
+  flex: 1;
+}
+
+.footer-column h3 {
+  color: #333;
+}
+
+.footer-column p {
+  margin: 5px 0;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+}
+
+.social-icons i {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #333;
+}
+

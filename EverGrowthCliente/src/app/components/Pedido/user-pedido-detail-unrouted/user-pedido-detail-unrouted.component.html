@@ -8,31 +8,33 @@
         <ng-template pTemplate="content">
           <div>
             <h1>DETALLES DE LA COMPRA</h1>
-            <div><strong>Fecha Pedido:</strong> {{ pedidos.fecha_pedido | date: 'dd/MM/yyyy' }}</div>
-            <div><strong>Fecha entrega:</strong> {{ pedidos.fecha_entrega | date: 'dd/MM/yyyy' }}</div>
-            <div *ngIf="pedidos.user !== undefined">
-              <strong>Dirección de entrega:</strong>
-              <ng-container *ngIf="pedidos.user.id">
-                {{ pedidos.user.direccion}} 
-              </ng-container>
-            </div>
             <div *ngIf="pedidos.user !== undefined">
               <strong>Usuario:</strong>
               <ng-container *ngIf="pedidos.user.id">
                 {{ pedidos.user.nombre}} {{ pedidos.user.apellido1}}
               </ng-container>
             </div>
-            <div>  <ng-container *ngIf="pedidos.id_factura">
-              <p class="mb-2"><strong>Número de factura: </strong>{{pedidos.id_factura}}</p>
-            </ng-container></div>
-            
-        
-           
-            <button class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
+            <div><strong>Fecha Pedido:</strong> {{ pedidos.fecha_pedido | date: 'dd/MM/yyyy' }}</div>
+            <div><strong>Fecha entrega:</strong> {{ pedidos.fecha_entrega | date: 'dd/MM/yyyy' }}</div>
+            <div *ngIf="pedidos.user !== undefined">
+              <strong>Dirección de entrega:</strong>
+              <ng-container *ngIf="pedidos.user.id">
+                {{ pedidos.user.direccion}}
+              </ng-container>
+            </div>
+            <div>
+              <ng-container *ngIf="pedidos.id_factura">
+                <p class="mb-2"><strong>Número de factura: </strong>{{pedidos.id_factura}}</p>
+              </ng-container>
+            </div>
+            <div>
+              <strong>Productos:</strong>
+              <app-user-detallePedido-plist-unrouted [id_pedido]="id"></app-user-detallePedido-plist-unrouted>
+            </div>
           </div>
         </ng-template>
       </p-card>
-   
+      <button class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
     </div>
   </div>
 </div>

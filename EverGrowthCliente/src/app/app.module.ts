@@ -117,6 +117,9 @@ import { UserPedidoDetailUnroutedComponent } from './components/Pedido/user-pedi
 import { UserPedidoViewRoutedComponent } from './components/Pedido/user-pedido-view-routed/user-pedido-view-routed.component';
 import { DialogModule } from 'primeng/dialog';
 import { PDFService } from './service/PDF.service';
+import { UserDetallePedidoPlistUnroutedComponent } from './components/DetallePedido/user-detallePedido-plist-unrouted/user-detallePedido-plist-unrouted.component';
+import { UserPedidoPlistUnroutedComponent } from './components/Pedido/user-pedido-plist-unrouted/user-pedido-plist-unrouted.component';
+import { UserPedidoPlistRoutedComponent } from './components/Pedido/user-pedido-plist-routed/user-pedido-plist-routed.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -177,6 +180,8 @@ import { PDFService } from './service/PDF.service';
     AdminPedidoNewRoutedComponent,
     UserPedidoDetailUnroutedComponent,
     UserPedidoViewRoutedComponent,
+    UserPedidoPlistUnroutedComponent,
+    UserPedidoPlistRoutedComponent,
 
     //Componentes entidad DetallePedido
     AdminDetallePedidoPlistUnroutedComponent,
@@ -186,6 +191,7 @@ import { PDFService } from './service/PDF.service';
     AdminDetallePedidoEditRoutedComponent,
     AdminDetallePedidoNewRoutedComponent,
     AdminDetallePedidoFormUnroutedComponent,
+    UserDetallePedidoPlistUnroutedComponent,
     
 
     //Componentes entidad Categoria

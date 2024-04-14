@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+      <p-paginator (onPageChange)="onPageChange($event)" [rows]="paginatorState.rows!" [totalRecords]="page?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <ng-container *ngFor="let pedido of page?.content">
+      <div class="col-lg-3 col-md-6">
+        <div class="order-details">
+          <div class="card-content p-4">
+            <p><strong>Pedido #{{pedido.id}}</strong></p>
+            <p>Fecha de pedido: {{pedido.fecha_pedido | date: 'dd/MM/yyyy'}}</p>
+            <p>Fecha de entrega: {{pedido.fecha_entrega | date: 'dd/MM/yyyy'}}</p>
+            <p *ngIf="pedido.id_factura">Número de factura: {{pedido.id_factura}}</p>
+            <a [routerLink]="['/usuario', 'pedido', 'view', pedido.id]">Ver detalles de la compra</a>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngIf="!page?.content || page?.content?.length === 0" class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+      <p class="text-center">No tienes ningún pedido.</p>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-4">
+      <button class="btn btn-block btn-seguir-comprando" (click)="volverAtras()">Seguir Comprando</button>
+    </div>
+  </div>
+</div>

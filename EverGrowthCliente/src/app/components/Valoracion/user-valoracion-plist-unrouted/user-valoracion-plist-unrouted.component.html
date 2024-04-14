@@ -28,7 +28,11 @@
           <div class="col-lg-6 col-md-12 col-sm-12" *ngFor="let valoracion of page?.content">
             <p-card class="custom-card">
               <ng-template class="title" pTemplate="title">
-                <div>{{ valoracion.titulo }}</div>
+                <div>{{ valoracion.titulo }}
+                  <i *ngIf="isUsuarioValoracion(valoracion)" (click)="borrarValoracion(valoracion.id)" class="fa-solid fa-trash "></i>
+
+                </div>
+                
 
               </ng-template>
               <ng-template pTemplate="subtitle">
@@ -36,10 +40,9 @@
               </ng-template>
               <ng-template pTemplate="content">
                 <div class="card-content">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="user-info">{{ valoracion.user.nombre }} {{ valoracion.user.apellido1 }}</div>
+                  <div class="d-flex  align-items-center">
+                    <div class="user-info">{{ valoracion.user.nombre }} {{ valoracion.user.apellido1 }}:</div>
                     <div class="message">{{ valoracion.mensaje }}</div>
-                    <button *ngIf="isUsuarioValoracion(valoracion)" (click)="borrarValoracion(valoracion.id)" type="button" class="btn btn-primary btn-lg mt-3"> <i class="fa-solid fa-trash"></i></button>
 
                   </div>
 

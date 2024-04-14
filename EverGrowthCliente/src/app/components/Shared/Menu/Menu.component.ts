@@ -83,8 +83,8 @@ export class MenuComponent implements OnInit {
         data: {
           id: this.oSessionUser.id
         },
-        header: "Vista de usuario",
-        width: '80%',
+        header: "Perfil de usuario",
+        width: '40%',
         contentStyle: { overflow: 'auto' },
         baseZIndex: 10000,
         maximizable: false

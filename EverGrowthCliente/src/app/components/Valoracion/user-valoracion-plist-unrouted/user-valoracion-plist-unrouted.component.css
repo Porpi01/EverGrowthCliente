@@ -1,5 +1,4 @@
-
-.title{
+.title {
   margin-bottom: 15px;
 }
 
@@ -8,13 +7,14 @@
   color: #fff;
   padding: 4px 8px;
   border-radius: 5px;
+  font-size: 12px;
+
+
+
 
 
 }
 
-.card-content {
-  margin-top: 1rem;
-}
 
 
 .user-info {
@@ -34,7 +34,7 @@ p-card {
   padding: 20px;
   border-radius: 5px;
   font-size: 16px;
- 
+
 
 
 }
@@ -50,6 +50,19 @@ p-card {
 
 
 }
+
+.fa-solid {
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 3px;
+  color: #ef6461;
+}
+
+.icon-link i:hover {
+  color: #d4605e;
+  /* Cambia el color del icono al pasar el ratón sobre él */
+}
+
 
 .info {
   font-size: 16px;

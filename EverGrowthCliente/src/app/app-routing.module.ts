@@ -34,6 +34,8 @@ import { HomeComponent } from './components/Shared/Home/Home.component';
 import { UserProductoViewRoutedComponent } from './components/Producto/user-producto-view-routed/user-producto-view-routed.component';
 import { UserCarritoPlistRoutedComponent } from './components/Carrito/user-carrito-plist-routed/user-carrito-plist-routed.component';
 import { UserPedidoViewRoutedComponent } from './components/Pedido/user-pedido-view-routed/user-pedido-view-routed.component';
+import { UserDetallePedidoPlistUnroutedComponent } from './components/DetallePedido/user-detallePedido-plist-unrouted/user-detallePedido-plist-unrouted.component';
+import { UserPedidoPlistRoutedComponent } from './components/Pedido/user-pedido-plist-routed/user-pedido-plist-routed.component';
 
 const routes: Routes = [
 
@@ -82,6 +84,7 @@ const routes: Routes = [
 { path: 'admin/pedido/new', component: AdminPedidoNewRoutedComponent},
 { path: 'admin/pedido/edit/:id', component: AdminPedidoEditRoutedComponent},
 { path: 'usuario/pedido/view/:id', component: UserPedidoViewRoutedComponent },
+{ path: 'usuario/pedido/plist/:idusuario', component: UserPedidoPlistRoutedComponent},
 
 
 
@@ -92,6 +95,7 @@ const routes: Routes = [
 { path: 'admin/detallePedido/view/:id', component: AdminDetallePedidoViewRoutedComponent },
 { path: 'admin/detallePedido/new', component: AdminDetallePedidoNewRoutedComponent},
 { path: 'admin/detallePedido/edit/:id', component: AdminDetallePedidoEditRoutedComponent},
+{ path: 'usuario/detallePedido/plist/bypedido/:idpedido', component: UserDetallePedidoPlistUnroutedComponent },
 
 
 

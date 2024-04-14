@@ -51,7 +51,10 @@
             <a class="nav-link" [class.active]="strUrl=='/admin/carrito/plist'||strUrl=='/'" aria-current="page"
               routerLink="/admin/carrito/plist" *ngIf="strUserName && oSessionUser?.rol==false"> Carrito</a>
           </li>
-        </ul>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="strUrl=='/usuario/pedido/plist/'+ oSessionUser?.id || strUrl=='/'" aria-current="page" routerLink="/usuario/pedido/plist/{{oSessionUser?.id}}" *ngIf="strUserName && oSessionUser?.rol==true"> Mis pedidos</a>
+          </li>
+        </ul> 
         
         <div class="ms-auto d-flex">
           <span class="navbar-text mx-1" *ngIf="strUserName">
