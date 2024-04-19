@@ -1,6 +1,7 @@
 <div class="section bg-slate-300" *ngIf="!username || (userSession && userSession.rol === true)">
   <app-user-producto-plist-unrouted></app-user-producto-plist-unrouted>
 </div>
+<div  *ngIf="username && (userSession && userSession.rol === false)">
 <h1><strong>BIENVENIDO A EVERGROWTH</strong></h1>
 <div class="container">
   <div class="row">
@@ -48,4 +49,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
