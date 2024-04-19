@@ -171,7 +171,7 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
       this.PedidoService.createCompraTodosCarritos(this.user.id).subscribe({
         next: (pedido: IPedido) => {
           this.matSnackBar.open('Compra realizada', 'Aceptar', { duration: 3000 });
-          this.PDFService.imprimirFactura(pedido.id);
+          // this.PDFService.imprimirFactura(pedido.id);
           console.log('Pedido', pedido.id);
           this.router.navigate(['/usuario', 'pedido', 'view', pedido.id]);
         },

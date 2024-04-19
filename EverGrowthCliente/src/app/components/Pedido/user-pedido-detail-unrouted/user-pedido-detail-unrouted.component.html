@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row justify-content-center">
+  <div class="row align-items-center">
     <div class="col-lg-5 col-md-5 d-none d-md-block">
       <i class="fa-solid fa-circle-info"></i>
     </div>
@@ -34,7 +34,13 @@
           </div>
         </ng-template>
       </p-card>
-      <button class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
+      <div class="row">
+        <div class="col-lg-8 col-md-6 col-sm-2">
+          <button class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-2">
+          <button class="btn btn-primary" (click)="imprimirFactura()"><i class="fa-solid fa-file-invoice"></i> Imprimir
+            Factura </button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>

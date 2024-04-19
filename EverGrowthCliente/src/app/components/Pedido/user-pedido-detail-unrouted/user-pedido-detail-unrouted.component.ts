@@ -53,8 +53,8 @@ export class UserPedidoDetailUnroutedComponent implements OnInit {
   }
 
      //Añado esto
-     imprimirFactura = (id_pedido: number) => {
-      this.PDFService.imprimirFactura(id_pedido);
+     imprimirFactura = () => {
+      this.PDFService.imprimirFactura(this.pedidos.id);
    
     }
   
@@ -74,6 +74,8 @@ export class UserPedidoDetailUnroutedComponent implements OnInit {
     }
 
   volverAtras() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/usuario/pedido/plist/', this.pedidos.user?.id]);
   }
+
+ 
 }

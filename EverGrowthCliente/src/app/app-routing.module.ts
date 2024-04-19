@@ -87,7 +87,6 @@ const routes: Routes = [
 { path: 'usuario/pedido/plist/:idusuario', component: UserPedidoPlistRoutedComponent},
 
 
-
 //DetallePedido
 { path: 'admin/detallePedido/plist', component: AdminDetallePedidoPlistRoutedComponent },
 { path: 'admin/detallePedido/plist/bypedido/:idpedido', component: AdminDetallePedidoPlistRoutedComponent },

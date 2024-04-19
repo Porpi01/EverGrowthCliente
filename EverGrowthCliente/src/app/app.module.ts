@@ -121,6 +121,7 @@ import { UserDetallePedidoPlistUnroutedComponent } from './components/DetallePed
 import { UserPedidoPlistUnroutedComponent } from './components/Pedido/user-pedido-plist-unrouted/user-pedido-plist-unrouted.component';
 import { UserPedidoPlistRoutedComponent } from './components/Pedido/user-pedido-plist-routed/user-pedido-plist-routed.component';
 import { ChartModule } from 'primeng/chart';
+import { ImageModule } from 'primeng/image';
 
 
 
@@ -254,7 +255,8 @@ import { ChartModule } from 'primeng/chart';
     PanelModule,
     FileUploadModule,
     DialogModule,
-    ChartModule
+    ChartModule,
+    ImageModule
   
    
 
