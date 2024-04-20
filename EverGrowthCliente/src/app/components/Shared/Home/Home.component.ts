@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
   totalCategoria: number = 0;
   totalProducto: number = 0;
   totalDetalles: number = 0;
+  
 
   constructor(
     private Router: Router,
@@ -87,7 +88,6 @@ export class HomeComponent implements OnInit {
     this.PedidoService.obtenerCantidadPedidosPorMes()
       .subscribe(data => {
         this.procesarDatos(data);
-        console.log('Data:', data); // Agrega este log
       });
   }
 
@@ -122,41 +122,55 @@ export class HomeComponent implements OnInit {
     };
   }
 
-
-obtenerProductosMasStock(): void {
-  this.ProductoService.getTop10ProductosMasStock()
-    .subscribe({
-      next: response => {
-        console.log('Respuesta:', response); // Registra la respuesta para ver su estructura
-
-        // Verifica si la respuesta es un array y no está vacía
-        if (Array.isArray(response) && response.length > 0) {
-          this.productosMasStock = response;
-
-          // Actualiza el gráfico de datos
-          this.dataMasStock = {
-            labels: this.productosMasStock.map(producto => producto.nombre),
-            datasets: [{
-              data: this.productosMasStock.map(producto => producto.stock),
-              backgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56',
-                '#4BC0C0', 
-                '#9966FF' 
-              ]
-            }]
-          };
-        } else {
-          console.error('La respuesta está vacía o no es un array:', response);
-        }
-      },
-      error: err => {
-        console.error('Error al obtener los datos:', err);
-      }
-    });
-}
+  obtenerProductosMasStock(): void {
+    this.ProductoService.getTop10ProductosMasStock()
+      .subscribe({
+        next: response => {
+          console.log('Respuesta:', response); // Registra la respuesta para ver su estructura
   
+          // Verifica si la respuesta es un array y no está vacía
+          if (Array.isArray(response) && response.length > 0) {
+            this.productosMasStock = response;
+  
+            // Actualiza el gráfico de datos
+            this.dataMasStock = {
+              labels: this.productosMasStock.map(producto => producto.nombre),
+              datasets: [{
+                data: this.productosMasStock.map(producto => producto.stock),
+                backgroundColor: [
+                  '#FF6384',
+                  '#36A2EB',
+                  '#FFCE56',
+                  '#4BC0C0',
+                  '#9966FF'
+                ]
+              }]
+            };
+  
+         // Define las opciones del gráfico
+         this.options = {
+          responsive: true,
+          maintainAspectRatio: false, // Ajusta esta opción según tus necesidades
+          scales: {
+            y: {
+              beginAtZero: true
+            },
+            x: {
+              beginAtZero: true
+            }
+          }
+          // Agrega más opciones según sea necesario
+        };
+      } else {
+            console.error('La respuesta está vacía o no es un array:', response);
+          }
+        },
+        error: err => {
+          console.error('Error al obtener los datos:', err);
+        }
+      });
+  }
+
 
   obtenerProductosMenosStock(): void {
     this.ProductoService.getTop10ProductosMenosStock()
@@ -191,7 +205,7 @@ obtenerProductosMasStock(): void {
     this.UsuarioService.getTotal().subscribe({
       next: (data: number) => {
         this.totalUsuarios = data;
-        console.log('Total de usuarios:', data);
+      
       },
       error: (error) => {
         console.error('Error al obtener el total de usuarios:', error);
@@ -203,7 +217,6 @@ obtenerProductosMasStock(): void {
     this.DetallePedidoService.getTotal().subscribe({
       next: (data: number) => {
         this.totalDetalles = data;
-        console.log('Total de detalles:', data);
       },
       error: (error) => {
         console.error('Error al obtener el total de detalles:', error);
@@ -216,7 +229,6 @@ obtenerProductosMasStock(): void {
     this.PedidoService.getTotal().subscribe({
       next: (data: number) => {
         this.totalPedidos = data;
-        console.log('Total de pedidos:', data);
       },
       error: (error) => {
         console.error('Error al obtener el total de pedidos:', error);
@@ -227,7 +239,6 @@ obtenerProductosMasStock(): void {
     this.CarritoService.getTotal().subscribe({
       next: (data: number) => {
         this.totalCarritos = data;
-        console.log('Total de carritos:', data);
       },
       error: (error) => {
         console.error('Error al obtener el total de carritos:', error);
@@ -238,7 +249,6 @@ obtenerProductosMasStock(): void {
     this.ProductoService.getTotal().subscribe({
       next: (data: number) => {
         this.totalProducto = data;
-        console.log('Total de productos:', data);
       },
       error: (error) => {
         console.error('Error al obtener el total de productos:', error);
@@ -249,7 +259,6 @@ obtenerProductosMasStock(): void {
     this.ValoracionService.getTotal().subscribe({
       next: (data: number) => {
         this.totalValoraciones = data;
-        console.log('Total de valoraciones:', data);
       },
       error: (error) => {
         console.error('Error al obtener el total de valoraciones:', error);
@@ -260,7 +269,6 @@ obtenerProductosMasStock(): void {
     this.CategoriaService.getTotal().subscribe({
       next: (data: number) => {
         this.totalCategoria = data;
-        console.log('Total de categorias:', data);
       },
       error: (error) => {
         console.error('Error al obtener el total de categorias:', error);
