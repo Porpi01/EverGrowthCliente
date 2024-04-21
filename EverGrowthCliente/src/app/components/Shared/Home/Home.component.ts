@@ -50,39 +50,50 @@ export class HomeComponent implements OnInit {
 
     private http: HttpClient
   ) {
-    console.log('MenuUnroutedComponent creado');
+ 
 
     this.Router.events.subscribe((ev) => {
       if (ev instanceof NavigationEnd) {
         this.url = ev.url;
       }
     })
-
-    this.username = SesionService.getUsername();
-    this.UsuarioService.getByUsername(this.SesionService.getUsername()).subscribe({
-      next: (user: IUsuario) => {
-        this.userSession = user;
-        console.log('User Session:', this.userSession); // Agrega este log
-      },
-      error: (err: HttpErrorResponse) => {
-        console.log(err);
-      }
-    });
   }
+
 
   ngOnInit() {
-    this.obtenerDatosParaGrafico();
-    this.getTotalUsuarios();
-    this.geTotalCategorias();
-    this.getTotalProductos();
-    this.getTotalCarritos();
-    this.getTotalPedidos();
-    this.getTotalValoraciones();
-    this.getTotalDetalles();
-    this.obtenerProductosMasStock();
-    this.obtenerProductosMenosStock();
-
+    this.username = this.SesionService.getUsername();
+      if (this.username) {
+      this.UsuarioService.getByUsername(this.username).subscribe({
+        next: (user: IUsuario) => {
+          this.userSession = user;
+          console.log('User Session:', this.userSession);
+  
+          if (this.userSession.rol === false) {
+            console.log('El usuario está autenticado como administrador.');
+  
+            this.obtenerDatosParaGrafico();
+            this.getTotalUsuarios();
+            this.geTotalCategorias();
+            this.getTotalProductos();
+            this.getTotalCarritos();
+            this.getTotalPedidos();
+            this.getTotalValoraciones();
+            this.getTotalDetalles();
+            this.obtenerProductosMasStock();
+            this.obtenerProductosMenosStock();
+          } else {
+            console.error('El usuario está autenticado pero no como administrador.');
+          }
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log(err);
+        }
+      });
+    } else {
+      console.log('Usuario no autenticado');
+    }
   }
+  
 
   obtenerDatosParaGrafico(): void {
     this.PedidoService.obtenerCantidadPedidosPorMes()
