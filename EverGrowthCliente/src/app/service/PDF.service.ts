@@ -30,7 +30,7 @@ export class PDFService {
           this.contenido(doc, detallesPedido);
           this.pieDePagina(doc, detallesPedido, doc.getNumberOfPages());
           console.log('Número de páginas:', doc.getNumberOfPages());
-  
+
           doc.save('factura.pdf');
         } else {
           console.error('No se encontraron detalles de pedido en la respuesta');
@@ -64,14 +64,14 @@ export class PDFService {
     let index = 0;
     let total = 0;
     let totalConIVA = 0;
-  
+
     const fechaPedido = new Date(detallesPedido[0].pedidos.fecha_pedido);
     const fechaPedidoFormateada = fechaPedido.toLocaleDateString();
     doc.setFontSize(11);
     doc.setFont('Arial', 'normal');
     doc.text(`Fecha de pedido: ${fechaPedidoFormateada}`, 10, 60 + index * 120);
     doc.text(`Número de factura:  ${detallesPedido[0].pedidos.id_factura}`, 10, 64 + index * 120);
-  
+
     doc.setFontSize(13);
     doc.setFont('Arial', 'bold');
     doc.text(10, 75 + index * 120, "Datos del cliente");
@@ -90,7 +90,7 @@ export class PDFService {
     doc.text("IVA(%)", 130, 105 + index * 120)
     doc.text("CANTIDAD", 150, 105 + index * 120);
     doc.text("IMPORTE", 180, 105 + index * 120);
-  
+
     detallesPedido.forEach((detalle, i) => {
       if (i > 0 && i % 5 === 0) { // Agregar una nueva página después de cada 5 productos
         doc.addPage();
@@ -122,86 +122,87 @@ export class PDFService {
         doc.text("CANTIDAD", 150, 105 + index * 120);
         doc.text("IMPORTE", 180, 105 + index * 120);
       }
-  
+
       const importe = detalle.productos.precio * detalle.cantidad;
       total += importe;
-  
+
       // Calcular el precio del producto con el IVA
       const precioConIVA = detalle.productos.precio * (1 + detalle.productos.iva);
-      console.log('Precio con IVA:', precioConIVA);
-      console.log('IVA:', detalle.productos.iva);
-  
+
       // Calcular el importe del producto con el IVA
       const importeConIVA = precioConIVA * detalle.cantidad;
-  
+
       // Agregar el importe con IVA al totalConIVA
       totalConIVA += importeConIVA;
-  
+
       doc.setFontSize(11);
       doc.setFont('Arial', 'normal');
-  
+
       const y = 111 + (index % 5) * 10; // Espacio entre los productos
-  
+
       doc.text(`${detalle.productos.id}`, 10, y);
       doc.text(`${detalle.productos.nombre}`, 35, y);
       doc.text(`${detalle.productos.descripcion}`, 35, y + 4);
       doc.text(`${detalle.productos.precio} €`, 110, y);
       doc.text(`${detalle.productos.iva * 100}%`, 130, y);
       doc.text(`${detalle.cantidad}`, 160, y);
-      doc.text((detalle.productos.precio * detalle.cantidad).toFixed(2) + "€", 180, y); // Mostrar el importe sin IVA
-  
+
+      doc.text(importeConIVA.toFixed(2) + "€", 180, y); // Mostrar el importe con IVA
       doc.setFont('Arial', 'bold');
-  
+
       index++;
     });
-  
+
     // Mostrar el total sin IVA
     doc.setFontSize(11);
     doc.setFont('Arial', 'bold');
     doc.text("BASE IMPONIBLE: ", 135, 140 + index * 7);
     doc.text(total.toFixed(2) + "€", 180, 140 + index * 7);
-  
-    // Agregar el costo de envío si la compra es inferior a 50
-    let costoEnvio = 0;
-    if (total < 50) {
-      costoEnvio = 7.21; 
-    }
-  
-    doc.text("COSTES DE ENVÍO:", 135, 145 + index * 7);
-    doc.text(costoEnvio.toFixed(2) + "€", 180, 145 + index * 7);
-  
+
     // Calcular el total de IVA
     const totalIVA = totalConIVA - total;
-  
+
     // Mostrar el total de IVA
-    doc.text("IVA :", 135, 150 + index * 7);
-    doc.text(totalIVA.toFixed(2) + "€", 180, 150 + index * 7);
-  
+    doc.text("IVA :", 135, 145 + index * 7);
+    doc.text(totalIVA.toFixed(2) + "€", 180, 145 + index * 7);
+
+    // Mostrar el total con IVA y, si corresponde, costo de envío
+    let totalConEnvio;
+    if (total + totalIVA >= 50) {
+      totalConEnvio = totalConIVA;
+    } else {
+      // Agregar el costo de envío si la suma de la base imponible y el IVA es menor a 50
+      const costoEnvio = 3.80;
+      totalConEnvio = totalConIVA + costoEnvio;
+      doc.text("COSTES DE ENVÍO:", 135, 150 + index * 7);
+      doc.text(costoEnvio.toFixed(2) + "€", 180, 150 + index * 7);
+    }
+
     // Mostrar el total con IVA y costo de envío si aplica
-    const totalConEnvio = totalConIVA + costoEnvio;
     doc.text("TOTAL CON IVA:", 135, 155 + index * 7);
     doc.text(totalConEnvio.toFixed(2) + "€", 180, 155 + index * 7);
   }
 
+
   private pieDePagina(doc: any, detallesPedido: IDetallePedido[], numeroPaginas: number): void {
     const gris = "#ccc";
-  
+
     // Agregar pie de página a cada página
     for (let i = 1; i <= numeroPaginas; i++) {
       doc.setPage(i);
       doc.setFontSize(11);
       doc.setFont('Arial', 'normal');
       doc.text("Términos y Condiciones:\n\n1. Los productos adquiridos a través de esta factura están sujetos a disponibilidad.\n2. Los precios indicados pueden estar sujetos a cambios sin previo aviso.\n3. Las devoluciones solo se aceptarán dentro de los 10 días posteriores a la compra.\n4. Los productos devueltos deben estar en condiciones originales y sin usar.\n\n¡Gracias por su compra!", 10, 200, { maxWidth: 190 });
-  
+
       // Agregar formas de pago
       doc.text("Formas de Pago: \n\n Aceptamos los siguientes métodos de pago: \n- Tarjeta de crédito \n- Transferencia bancaria \n- PayPal", 10, 250, { maxWidth: 190 });
-  
+
       // Agregar cabecera
       this.cabecera(doc, detallesPedido);
-  
+
       doc.setDrawColor(gris);
       doc.line(10, 240, 200, 240);
-  
+
       // Agregar número de página
       doc.text(`Página ${i} de ${numeroPaginas}`, 160, 278);
     }
