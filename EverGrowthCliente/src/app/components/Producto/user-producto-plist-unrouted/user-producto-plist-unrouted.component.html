@@ -37,9 +37,7 @@
               <ng-template pTemplate="header" >
                 <img [src]="producto.imagen" alt="Imagen del producto" class="product-image"  (click)="doView(producto)" >
               </ng-template>
-          
-
-              <p>{{producto.descripcion}}</p>
+      
               <p>Precio: {{producto.precio}} €</p>
               <p class="stock" *ngIf="producto.stock === 0">Sin existencias</p>
               <p class="stock" *ngIf="producto.stock > 0">En Existencias</p>

@@ -74,6 +74,8 @@
             <mat-error *ngIf="hasError('direccion', 'required')">Campo obligatorio</mat-error>
             <mat-error *ngIf="hasError('direccion', 'minlength')">Mínimo 5 caracteres</mat-error>
             <mat-error *ngIf="hasError('direccion', 'maxlength')">Límite excedido</mat-error>
+            <mat-error *ngIf="hasError('direccion', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
+
           </mat-form-field>
         </div>
         <div class="form-group">

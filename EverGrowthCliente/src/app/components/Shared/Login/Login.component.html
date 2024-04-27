@@ -26,15 +26,19 @@
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon">
                 <i class="fa-solid fa-lock"></i>
-                            </span>
+              </span>
               <input id="password" type="password" pInputText formControlName="password" class="form-control" placeholder="Contraseña" matInput>
             </div>
             <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Contraseña requerida</mat-error>
             <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 6 caracteres</mat-error>
           </div>
           <div class="p-col">
-            <button pButton type="submit" label="Iniciar sesión" class="btn btn-danger m-2" [disabled]="!loginForm.valid"></button>
-            <button pButton type="button" label="Limpiar" class="btn btn-danger m-2" (click)="onReset()"></button>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <button pButton type="submit" label="Iniciar sesión" class="btn btn-danger m-2" [disabled]="!loginForm.valid" style="width: 100%;"></button>
+            </div>
+            <p>
+              ¿No tienes cuenta? <a routerLink="/register">Regístrate aquí</a></p>
+
           </div>
         
         </div>
@@ -48,6 +52,8 @@
         <div class="control-group text-center mt-3">
           <button pButton type="button" label="Ingresar como Administrador" class="btn btn-danger m-2" (click)="loginAdmin()"></button>
           <button pButton type="button" label="Ingresar como Usuario" class="btn btn-success m-2" (click)="loginUser()"></button>
+        </div>
+        <div class="text-center mt-3">
         </div>
       </div>
     </div>

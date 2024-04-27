@@ -29,6 +29,8 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
   oPaginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
   pedidos: IPedido[] = [];
+  pedido: IPedido = {user:{} } as IPedido;
+
   pedidoToRemove: IPedido | null = null;
   ref: DynamicDialogRef | undefined;
   oUsuario: IUsuario | null = null;
@@ -136,26 +138,7 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
     });
   }
 
-    //Añado esto
-    imprimirFactura = (id_pedido: number) => {
-      this.PDFService.imprimirFactura(id_pedido);
-   
-    }
-  
-    togglePedidoActive(pedido: IPedido): void {
-      const pedidoToUpdate: IPedido = { ...pedido };
-     
-      pedidoToUpdate.active = !pedidoToUpdate.active;
-  
-      this.PedidoService.updateOne(pedidoToUpdate).subscribe({
-        next: () => {
-          this.forceReload.next(true);
-        },
-        error: (error) => {
-          pedidoToUpdate.active = !pedidoToUpdate.active;
-        }
-      });
-    }
+
 
   getUsuario(): void {
     this.UsuarioService.getOne(this.id_usuario).subscribe({

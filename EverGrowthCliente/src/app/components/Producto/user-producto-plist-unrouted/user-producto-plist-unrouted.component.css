@@ -41,15 +41,14 @@ h1 {
 .product-image {
   width: 100%;
   height: 200px;
+  cursor: pointer;
 }
 
 /* Estilos para dispositivos pequeños (sm) */
 @media screen and (max-width: 768px) {
   .product-image {
     width: 100%;
-    /* o el ancho que desees para dispositivos pequeños */
     height: auto;
-    /* o la altura que desees para dispositivos pequeños */
   }
 }
 

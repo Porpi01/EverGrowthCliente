@@ -39,7 +39,7 @@
             <th class="d-none d-sm-table-cell" (click)="doOrder('Apellido2')">Apellido2</th>
             <th (click)="doOrder('Email')">Email</th>
             <th class="d-none d-sm-table-cell">Teléfono</th>
-            <th class="d-none d-sm-table-cell" (click)="doOrder('Dirección')">Dirección</th>
+            <th class="d-none d-sm-table-cell" (click)="doOrder('Direccion')">Dirección</th>
             <th  (click)="doOrder('Username')">Username</th>
             <th (click)="doOrder('Rol')">Rol</th>
             <th>Pedidos</th>
@@ -88,7 +88,7 @@
                   class="fa-solid fa-pen-to-square"></i>
               </a>
 
-              <a (click)="doView(user)" class="icon-link"><i class="fa-solid fa-circle-up"></i>
+              <a (click)="doView(user)"  class="icon-link"><i class="fa-solid fa-circle-up"></i>
               </a>
               <a *ngIf="user.pedidos==0 && user.valoracion==0 && user.carritos==0" (click)="doRemove(user)"
                 class="icon-link"><i class="fa-solid fa-trash"></i>

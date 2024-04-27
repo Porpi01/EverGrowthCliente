@@ -54,4 +54,6 @@ export class AdminUserDetailUnroutedComponent implements OnInit {
   volverAtras() {
     this.router.navigate(['/admin/usuario/plist']);
   }
+
+ 
 }

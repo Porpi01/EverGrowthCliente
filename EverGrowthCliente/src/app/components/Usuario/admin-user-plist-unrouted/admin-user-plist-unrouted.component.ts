@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UsuarioService } from './../../../service/Usuario.service';
 import { IUsuarioPage } from 'src/app/model/model.interfaces';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -113,12 +113,12 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
 
   
   doView(user: IUsuario) {
-    this.mostrarBotones = false; 
-    console.log(this.mostrarBotones)
+
     this.ref = this.DialogService.open(AdminUserDetailUnroutedComponent, {
       
       data: {
         id: user.id,
+        
       },
       header: 'Vista del usuario',
       width: '60%',
@@ -127,6 +127,10 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
       baseZIndex: 10000,
       maximizable: false
     });
+  }
+
+  ocultarBoton(evento: boolean) {
+    this.mostrarBotones = evento;
   }
 
 

@@ -69,6 +69,7 @@ export class DetallePedidoService {
   }
 
   getDetallesPorPedidoId(id_pedido: number, size: number, page: number, sort: string, direction: string): Observable<IDetallePedidoPage> {
+  
     return this.http.get<IDetallePedidoPage>(this.sUrl + '/bypedido/' + id_pedido + '?size=' + size + '&page=' + page + '&sort=' + sort + ',' + direction);
 }
 }

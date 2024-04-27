@@ -60,4 +60,9 @@ export class UsuarioService {
     return this.http.delete<number>(this.sUrl + "/empty");
   }
 
+
+  signUp(nuevoUsuario: IUsuario): Observable<number> {
+    return this.http.post<number>(this.sUrl + "/signup", nuevoUsuario);
+  }
+
 }

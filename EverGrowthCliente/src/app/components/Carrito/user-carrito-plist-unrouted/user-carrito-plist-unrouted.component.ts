@@ -43,9 +43,7 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
     private PedidoService: PedidoService,
     private router: Router,
     private matSnackBar: MatSnackBar,
-    private confirmationService: ConfirmationService,
-    private PDFService: PDFService,
-    private DetallePedidoService: DetallePedidoService
+   
   ) { }
 
   ngOnInit() {
@@ -92,6 +90,7 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
     const precioIndividual = precioProducto * cantidad * (1 + iva);
     this.precioIndividualMap.set(carrito.id, precioIndividual);
   }
+
   updateCantidad(carrito: ICarrito, nuevaCantidad: number): void {
     const stockDisponible = carrito.producto.stock;
 

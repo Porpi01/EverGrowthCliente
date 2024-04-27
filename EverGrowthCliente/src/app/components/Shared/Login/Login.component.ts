@@ -52,9 +52,7 @@ export class LoginComponent implements OnInit {
       });
     }
   }
-  onReset() {
-    this.loginForm.reset();
-  }
+ 
 
   loginAdmin() {
     this.loginForm.setValue({

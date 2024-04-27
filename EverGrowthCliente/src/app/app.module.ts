@@ -122,6 +122,8 @@ import { UserPedidoPlistUnroutedComponent } from './components/Pedido/user-pedid
 import { UserPedidoPlistRoutedComponent } from './components/Pedido/user-pedido-plist-routed/user-pedido-plist-routed.component';
 import { ChartModule } from 'primeng/chart';
 import { ImageModule } from 'primeng/image';
+import { MenubarModule } from 'primeng/menubar';
+import { RegisterComponent } from './components/Shared/Register/Register.component';
 
 
 
@@ -135,8 +137,7 @@ import { ImageModule } from 'primeng/image';
     LogoutComponent,
     LoginComponent,
     HomeComponent,
- 
- 
+    RegisterComponent,
 
     //Componentes entidad Usuario
     AdminUserPlistRoutedComponent,
@@ -256,7 +257,8 @@ import { ImageModule } from 'primeng/image';
     FileUploadModule,
     DialogModule,
     ChartModule,
-    ImageModule
+    ImageModule,
+    MenubarModule
   
    
 
