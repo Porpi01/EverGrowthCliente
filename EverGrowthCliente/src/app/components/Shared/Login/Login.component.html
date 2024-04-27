@@ -7,54 +7,52 @@
     </div>
   </div>
 </div>
+<div class="login-container ">
+  <div class="col-12">
+    <div class="d-flex justify-content-center my-3">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label><i class="fas fa-user"></i> Usuario</mat-label>
+            <input matInput formControlName="username" placeholder="Usuario" required>
 
-<div class="col-12">
-  <div class="d-flex justify-content-center my-3">
-    <p-panel>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="p-grid p-dir-col">
-          <div class="p-col">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">
-                <i class="fa-solid fa-user"></i>              
-              </span>
-              <input id="username" type="text" pInputText formControlName="username" class="form-control" placeholder="Usuario" matInput>
-            </div>
             <mat-error *ngIf="loginForm.get('username')?.hasError('required')">Usuario requerido</mat-error>
-          </div>
-          <div class="p-col">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">
-                <i class="fa-solid fa-lock"></i>
-              </span>
-              <input id="password" type="password" pInputText formControlName="password" class="form-control" placeholder="Contraseña" matInput>
-            </div>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field>
+            <mat-label><i class="fas fa-lock"></i> Contraseña</mat-label>
+            <input matInput type="password" formControlName="password" placeholder="Contraseña" required>
             <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Contraseña requerida</mat-error>
-            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 6 caracteres</mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 6
+              caracteres</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <button pButton type="submit" label="Iniciar sesión" class="btn btn-danger m-2"
+              [disabled]="!loginForm.valid" style="width: 100%;"></button>
           </div>
-          <div class="p-col">
-            <div style="display: flex; flex-direction: column; align-items: center;">
-              <button pButton type="submit" label="Iniciar sesión" class="btn btn-danger m-2" [disabled]="!loginForm.valid" style="width: 100%;"></button>
-            </div>
-            <p>
-              ¿No tienes cuenta? <a routerLink="/register">Regístrate aquí</a></p>
 
+
+          <div class="text-center mt-2">
+            ¿No tienes cuenta? <a routerLink="/register">Regístrate aquí</a>
           </div>
-        
         </div>
       </form>
-    </p-panel>
+    </div>
   </div>
-
-  <div class="col-12 mt-5">
-    <div class="card">
-      <div class="card-body">
-        <div class="control-group text-center mt-3">
-          <button pButton type="button" label="Ingresar como Administrador" class="btn btn-danger m-2" (click)="loginAdmin()"></button>
-          <button pButton type="button" label="Ingresar como Usuario" class="btn btn-success m-2" (click)="loginUser()"></button>
-        </div>
-        <div class="text-center mt-3">
-        </div>
+</div>
+<div class="col-12 mt-5">
+  <div class="card">
+    <div class="card-body">
+      <div class="control-group text-center mt-3">
+        <button pButton type="button" label="Ingresar como Administrador" class="btn btn-danger m-2"
+          (click)="loginAdmin()"></button>
+        <button pButton type="button" label="Ingresar como Usuario" class="btn btn-success m-2"
+          (click)="loginUser()"></button>
+      </div>
+      <div class="text-center mt-3">
       </div>
     </div>
   </div>

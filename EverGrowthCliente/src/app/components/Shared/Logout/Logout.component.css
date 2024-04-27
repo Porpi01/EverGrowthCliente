@@ -11,14 +11,13 @@
     
   
   /* Estilos para el panel */
-  p-panel {
+ .logout-container {
     width: 80%; /* Ancho del panel */
     max-width: 400px; /* Ancho máximo del panel */
     margin: auto; /* Centrar horizontalmente */
     padding: 20px;
-    background-color: #e8e9eb;
+
     border-radius: 8px; /* Borde redondeado */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
   }
 
   

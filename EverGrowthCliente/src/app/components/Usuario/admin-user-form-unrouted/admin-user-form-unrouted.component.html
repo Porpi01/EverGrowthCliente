@@ -62,7 +62,7 @@
             <mat-label>Teléfono:</mat-label>
             <input matInput  formControlName="telefono" placeholder="Teléfono" required>
             <mat-error *ngIf="hasError('telefono', 'required')">Campo obligatorio</mat-error>
-            <mat-error *ngIf="hasError('telefono', 'minlength')">Mínimo 3 caracteres</mat-error>
+            <mat-error *ngIf="hasError('telefono', 'minlength')">De 3 a 9 caracteres</mat-error>
             <mat-error *ngIf="hasError('telefono', 'maxlength')">Límite excedido</mat-error>
             <mat-error *ngIf="hasError('telefono', 'pattern')">Caracteres no permitidos</mat-error>
           </mat-form-field>

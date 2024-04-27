@@ -7,98 +7,83 @@
     </div>
   </div>
 </div>
-
+<div class="registration-container">
 <div class="col-12">
   <div class="d-flex justify-content-center my-3">
-    <p-panel>
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="p-grid p-dir-col">
-          <div class="p-col">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">
-                <i class="fa-solid fa-user"></i>              
-              </span>
-              <input id="nombre" type="text" formControlName="nombre" class="form-control" placeholder="Nombre" matInput>
-            </div>
-            <mat-error *ngIf="hasError('nombre', 'required')">Nombre requerido</mat-error>
-            <mat-error *ngIf="hasError('nombre', 'minlength')">Mínimo 3 caracteres</mat-error>
-            <mat-error *ngIf="hasError('nombre', 'maxlength')">Límite excedido</mat-error>
-          </div>
-          <div class="p-col">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">
-                <i class="fa-solid fa-user"></i>              
-              </span>
-              <input id="apellido1" type="text" formControlName="apellido1" class="form-control" placeholder="Apellido 1" matInput>
-            </div>
-            <mat-error *ngIf="hasError('apellido1', 'required')">Apellido 1 requerido</mat-error>
-            <mat-error *ngIf="hasError('apellido1', 'minlength')">Mínimo 3 caracteres</mat-error>
-            <mat-error *ngIf="hasError('apellido1', 'maxlength')">Límite excedido</mat-error>
-          </div>
-        
-          <div class="p-col">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">
-                <i class="fa-solid fa-envelope"></i>
-              </span>
-              <input id="email" type="email" formControlName="email" class="form-control" placeholder="Correo electrónico" matInput>
-            </div>
-            <mat-error *ngIf="hasError('email', 'required')">Correo electrónico requerido</mat-error>
-            <mat-error *ngIf="hasError('email', 'email')">Correo electrónico inválido</mat-error>
-          </div>
-          <div class="p-col">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">
-                <i class="fa-solid fa-phone"></i>
-              </span>
-              <input id="telefono" type="tel" formControlName="telefono" class="form-control" placeholder="Teléfono" matInput>
-            </div>
-            <mat-error *ngIf="hasError('telefono', 'required')">Campo obligatorio</mat-error>
-            <mat-error *ngIf="hasError('telefono', 'minlength')">De 3 a 9 caracteres</mat-error>
-            <mat-error *ngIf="hasError('telefono', 'maxlength')">Límite excedido</mat-error>
-            <mat-error *ngIf="hasError('telefono', 'pattern')">Caracteres no permitidos</mat-error>
-          </div>
-          <div class="p-col">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">
-                <i class="fa-solid fa-map-marker"></i>
-              </span>
-              <input id="direccion" type="text" formControlName="direccion" class="form-control" placeholder="Dirección" matInput>
-            </div>
-            <mat-error *ngIf="hasError('direccion', 'required')">Campo obligatorio</mat-error>
-            <mat-error *ngIf="hasError('direccion', 'minlength')">Mínimo 5 caracteres</mat-error>
-            <mat-error *ngIf="hasError('direccion', 'maxlength')">Límite excedido</mat-error>
-          </div>
-          <div class="p-col">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">
-                <i class="fa-solid fa-user"></i>              
-              </span>
-              <input id="username" type="text" formControlName="username" class="form-control" placeholder="Nombre de usuario" matInput>
-            </div>
-            <mat-error *ngIf="hasError('username', 'required')">Campo obligatorio</mat-error>
-            <mat-error *ngIf="hasError('username', 'minlength')">Mínimo 6 caracteres</mat-error>
-            <mat-error *ngIf="hasError('username', 'maxlength')">Límite excedido</mat-error>
-            <mat-error *ngIf="hasError('username', 'pattern')">Caracteres no permitidos</mat-error>          </div>
-          <div class="p-col">
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon">
-                <i class="fa-solid fa-lock"></i>
-              </span>
-              <input id="password" type="password" formControlName="password" class="form-control" placeholder="Contraseña" matInput>
-            </div>
-            <mat-error *ngIf="hasError('password', 'required')">Contraseña requerida</mat-error>
-            <mat-error *ngIf="hasError('password', 'minlength')">La contraseña debe tener al menos 6 caracteres</mat-error>
-          </div>
-          <div class="p-col">
-            <div style="display: flex; flex-direction: column; align-items: center;">
-              <button pButton type="submit" label="Registrarse" class="btn btn-primary m-2" [disabled]="!registerForm.valid" style="width: 100%;"></button>
-            </div>
-            <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="registration-form">
+      <div class="form-group">
+        <mat-form-field class="input-field">
+          <mat-label><i class="fas fa-user"></i> Nombre:</mat-label>
+          <input matInput formControlName="nombre" placeholder="Nombre" required>
+          <mat-error *ngIf="hasError('nombre', 'required')">Campo obligatorio</mat-error>
+          <mat-error *ngIf="hasError('nombre', 'minlength')">Mínimo 3 caracteres</mat-error>
+          <mat-error *ngIf="hasError('nombre', 'maxlength')">Límite excedido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="input-field">
+          <mat-label><i class="fas fa-user"></i> Apellido1:</mat-label>
+          <input matInput formControlName="apellido1" placeholder="Apellido1" required>
+          <mat-error *ngIf="hasError('apellido1', 'required')">Campo obligatorio</mat-error>
+          <mat-error *ngIf="hasError('apellido1', 'minlength')">Mínimo 3 caracteres</mat-error>
+          <mat-error *ngIf="hasError('apellido1', 'maxlength')">Límite excedido</mat-error>
+        </mat-form-field>
+      </div>
 
-          </div>
-        </div>
-      </form>
-    </p-panel>
+      <div class="form-group">
+        <mat-form-field class="input-field">
+          <mat-label><i class="fas fa-envelope"></i> Email:</mat-label>
+          <input matInput formControlName="email" placeholder="pat@example.com" required>
+          <mat-error *ngIf="hasError('email', 'required')">Campo obligatorio</mat-error>
+          <mat-error *ngIf="hasError('email', 'email')">Email no válido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="input-field">
+          <mat-label><i class="fas fa-phone"></i> Teléfono:</mat-label>
+          <input matInput formControlName="telefono" placeholder="Teléfono" required>
+          <mat-error *ngIf="hasError('telefono', 'required')">Campo obligatorio</mat-error>
+          <mat-error *ngIf="hasError('telefono', 'minlength')">De 3 a 9 caracteres</mat-error>
+          <mat-error *ngIf="hasError('telefono', 'maxlength')">Límite excedido</mat-error>
+          <mat-error *ngIf="hasError('telefono', 'pattern')">Caracteres no permitidos</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="input-field">
+          <mat-label><i class="fas fa-map-marker-alt"></i> Dirección:</mat-label>
+          <input matInput formControlName="direccion" placeholder="Dirección" required>
+          <mat-error *ngIf="hasError('direccion', 'required')">Campo obligatorio</mat-error>
+          <mat-error *ngIf="hasError('direccion', 'minlength')">Mínimo 5 caracteres</mat-error>
+          <mat-error *ngIf="hasError('direccion', 'maxlength')">Límite excedido</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="input-field">
+          <mat-label><i class="fas fa-user"></i> Username:</mat-label>
+          <input matInput formControlName="username" placeholder="Username" required>
+          <mat-error *ngIf="hasError('username', 'required')">Campo obligatorio</mat-error>
+          <mat-error *ngIf="hasError('username', 'minlength')">Mínimo 6 caracteres</mat-error>
+          <mat-error *ngIf="hasError('username', 'maxlength')">Límite excedido</mat-error>
+          <mat-error *ngIf="hasError('username', 'pattern')">Caracteres no permitidos</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="input-field">
+          <mat-label><i class="fas fa-lock"></i> Contraseña:</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Contraseña" required>
+          <mat-error *ngIf="hasError('password', 'required')">Campo obligatorio</mat-error>
+          <mat-error *ngIf="hasError('password', 'minlength')">Mínimo 6 caracteres</mat-error>
+     
+        </mat-form-field>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <button pButton type="submit" label="Registrarse" class="btn btn-primary m-2" [disabled]="!registerForm.valid" style="width: 100%;"></button>
+      </div>
+      
+      <div class="text-center mt-2">
+        ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a>
+      </div>
+    </form>
   </div>
+</div>
 </div>

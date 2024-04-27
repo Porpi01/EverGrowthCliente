@@ -124,6 +124,7 @@ import { ChartModule } from 'primeng/chart';
 import { ImageModule } from 'primeng/image';
 import { MenubarModule } from 'primeng/menubar';
 import { RegisterComponent } from './components/Shared/Register/Register.component';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -258,8 +259,8 @@ import { RegisterComponent } from './components/Shared/Register/Register.compone
     DialogModule,
     ChartModule,
     ImageModule,
-    MenubarModule
-  
+    MenubarModule,
+    MatCardModule,
    
 
 
