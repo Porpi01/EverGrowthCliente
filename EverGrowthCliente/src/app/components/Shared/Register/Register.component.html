@@ -29,7 +29,16 @@
           <mat-error *ngIf="hasError('apellido1', 'maxlength')">Límite excedido</mat-error>
         </mat-form-field>
       </div>
+      <div class="form-group">
+        <mat-form-field >
+          <mat-label><i class="fas fa-user"></i>Apellido2:</mat-label>
+          <input matInput formControlName="apellido2" placeholder="Apellido2" >
+          <mat-error *ngIf="hasError('apellido2', 'minlength')">Mínimo 3 caracteres</mat-error>
+          <mat-error *ngIf="hasError('apellido2', 'maxlength')">Límite excedido</mat-error>
+        
 
+        </mat-form-field>
+      </div>
       <div class="form-group">
         <mat-form-field class="input-field">
           <mat-label><i class="fas fa-envelope"></i> Email:</mat-label>

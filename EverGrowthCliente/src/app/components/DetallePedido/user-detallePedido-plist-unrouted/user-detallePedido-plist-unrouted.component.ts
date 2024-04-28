@@ -26,7 +26,7 @@ export class UserDetallePedidoPlistUnroutedComponent implements OnInit {
   oPage: IDetallePedidoPage | undefined;
   orderField: string = 'id';
   orderDirection: string = 'asc';
-  oPaginatorState: PaginatorState = { first: 0, rows: 10, page: 0, pageCount: 0 };
+  oPaginatorState: PaginatorState = { first: 0, rows: 20, page: 0, pageCount: 0 };
   status: HttpErrorResponse | null = null;
   detallePedidos: IDetallePedido[] = [];
   pedidoToRemove: IDetallePedido | null = null;
@@ -38,11 +38,8 @@ export class UserDetallePedidoPlistUnroutedComponent implements OnInit {
 
   constructor(
     private DetallePedidoService: DetallePedidoService,
-    private ConfirmationService: ConfirmationService,
-    private DialogService: DialogService,
     private ProductoService: ProductoService,
     private PedidoService: PedidoService,
-    private MatSnackBar : MatSnackBar
   ) { 
   }
 

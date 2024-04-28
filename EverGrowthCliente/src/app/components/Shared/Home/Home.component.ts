@@ -82,7 +82,6 @@ export class HomeComponent implements OnInit {
             this.obtenerProductosMasStock();
             this.obtenerProductosMenosStock();
           } else {
-            console.error('El usuario está autenticado pero no como administrador.');
           }
         },
         error: (err: HttpErrorResponse) => {
