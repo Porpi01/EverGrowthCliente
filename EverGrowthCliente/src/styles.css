@@ -10,3 +10,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
+.p-button:enabled:hover {
+    background: #e4b363;
+    color: #ffffff;
+    border-color: #e4b363;
+  }
+

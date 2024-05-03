@@ -26,9 +26,3 @@ background: #ef6461;
   border-radius: 5px;
   font-size: 16px;
 }
-
-.p-button:enabled:hover {
-  background: #e4b363;
-  color: #ffffff;
-  border-color: #e4b363;
-}
