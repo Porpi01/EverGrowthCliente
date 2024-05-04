@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { IPedido, IUsuario } from 'src/app/model/model.interfaces';
 import { Router } from '@angular/router';
+import { PDFService } from './../../../service/PDF.service';
 
 @Component({
   selector: 'app-admin-pedido-detail-unrouted',
@@ -19,6 +20,7 @@ export class AdminPedidoDetailUnroutedComponent implements OnInit {
     constructor(
       private PedidoService: PedidoService,
       private router: Router,
+
       @Optional() public ref: DynamicDialogRef,
       @Optional() public config: DynamicDialogConfig
     ) {
@@ -47,6 +49,8 @@ export class AdminPedidoDetailUnroutedComponent implements OnInit {
         }
       });
     }
+   
+
 
     volverAtras() {
       this.router.navigate(['/admin/pedido/plist']);

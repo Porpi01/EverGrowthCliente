@@ -88,7 +88,8 @@
             class="fa-solid fa-pen-to-square"></i>
           </a>
 
-         
+          <a class="icon-link"(click)="imprimirFactura(pedido.id)"><i class="fa-solid fa-file-invoice"></i> 
+          </a>
           <a *ngIf="pedido.categoria===0" 
           (click)="doRemove(pedido)"><i class="fa-solid fa-trash"  class="icon-link"></i>
           </a>
