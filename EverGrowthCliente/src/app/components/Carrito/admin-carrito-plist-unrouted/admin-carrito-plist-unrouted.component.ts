@@ -110,20 +110,6 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
   }
 
  
-  doView(carrito: ICarrito) {
-    this.ref = this.DialogService.open(AdminCarritoDetailUnroutedComponent, {
-      data: {
-        id: carrito.id
-      },
-      header: 'Vista de carrito',
-      width: '60%',
-      contentStyle: { overflow: 'auto' },
-      baseZIndex: 10000,
-      maximizable: false
-    });
-  }
-
-
   doRemove(carrito: ICarrito) {
     this.carritoToRemove  = carrito;
   

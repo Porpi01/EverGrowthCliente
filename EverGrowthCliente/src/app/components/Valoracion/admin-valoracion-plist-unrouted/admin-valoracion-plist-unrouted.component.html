@@ -74,18 +74,18 @@
                 {{valoraciones.producto.nombre}}
               </a>
             </td>
+           
             <td class="text-center">
+
               <a [routerLink]="['/admin','valoracion','view',valoraciones.id]" class="icon-link">
-                <i class="fa-solid fa-eye"></i>
-              </a>
+                <i class="fa-solid fa-eye"></i></a>
+
 
               <a [routerLink]="['/admin','valoracion','edit',valoraciones.id]" class="icon-link">
                 <i class="fa-solid fa-pen-to-square"></i>
               </a>
 
-              <a (click)="doView(valoraciones)" class="icon-link">
-                <i class="fa-solid fa-circle-up"></i>
-              </a>
+    
 
               <a *ngIf="valoraciones.user==0 && valoraciones.producto==0" (click)="doRemove(valoraciones)"
                 class="icon-link">

@@ -10,38 +10,3 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
-.p-button {
-    color: #ffffff;
-    background: #e4b363;
-    border: 1px solid #e4b363;
-    padding: 0.75rem 1.25rem;
-    font-size: 1rem;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
-    border-radius: 5px;
-  }
-
-.p-button:enabled:hover {
-    background: #e4b363;
-    color: #ffffff;
-    border-color: #e4b363;
-  }
-  .p-button:enabled:active {
-    background: #e4b363;
-    color: #ffffff;
-    border-color: #e4b363;
-  }
-  .p-button.p-button-outlined {
-    background-color: transparent;
-    color: #e4b363;
-    border: 1px solid;
-  }
-  .p-button.p-button-outlined:enabled:hover {
-    background: rgba(99, 102, 241, 0.04);
-    color: #e4b363;
-    border: 1px solid;
-  }
-  .p-button.p-button-outlined:enabled:active {
-    background: rgba(99, 102, 241, 0.16);
-    color: #e4b363;
-    border: 1px solid;
-  }

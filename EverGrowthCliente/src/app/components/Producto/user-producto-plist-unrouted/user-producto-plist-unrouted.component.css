@@ -82,7 +82,7 @@ input {
 }
 
 .btn {
-  background-color: #ef6461;
+  background-color: #ef6461 !important;
   color: #fff;
   border: none;
   padding: 5 10px;

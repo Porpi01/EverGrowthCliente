@@ -81,15 +81,13 @@
 
             <td class="text-center">
 
-              <a [routerLink]="['/admin','usuario','view',user.id]" class="icon-link"><i
-                  class="fa-solid fa-eye"></i></a>
+              <a [routerLink]="['/admin','usuario','view',user.id]" class="icon-link">
+                <i class="fa-solid fa-eye"></i></a>
 
               <a [routerLink]="['/admin','usuario','edit',user.id]" class="icon-link"><i
                   class="fa-solid fa-pen-to-square"></i>
               </a>
 
-              <a (click)="doView(user)"  class="icon-link"><i class="fa-solid fa-circle-up"></i>
-              </a>
               <a *ngIf="user.pedidos==0 && user.valoracion==0 && user.carritos==0" (click)="doRemove(user)"
                 class="icon-link"><i class="fa-solid fa-trash"></i>
               </a>

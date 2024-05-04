@@ -49,6 +49,13 @@ export class AdminDetallePedidoDetailUnroutedComponent implements OnInit {
     });
   }
 
+  calculateTotalPrice(detallePedido: IDetallePedido, quantity: number, unitPrice: number): string {
+    const totalPrice = quantity * unitPrice;
+    const totalWithIVA = totalPrice + (totalPrice * detallePedido.iva);
+    return totalWithIVA.toFixed(2);
+}
+
+
   volverAtras() {
     this.router.navigate(['/admin/detallePedido/plist']);
   }

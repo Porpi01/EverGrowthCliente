@@ -38,6 +38,17 @@
                 <span>0</span>
               </ng-template>
             </div>
+            <div *ngIf="productos.carritos !== undefined">
+              <strong>Carritos:</strong>
+              <ng-container *ngIf="productos.carritos > 0; else noCarritos">
+                <a [routerLink]="['/admin','carrito','plist','byproducto',productos.id]">
+                  {{ productos.carritos }}
+                </a>
+              </ng-container>
+              <ng-template #noCarritos>
+                <span>0</span>
+              </ng-template>
+            </div>
           </div>
         </ng-template>
       </p-card>

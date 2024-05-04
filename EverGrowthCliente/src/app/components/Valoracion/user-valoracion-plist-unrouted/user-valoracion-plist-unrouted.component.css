@@ -40,7 +40,7 @@ p-card {
 }
 
 .btn-primary {
-  background-color: #ef6461;
+  background-color: #ef6461 !important;
   color: #fff;
   border: none;
   border-radius: 5px;

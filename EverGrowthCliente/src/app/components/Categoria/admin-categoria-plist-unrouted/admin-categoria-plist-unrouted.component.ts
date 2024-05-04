@@ -105,18 +105,7 @@ export class AdminCategoriaPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  doView(categoria: ICategoria) {
-    this.ref = this.DialogService.open(AdminCategoriaDetailUnroutedComponent, {
-      data: {
-        id: categoria.id
-      },
-      header: 'Vista de la categoría',
-      width: '60%',
-      contentStyle: { overflow: 'auto' },
-      baseZIndex: 10000,
-      maximizable: false
-    });
-  }
+
 
 
   doRemove(categoria: ICategoria) {

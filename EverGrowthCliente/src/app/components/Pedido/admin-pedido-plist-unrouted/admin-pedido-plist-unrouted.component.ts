@@ -102,18 +102,6 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  doView(pedido: IPedido) {
-    this.ref = this.DialogService.open(AdminPedidoDetailUnroutedComponent, {
-      data: {
-        id: pedido.id
-      },
-      header: 'Vista de pedido',
-      width: '70%',
-      contentStyle: { overflow: 'auto' },
-      baseZIndex: 10000,
-      maximizable: false
-    });
-  }
 
 
   doRemove(pedido: IPedido) {

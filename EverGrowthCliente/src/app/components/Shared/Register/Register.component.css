@@ -6,8 +6,8 @@ h1 {
 
 /* Estilos para el contenedor del formulario */
 .registration-container {
-  width: 80%; /* Ancho del contenedor */
-  max-width: 400px; /* Ancho máximo del contenedor */
+  width: 100%; /* Ancho del contenedor */
+  max-width: 600px; /* Ancho máximo del contenedor */
   margin: auto; /* Centrar horizontalmente */
   padding: 20px;
   background-color: #e8e9eb;

@@ -27,14 +27,13 @@ export class AdminUserDetailUnroutedComponent implements OnInit {
     if (config && config.data) {
       this.id = config.data.id;
       console.log(this.config.data);
-      
+
     }
-    this.mostrarBotones = true; 
+
   }
 
   ngOnInit() {
     console.log(this.id);
-    console.log(this.mostrarBotones);
     this.getOne();
   }
 
@@ -42,8 +41,8 @@ export class AdminUserDetailUnroutedComponent implements OnInit {
     this.usuarioService.getOne(this.id).subscribe({
       next: (data: IUsuario) => {
         this.usuarios = data;
-        console.log(this.usuarios)    
-        console.log(data.nombre)  
+        console.log(this.usuarios)
+        console.log(data.nombre)
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;
@@ -55,5 +54,4 @@ export class AdminUserDetailUnroutedComponent implements OnInit {
     this.router.navigate(['/admin/usuario/plist']);
   }
 
- 
 }

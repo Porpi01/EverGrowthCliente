@@ -74,8 +74,7 @@
 
               <a [routerLink]="['/admin','carrito','edit',carritos.id]"  class="icon-link"><i class="fa-solid fa-pen-to-square"></i></a>
 
-              <a (click)="doView(carritos)" class="icon-link"><i class="fa-solid fa-circle-up"></i>
-              </a>
+          
               <a *ngIf="carritos.categoria===0" (click)="doRemove(carritos)"  class="icon-link"><i class="fa-solid fa-trash"></i>
               </a>
 

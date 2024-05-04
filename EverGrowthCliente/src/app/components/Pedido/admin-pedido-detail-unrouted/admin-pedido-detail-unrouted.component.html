@@ -18,7 +18,7 @@
             <div *ngIf="pedidos.detallePedidos !== undefined">
               <strong>Detalles Pedidos:</strong>
               <ng-container *ngIf="pedidos.detallePedidos > 0; else noDetallePedidos">
-                <a [routerLink]="['/admin','detallePedido','bydetallePedido',pedidos.id]">
+                <a [routerLink]="['/admin','detallePedido','plist','bypedido',pedidos.id]">
                   {{ pedidos.detallePedidos }}
                 </a>
               </ng-container>

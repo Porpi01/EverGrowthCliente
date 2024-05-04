@@ -33,6 +33,7 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
   ref: DynamicDialogRef | undefined;
   mostrarBotones: boolean = true;
 
+
   value: string = '';
 
   constructor(
@@ -112,26 +113,7 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
   }
 
   
-  doView(user: IUsuario) {
 
-    this.ref = this.DialogService.open(AdminUserDetailUnroutedComponent, {
-      
-      data: {
-        id: user.id,
-        
-      },
-      header: 'Vista del usuario',
-      width: '60%',
-      height: '100%',
-      contentStyle: { overflow: 'auto' },
-      baseZIndex: 10000,
-      maximizable: false
-    });
-  }
-
-  ocultarBoton(evento: boolean) {
-    this.mostrarBotones = evento;
-  }
 
 
   doRemove(user: IUsuario) {

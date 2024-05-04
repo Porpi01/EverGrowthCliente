@@ -22,6 +22,7 @@ export class AdminValoracionDetailUnroutedComponent implements OnInit {
 
 
 
+
   valoraciones: IValoracion = {} as IValoracion;
   status: HttpErrorResponse | null = null;
 
@@ -29,7 +30,7 @@ export class AdminValoracionDetailUnroutedComponent implements OnInit {
   constructor(
     private ValoracionService: ValoracionService,
     private router: Router,
-    
+   
    
     @Optional() public ref: DynamicDialogRef,
     @Optional() public config: DynamicDialogConfig
@@ -41,11 +42,13 @@ export class AdminValoracionDetailUnroutedComponent implements OnInit {
     }
     this.mostrarBotones = true; 
     this.openedFromView = false;
+  
   }
 
   ngOnInit() {
     console.log(this.id);
     console.log(this.mostrarBotones);
+ 
     this.mostrarBotones =!this.openedFromView;
 
 

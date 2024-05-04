@@ -17,6 +17,17 @@
               <span *ngIf="usuarios.rol==false">Admin</span>
               <span *ngIf="usuarios.rol==true">User</span>
             </div>
+            <div *ngIf="usuarios.pedidos !== undefined">
+              <strong>Pedidos:</strong>
+              <ng-container *ngIf="usuarios.pedidos > 0; else noPedidos">
+                <a [routerLink]="['/admin','pedido','plist','byusuario',usuarios.id]">
+                  {{ usuarios.pedidos }}
+                </a>
+              </ng-container>
+              <ng-template #noPedidos>
+                <span>0</span>
+              </ng-template>
+            </div>
             <div *ngIf="usuarios.valoracion !== undefined">
               <strong>Valoraciones:</strong>
               <ng-container *ngIf="usuarios.valoracion > 0; else noValoraciones">
@@ -32,7 +43,7 @@
             <div *ngIf="usuarios.carritos !== undefined">
               <strong>Carritos:</strong>
               <ng-container *ngIf="usuarios.carritos > 0; else noCarritos">
-                <a [routerLink]="['/admin','usuario','plist','bycarrito',usuarios.id]">
+                <a [routerLink]="['/admin','carrito','plist','byusuario',usuarios.id]">
                   {{ usuarios.carritos }}
                 </a>
               </ng-container>
@@ -43,7 +54,7 @@
           </div>
         </ng-template>
       </p-card>
-      <button *ngIf="mostrarBotones" class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
+      <button  *ngIf="mostrarBotones" class="btn btn-primary" (click)="volverAtras()">Volver atrás</button>
 
     </div>
   </div>

@@ -125,19 +125,6 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  doView(producto: IProducto) {
-    this.ref = this.DialogService.open(AdminProductoDetailUnroutedComponent, {
-      data: {
-        id: producto.id
-      },
-      header: 'Vista de Producto',
-      width: '60%',
-      contentStyle: { overflow: 'auto' },
-      baseZIndex: 10000,
-      maximizable: false
-    });
-  }
-
 
   doRemove(producto: IProducto) {
     this.productoToRemove = producto;
