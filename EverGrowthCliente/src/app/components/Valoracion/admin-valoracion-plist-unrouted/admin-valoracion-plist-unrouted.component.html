@@ -9,7 +9,7 @@
 <p-divider></p-divider>
 <div class="container">
   <div class="row justify-content-center align-items-center">
-    <div class="col-lg-9 col-md-12 col-sm-12">
+    <div class="col-lg-8 col-md-12 col-sm-12">
       <div class="d-flex align-items-center">
         <span class="p-input-icon-left">
           <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
@@ -19,113 +19,114 @@
         <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!"
           [rows]="oPaginatorState.rows!" [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]"
           class="mx-2"></p-paginator>
-          <h3 *ngIf="id_usuario > 0; else noFilter">
-            ({{ id_usuario }} - {{ oUsuario?.nombre }})
-            <a type="button" class="btn btn-primary " [routerLink]="['/admin', 'valoracion', 'plist']">Reset filter</a>
-          </h3>
-          
-          <h3 *ngIf="id_producto > 0; else noFilter">
-            ({{ id_producto }} - {{ oProducto?.nombre }})
-            <a type="button" class="btn btn-primary " [routerLink]="['/admin', 'valoracion', 'plist']">Reset filter</a>
-          </h3>
-          
-          <ng-template #noFilter>
-         
-          </ng-template>
+        <h3 *ngIf="id_usuario > 0; else noFilter">
+          ({{ id_usuario }} - {{ oUsuario?.nombre }})
+          <a type="button" class="btn btn-primary " [routerLink]="['/admin', 'valoracion', 'plist']">Reset filter</a>
+        </h3>
+
+        <h3 *ngIf="id_producto > 0; else noFilter">
+          ({{ id_producto }} - {{ oProducto?.nombre }})
+          <a type="button" class="btn btn-primary " [routerLink]="['/admin', 'valoracion', 'plist']">Reset filter</a>
+        </h3>
+
+        <ng-template #noFilter>
+
+        </ng-template>
       </div>
     </div>
     <div>
-  <div class="row">
-    <div class="col-lg-12 col-md-12 d-flex align-items-center justify-content-center">
-     
-      <h3 class="text-center mb-0">Mostrando {{ oPage?.numberOfElements }} de {{ oPage?.totalElements }}</h3>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 d-flex align-items-center justify-content-center">
+
+          <h3 class="text-center mb-0">Mostrando {{ oPage?.numberOfElements }} de {{ oPage?.totalElements }}</h3>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+          <p-table [value]="valoraciones">
+            <ng-template pTemplate="header">
+              <tr>
+
+                <th (click)="doOrder('titulo')">Título</th>
+                <th (click)="doOrder('fecha')">Fecha</th>
+                <th (click)="doOrder('mensaje')">Mensaje</th>
+                <th>Usuario</th>
+                <th>Producto</th>
+                <th>Acciones</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-valoraciones of oPage?.content class="align-middle">
+              <tr>
+
+                <td>{{valoraciones.titulo | trim:25}}</td>
+                <td>{{valoraciones.fecha | date: 'dd/MM/yyyy'}}</td>
+                <td>{{ valoraciones.mensaje | trim:25 }}</td>
+
+                <td class="text-center">
+                  <a [routerLink]="['/admin','valoracion','plist','byusuario',valoraciones.user.id]">({{valoraciones.user.id}})
+                    {{valoraciones.user.nombre}}
+                    {{valoraciones.user.apellido1}}</a>
+                </td>
+                <td class="text-center">
+                  <a [routerLink]="['/admin','valoracion','plist','byproducto',valoraciones.producto.id]">({{valoraciones.producto.id}})
+                    {{valoraciones.producto.nombre}}
+                  </a>
+                </td>
+
+                <td class="text-center">
+
+                  <a [routerLink]="['/admin','valoracion','view',valoraciones.id]" class="icon-link">
+                    <i class="fa-solid fa-eye"></i></a>
+
+
+                  <a [routerLink]="['/admin','valoracion','edit',valoraciones.id]" class="icon-link">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </a>
+
+
+
+                  <a *ngIf="valoraciones.user==0 && valoraciones.producto==0" (click)="doRemove(valoraciones)"
+                    class="icon-link">
+                    <i class="fa-solid fa-trash"></i>
+                  </a>
+                </td>
+
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <tr>
+
+                <th (click)="doOrder('titulo')">Título</th>
+                <th (click)="doOrder('fecha')">Fecha</th>
+                <th (click)="doOrder('mensaje')">Mensaje</th>
+                <th>Usuario</th>
+                <th>Producto</th>
+                <th>Acciones</th>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="row justify-content-center">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-
-      <p-table [value]="valoraciones">
-        <ng-template pTemplate="header">
-          <tr>
-            
-            <th (click)="doOrder('titulo')">Título</th>
-            <th (click)="doOrder('fecha')">Fecha</th>
-            <th (click)="doOrder('mensaje')">Mensaje</th>
-            <th>Usuario</th>
-            <th>Producto</th>
-            <th>Acciones</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-valoraciones of oPage?.content class="align-middle">
-          <tr>
-
-            <td>{{valoraciones.titulo | trim:25}}</td>
-            <td>{{valoraciones.fecha | date: 'dd/MM/yyyy'}}</td>
-            <td>{{ valoraciones.mensaje | trim:25 }}</td>
-
-            <td class="text-center">
-              <a [routerLink]="['/admin','valoracion','plist','byusuario',valoraciones.user.id]">({{valoraciones.user.id}})
-                {{valoraciones.user.nombre}}
-                {{valoraciones.user.apellido1}}</a>
-            </td>
-            <td class="text-center">
-              <a [routerLink]="['/admin','valoracion','plist','byproducto',valoraciones.producto.id]">({{valoraciones.producto.id}})
-                {{valoraciones.producto.nombre}}
-              </a>
-            </td>
-           
-            <td class="text-center">
-
-              <a [routerLink]="['/admin','valoracion','view',valoraciones.id]" class="icon-link">
-                <i class="fa-solid fa-eye"></i></a>
 
 
-              <a [routerLink]="['/admin','valoracion','edit',valoraciones.id]" class="icon-link">
-                <i class="fa-solid fa-pen-to-square"></i>
-              </a>
+    <p-confirmDialog #cd [style]="{ width: '30vw' }">
+      <ng-template pTemplate="header">
+        <h5><i class="fa-solid fa-triangle-exclamation"></i> Eliminar valoración</h5>
+      </ng-template>
+      <ng-template pTemplate="message">
+        <div class="container d-flex align-items-center justify-content-center">
+          <app-admin-valoracion-detail-unrouted [mostrarBotones]="false"
+            [id]="valoracionToRemove!.id"></app-admin-valoracion-detail-unrouted>
 
-    
-
-              <a *ngIf="valoraciones.user==0 && valoraciones.producto==0" (click)="doRemove(valoraciones)"
-                class="icon-link">
-                <i class="fa-solid fa-trash"></i>
-              </a>
-            </td>
-
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="footer">
-          <tr>
-
-            <th (click)="doOrder('titulo')">Título</th>
-            <th (click)="doOrder('fecha')">Fecha</th>
-            <th (click)="doOrder('mensaje')">Mensaje</th>
-            <th>Usuario</th>
-            <th>Producto</th>
-            <th>Acciones</th>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-  </div>
-</div>
-
-
-<p-confirmDialog #cd [style]="{ width: '30vw' }">
-  <ng-template pTemplate="header">
-    <h5><i class="fa-solid fa-triangle-exclamation"></i> Eliminar valoración</h5>
-  </ng-template>
-  <ng-template pTemplate="message">
-    <div class="container d-flex align-items-center justify-content-center">
-      <app-admin-valoracion-detail-unrouted [mostrarBotones]="false" [id]="valoracionToRemove!.id"></app-admin-valoracion-detail-unrouted>
-
-    </div>
-  </ng-template>
-  <ng-template pTemplate="footer">
-    <p>¿Seguro que quieres eliminar esta valoración?</p>
-    <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
-    <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Sí" (click)="cd.accept()"></button>
-  </ng-template>
-</p-confirmDialog>
-<p-messages></p-messages>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <p>¿Seguro que quieres eliminar esta valoración?</p>
+        <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
+        <button class="btn btn-danger mx-1" pButton icon="pi pi-check" label="Sí" (click)="cd.accept()"></button>
+      </ng-template>
+    </p-confirmDialog>
+    <p-messages></p-messages>

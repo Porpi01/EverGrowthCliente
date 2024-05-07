@@ -7,34 +7,43 @@
 </div>
 
 <div *ngIf="status == null">
-  <div class="container col-12">
+  <div class="container">
     <div class="d-flex justify-content-center my-3">
       <form [formGroup]="pedidoForm" (ngSubmit)="onSubmit()">
-
-        <div class="form-group">
-          <mat-form-field *ngIf="operation == 'EDIT'">
-            <mat-label>ID:</mat-label>
-            <input matInput formControlName="id" placeholder="ID" required readonly>
-            <mat-hint align="end">No se puede modificar</mat-hint>
-          </mat-form-field>
+        <div class=" row">
+          <div class=" col-lg-12">
+            <div class="form-group">
+              <mat-form-field *ngIf="operation == 'EDIT'">
+                <mat-label>ID:</mat-label>
+                <input matInput formControlName="id" placeholder="ID" required readonly>
+                <mat-hint align="end">No se puede modificar</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <mat-form-field>
-            <mat-label>Cantidad</mat-label>
-            <input matInput formControlName="cantidad" type="number">
-            <mat-error *ngIf="hasError('cantidad', 'required')">Campo requerido</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="form-group">
-          <mat-form-field>
-            <mat-label>Precio Unitario</mat-label>
-            <input matInput formControlName="precio_unitario" type="number" step="0.01" required>
-            <mat-error *ngIf="hasError('precio_unitario', 'required')">Campo requerido</mat-error>
-          </mat-form-field>
-        </div>
-
+        <div class=" row">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Cantidad</mat-label>
+                <input matInput formControlName="cantidad" type="number">
+                <mat-error *ngIf="hasError('cantidad', 'required')">Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Precio Unitario</mat-label>
+                <input matInput formControlName="precio_unitario" type="number" step="0.01" required>
+                <mat-error *ngIf="hasError('precio_unitario', 'required')">Campo requerido</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+       
 
         <!-- Iva field -->
+        <div class="col-lg-4">
         <div class="form-group">
           <mat-form-field>
             <mat-label>Iva:</mat-label>
@@ -43,7 +52,10 @@
             <mat-error *ngIf="hasError('iva', 'pattern')">Debe ser mayor a 0</mat-error>
           </mat-form-field>
         </div>
-
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
         <div formGroupName="productos" class="row">
           <div class="col-8">
             <div class="form-group">
@@ -54,36 +66,39 @@
               {{ detallePedido.productos.nombre }}
             </div>
           </div>
-            <div class="col-4">
-              <button style="margin-bottom: 10px" class="btn btn-primary" type="button"
-                (click)="onShowProductoSelection()">
-                <i class="fa-solid fa-boxes-stacked"></i>
-              </button>
+          <div class="col-4">
+            <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowProductoSelection()">
+              <i class="fa-solid fa-boxes-stacked"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="col-lg-6">
+        <div formGroupName="pedidos" class="row">
+          <div class="col-8">
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Pedido:</mat-label>
+                <input matInput formControlName="id" placeholder="ID pedido" required readonly>
+              </mat-form-field>
+              {{ detallePedido.pedidos.id }}
             </div>
           </div>
+          <div class="col-4">
+            <button style="margin-bottom: 10px" class="btn btn-primary" type="button" (click)="onShowPedidoSelection()">
+              <i class="fa-solid fa-cart-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <div formGroupName="pedidos" class="row">
-            <div class="col-8">
-              <div class="form-group">
-                <mat-form-field >
-                  <mat-label>Pedido:</mat-label>
-                  <input matInput formControlName="id" placeholder="ID pedido" required readonly>
-                </mat-form-field>
-              </div>
-            </div>
-              <div class="col-4">
-                <button style="margin-bottom: 10px" class="btn btn-primary" type="button"
-                  (click)="onShowPedidoSelection()">
-                  <i class="fa-solid fa-cart-plus"></i> 
-                </button>
-              </div>
-            </div>
+        <!-- Botón de Guardar -->
 
-            <!-- Botón de Guardar -->
-
-            <div class="text-center mt-5">
-              <button class="btn btn-primary" type="submit">Guardar</button>
-            </div>
+        <div class="text-center mt-5">
+          <button class="btn btn-primary" type="submit">Guardar</button>
+        </div>
       </form>
     </div>
   </div>

@@ -6,80 +6,104 @@
   </div>
 </div>
 
-<div *ngIf="status==null">
-  <div class="container col-12">
-    <div class="d-flex justify-content-center my-3">
-      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-        <div class="form-group" >
-          <mat-form-field *ngIf="operation=='EDIT'">
+<div *ngIf="status == null" class="d-flex justify-content-center my-3">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="container">
+    <div class="row">
+      <div class="col-lg-5" *ngIf="operation === 'EDIT'">
+        <div class="form-group">
+          <mat-form-field>
             <mat-label>ID:</mat-label>
             <input matInput formControlName="id" placeholder="Id" required readonly>
             <mat-hint align="end">No se puede modificar</mat-hint>
           </mat-form-field>
         </div>
+      </div>
+
+      <div class="col-lg-7">
         <div class="form-group">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Nombre:</mat-label>
             <input matInput formControlName="nombre" placeholder="Nombre" required>
             <mat-error *ngIf="hasError('nombre', 'required')">Campo obligatorio</mat-error>
             <mat-error *ngIf="hasError('nombre', 'minlength')">Mínimo 3 caracteres</mat-error>
             <mat-error *ngIf="hasError('nombre', 'maxlength')">Límite excedido</mat-error>
             <mat-error *ngIf="hasError('nombre', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
-
           </mat-form-field>
         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
         <div class="form-group">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Apellido1:</mat-label>
             <input matInput formControlName="apellido1" placeholder="Apellido1" required>
             <mat-error *ngIf="hasError('apellido1', 'required')">Campo obligatorio</mat-error>
             <mat-error *ngIf="hasError('apellido1', 'minlength')">Mínimo 3 caracteres</mat-error>
             <mat-error *ngIf="hasError('apellido1', 'maxlength')">Límite excedido</mat-error>
             <mat-error *ngIf="hasError('apellido1', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
-
           </mat-form-field>
         </div>
+      </div>
+
+      <div class="col-lg-6">
         <div class="form-group">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Apellido2:</mat-label>
-            <input matInput formControlName="apellido2" placeholder="Apellido2" >
+            <input matInput formControlName="apellido2" placeholder="Apellido2">
             <mat-error *ngIf="hasError('apellido2', 'minlength')">Mínimo 3 caracteres</mat-error>
             <mat-error *ngIf="hasError('apellido2', 'maxlength')">Límite excedido</mat-error>
             <mat-error *ngIf="hasError('apellido2', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
-
           </mat-form-field>
         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
         <div class="form-group">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Email:</mat-label>
             <input matInput formControlName="email" placeholder="pat@example.com" required>
             <mat-error *ngIf="hasError('email', 'required')">Campo obligatorio</mat-error>
             <mat-error *ngIf="hasError('email', 'email')">Email no válido</mat-error>
           </mat-form-field>
         </div>
+      </div>
+
+      <div class="col-lg-6">
         <div class="form-group">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Teléfono:</mat-label>
-            <input matInput  formControlName="telefono" placeholder="Teléfono" required>
+            <input matInput formControlName="telefono" placeholder="Teléfono" required>
             <mat-error *ngIf="hasError('telefono', 'required')">Campo obligatorio</mat-error>
             <mat-error *ngIf="hasError('telefono', 'minlength')">De 3 a 9 caracteres</mat-error>
             <mat-error *ngIf="hasError('telefono', 'maxlength')">Límite excedido</mat-error>
             <mat-error *ngIf="hasError('telefono', 'pattern')">Caracteres no permitidos</mat-error>
           </mat-form-field>
         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
         <div class="form-group">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Dirección:</mat-label>
             <input matInput formControlName="direccion" placeholder="Direccion" required>
             <mat-error *ngIf="hasError('direccion', 'required')">Campo obligatorio</mat-error>
             <mat-error *ngIf="hasError('direccion', 'minlength')">Mínimo 5 caracteres</mat-error>
             <mat-error *ngIf="hasError('direccion', 'maxlength')">Límite excedido</mat-error>
             <mat-error *ngIf="hasError('direccion', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
-
           </mat-form-field>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
         <div class="form-group">
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>Username:</mat-label>
             <input matInput formControlName="username" placeholder="Username" required>
             <mat-error *ngIf="hasError('username', 'required')">Campo obligatorio</mat-error>
@@ -88,18 +112,20 @@
             <mat-error *ngIf="hasError('username', 'pattern')">Caracteres no permitidos</mat-error>
           </mat-form-field>
         </div>
+      </div>
+
+      <div class="col-lg-6">
 
         <mat-radio-group aria-label="Tipo de usuario" formControlName="rol" required>
           <mat-radio-button [value]="false">Admin</mat-radio-button>
           <mat-radio-button [value]="true">User</mat-radio-button>
           <mat-error *ngIf="hasError('rol', 'required')">Campo obligatorio</mat-error>
         </mat-radio-group>
+      </div>
+    </div>
 
       <div class="text-center mt-5">
         <button class="btn btn-primary" type="submit">Guardar</button>
       </div>
-
-      </form>
-    </div>
-  </div>
+  </form>
 </div>
