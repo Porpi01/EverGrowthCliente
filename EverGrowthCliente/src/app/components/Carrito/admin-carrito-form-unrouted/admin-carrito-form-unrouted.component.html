@@ -9,7 +9,7 @@
 <div *ngIf="status == null" class="d-flex justify-content-center my-3">
   <form [formGroup]="carritoForm" (ngSubmit)="onSubmit()" class="container">
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-6">
     <div class="form-group">
       <mat-form-field *ngIf="operation == 'EDIT'">
         <mat-label>ID:</mat-label>
@@ -20,7 +20,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-6">
     <div class="form-group">
       <mat-form-field>
         <mat-label>Cantidad</mat-label>

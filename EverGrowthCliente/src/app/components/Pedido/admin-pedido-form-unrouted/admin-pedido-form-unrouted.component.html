@@ -11,6 +11,8 @@
       <form [formGroup]="pedidoForm" (ngSubmit)="onSubmit()" class="container">
 
         <!-- ID field - Only shown in EDIT mode -->
+        <div class="row">
+          <div class="col-lg-6">
         <div class="form-group">
           <mat-form-field *ngIf="operation == 'EDIT'">
             <mat-label>Id:</mat-label>
@@ -18,6 +20,8 @@
             <mat-hint align="end">No se puede modificar</mat-hint>
           </mat-form-field>
         </div>
+      </div>
+    </div>
 
         <!-- Fecha de Pedido field -->
         <div class="row">
@@ -63,7 +67,7 @@
 
         <!-- User ID field -->
         <div formGroupName="user" class="row">
-          <div class="col-8">
+          <div class="col-6">
           <div class="form-group">
             <mat-form-field>
               <mat-label>User ID:</mat-label>
