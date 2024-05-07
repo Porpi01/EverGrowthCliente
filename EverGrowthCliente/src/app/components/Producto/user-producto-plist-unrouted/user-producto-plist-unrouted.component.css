@@ -18,6 +18,7 @@
 
 }
 
+
 .img-thumbnail {
   width: 35px;
   height: 35px;
@@ -65,11 +66,6 @@ h1 {
   background-color: #dfded9;
 }
 
-input {
-
-  margin: 8px 0;
-  box-sizing: border-box;
-}
 
 .card {
   margin-top: 70px;
