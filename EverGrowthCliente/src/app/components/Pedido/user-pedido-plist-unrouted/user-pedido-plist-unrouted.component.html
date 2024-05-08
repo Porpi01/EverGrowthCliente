@@ -13,7 +13,6 @@
             <p><strong>Pedido #{{pedido.id}}</strong></p>
             <p>Fecha de pedido: {{pedido.fecha_pedido | date: 'dd/MM/yyyy'}}</p>
             <p>Fecha de entrega: {{pedido.fecha_entrega | date: 'dd/MM/yyyy'}}</p>
-            <p *ngIf="pedido.id_factura">Número de factura: {{pedido.id_factura}}</p>
             <a *ngIf="pedido.detallePedidos>0" [routerLink]="['/usuario', 'pedido', 'view', pedido.id]">Ver detalles de la compra</a>
           </div>
         </div>
