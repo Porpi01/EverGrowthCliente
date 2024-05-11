@@ -21,6 +21,7 @@
                   <mat-error *ngIf="hasError('nombre', 'required')">Campo obligatorio</mat-error>
                   <mat-error *ngIf="hasError('nombre', 'minlength')">Mínimo 3 caracteres</mat-error>
                   <mat-error *ngIf="hasError('nombre', 'maxlength')">Límite excedido</mat-error>
+                  <mat-error *ngIf="hasError('nombre', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -34,6 +35,8 @@
                   <mat-error *ngIf="hasError('apellido1', 'required')">Campo obligatorio</mat-error>
                   <mat-error *ngIf="hasError('apellido1', 'minlength')">Mínimo 3 caracteres</mat-error>
                   <mat-error *ngIf="hasError('apellido1', 'maxlength')">Límite excedido</mat-error>
+                  <mat-error *ngIf="hasError('apellido1', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
+
                 </mat-form-field>
               </div>
             </div>
@@ -44,6 +47,8 @@
                   <input matInput formControlName="apellido2" placeholder="Apellido2" >
                   <mat-error *ngIf="hasError('apellido2', 'minlength')">Mínimo 3 caracteres</mat-error>
                   <mat-error *ngIf="hasError('apellido2', 'maxlength')">Límite excedido</mat-error>
+                  <mat-error *ngIf="hasError('apellido2', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
+
                 </mat-form-field>
               </div>
             </div>
@@ -81,6 +86,8 @@
                   <mat-error *ngIf="hasError('direccion', 'required')">Campo obligatorio</mat-error>
                   <mat-error *ngIf="hasError('direccion', 'minlength')">Mínimo 5 caracteres</mat-error>
                   <mat-error *ngIf="hasError('direccion', 'maxlength')">Límite excedido</mat-error>
+                  <mat-error *ngIf="hasError('direccion', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
+
                 </mat-form-field>
               </div>
             </div>
