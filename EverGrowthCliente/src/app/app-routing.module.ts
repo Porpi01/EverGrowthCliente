@@ -36,7 +36,6 @@ import { UserCarritoPlistRoutedComponent } from './components/Carrito/user-carri
 import { UserPedidoViewRoutedComponent } from './components/Pedido/user-pedido-view-routed/user-pedido-view-routed.component';
 import { UserDetallePedidoPlistUnroutedComponent } from './components/DetallePedido/user-detallePedido-plist-unrouted/user-detallePedido-plist-unrouted.component';
 import { UserPedidoPlistRoutedComponent } from './components/Pedido/user-pedido-plist-routed/user-pedido-plist-routed.component';
-import { RegisterComponent } from './components/Shared/Register/Register.component';
 
 const routes: Routes = [
 
@@ -44,7 +43,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
-  { path: 'register', component: RegisterComponent },
 
 
 

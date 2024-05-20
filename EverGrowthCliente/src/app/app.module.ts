@@ -123,7 +123,6 @@ import { UserPedidoPlistRoutedComponent } from './components/Pedido/user-pedido-
 import { ChartModule } from 'primeng/chart';
 import { ImageModule } from 'primeng/image';
 import { MenubarModule } from 'primeng/menubar';
-import { RegisterComponent } from './components/Shared/Register/Register.component';
 import { MatCardModule } from '@angular/material/card';
 
 
@@ -138,7 +137,6 @@ import { MatCardModule } from '@angular/material/card';
     LogoutComponent,
     LoginComponent,
     HomeComponent,
-    RegisterComponent,
 
     //Componentes entidad Usuario
     AdminUserPlistRoutedComponent,
