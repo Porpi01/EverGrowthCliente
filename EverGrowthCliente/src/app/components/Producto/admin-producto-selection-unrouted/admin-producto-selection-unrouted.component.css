@@ -1,13 +1,13 @@
 .btn {
-    background-color: #ef6461;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-  
-  }
+  background-color: #ef6461 !important;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
 
-  img {
-    width: 50px;
-    height: 60px;
-  }
+}
+
+img {
+  width: 50px;
+  height: 60px;
+}
