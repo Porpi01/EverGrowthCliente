@@ -20,8 +20,8 @@
 
     <ng-template pTemplate="header">
       <tr>
-   
-        <th (click)="doOrder('id')">Nombre</th>
+        <th (click)="doOrder('id')">Id</th>
+        <th (click)="doOrder('Nombre')">Nombre</th>
         <th (click)="doOrder('Apellido1')">Apellido1</th>
         <th (click)="doOrder('Apellido2')">Apellido2</th>
         <th (click)="doOrder('Email')">Email</th>
@@ -32,7 +32,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-user of oPage?.content class="align-middle">
       <tr >
-       
+        <td>{{ user.id }}</td>
         <td>{{ user.nombre }}</td>
         <td>{{ user.apellido1 }}</td>
         <td>{{ user.apellido2 }}</td>

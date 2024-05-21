@@ -22,6 +22,7 @@
   <p-table [value]="productos">
     <ng-template pTemplate="header">
       <tr>
+        <th (click)="doOrder('id')">Id</th>
         <th (click)="doOrder('nombre')">Nombre</th>
         <th (click)="doOrder('descripcion')">Descripción</th>
         <th (click)="doOrder('precio')">Precio</th>
@@ -34,6 +35,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-producto of oPage?.content class="align-middle">
       <tr>
+        <td>{{ producto.id }}</td>
         <td>{{ producto.nombre }}</td>
         <td>{{ producto.descripcion }}</td>
         <td>{{ producto.precio }}</td>
