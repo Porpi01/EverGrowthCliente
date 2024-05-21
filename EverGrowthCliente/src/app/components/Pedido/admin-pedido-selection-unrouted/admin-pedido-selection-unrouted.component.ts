@@ -42,25 +42,7 @@ export class AdminPedidoSelectionUnroutedComponent implements OnInit {
     this.getPage();
   }
 
-  onInputChange(query: string): void {
-    if (query.length > 2) {
-      this.PedidoService
-        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_usuario, query)
-        .subscribe({
-          next: (data: IPedidoPage) => {
-            this.oPage = data;
-            this.pedidos = data.content;
-            this.oPaginatorState.pageCount = data.totalPages;
-            console.log(this.oPaginatorState);
-          },
-          error: (error: HttpErrorResponse) => {
-            this.status = error;
-          }
-        });
-    } else {
-      this.getPage();
-    }
-  }
+
 
   getPage(): void {
     this.PedidoService

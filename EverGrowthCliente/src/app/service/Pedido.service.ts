@@ -19,7 +19,7 @@ export class PedidoService {
     return this.http.get<number>(this.sUrl + "/total");
   }
 
-  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_usuario: number, strFilter?: string): Observable<IPedidoPage> {
+  getPage(size: number | undefined, page: number | undefined, orderField: string, orderDirection: string, id_usuario: number, ): Observable<IPedidoPage> {
     let sUrl_filter: string;
     if (!size) size = 10;
     if (!page) page = 0;
@@ -29,12 +29,8 @@ export class PedidoService {
       sUrl_usuario = "&usuario=" + id_usuario;
     }
 
-    if (strFilter && strFilter.trim().length > 0) {
-      sUrl_filter = `&filter=${strFilter}`;
-    } else {
-      sUrl_filter = "";
-    }
-    return this.http.get<IPedidoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_usuario + sUrl_filter);
+   
+    return this.http.get<IPedidoPage>(this.sUrl + "?size=" + size + "&page=" + page + "&sort=" + orderField + "," + orderDirection + sUrl_usuario);
   }
 
   removeOne(id: number | undefined): Observable<number> {

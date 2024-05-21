@@ -7,11 +7,12 @@
 </div>
 
 <div *ngIf="status==null">
-<div class="d-flex align-items-center justify-content-center">
-  <span class="p-input-icon-left">
-    <i class="fa-solid fa-magnifying-glass" style="font-size: 1.5em;"></i>
-    <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"  style="width: 100%; height: 30px;" />
-  </span>
+  <div class="d-flex align-items-center justify-content-center">
+    <span class="p-input-icon-left">
+      <i class="fa-solid fa-magnifying-glass" style="font-size: 1em;"></i>
+      <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
+        style="width: 100%; height: 30px;" />
+    </span>
   <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
     [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
   <h3 class="mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>

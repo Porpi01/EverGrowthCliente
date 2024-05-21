@@ -8,11 +8,7 @@
 
 <p-divider></p-divider>
 <div class="d-flex align-items-center justify-content-center">
-  <span class="p-input-icon-left">
-    <i class="fa-solid fa-magnifying-glass" style="font-size: 1em;"></i>
-    <input type="text" pInputText [(ngModel)]="value" (ngModelChange)="onInputChange($event)"
-      style="width: 100%; height: 30px;" />
-  </span>
+  
   <p-paginator (onPageChange)="onPageChange($event)" [first]="oPaginatorState.first!" [rows]="oPaginatorState.rows!"
     [totalRecords]="oPage?.totalElements || 0" [rowsPerPageOptions]="[10, 20, 50]" class="mx-2"></p-paginator>
   <h3 class="mb-0">Mostrando {{oPage?.numberOfElements}} de {{oPage?.totalElements}}</h3>
@@ -35,14 +31,14 @@
     <ng-template pTemplate="body" let-pedido of oPage?.content class="align-middle">
       <tr>
         <td>{{ pedido.id }}</td>
-        <td>{{ pedido.fecha_pedido }}</td>
-        <td>{{ pedido.fecha_entrega}}</td>
+        <td>{{ pedido.fecha_pedido | date: 'dd/MM/yyyy'}}</td>
+        <td>{{ pedido.fecha_entrega | date: 'dd/MM/yyyy'}}</td>
           
-        <td class="text-center">
+        <td >
           <span *ngIf="pedido.estado_pedido ==true">Entregado</span>
           <span *ngIf="pedido.estado_pedido ==false">No entregado</span>
         </td>
-<td></td>
+<td >{{ pedido.id_factura}}</td>
 
         <td class="text-center">
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
