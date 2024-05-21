@@ -41,7 +41,7 @@ h1 {
 /* Estilos por defecto */
 .product-image {
   width: 100%;
-  height: 200px;
+  height: 220px;
   cursor: pointer;
 }
 
@@ -49,7 +49,15 @@ h1 {
 @media screen and (max-width: 768px) {
   .product-image {
     width: 100%;
-    height: auto;
+    height: 220px;
+  }
+}
+
+/* Estilos para dispositivos medianos y grandes en un rango específico (880px a 1150px) */
+@media screen and (min-width: 870px) and (max-width: 1150px) {
+  .product-image {
+    width: 100%;
+    height: 200px; /* Ajusta la altura según tus necesidades */
   }
 }
 
@@ -76,6 +84,7 @@ h1 {
   background-color: #f5f4ed;
   font-weight: bold;
 }
+
 
 .btn {
   background-color: #ef6461 !important;
