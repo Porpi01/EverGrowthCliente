@@ -142,8 +142,5 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
     })
   }
 
-  imprimirFactura = (pedidoId: number) => {
-    this.PDFService.imprimirFactura(pedidoId);
-    console.log(pedidoId);
-  }
+
 }

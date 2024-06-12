@@ -53,6 +53,7 @@ export class AdminCategoriaPlistUnroutedComponent implements OnInit {
 
   onInputChange(query: string): void {
     if (query.length > 2) {
+      this.oPaginatorState.page = 0; // Reinicia la página a 0 al aplicar un filtro
       this.CategoriaService
         .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, query)
         .subscribe({

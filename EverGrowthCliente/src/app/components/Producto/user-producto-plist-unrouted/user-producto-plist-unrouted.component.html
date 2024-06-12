@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-4 d-none d-lg-block">
-      <img src="http://127.0.0.1:8085/media/Logo.png" alt="Imagen Logo">
+      <img src="http://127.0.0.1:8085/media/Logo.png" alt="EverGrowth">
     </div>
     <div class="col-lg-6 col-md-12 col-sm-12">
       <div class="input-group mb-3">
@@ -20,7 +20,7 @@
       <ul class="categoria-list">
         <li *ngFor="let cat of categoria" class="categoria-item"  (click)="filtrarPorCategoria(cat.id)"
           [class.active]="cat.id === idCategoriaFiltrada && filtrandoPorCategoria">
-          <img  [src]="cat.imagen" class="img-thumbnail"alt="Imagen del producto" >
+          <img  [src]="cat.imagen" class="img-thumbnail" [alt]="cat.nombre" >
           {{ cat.nombre }} ({{ cat.productos }})
         </li>
       </ul>
@@ -36,7 +36,7 @@
           <div class=" col-xl-3 col-lg-4 col-md-6 col-sm-12" >
             <p-card class="card" [header]="producto.nombre" >
               <ng-template pTemplate="header" >
-                <img [src]="producto.imagen" alt="Imagen del producto" class="product-image"  (click)="doView(producto)" >
+                <img [src]="producto.imagen" [alt]="producto.nombre" class="product-image"  (click)="doView(producto)" >
               </ng-template>
       
               <p>Precio: {{producto.precio}} €</p>

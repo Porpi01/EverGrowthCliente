@@ -15,7 +15,7 @@
       <tbody>
         <tr *ngFor="let carrito of page?.content">
           <td>
-            <img [src]="carrito.producto.imagen" alt="Imagen del producto" style="max-width: 100px;">
+            <img [src]="carrito.producto.imagen" [alt]="carrito.producto.nombre" style="max-width: 100px;">
           </td>
           <td>{{carrito.producto.nombre}}</td>
           <td>{{carrito.producto.precio | Precio }} Є</td>

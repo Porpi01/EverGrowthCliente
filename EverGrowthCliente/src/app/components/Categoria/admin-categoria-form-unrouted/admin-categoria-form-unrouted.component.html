@@ -26,6 +26,8 @@
           <mat-error *ngIf="hasError('nombre', 'required')">Campo requerido</mat-error>
           <mat-error *ngIf="hasError('nombre', 'minlength')">Mínimo 3 caracteres</mat-error>
           <mat-error *ngIf="hasError('nombre', 'maxlength')">Límite excedido</mat-error>
+          <mat-error *ngIf="hasError('nombre', 'startWithCapitalLetter')">Debe comenzar con mayúscula</mat-error>
+
         </mat-form-field>
 
         <div class="form-group">

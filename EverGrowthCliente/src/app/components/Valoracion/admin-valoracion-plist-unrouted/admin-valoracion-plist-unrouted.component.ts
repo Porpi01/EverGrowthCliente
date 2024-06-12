@@ -71,6 +71,7 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
 
   onInputChange(query: string): void {
     if (query.length > 2) {
+      this.oPaginatorState.page = 0; // Reinicia la página a 0 al aplicar un filtro
       this.ValoracionService
         .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_usuario, this.id_producto, query)
         .subscribe({

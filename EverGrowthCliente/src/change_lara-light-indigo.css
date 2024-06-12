@@ -33,3 +33,11 @@
     color: #e4b363;
     border: 1px solid;
   }
+
+  .p-card .p-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+}
+.p-card .p-card-content {
+  padding: 0 0;
+}

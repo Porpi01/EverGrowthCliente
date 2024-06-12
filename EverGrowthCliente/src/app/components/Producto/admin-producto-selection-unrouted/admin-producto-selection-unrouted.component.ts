@@ -46,6 +46,7 @@ export class AdminProductoSelectionUnroutedComponent implements OnInit {
 
   onInputChange(query: string): void {
     if (query.length > 2) {
+      this.oPaginatorState.page = 0; // Reinicia la página a 0 al aplicar un filtro
       this.ProductoService
         .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_categoria, query)
         .subscribe({

@@ -25,6 +25,7 @@
       <tr>
         <th (click)="doOrder('id')">Id</th>
         <th (click)="doOrder('nombre')">Nombre</th>
+        <th>Imagen</th>
         <th >Productos</th>
         <th >Acciones</th>
       </tr>
@@ -33,7 +34,9 @@
       <tr >
         <td>{{ categoria.id }}</td>
         <td>{{ categoria.nombre}}</td>
-        
+        <td>
+          <img class="rounded" class="img-thumbnail" [src]="categoria.imagen" [alt]="categoria.nombre">
+        </td>
         <td class="text-center">
           <a [routerLink]="['/admin','categoria','plist','byproducto',categoria.productos.id]">({{categoria.productos}})
           </a>

@@ -24,7 +24,7 @@ export class UserProductoPlistUnroutedComponent implements OnInit {
   productosSeleccionados: IProducto[] = [];
   oPage: IProductoPage | undefined;
   productos: IProducto[] = [];
-  
+
   categoria: ICategoria[] = [];
   productosPorPagina: number = 8;
   orderField: string = 'id';
@@ -37,9 +37,9 @@ export class UserProductoPlistUnroutedComponent implements OnInit {
   oCategoria: ICategoria | null = null;
   strUserName: string = '';
   idCategoriaFiltrada: number | null = null;
-filtrandoPorCategoria: boolean = false;
+  filtrandoPorCategoria: boolean = false;
 
-carrito: ICarrito = { user: {}, producto: {}, cantidad: 0 } as ICarrito;
+  carrito: ICarrito = { user: {}, producto: {}, cantidad: 0 } as ICarrito;
 
 
 
@@ -49,7 +49,7 @@ carrito: ICarrito = { user: {}, producto: {}, cantidad: 0 } as ICarrito;
     private CategoriaService: CategoriaService,
     private oRouter: Router,
     private CarritoService: CarritoService,
- 
+
     private matSnackBar: MatSnackBar
   ) { }
 
@@ -60,13 +60,15 @@ carrito: ICarrito = { user: {}, producto: {}, cantidad: 0 } as ICarrito;
     if (this.id_categoria > 0) {
       this.getCategoria();
     }
- 
+
   }
 
 
 
   onInputChange(query: string): void {
     if (query.length > 2) {
+      this.oPaginatorState.page = 0; // Reinicia la página a 0 al aplicar un filtro
+
       this.productoService
         .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_categoria, query)
         .subscribe({
@@ -134,7 +136,7 @@ carrito: ICarrito = { user: {}, producto: {}, cantidad: 0 } as ICarrito;
   }
 
   getCategorias(): void {
-    this.CategoriaService.getPage(12, 0, 'id', 'asc').subscribe({
+    this.CategoriaService.getPage(13, 0, 'id', 'asc').subscribe({
       next: (data: ICategoriaPage) => {
         this.categoria = data.content;
       },
@@ -173,10 +175,10 @@ carrito: ICarrito = { user: {}, producto: {}, cantidad: 0 } as ICarrito;
     this.oRouter.navigate(['/user', 'producto', 'view', producto.id]);
   }
 
-  // Método para filtrar por categoría cuando se hace clic en una categoría
   filtrarPorCategoria(idCategoria: number): void {
     this.id_categoria = idCategoria;
-    this.getPage(); 
+    this.oPaginatorState.page = 0; // Reinicia la página a 0 al aplicar un filtro
+    this.getPage();
     this.idCategoriaFiltrada = idCategoria;
     this.filtrandoPorCategoria = true;
   }
@@ -184,49 +186,49 @@ carrito: ICarrito = { user: {}, producto: {}, cantidad: 0 } as ICarrito;
   quitarFiltro(): void {
     this.value = ''; // Limpiar el valor del filtro de búsqueda
     console.log(this.value);
-    
+
     this.productoService.getPage(
-        this.productosPorPagina,
-        this.oPaginatorState.page,
-        this.orderField,
-        this.orderDirection,
-        0 // Filtro por categoría establecido a 0 para mostrar todos los productos
+      this.productosPorPagina,
+      this.oPaginatorState.page,
+      this.orderField,
+      this.orderDirection,
+      0 // Filtro por categoría establecido a 0 para mostrar todos los productos
     ).subscribe({
-        next: (data: IProductoPage) => {
-            this.oPage = data;
-            this.oPaginatorState.pageCount = data.totalPages;
-            this.productos = data.content;
-            console.log(this.productos);
-        },
-        error: (error: HttpErrorResponse) => {
-            this.status = error;
-        }
+      next: (data: IProductoPage) => {
+        this.oPage = data;
+        this.oPaginatorState.pageCount = data.totalPages;
+        this.productos = data.content;
+        console.log(this.productos);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.status = error;
+      }
     });
-    
+
     this.id_categoria = 0; // Restablecer el valor de id_categoria a 0
     console.log(this.id_categoria);
-    
+
     this.filtrandoPorCategoria = false; // Desactivar la bandera de filtrado por categoría
     console.log(this.filtrandoPorCategoria);
-}
+  }
 
-agregarAlCarrito(producto: IProducto): void {
-  if (this.sesionService.isSessionActive()) {
-      this.carrito.user = {username: this.sesionService.getUsername()} as IUsuario; 
-      this.carrito.producto = {id: producto.id} as IProducto;
+  agregarAlCarrito(producto: IProducto): void {
+    if (this.sesionService.isSessionActive()) {
+      this.carrito.user = { username: this.sesionService.getUsername() } as IUsuario;
+      this.carrito.producto = { id: producto.id } as IProducto;
       this.carrito.cantidad = 1;
       this.CarritoService.newOne(this.carrito).subscribe({
         next: (data: ICarrito) => {
           this.carrito = data;
-          this.matSnackBar.open('Producto añadido al carrito', 'Aceptar', {duration: 3000});
+          this.matSnackBar.open('Producto añadido al carrito', 'Aceptar', { duration: 3000 });
           this.oRouter.navigate(['/usuario', 'carrito', 'plist']);
         },
         error: (err: HttpErrorResponse) => {
           this.status = err;
-          this.matSnackBar.open('Error al añadir el producto al carrito', 'Aceptar', {duration: 3000});
+          this.matSnackBar.open('Error al añadir el producto al carrito', 'Aceptar', { duration: 3000 });
         }
       });
+    }
   }
-}
 
 }
