@@ -53,20 +53,5 @@ export class LoginComponent implements OnInit {
     }
   }
  
-
-  loginAdmin() {
-    this.loginForm.setValue({
-
-      username: 'anita17',
-      password: 'EverGrowth'
-
-    })
-  }
-
-  loginUser() {
-    this.loginForm.setValue({
-      username: 'moni01',
-      password: 'EverGrowth'
-    })
-  }
 }
+ 
