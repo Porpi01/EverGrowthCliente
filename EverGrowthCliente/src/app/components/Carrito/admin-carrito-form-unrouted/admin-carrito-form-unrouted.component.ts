@@ -78,14 +78,12 @@ export class AdminCarritoFormUnroutedComponent implements OnInit {
   onSubmit() {
     if (this.carritoForm.valid) {
       if (this.operation == 'NEW') {
-        console.log(this.carritoForm.value);
         this.CarritoService.newOne(this.carritoForm.value).subscribe({
 
           next: (data: ICarrito) => {
             this.carrito = data;
             this.initializeForm(this.carrito);
             this.snackBar.open('Carrito creado', '', { duration: 2000 });
-            console.log(this.carrito.id);
 
             this.router.navigate(['/admin', 'carrito', 'view', data]);
 

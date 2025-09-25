@@ -78,15 +78,13 @@ export class AdminPedidoFormUnroutedComponent implements OnInit {
   onSubmit() {
     if (this.pedidoForm.valid) {
       if (this.operation == 'NEW') {
-        console.log(this.pedidoForm.value);
         this.PedidoService.newOne(this.pedidoForm.value).subscribe({
        
           next: (data: IPedido) => {
             this.pedido = {"user": {}} as IPedido;
             this.initializeForm(this.pedido);
             this.snackBar.open('Pedido creado', '', { duration: 2000 });
-            console.log(this.pedido.id);
-console.log(this.pedido.fecha_pedido)
+            
             this.router.navigate(['/admin', 'pedido', 'view', data]);
 
           },
@@ -134,10 +132,8 @@ console.log(this.pedido.fecha_pedido)
   addEvent(type: string, event: MatDatepickerInputEvent<Date>, field: string) {
     if (field === 'fecha_entrega') {
       this.pedidoForm.get('fecha_entrega')!.setValue(event.value);
-      console.log(this.pedidoForm.get('fecha_entrega')!.value);
     } else if (field === 'fecha_pedido') {
       this.pedidoForm.get('fecha_pedido')!.setValue(event.value);
-      console.log(this.pedidoForm.get('fecha_pedido')!.value);
     }
   }
 

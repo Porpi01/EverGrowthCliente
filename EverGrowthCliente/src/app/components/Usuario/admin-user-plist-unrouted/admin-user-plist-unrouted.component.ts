@@ -68,7 +68,6 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
             this.oPage = data;
             this.usuarios = data.content;
             this.oPaginatorState.pageCount = data.totalPages;
-            console.log(this.oPaginatorState);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
@@ -92,8 +91,7 @@ export class AdminUserPlistUnroutedComponent implements OnInit {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
           this.usuarios = data.content;
-          console.log(this.oPaginatorState);
-          console.log(this.usuarios);
+         
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;

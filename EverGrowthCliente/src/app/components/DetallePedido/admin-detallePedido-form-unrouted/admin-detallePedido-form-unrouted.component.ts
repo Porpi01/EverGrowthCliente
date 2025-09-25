@@ -79,14 +79,12 @@ export class AdminDetallePedidoFormUnroutedComponent implements OnInit {
   onSubmit() {
     if (this.pedidoForm.valid) {
       if (this.operation == 'NEW') {
-        console.log(this.pedidoForm.value);
         this.DetallePedidoService.newOne(this.pedidoForm.value).subscribe({
        
           next: (data: IDetallePedido) => {
             this.detallePedido = {"productos": {}, "pedidos":{}} as IDetallePedido;
             this.initializeForm(this.detallePedido);
             this.snackBar.open('The detalle pedido create has been successful', '', { duration: 2000 });
-            console.log(this.detallePedido.id);
 
             this.router.navigate(['/admin', 'detallePedido', 'view', data]);
 

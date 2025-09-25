@@ -79,7 +79,6 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
             this.oPage = data;
             this.valoraciones = data.content;
             this.oPaginatorState.pageCount = data.totalPages;
-            console.log(this.oPaginatorState);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
@@ -105,10 +104,7 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
           this.valoraciones = data.content;
-          console.log(this.oPaginatorState);
-          console.log(this.valoraciones);
-          console.log(this.id_usuario)
-          console.log(this.id_producto)
+          
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -165,7 +161,6 @@ export class AdminValoracionPlistUnroutedComponent implements OnInit {
       next: (data: IUsuario) => {
         this.oUsuario = data;
 
-        console.log(this.oUsuario.id);
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;

@@ -22,7 +22,6 @@ export class UserProductoViewRoutedComponent implements OnInit {
 
    
     
-  console.log( "Id producto" + "" + this.id);
 
 
    }

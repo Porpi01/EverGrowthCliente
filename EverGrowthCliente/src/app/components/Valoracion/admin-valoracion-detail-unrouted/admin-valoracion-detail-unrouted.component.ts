@@ -37,7 +37,6 @@ export class AdminValoracionDetailUnroutedComponent implements OnInit {
   ) {
     if (config && config.data) {
       this.id = config.data.id;
-      console.log(this.config.data);
       
     }
     this.mostrarBotones = true; 
@@ -46,8 +45,7 @@ export class AdminValoracionDetailUnroutedComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.id);
-    console.log(this.mostrarBotones);
+   
  
     this.mostrarBotones =!this.openedFromView;
 
@@ -59,8 +57,7 @@ export class AdminValoracionDetailUnroutedComponent implements OnInit {
     this.ValoracionService.getOne(this.id).subscribe({
       next: (data: IValoracion) => {
         this.valoraciones = data;
-        console.log(data.titulo)  
-        console.log(data.fecha)
+        
        
       },
       error: (error: HttpErrorResponse) => {

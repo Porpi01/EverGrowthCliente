@@ -59,8 +59,7 @@ export class AdminPedidoSelectionUnroutedComponent implements OnInit {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
           this.pedidos = data.content;
-          console.log(this.oPaginatorState);
-          console.log(this.pedidos);
+          
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;

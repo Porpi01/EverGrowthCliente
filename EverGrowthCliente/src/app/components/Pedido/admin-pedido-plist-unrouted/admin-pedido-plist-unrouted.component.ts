@@ -53,7 +53,7 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
 
     if (this.id_usuario > 0) {
       this.getUsuario();
-      console.log(this.id_usuario);
+      
       
     }
 
@@ -81,8 +81,7 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
           this.pedidos = data.content;
-          console.log(this.oPaginatorState);
-          console.log(this.pedidos);
+          
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -133,7 +132,6 @@ export class AdminPedidoPlistUnroutedComponent implements OnInit {
       next: (data: IUsuario) => {
         this.oUsuario = data;
 
-        console.log(this.oUsuario.id);
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;

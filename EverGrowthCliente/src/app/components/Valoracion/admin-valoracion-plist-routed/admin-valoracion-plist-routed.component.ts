@@ -31,8 +31,7 @@ export class AdminValoracionPlistRoutedComponent implements OnInit {
   ) {
     this.id_usuario = parseInt(this.ActivatedRoute.snapshot.paramMap.get("idusuario") ?? "0");
     this.id_producto = parseInt(this.ActivatedRoute.snapshot.paramMap.get("idproducto") ?? "0");
-    console.log('id_usuario:', this.id_usuario);
-    console.log('id_producto:', this.id_producto);
+    
    }
 
   ngOnInit() {
@@ -79,7 +78,6 @@ export class AdminValoracionPlistRoutedComponent implements OnInit {
   doEmpty() {
     this.ValoracionService.empty().subscribe({
       next: (oResponse: number) => {
-        console.log('Success response:', oResponse);
         this.MatSnackBar.open(`Hay ${oResponse} valoraciones.`, 'Cerrar', {duration: 2000,});
 
         this.bLoading = false;

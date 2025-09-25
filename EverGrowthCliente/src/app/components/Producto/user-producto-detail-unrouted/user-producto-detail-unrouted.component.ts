@@ -58,7 +58,6 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.id);
     this.getOne();
 
   }
@@ -69,8 +68,7 @@ export class UserProductoDetailUnroutedComponent implements OnInit {
     this.productoService.getOne(this.id).subscribe({
       next: (data: IProducto) => {
         this.productos = data;
-        console.log(this.productos);
-        console.log(data.nombre);
+        
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;

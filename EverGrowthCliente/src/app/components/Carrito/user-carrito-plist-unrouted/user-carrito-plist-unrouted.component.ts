@@ -125,7 +125,6 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
       this.CarritoService.getCosteCarritoByUsuario(this.user.id).subscribe({
         next: (coste: number) => {
           this.costeTotal = coste;
-          console.log('Coste total', this.costeTotal);
         },
         error: (err: HttpErrorResponse) => {
           this.status = err;
@@ -171,7 +170,6 @@ export class UserCarritoPlistUnroutedComponent implements OnInit {
         next: (pedido: IPedido) => {
           this.matSnackBar.open('Compra realizada', 'Aceptar', { duration: 3000 });
           // this.PDFService.imprimirFactura(pedido.id);
-          console.log('Pedido', pedido.id);
           this.router.navigate(['/usuario', 'pedido', 'view', pedido.id]);
         },
         error: (err: HttpErrorResponse) => {

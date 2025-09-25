@@ -65,27 +65,38 @@ export class UserProductoPlistUnroutedComponent implements OnInit {
 
 
 
-  onInputChange(query: string): void {
-    if (query.length > 2) {
-      this.oPaginatorState.page = 0; // Reinicia la página a 0 al aplicar un filtro
+ onInputChange(query: string): void {
+  console.log('Query actual:', query);
 
-      this.productoService
-        .getPage(this.oPaginatorState.rows, this.oPaginatorState.page, this.orderField, this.orderDirection, this.id_categoria, query)
-        .subscribe({
-          next: (data: IProductoPage) => {
-            this.oPage = data;
-            this.productos = data.content;
-            this.oPaginatorState.pageCount = data.totalPages;
-            console.log(this.oPaginatorState);
-          },
-          error: (error: HttpErrorResponse) => {
-            this.status = error;
-          }
-        });
-    } else {
-      this.getPage();
-    }
+  if (query.length > 2) {
+    console.log('Query > 2, buscando productos filtrados');
+    this.oPaginatorState.page = 0; // reinicia paginación
+
+    this.productoService
+      .getPage(
+        this.oPaginatorState.rows,
+        this.oPaginatorState.page,
+        this.orderField,
+        this.orderDirection,
+        this.id_categoria,
+        query
+      )
+      .subscribe({
+        next: (data: IProductoPage) => {
+          this.oPage = data;
+          this.productos = data.content;
+          this.oPaginatorState.pageCount = data.totalPages;
+        },
+        error: (error: HttpErrorResponse) => {
+          this.status = error;
+        }
+      });
+  } else if (query.length === 0) {
+    this.getPage(); // solo recarga todo si el input está completamente vacío
+  } else {
+    // No hacer nada, mantiene la lista actual hasta que el usuario borre todo
   }
+}
 
   onPageChange(event: PaginatorState) {
     this.oPaginatorState.rows = this.productosPorPagina;
@@ -106,7 +117,6 @@ export class UserProductoPlistUnroutedComponent implements OnInit {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
           this.productos = data.content;
-          console.log(this.productos);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -148,7 +158,6 @@ export class UserProductoPlistUnroutedComponent implements OnInit {
 
   addToCart(producto: IProducto) {
     this.productosSeleccionados.push(producto);
-    console.log(`Producto '${producto.nombre}' añadido al carrito.`);
   }
 
   getTotalAPagar(): number {
@@ -160,7 +169,6 @@ export class UserProductoPlistUnroutedComponent implements OnInit {
     const nuevaPagina = this.oPaginatorState.page + direccion;
     if (nuevaPagina >= 0 && nuevaPagina < this.oPaginatorState.pageCount) {
       this.oPaginatorState.page = nuevaPagina;
-      console.log(nuevaPagina);
       this.getPage();
     } else {
       if (nuevaPagina < 0) {
@@ -185,7 +193,6 @@ export class UserProductoPlistUnroutedComponent implements OnInit {
 
   quitarFiltro(): void {
     this.value = ''; // Limpiar el valor del filtro de búsqueda
-    console.log(this.value);
 
     this.productoService.getPage(
       this.productosPorPagina,
@@ -198,7 +205,6 @@ export class UserProductoPlistUnroutedComponent implements OnInit {
         this.oPage = data;
         this.oPaginatorState.pageCount = data.totalPages;
         this.productos = data.content;
-        console.log(this.productos);
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;
@@ -206,10 +212,8 @@ export class UserProductoPlistUnroutedComponent implements OnInit {
     });
 
     this.id_categoria = 0; // Restablecer el valor de id_categoria a 0
-    console.log(this.id_categoria);
 
     this.filtrandoPorCategoria = false; // Desactivar la bandera de filtrado por categoría
-    console.log(this.filtrandoPorCategoria);
   }
 
   agregarAlCarrito(producto: IProducto): void {

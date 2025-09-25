@@ -80,7 +80,6 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
           this.valoracion = data;
           this.initializeForm(this.valoracion);
 
-          console.log(this.valoracion.fecha);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -103,7 +102,6 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
   onSubmit() {
     if (this.valoracionForm.valid) {
       if (this.operation == 'NEW') {
-        console.log(this.valoracionForm.value);
         this.valoracionService.newOne(this.valoracionForm.value).subscribe({
        
           next: (data: IValoracion) => {
@@ -112,8 +110,7 @@ export class AdminValoracionFormUnroutedComponent implements OnInit {
 
             this.MatSnackBar.open('La creación de la valoración ha sido exitosa', 'Cerrar', {
               duration: 2000,});            
-            console.log(this.valoracion.id);
-            console.log('Mensaje agregado con éxito al MessageService');          
+                      
             this.router.navigate(['/admin', 'valoracion', 'view', data]);
     
           },

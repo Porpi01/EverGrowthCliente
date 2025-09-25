@@ -12,6 +12,6 @@ constructor(
 ) { }
 
 uploadFile(formData: FormData): Observable<any>{
-  return this.http.post('http://localhost:8085/media/', formData);
+  return this.http.post('https://evergrowth-server-2.onrender.com/media/cloudinary/', formData);
 }
 }

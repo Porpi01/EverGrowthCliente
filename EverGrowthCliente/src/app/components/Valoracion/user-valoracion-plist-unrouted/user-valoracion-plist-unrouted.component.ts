@@ -113,7 +113,6 @@ export class UserValoracionPlistUnroutedComponent implements OnInit {
         next: () => {
           this.getValoraciones();
           this.MatSnackBar.open('La valoración ha sido eliminada', 'Cerrar', { duration: 2000 });
-          console.log(this.usuario?.id);
         },
         error: (err: HttpErrorResponse) => {
           this.status = err;

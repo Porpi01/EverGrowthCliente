@@ -22,14 +22,12 @@ export class PDFService {
       next: (response: any) => {
         if (response && response.content) {
           const detallesPedido: IDetallePedido[] = response.content;
-          console.log('Detalles de pedido:', detallesPedido);
           const doc = new jsPDF();
           doc.setFont('Arial');
           doc.setFontSize(12);
           this.cabecera(doc, detallesPedido);
           this.contenido(doc, detallesPedido);
           this.pieDePagina(doc, detallesPedido, doc.getNumberOfPages());
-          console.log('Número de páginas:', doc.getNumberOfPages());
 
           doc.save('factura.pdf');
         } else {
@@ -48,7 +46,7 @@ export class PDFService {
     doc.line(10, 18, 200, 18);
     doc.setFont('Arial', 'bold');
     const logoImg = new Image();
-    logoImg.src = "http://localhost:8085/media/Logo-removebg-preview%20(1).png";
+    logoImg.src = "https://res.cloudinary.com/dtunlhsqn/image/upload/v1758784802/cdv0hqddrtr5fbremvmt.png";
     doc.addImage(logoImg, 'PNG', 10, 25, 50, 15);
     doc.setFontSize(11);
     doc.text(135, 27, "EverGrowth");

@@ -61,7 +61,6 @@ export class AdminCategoriaPlistUnroutedComponent implements OnInit {
             this.oPage = data;
             this.categoria = data.content;
             this.oPaginatorState.pageCount = data.totalPages;
-            console.log(this.oPaginatorState);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
@@ -85,8 +84,7 @@ export class AdminCategoriaPlistUnroutedComponent implements OnInit {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
           this.categoria = data.content;
-          console.log(this.oPaginatorState);
-          console.log(this.categoria);
+          
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;

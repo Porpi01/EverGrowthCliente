@@ -14,9 +14,7 @@ export class FooterComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.oSessionUser)
-    console.log(this.strUserName)
-    console.log(this.oSessionUser?.rol)
+   
   }
 
 }

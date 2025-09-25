@@ -81,7 +81,6 @@ export class AdminDetallePedidoPlistRoutedComponent implements OnInit {
   doEmpty() {
     this.DetallePedidoService.empty().subscribe({
       next: (oResponse: number) => {
-        console.log('Success response:', oResponse);
         this.MatSnackBar.open(`Hay ${oResponse} detalles pedidos.`, 'Cerrar', {duration: 2000,});
 
         this.bLoading = false;

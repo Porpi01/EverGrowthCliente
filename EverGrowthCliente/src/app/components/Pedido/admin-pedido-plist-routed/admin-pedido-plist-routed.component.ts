@@ -32,7 +32,6 @@ export class AdminPedidoPlistRoutedComponent implements OnInit {
 
   ) {
     this.id_usuario = parseInt(this.ActivatedRoute.snapshot.paramMap.get("idusuario") ?? "0");
-    console.log(this.id_usuario);
    }
 
   ngOnInit() {
@@ -79,7 +78,6 @@ export class AdminPedidoPlistRoutedComponent implements OnInit {
   doEmpty() {
     this.PedidoService.empty().subscribe({
       next: (oResponse: number) => {
-        console.log('Success response:', oResponse);
         this.MatSnackBar.open(`Hay ${oResponse} pedidos.`, 'Cerrar', {duration: 2000,});
 
         this.bLoading = false;

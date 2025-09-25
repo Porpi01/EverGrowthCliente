@@ -79,13 +79,10 @@ export class AdminUserFormUnroutedComponent implements OnInit {
 
   onSubmit() {
     if (this.userForm.valid) {
-      console.log(this.userForm.value);
       if (this.operation == 'NEW') {
-        console.log(this.operation);
         this.UsuarioService.newOne(this.userForm.value).subscribe({
           next: (data: IUsuario) => {
             this.usuario = data;
-            console.log(this.usuario);
             this.initializeForm(this.usuario);
             this.MatSnackBar.open('El usuario se ha creado correctamente', '', { duration: 2000 });
             this.oRouter.navigate(['/admin', 'usuario', 'view', this.usuario]);

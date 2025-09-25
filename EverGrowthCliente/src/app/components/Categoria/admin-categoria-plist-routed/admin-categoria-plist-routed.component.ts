@@ -74,7 +74,6 @@ export class AdminCategoriaPlistRoutedComponent implements OnInit {
   doEmpty() {
     this.CategoriaService.empty().subscribe({
       next: (oResponse: number) => {
-        console.log('Success response:', oResponse);
         this.MatSnackBar.open(`Hay ${oResponse} categorías.`, 'Cerrar', {duration: 2000,});
 
         this.bLoading = false;
@@ -82,7 +81,6 @@ export class AdminCategoriaPlistRoutedComponent implements OnInit {
         this.displayDialog = false; 
       },
       error: (oError: HttpErrorResponse) => {
-        console.error('Error response:', oError);
         this.MatSnackBar.open(`Error al eliminar las categorías: ${oError.message}`, 'Cerrar', { duration: 2000,});
         this.bLoading = false;
       },

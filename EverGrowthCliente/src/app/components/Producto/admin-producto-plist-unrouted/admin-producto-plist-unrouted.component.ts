@@ -81,7 +81,6 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
             this.oPage = data;
             this.productos = data.content;
             this.oPaginatorState.pageCount = data.totalPages;
-            console.log(this.oPaginatorState);
           },
           error: (error: HttpErrorResponse) => {
             this.status = error;
@@ -106,8 +105,7 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
           this.productos = data.content;
-          console.log(this.oPaginatorState);
-          console.log(this.productos);
+        
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -152,12 +150,10 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
 
   upload(event: any) {
     const file = event.target.files[0];
-    console.log(file, 'file');
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
       this.MediaService.uploadFile(formData).subscribe(response => {
-        console.log(response, 'response');
         this.url = response.url;
       }
 
@@ -170,7 +166,6 @@ export class AdminProductoPlistUnroutedComponent implements OnInit {
       next: (data: ICategoria) => {
         this.oCategoria = data;
 
-        console.log(this.oCategoria.id);
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;

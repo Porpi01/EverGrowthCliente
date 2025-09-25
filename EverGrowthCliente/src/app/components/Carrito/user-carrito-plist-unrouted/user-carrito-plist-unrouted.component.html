@@ -59,7 +59,7 @@
 <p-confirmPopup></p-confirmPopup>
 
 <p-dialog header="Confirmación" [(visible)]="displayDialogCompra" [modal]="true" [responsive]="true" [closable]="false">
-  <p>¿Desea comprar todos los carritos?</p>
+  <p>¿Desea comprar todos los productos?</p>
   <p-footer>
     <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="Sí"   (click)="confirmCompra()"></button>
     <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="No"  (click)="cancelCompra()"></button>
@@ -67,7 +67,7 @@
 </p-dialog>
 
 <p-dialog header="Confirmación" [(visible)]="displayDialogBorrar" [modal]="true" [responsive]="true" [closable]="false">
-  <p>¿Desea eliminar todos los carritos?</p>
+  <p>¿Desea eliminar todos los productos?</p>
   <p-footer>
     <button class="btn btn-primary mx-1" pButton icon="pi pi-times" label="Sí"(click)="confirmDelete()"></button>
     <button class="btn btn-primary mx-1"pButton icon="pi pi-times" label="No" (click)="cancelDelete()"></button>

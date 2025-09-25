@@ -53,12 +53,10 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
 
     if (this.id_pedido > 0) {
       this.getPedido();
-      console.log(this.id_pedido);
       
     }
     if (this.id_producto > 0) {
       this.getProducto();
-      console.log(this.id_producto);
       
     }
 
@@ -89,8 +87,7 @@ export class AdminDetallePedidoPlistUnroutedComponent implements OnInit {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
           this.detallePedidos = data.content;
-          console.log(this.oPaginatorState);
-          console.log(this.detallePedidos);
+          
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;

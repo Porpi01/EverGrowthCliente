@@ -43,26 +43,20 @@ export class MenuComponent implements OnInit {
           this.oSessionUser = oUser;
         },
         error: (error: HttpErrorResponse) => {
-          console.log(error);
         }
       });
     } else {
-      console.log('No hay usuario autenticado');
-      // Aquí puedes manejar la lógica para cuando no hay usuario autenticado.
-      // Por ejemplo, redirigir al usuario a la página de inicio de sesión.
+      
     }
   }
 
   ngOnInit() {
     this.SesionService.on().subscribe({
       next: (data: SessionEvent) => {
-        console.log(data);
-        console.log(this.strUserName);
+        
      
         if (data.type == 'login') {
-          console.log(data);
           this.strUserName =  this.SesionService.getUsername();
-          console.log(this.strUserName);
           this.UsuarioService.getByUsername(this.SesionService.getUsername()).subscribe({
            
             next: (oUser: IUsuario) => {
@@ -70,7 +64,6 @@ export class MenuComponent implements OnInit {
             
             },
             error: (error: HttpErrorResponse) => {
-              console.log(error);
             }
           });
         }

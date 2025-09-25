@@ -26,12 +26,10 @@ export class AdminPedidoDetailUnroutedComponent implements OnInit {
     ) {
       if (config && config.data) {
         this.id = config.data.id;
-        console.log(this.config.data);
       }
     }
   
     ngOnInit() {
-      console.log(this.id);
       
       this.getOne();
     }
@@ -40,8 +38,7 @@ export class AdminPedidoDetailUnroutedComponent implements OnInit {
       this.PedidoService.getOne(this.id).subscribe({
         next: (data: IPedido) => {
           this.pedidos = data;
-          console.log(this.pedidos.fecha_entrega) 
-          console.log(this.pedidos.fecha_pedido)   
+             
        
         },
         error: (error: HttpErrorResponse) => {

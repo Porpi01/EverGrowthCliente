@@ -76,61 +76,90 @@ export class AdminCategoriaFormUnroutedComponent implements OnInit {
     return this.categoriaForm.controls[controlName].hasError(errorName);
   }
 
-  onSubmit() {
-    if (this.categoriaForm.valid) {
-      if (this.operation == 'NEW') {
-        console.log(this.categoriaForm.value);
-        this.CategoriaService.newOne(this.categoriaForm.value).subscribe({
-
-          next: (data: ICategoria) => {
-            this.categoria = data;
-            this.initializeForm(this.categoria);
-            this.snackBar.open('La categoría se ha creado', '', { duration: 2000 });
-            console.log(this.categoria.id);
-
-            this.router.navigate(['/admin', 'categoria', 'view', data]);
-
-          },
-          error: (error: HttpErrorResponse) => {
-            this.status = error;
-            this.snackBar.open('La categoría no se ha creado', '', { duration: 2000 });
-          }
-        });
-      } else {
-        this.CategoriaService.updateOne(this.categoriaForm.value).subscribe({
-          next: (data: ICategoria) => {
-            this.categoria = data;
-            this.initializeForm(this.categoria);
-            this.snackBar.open('La categoría se ha actualizado', '', { duration: 2000 });
-            this.router.navigate(['/admin', 'categoria', 'view', this.categoria.id]);
-          },
-          error: (error: HttpErrorResponse) => {
-            this.status = error;
-            this.snackBar.open('Falló la actualización', '', { duration: 2000 });
-          }
-        });
+ onSubmit() {
+  if (this.categoriaForm.valid) {
+    if (this.operation == 'NEW') {
+      // Si hay imagen subida, actualizar el form antes de enviar
+      if (this.selectedImageUrl) {
+        this.categoriaForm.controls['imagen'].patchValue(this.selectedImageUrl);
       }
-    }
-  }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const formData = new FormData();
-      formData.append("file", file);
-      this.MediaService.uploadFile(formData).subscribe({
-        next: (response) => {
-          this.selectedImageUrl = response.url; // Asignar la URL del archivo seleccionado
-          this.categoria.imagen = response.url;
-          this.categoriaForm.controls['imagen'].patchValue(response.url);
+      this.CategoriaService.newOne(this.categoriaForm.value).subscribe({
+        next: (data: ICategoria) => {
+          this.categoria = data;
+          // Aseguramos que la categoría creada tenga la imagen correcta
+          if (this.selectedImageUrl) {
+            this.categoria.imagen = this.selectedImageUrl;
+          }
+
+          this.initializeForm(this.categoria);
+          this.snackBar.open('La categoría se ha creado', '', { duration: 2000 });
+
+          this.router.navigate(['/admin', 'categoria', 'view', this.categoria.id]);
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
-          this.snackBar.open('Error al subir la imagen', '', { duration: 2000 });
+          this.snackBar.open('La categoría no se ha creado', '', { duration: 2000 });
+        }
+      });
+    } else {
+      // UPDATE
+      if (this.selectedImageUrl) {
+        this.categoriaForm.controls['imagen'].patchValue(this.selectedImageUrl);
+      }
+
+      this.CategoriaService.updateOne(this.categoriaForm.value).subscribe({
+        next: (data: ICategoria) => {
+          this.categoria = data;
+          this.initializeForm(this.categoria);
+          this.snackBar.open('La categoría se ha actualizado', '', { duration: 2000 });
+          this.router.navigate(['/admin', 'categoria', 'view', this.categoria.id]);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.status = error;
+          this.snackBar.open('Falló la actualización', '', { duration: 2000 });
         }
       });
     }
   }
+}
+
+ onFileSelected(event: any) {
+  const file: File = event.target.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  this.MediaService.uploadFile(formData).subscribe({
+    next: (response) => {
+      const newUrl = response.url;
+      this.selectedImageUrl = newUrl;
+      this.categoria.imagen = newUrl;
+      this.categoriaForm.controls['imagen'].patchValue(newUrl);
+
+      if (this.categoria.id) {
+        // Actualizamos la categoría en el backend
+        this.CategoriaService.updateOne(this.categoria).subscribe({
+          next: (updatedCategoria) => {
+            this.categoria = updatedCategoria;
+            this.snackBar.open('Imagen actualizada correctamente', '', { duration: 2000 });
+          },
+          error: (err) => {
+            console.error('Error al actualizar categoría:', err);
+            this.snackBar.open('Error al guardar la imagen en la categoría', '', { duration: 2000 });
+          }
+        });
+      }
+    },
+    error: (err: HttpErrorResponse) => {
+      console.error('Error al subir la imagen:', err);
+      this.snackBar.open('Error al subir la imagen', '', { duration: 2000 });
+    }
+  });
+}
+
+
 
 }
 

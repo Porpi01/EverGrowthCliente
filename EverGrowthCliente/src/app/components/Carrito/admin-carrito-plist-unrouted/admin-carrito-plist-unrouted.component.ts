@@ -52,12 +52,10 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
 
     if (this.id_usuario > 0) {
       this.getUsuario();
-      console.log(this.id_usuario);
       
     }
     if (this.id_producto > 0) {
       this.getProducto();
-      console.log(this.id_producto);
       
     }
 
@@ -88,8 +86,7 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
           this.oPage = data;
           this.oPaginatorState.pageCount = data.totalPages;
           this.carrito = data.content;
-          console.log(this.oPaginatorState);
-          console.log(this.carrito);
+         
         },
         error: (error: HttpErrorResponse) => {
           this.status = error;
@@ -137,7 +134,6 @@ export class AdminCarritoPlistUnroutedComponent implements OnInit {
       next: (data: IUsuario) => {
         this.oUsuario = data;
 
-        console.log(this.oUsuario.id);
       },
       error: (error: HttpErrorResponse) => {
         this.status = error;

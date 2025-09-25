@@ -66,10 +66,8 @@ export class HomeComponent implements OnInit {
       this.UsuarioService.getByUsername(this.username).subscribe({
         next: (user: IUsuario) => {
           this.userSession = user;
-          console.log('User Session:', this.userSession);
   
           if (this.userSession.rol === false) {
-            console.log('El usuario está autenticado como administrador.');
   
             this.obtenerDatosParaGrafico();
             this.getTotalUsuarios();
@@ -85,11 +83,9 @@ export class HomeComponent implements OnInit {
           }
         },
         error: (err: HttpErrorResponse) => {
-          console.log(err);
         }
       });
     } else {
-      console.log('Usuario no autenticado');
     }
   }
   
@@ -136,7 +132,6 @@ export class HomeComponent implements OnInit {
     this.ProductoService.getTop10ProductosMasStock()
       .subscribe({
         next: response => {
-          console.log('Respuesta:', response); // Registra la respuesta para ver su estructura
   
           // Verifica si la respuesta es un array y no está vacía
           if (Array.isArray(response) && response.length > 0) {

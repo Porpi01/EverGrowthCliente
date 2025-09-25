@@ -39,9 +39,7 @@ export class UserProductoValoracionUnroutedComponent implements OnInit {
 
   ) {
     this.id_usuario = this.oDynamicDialogConfig.data.id_usuario;
-    console.log(this.id_usuario)
     this.id_producto = this.oDynamicDialogConfig.data.id_producto;
-    console.log(this.id_producto)
   }
 
   public hasError = (controlName: string, errorName: string) => {
@@ -54,7 +52,6 @@ export class UserProductoValoracionUnroutedComponent implements OnInit {
       this.UsuarioService.getOne(this.id_usuario).subscribe({
         next: (usuario: IUsuario) => {
           this.usuario = usuario;
-          console.log(this.usuario)
         },
         error: (error) => {
           this.status = error
@@ -68,7 +65,6 @@ export class UserProductoValoracionUnroutedComponent implements OnInit {
       this.ProductoService.getOne(this.id_producto).subscribe({
         next: (producto: IProducto) => {
           this.producto = producto;
-          console.log(this.producto)
         },
         error: (error) => {
           this.status = error

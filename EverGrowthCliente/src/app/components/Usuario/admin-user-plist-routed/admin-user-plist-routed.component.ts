@@ -64,7 +64,6 @@ export class AdminUserPlistRoutedComponent implements OnInit {
 
             });
             this.bLoading = false;
-            console.log('Success response:', oResponse);
           },
           error: (oError: HttpErrorResponse) => {
             this.MatSnackBar.open('Error al generar usuarios: ' + oError.message, 'Cerrar', {
@@ -80,7 +79,6 @@ export class AdminUserPlistRoutedComponent implements OnInit {
   doEmpty() {
     this.UsuarioService.empty().subscribe({
       next: (oResponse: number) => {
-        console.log('Success response:', oResponse);
         this.MatSnackBar.open(`Hay ${oResponse} usuarios.`, 'Cerrar', { duration: 2000, });
 
         this.bLoading = false;
