@@ -1,0 +1,120 @@
+# EverGrowth - Tienda de Alimentación Online
+
+Bienvenido a **EverGrowth**, tu tienda de alimentación online. Esta guía explica cómo navegar, buscar productos, gestionar el carrito y realizar compras en nuestra plataforma.  
+
+---
+
+## Home
+
+- Los **usuarios no registrados** pueden:
+  - Navegar por los productos.
+  - Buscar productos mediante el **buscador** (recomendación: no sensible a mayúsculas ni tildes para evitar confusiones).
+  - Aplicar **filtros** que se encuentran a la izquierda:
+    - Al hacer clic en un filtro, solo se mostrarán los productos de esa categoría.
+    - Para quitar un filtro, usa el botón **“Quitar filtro”**, que aparece debajo de los filtros.
+- **No puedes comprar** sin iniciar sesión. Si intentas comprar, serás redirigido a la página de **registro/login**.
+
+---
+
+##  Usuarios de prueba
+
+- Para probar **EverGrowth** sin tener que registrarte, puedes usar estos usuarios:  
+
+| Usuario   | Contraseña |
+|----------|------------|
+| moni01   | EverGrowth |
+| andresito | EverGrowth |
+
+> Nota: El sistema de login completo está en desarrollo.
+
+---
+
+## ⚠️ Avisos importantes sobre sesión y despliegue
+
+- **Token de sesión:** dura solo **1 hora**. Pasado ese tiempo, la aplicación empezará a fallar si permaneces logueado.  
+  - Solución: **salir y volver a iniciar sesión**.  
+  - El progreso, carrito y productos seleccionados **no se perderán**.  
+
+- **Despliegue del backend (Spring Boot + base de datos):** alojado en **Render**.  
+  - Latencia de inicio: aproximadamente **5 minutos**. Puede que las primeras acciones sean un poco lentas mientras Render “despierta” la aplicación.  
+
+- **Frontend:** desarrollado en **Angular 16** y desplegado en **Netlify**.
+
+---
+
+## Tecnologías y lenguajes de programación
+
+- **Backend:** Java (Spring Boot)  
+- **Frontend:** TypeScript, JavaScript, CSS, HTML5  
+
+---
+
+## Funcionalidades al iniciar sesión
+
+Una vez logueado en **EverGrowth**, aparecerán cinco pestañas en el menú:  
+
+1. **Home:** Muestra todos los productos.  
+2. **Pedidos:** Consulta tus pedidos realizados.  
+3. **Perfil:** Muestra tu información de usuario (actualmente solo visualizable, la edición es solo para administradores).  
+4. **Cerrar sesión:** Para salir de tu cuenta.  
+5. **Carrito:** Muestra los productos que has seleccionado para comprar.
+
+---
+
+## Carrito y compra
+
+### Añadir productos
+
+- **Opción 1:** Clic en **“Añadir al carrito”** → añade **1 unidad** al carrito.  
+- **Opción 2:** Clic en la **imagen del producto** → se abre una ventana con más detalles (descripción, envío, valoraciones, etc.) → puedes especificar la **cantidad deseada** antes de añadir al carrito.  
+
+> Si se agota el stock, aparecerá **“Sin existencias”**.
+
+### Gestión del carrito
+
+- Puedes ver:
+  - Productos añadidos, cantidades, IVA, total por producto y total global.  
+- Opciones disponibles:
+  - **Seguir comprando:** vuelve al Home.  
+  - **Vaciar cesta:** elimina todos los productos.  
+  - **Comprar todos los productos:** realiza la compra de todos los productos en el carrito.  
+  - **Modificar cantidad** o **eliminar productos individualmente** usando los botones `+` y `-` o el icono de la papelera.
+
+  > **Gastos de envío:** Si tu compra es inferior a **50 €**, se aplicarán **3,80 € de gastos de envío**. Si el total es igual o superior a 50 €, el envío es gratuito.
+
+
+### Realizar compra
+
+- Al hacer clic en **“Comprar”**, aparecerá un mensaje de confirmación:  
+  - Si confirmas, la compra se realiza con éxito.  
+  - Se mostrará el **detalle del pedido**: productos, cantidad, usuario, fecha de pedido, fecha estimada de entrega, dirección y total.  
+- También puedes **imprimir la factura** con desglose de cada producto, base imponible, IVA y total.
+
+---
+
+## Valoraciones de productos
+
+ Cada producto puede ser **valorado por los usuarios**.  
+- Se muestran todas las valoraciones.  
+- Solo puedes **eliminar tus propias valoraciones**.  
+- **Nota:** No se permiten los signos de interrogación `?` ni de exclamación `!` en las valoraciones; si los incluyes, no se guardarán correctamente.
+
+---
+
+## Notas adicionales
+
+- Algunas funcionalidades están en desarrollo, como **login completo** y **modificación de información del usuario**.  
+- El objetivo de esta versión es permitir **visualización de productos, carrito y pruebas de compra** en **EverGrowth**.  
+- Los usuarios de prueba permiten **experimentar todas las funcionalidades** sin necesidad de registrarse.
+
+---
+
+## Resumen rápido para el usuario
+
+1. Navega por los productos y aplica filtros.  
+2. Usa el buscador para encontrar productos rápidamente.  
+3. Añade productos al carrito mediante botón o clic en la imagen para más detalle.  
+4. Modifica cantidades, elimina productos o vacía el carrito según necesidad.  
+5. Confirma la compra y revisa el detalle del pedido o imprime la factura.  
+6. Valora productos y gestiona tus valoraciones personales.  
+7. Recuerda que el **token de sesión dura 1 hora**; tras ese tiempo, vuelve a iniciar sesión si es necesario.
