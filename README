@@ -118,3 +118,6 @@ Una vez logueado en **EverGrowth**, aparecerán cinco pestañas en el menú:
 5. Confirma la compra y revisa el detalle del pedido o imprime la factura.  
 6. Valora productos y gestiona tus valoraciones personales.  
 7. Recuerda que el **token de sesión dura 1 hora**; tras ese tiempo, vuelve a iniciar sesión si es necesario.
+
+
+ **Proyecto desplegado:** [EverGrowth - Tienda Online](evergrowth.netlify.app) 
